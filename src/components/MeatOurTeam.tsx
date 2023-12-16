@@ -16,11 +16,9 @@ const TeamMember = ({
   reversed = false,
 }) => {
   return (
-    <div
-      className={`flex border ${!reversed ? "justify-start" : "justify-end"}`}
-    >
+    <div className={`flex  ${!reversed ? "justify-start" : "justify-end"}`}>
       <Image
-        className={`rounded-full max-w-[200px] border-8 border-white shadow-lg shadow-[#6EC756] z-0 ${
+        className={`rounded-full max-w-[150px] border-8 border-white shadow-lg shadow-[#6EC756] z-0 ${
           !reversed ? "order-first" : "order-last"
         }`}
         src={image}
@@ -34,19 +32,28 @@ const TeamMember = ({
         }`}
       >
         <div
-          className={`pl-12 py-3 min-w-[290px] bg-white ${margin} shadow-lg shadow-[#6EC756] rounded-lg`}
+          className={`pl-12 py-2 min-w-[290px] bg-white ${margin} shadow-lg shadow-[#6EC756] rounded-lg`}
         >
           <h1 className="text-lg font-bold">{name}</h1>
           <h2>{designation}</h2>
           <div className="flex gap-6 mt-2">
             <Link href={social.github}>
-              <GithubFilled style={{ fontSize: "18px" }} />
+              <GithubFilled
+                className="text-gray-500 hover:text-black"
+                style={{ fontSize: "18px" }}
+              />
             </Link>
             <Link href={social.linkedin}>
-              <LinkedinFilled style={{ fontSize: "18px" }} />
+              <LinkedinFilled
+                className="text-gray-500 hover:text-blue-700"
+                style={{ fontSize: "18px" }}
+              />
             </Link>
             <Link href={social.facebook}>
-              <FacebookFilled style={{ fontSize: "18px" }} />
+              <FacebookFilled
+                className="text-gray-500 hover:text-blue-800"
+                style={{ fontSize: "18px" }}
+              />
             </Link>
           </div>
         </div>
@@ -59,9 +66,66 @@ const MeatOurTeam = () => {
   return (
     <div className="max-w-[1200px] mx-auto my-40">
       <h1>Meat Our Team</h1>
-      <div className="grid grid-cols-2">
+      <div className="grid grid-cols-2 gap-24">
         <TeamMember
-          name="Samiul Islam"
+          name="John Doe"
+          designation="Full Stack Developer"
+          image={profileImg}
+          social={{
+            facebook: "https://www.facebook.com",
+            linkedin: "https://www.linkedin.com",
+            github: "https://www.github.com",
+          }}
+          margin="ml-[-40px]"
+        />
+        <TeamMember
+          name="John Doe"
+          designation="Full Stack Developer"
+          image={profileImg}
+          social={{
+            facebook: "https://www.facebook.com",
+            linkedin: "https://www.linkedin.com",
+            github: "https://www.github.com",
+          }}
+          margin="ml-[-40px]"
+        />
+        <TeamMember
+          name="John Doe"
+          designation="Full Stack Developer"
+          image={profileImg}
+          social={{
+            facebook: "https://www.facebook.com",
+            linkedin: "https://www.linkedin.com",
+            github: "https://www.github.com",
+          }}
+          margin="mr-[-40px]"
+          reversed
+        />
+        <TeamMember
+          name="John Doe"
+          designation="Full Stack Developer"
+          image={profileImg}
+          social={{
+            facebook: "https://www.facebook.com",
+            linkedin: "https://www.linkedin.com",
+            github: "https://www.github.com",
+          }}
+          margin="mr-[-40px]"
+          reversed
+        />
+        <TeamMember
+          name="John Doe"
+          designation="Full Stack Developer"
+          image={profileImg}
+          social={{
+            facebook: "https://www.facebook.com",
+            linkedin: "https://www.linkedin.com",
+            github: "https://www.github.com",
+          }}
+          margin="ml-[-40px]"
+        />
+        <TeamMember
+          name="John Doe"
           designation="Full Stack Developer"
           image={profileImg}
           social={{

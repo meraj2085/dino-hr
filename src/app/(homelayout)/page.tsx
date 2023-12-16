@@ -63,7 +63,7 @@ export default function Home() {
                     clipRule="evenodd"
                   ></path>
                 </svg>
-                Cancel anytime
+                Cancel anytime.
               </div>
             </div>
           </div>

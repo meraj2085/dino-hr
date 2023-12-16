@@ -12,13 +12,22 @@ const TeamMember = ({
   designation,
   image,
   social,
-  margin,
   reversed = false,
+}: {
+  name: string;
+  designation: string;
+  image: any;
+  social: {
+    facebook: string;
+    linkedin: string;
+    github: string;
+  };
+  reversed?: boolean;
 }) => {
   return (
     <div className={`flex  ${!reversed ? "justify-start" : "justify-end"}`}>
       <Image
-        className={`rounded-full max-w-[150px] border-8 border-white shadow-lg shadow-[#6EC756] z-0 ${
+        className={`rounded-full max-w-[150px] border-8 border-white shadow-lg shadow-[#6ec7567d] z-0 ${
           !reversed ? "order-first" : "order-last"
         }`}
         src={image}
@@ -32,30 +41,38 @@ const TeamMember = ({
         }`}
       >
         <div
-          className={`pl-12 py-2 min-w-[290px] bg-white ${margin} shadow-lg shadow-[#6EC756] rounded-lg`}
+          className={`py-2 min-w-[290px] bg-white shadow-lg shadow-[#6ec7567d] rounded-xl ${
+            !reversed
+              ? "ml-[-30px] pl-12 text-start"
+              : "mr-[-30px] pr-12 text-end"
+          }`}
         >
           <h1 className="text-lg font-bold">{name}</h1>
-          <h2>{designation}</h2>
-          <div className="flex gap-6 mt-2">
-            <Link href={social.github}>
-              <GithubFilled
-                className="text-gray-500 hover:text-black"
-                style={{ fontSize: "18px" }}
-              />
-            </Link>
-            <Link href={social.linkedin}>
-              <LinkedinFilled
-                className="text-gray-500 hover:text-blue-700"
-                style={{ fontSize: "18px" }}
-              />
-            </Link>
-            <Link href={social.facebook}>
-              <FacebookFilled
-                className="text-gray-500 hover:text-blue-800"
-                style={{ fontSize: "18px" }}
-              />
-            </Link>
-          </div>
+          <h2 className="mb-2">{designation}</h2>
+          <Link href={social.github}>
+            <GithubFilled
+              className={`text-gray-500 hover:text-black ${
+                reversed ? "ml-6" : "mr-6"
+              } transition-transform duration-300 transform hover:scale-110`}
+              style={{ fontSize: "18px" }}
+            />
+          </Link>
+          <Link href={social.linkedin}>
+            <LinkedinFilled
+              className={`text-gray-500 hover:text-blue-700 ${
+                reversed ? "ml-6" : "mr-6"
+              } transition-transform duration-300 transform hover:scale-110`}
+              style={{ fontSize: "18px" }}
+            />
+          </Link>
+          <Link href={social.facebook}>
+            <FacebookFilled
+              className={`text-gray-500 hover:text-blue-800 ${
+                reversed ? "ml-6" : "mr-6"
+              } transition-transform duration-300 transform hover:scale-110`}
+              style={{ fontSize: "18px" }}
+            />
+          </Link>
         </div>
       </div>
     </div>
@@ -76,7 +93,6 @@ const MeatOurTeam = () => {
             linkedin: "https://www.linkedin.com",
             github: "https://www.github.com",
           }}
-          margin="ml-[-40px]"
         />
         <TeamMember
           name="John Doe"
@@ -87,7 +103,6 @@ const MeatOurTeam = () => {
             linkedin: "https://www.linkedin.com",
             github: "https://www.github.com",
           }}
-          margin="ml-[-40px]"
         />
         <TeamMember
           name="John Doe"
@@ -98,7 +113,6 @@ const MeatOurTeam = () => {
             linkedin: "https://www.linkedin.com",
             github: "https://www.github.com",
           }}
-          margin="mr-[-40px]"
           reversed
         />
         <TeamMember
@@ -110,7 +124,6 @@ const MeatOurTeam = () => {
             linkedin: "https://www.linkedin.com",
             github: "https://www.github.com",
           }}
-          margin="mr-[-40px]"
           reversed
         />
         <TeamMember
@@ -122,7 +135,6 @@ const MeatOurTeam = () => {
             linkedin: "https://www.linkedin.com",
             github: "https://www.github.com",
           }}
-          margin="ml-[-40px]"
         />
         <TeamMember
           name="John Doe"
@@ -133,7 +145,6 @@ const MeatOurTeam = () => {
             linkedin: "https://www.linkedin.com",
             github: "https://www.github.com",
           }}
-          margin="ml-[-40px]"
         />
       </div>
     </div>

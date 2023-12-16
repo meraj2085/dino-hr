@@ -1,6 +1,4 @@
-import {
-  ArrowRightOutlined,
-} from "@ant-design/icons";
+import { ArrowRightOutlined } from "@ant-design/icons";
 import React from "react";
 
 const VideoSection = () => {

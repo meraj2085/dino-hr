@@ -1,3 +1,4 @@
+import PricingSection from "@/components/PricingSection";
 import heroImage from "../../../public/assets/heroImage.png";
 import Image from "next/image";
 
@@ -67,6 +68,7 @@ export default function Home() {
               </div>
             </div>
           </div>
+          <PricingSection />
         </div>
       </div>
     </>

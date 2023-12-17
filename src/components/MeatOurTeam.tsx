@@ -75,8 +75,8 @@ const TeamMember = ({
   designation,
   image,
   social,
-  reversed = false,
-  mobile = false,
+  desktopFlipped = false,
+  mobileFlipped = false,
 }: {
   name: string;
   designation: string;
@@ -86,19 +86,19 @@ const TeamMember = ({
     linkedin: string;
     github: string;
   };
-  reversed?: boolean;
-  mobile?: boolean;
+  desktopFlipped?: boolean;
+  mobileFlipped?: boolean;
 }) => {
   return (
     <div
       className={`flex justify-center  ${
-        !reversed ? "md:justify-start" : "md:justify-end"
+        !desktopFlipped ? "md:justify-start" : "md:justify-end"
       }`}
     >
       <Image
         className={`rounded-full max-w-[150px] border-8 border-white shadow-lg shadow-[#6ec7567d] z-10 ${
-          !reversed ? "md:order-first" : "md:order-last"
-        } ${!mobile ? "order-first" : "order-last"}`}
+          !desktopFlipped ? "md:order-first" : "md:order-last"
+        } ${!mobileFlipped ? "order-first" : "order-last"}`}
         src={image}
         width={0}
         height={0}
@@ -106,16 +106,16 @@ const TeamMember = ({
       />
       <div
         className={`flex flex-col justify-center z-0 ${
-          !reversed ? "md:order-last" : "md:order-first"
-        } ${!mobile ? "order-last" : "order-first"}`}
+          !desktopFlipped ? "md:order-last" : "md:order-first"
+        } ${!mobileFlipped ? "order-last" : "order-first"}`}
       >
         <div
           className={`py-2 min-w-[290px] shadow-lg shadow-[#6ec7567d] rounded-xl ${
-            !reversed
+            !desktopFlipped
               ? "md:ml-[-30px] md:pl-12 md:text-start"
               : "md:mr-[-30px] md:pr-12 md:text-end"
           } ${
-            !mobile
+            !mobileFlipped
               ? "ml-[-30px] pl-12 text-start"
               : "mr-[-30px] pr-12 text-end"
           }`}
@@ -125,9 +125,9 @@ const TeamMember = ({
           <Link href={social.github}>
             <GithubFilled
               className={`text-gray-500 hover:text-black ${
-                reversed ? "md:ml-6" : "md:mr-6"
+                desktopFlipped ? "md:ml-6" : "md:mr-6"
               } ${
-                mobile ? "ml-6" : "mr-6"
+                mobileFlipped ? "ml-6" : "mr-6"
               } transition-transform duration-300 transform hover:scale-110`}
               style={{ fontSize: "18px" }}
             />
@@ -135,9 +135,9 @@ const TeamMember = ({
           <Link href={social.linkedin}>
             <LinkedinFilled
               className={`text-gray-500 hover:text-blue-700 ${
-                reversed ? "md:ml-6" : "md:mr-6"
+                desktopFlipped ? "md:ml-6" : "md:mr-6"
               } ${
-                mobile ? "ml-6" : "mr-6"
+                mobileFlipped ? "ml-6" : "mr-6"
               } transition-transform duration-300 transform hover:scale-110`}
               style={{ fontSize: "18px" }}
             />
@@ -145,9 +145,9 @@ const TeamMember = ({
           <Link href={social.facebook}>
             <FacebookFilled
               className={`text-gray-500 hover:text-blue-800 ${
-                reversed ? "md:ml-6" : "md:mr-6"
+                desktopFlipped ? "md:ml-6" : "md:mr-6"
               } ${
-                mobile ? "ml-6" : "mr-6"
+                mobileFlipped ? "ml-6" : "mr-6"
               } transition-transform duration-300 transform hover:scale-110`}
               style={{ fontSize: "18px" }}
             />
@@ -169,9 +169,9 @@ const MeatOurTeam = () => {
       </p>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-24">
         {TeamMemberDetails.map((member, index) => {
-          const isMobile = index % 2 !== 0;
-          const isReversed = index % 4 >= 2;
-        //   console.log(isReversed, isMobile);
+          const isMobileFlipped = index % 2 !== 0;
+          const isDesktopFlipped = index % 4 >= 2;
+          //   console.log(isDesktopFlipped, isMobileFlipped);
           return (
             <TeamMember
               key={index}
@@ -179,8 +179,8 @@ const MeatOurTeam = () => {
               designation={member.designation}
               image={member.image}
               social={member.social}
-              reversed={isReversed}
-              mobile={isMobile}
+              desktopFlipped={isDesktopFlipped}
+              mobileFlipped={isMobileFlipped}
             />
           );
         })}

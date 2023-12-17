@@ -1,7 +1,5 @@
-import PricingSection from "@/components/PricingSection";
 import heroImage from "../../../public/assets/heroImage.png";
 import Image from "next/image";
-import TopCompanies from "@/components/TopCompanies";
 
 export default function Home() {
   return (

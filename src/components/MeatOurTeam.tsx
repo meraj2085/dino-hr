@@ -110,48 +110,48 @@ const TeamMember = ({
         } ${!mobileFlipped ? "order-last" : "order-first"}`}
       >
         <div
-          className={`py-2 min-w-[290px] shadow-lg shadow-[#6ec7567d] rounded-xl ${
+          className={`py-2 px-14 md:px-10 lg:px-20 shadow-lg shadow-[#6ec7567d] rounded-xl ${
             !desktopFlipped
-              ? "md:ml-[-30px] md:pl-12 md:text-start"
-              : "md:mr-[-30px] md:pr-12 md:text-end"
+              ? "md:ml-[-30px] md:text-start"
+              : "md:mr-[-30px] md:text-end"
           } ${
             !mobileFlipped
-              ? "ml-[-30px] pl-12 text-start"
-              : "mr-[-30px] pr-12 text-end"
+              ? "ml-[-30px] text-start"
+              : "mr-[-30px] text-end"
           }`}
         >
           <h1 className="text-lg font-bold">{name}</h1>
           <h2 className="mb-2">{designation}</h2>
-          <Link href={social.github}>
-            <GithubFilled
-              className={`text-gray-500 hover:text-black ${
-                desktopFlipped ? "md:ml-6" : "md:mr-6"
-              } ${
-                mobileFlipped ? "ml-6" : "mr-6"
-              } transition-transform duration-300 transform hover:scale-110`}
-              style={{ fontSize: "18px" }}
-            />
-          </Link>
-          <Link href={social.linkedin}>
-            <LinkedinFilled
-              className={`text-gray-500 hover:text-blue-700 ${
-                desktopFlipped ? "md:ml-6" : "md:mr-6"
-              } ${
-                mobileFlipped ? "ml-6" : "mr-6"
-              } transition-transform duration-300 transform hover:scale-110`}
-              style={{ fontSize: "18px" }}
-            />
-          </Link>
-          <Link href={social.facebook}>
-            <FacebookFilled
-              className={`text-gray-500 hover:text-blue-800 ${
-                desktopFlipped ? "md:ml-6" : "md:mr-6"
-              } ${
-                mobileFlipped ? "ml-6" : "mr-6"
-              } transition-transform duration-300 transform hover:scale-110`}
-              style={{ fontSize: "18px" }}
-            />
-          </Link>
+          <div
+            className={`flex gap-5 ${
+              !desktopFlipped
+                ? "md:justify-start"
+                : "md:justify-end"
+            } ${
+              !mobileFlipped
+                ? "justify-start"
+                : "justify-end"
+            }`}
+          >
+            <Link href={social.github}>
+              <GithubFilled
+                className={`text-gray-500 hover:text-black  transition-transform duration-300 transform hover:scale-125`}
+                style={{ fontSize: "18px" }}
+              />
+            </Link>
+            <Link href={social.linkedin}>
+              <LinkedinFilled
+                className={`text-gray-500 hover:text-blue-700  transition-transform duration-300 transform hover:scale-125`}
+                style={{ fontSize: "18px" }}
+              />
+            </Link>
+            <Link href={social.facebook}>
+              <FacebookFilled
+                className={`text-gray-500 hover:text-blue-800  transition-transform duration-300 transform hover:scale-125`}
+                style={{ fontSize: "18px" }}
+              />
+            </Link>
+          </div>
         </div>
       </div>
     </div>
@@ -160,14 +160,14 @@ const TeamMember = ({
 
 const MeatOurTeam = () => {
   return (
-    <div className="max-w-[1200px] mx-auto my-40">
+    <div className="max-w-[1200px] mx-auto px-5 my-40">
       <h1 className="text-5xl font-extrabold text-center">Meat Our Team</h1>
       <p className="text-center max-w-2xl mx-auto mt-4 mb-10">
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam
         voluptatum, voluptate quibusdam, quia voluptas, eaque aperiam
         necessitatibus quos doloribus quod voluptatem
       </p>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-24">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-24 md:gap-x-10 md:gap-y-24 lg:gap-24">
         {TeamMemberDetails.map((member, index) => {
           const isMobileFlipped = index % 2 !== 0;
           const isDesktopFlipped = index % 4 >= 2;

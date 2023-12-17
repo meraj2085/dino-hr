@@ -1,11 +1,10 @@
-import MeatOurTeam from "@/components/MeatOurTeam";
 import heroImage from "../../../public/assets/heroImage.png";
 import Image from "next/image";
 
 export default function Home() {
   return (
     <>
-      {/* <div className="flex flex-col">
+      <div className="flex flex-col">
         <div className="relative w-full max-h-[800px] ">
           <div className="flex md:hidden absolute inset-0 bg-gradient-to-r from-black to-transparent mix-blend-multiply"></div>
           <Image
@@ -69,8 +68,7 @@ export default function Home() {
             </div>
           </div>
         </div>
-      </div> */}
-      <MeatOurTeam />
+      </div>
     </>
   );
 }

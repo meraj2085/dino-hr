@@ -2,7 +2,9 @@ const PricingSection = () => {
   return (
     <div className="max-w-[1200px] mx-auto">
       <div className="flex flex-col items-center justify-center min-h-screen p-10 text-gray-700  md:p-20">
-        <h2 className="text-2xl font-medium">Our Pricing</h2>
+        <h2 className="text-2xl font-semibold text-gray-800  lg:text-4xl lg:font-bold capitalize">
+          OUR PRICING
+        </h2>
 
         {/* <!-- Component Start --> */}
         <div className="flex flex-wrap items-center justify-center w-full max-w-4xl mt-8 transition-all">

@@ -1,7 +1,5 @@
-import ReviewSection from "@/components/Review/review";
 import heroImage from "../../../public/assets/heroImage.png";
 import Image from "next/image";
-import ContractUsPage from "@/components/Contract/contract";
 
 export default function Home() {
   return (

@@ -1,5 +1,7 @@
+import Feedback from "@/components/Feedback";
 import heroImage from "../../../public/assets/heroImage.png";
 import Image from "next/image";
+import About from "@/components/About";
 
 export default function Home() {
   return (
@@ -67,6 +69,8 @@ export default function Home() {
               </div>
             </div>
           </div>
+          <Feedback/>
+          <About/>
         </div>
       </div>
     </>

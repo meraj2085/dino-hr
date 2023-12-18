@@ -1,4 +1,3 @@
-import ReviewSection from "@/components/Review/review";
 import heroImage from "../../../public/assets/heroImage.png";
 import Image from "next/image";
 

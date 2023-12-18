@@ -69,8 +69,6 @@ export default function Home() {
               </div>
             </div>
           </div>
-          <Feedback/>
-          <About/>
         </div>
       </div>
     </>

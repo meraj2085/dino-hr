@@ -1,7 +1,11 @@
-import Feedback from "@/components/Feedback";
 import heroImage from "../../../public/assets/heroImage.png";
 import Image from "next/image";
-import About from "@/components/About";
+import ContactUs from "@/components/ContactUs";
+import MeatOurTeam from "@/components/MeatOurTeam";
+import PricingSection from "@/components/PricingSection";
+import TopCompanies from "@/components/TopCompanies";
+import VideoSection from "@/components/VideoSection";
+import ReviewSection from "@/components/Review/review";
 
 export default function Home() {
   return (
@@ -71,6 +75,12 @@ export default function Home() {
           </div>
         </div>
       </div>
+      <VideoSection />
+      <MeatOurTeam />
+      <PricingSection />
+      <TopCompanies />
+      <ReviewSection />
+      <ContactUs />
     </>
   );
 }

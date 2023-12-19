@@ -6,6 +6,7 @@ import PricingSection from "@/components/PricingSection";
 import TopCompanies from "@/components/TopCompanies";
 import VideoSection from "@/components/VideoSection";
 import ReviewSection from "@/components/Review/review";
+import AboutUs from "@/components/AboutUs";
 
 export default function Home() {
   return (
@@ -75,12 +76,13 @@ export default function Home() {
           </div>
         </div>
       </div>
-      <VideoSection />
+      {/* <VideoSection />
       <MeatOurTeam />
       <PricingSection />
       <TopCompanies />
       <ReviewSection />
-      <ContactUs />
+      <ContactUs /> */}
+      <AboutUs />
     </>
   );
 }

@@ -91,12 +91,12 @@ export default function Home() {
           </div>
         </div>
       </section>
-      {/* <VideoSection /> */}
+      <VideoSection />
       <MeatOurTeam />
-      {/* <PricingSection />
+      <PricingSection />
       <TopCompanies />
       <ReviewSection />
-      <ContactUs /> */}
+      <ContactUs />
     </>
   );
 }

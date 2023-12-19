@@ -7,6 +7,7 @@ const nextConfig = {
       "plus.unsplash.com",
       "source.unsplash.com",
       "i.ibb.co",
+      "xsgames.co",
     ],
   },
 };

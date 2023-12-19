@@ -11,8 +11,8 @@ const TeamMemberDetails = [
   {
     name: "John Doe",
     description:
-      "lorem ipsum dolor sit amet consectetur adipisicing elit lorem ipsum dolor sit amet consectetur adipisicing elit",
-    image: profileImg,
+      "Meet John Doe, a dynamic and innovative Full Stack Developer with a passion for crafting seamless digital experiences",
+    image: "https://xsgames.co/randomusers/assets/avatars/male/7.jpg",
     social: {
       linkedin: "https://www.linkedin.com",
       twitter: "https://www.twitter.com",
@@ -22,8 +22,8 @@ const TeamMemberDetails = [
   {
     name: "John Doe",
     description:
-      "lorem ipsum dolor sit amet consectetur adipisicing elit lorem ipsum dolor sit amet consectetur adipisicing elit",
-    image: profileImg,
+      "Meet John Doe, a dynamic and innovative Full Stack Developer with a passion for crafting seamless digital experiences",
+    image: "https://xsgames.co/randomusers/assets/avatars/male/8.jpg",
     social: {
       linkedin: "https://www.linkedin.com",
       twitter: "https://www.twitter.com",
@@ -33,8 +33,8 @@ const TeamMemberDetails = [
   {
     name: "John Doe",
     description:
-      "lorem ipsum dolor sit amet consectetur adipisicing elit lorem ipsum dolor sit amet consectetur adipisicing elit",
-    image: profileImg,
+      "Meet John Doe, a dynamic and innovative Full Stack Developer with a passion for crafting seamless digital experiences",
+    image: "https://xsgames.co/randomusers/assets/avatars/male/2.jpg",
     social: {
       linkedin: "https://www.linkedin.com",
       twitter: "https://www.twitter.com",
@@ -44,8 +44,8 @@ const TeamMemberDetails = [
   {
     name: "John Doe",
     description:
-      "lorem ipsum dolor sit amet consectetur adipisicing elit lorem ipsum dolor sit amet consectetur adipisicing elit",
-    image: profileImg,
+      "Meet John Doe, a dynamic and innovative Full Stack Developer with a passion for crafting seamless digital experiences",
+    image: "https://xsgames.co/randomusers/assets/avatars/male/20.jpg",
     social: {
       linkedin: "https://www.linkedin.com",
       twitter: "https://www.twitter.com",
@@ -55,8 +55,8 @@ const TeamMemberDetails = [
   {
     name: "John Doe",
     description:
-      "lorem ipsum dolor sit amet consectetur adipisicing elit lorem ipsum dolor sit amet consectetur adipisicing elit",
-    image: profileImg,
+      "Meet John Doe, a dynamic and innovative Full Stack Developer with a passion for crafting seamless digital experiences",
+    image: "https://xsgames.co/randomusers/assets/avatars/male/30.jpg",
     social: {
       linkedin: "https://www.linkedin.com",
       twitter: "https://www.twitter.com",
@@ -66,8 +66,8 @@ const TeamMemberDetails = [
   {
     name: "John Doe",
     description:
-      "lorem ipsum dolor sit amet consectetur adipisicing elit lorem ipsum dolor sit amet consectetur adipisicing elit",
-    image: profileImg,
+      "Meet John Doe, a dynamic and innovative Full Stack Developer with a passion for crafting seamless digital experiences",
+    image: "https://xsgames.co/randomusers/assets/avatars/male/57.jpg",
     social: {
       linkedin: "https://www.linkedin.com",
       twitter: "https://www.twitter.com",
@@ -111,7 +111,7 @@ const TeamMember = ({
             width={300}
             height={300}
             className={`rounded-full border-8 border-white shadow-lg`}
-            src={image}
+            src={image || profileImg}
             alt="Profile image"
           />
         </div>
@@ -169,9 +169,10 @@ const MeatOurTeam = () => {
     <div className="max-w-[1200px] mx-auto px-5 my-40">
       <h1 className="text-5xl font-extrabold text-center">Meat Our Team</h1>
       <p className="text-center max-w-2xl mx-auto mt-4 mb-10">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam
-        voluptatum, voluptate quibusdam, quia voluptas, eaque aperiam
-        necessitatibus quos doloribus quod voluptatem
+        Welcome to the heart of our innovation—the brilliant minds that make up
+        our dedicated team. Each member is a unique puzzle piece, contributing
+        distinct skills and perspectives to the collective masterpiece we
+        create.
       </p>
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-24">
         {TeamMemberDetails.map((member, index) => {

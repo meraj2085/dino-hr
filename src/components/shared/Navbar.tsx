@@ -37,7 +37,7 @@ const NavBar = () => {
 
   return (
     <header
-      className={`${sticky && "bg-white"} fixed top-0 left-0 right-0 z-[1]`}
+      className={`${sticky && "bg-white"} fixed top-0 left-0 right-0 z-[999]`}
     >
       <div className="max-w-[1200px] mx-auto px-6 lg:px-0">
         <div className="flex h-16 items-center justify-between">

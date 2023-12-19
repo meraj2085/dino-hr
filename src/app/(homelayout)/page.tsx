@@ -7,6 +7,7 @@ import TopCompanies from "@/components/TopCompanies";
 import VideoSection from "@/components/VideoSection";
 import ReviewSection from "@/components/Review/review";
 import AboutUs from "@/components/AboutUs";
+import Feedback from "@/components/Feedback";
 
 export default function Home() {
   return (
@@ -81,8 +82,10 @@ export default function Home() {
       <PricingSection />
       <TopCompanies />
       <ReviewSection />
-      <ContactUs /> */}
       <AboutUs />
+      <ContactUs /> 
+    */}
+      <Feedback />
     </>
   );
 }

@@ -41,7 +41,7 @@ const DynamicAuthNav = () => {
         <div className="hidden sm:flex sm:gap-4">
           <>
             <Link
-              className="rounded-md bg-[#8484BD] px-5 py-2.5 text-sm font-medium text-white shadow"
+              className="rounded-md bg-[#00674A] hover:bg-[#008567] px-5 py-2.5 text-sm font-medium text-white shadow"
               href="/auth/login"
             >
               Login

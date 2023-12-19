@@ -4,7 +4,7 @@ import temp1 from "../../public/assets/temp_1.jpg";
 
 const AboutUs = () => {
   return (
-    <div className="max-w-[1200px] mx-auto px-5 my-40 ">
+    <div className="max-w-[1200px] mx-auto px-5 my-40">
       <div className="mb-5 md:mb-8">
         <h1 className="text-4xl  font-bold text-center mb-3">Our Story</h1>
         <p className="max-w-2xl text-center mx-auto">

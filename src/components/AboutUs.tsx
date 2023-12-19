@@ -1,6 +1,5 @@
-import { Col, Row } from "antd";
 import Image from "next/image";
-import temp1 from "../../public/assets/temp_1.jpg";
+import aboutUsImg from "../../public/assets/about-us.png";
 
 const AboutUs = () => {
   return (
@@ -14,11 +13,11 @@ const AboutUs = () => {
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-8">
         <div>
-          <Image src={temp1} alt="about img" />
+          <Image src={aboutUsImg} alt="about img" className="rounded-lg shadow-xl"/>
         </div>
         <div className="flex flex-col justify-center">
           <h1 className="text-2xl text-center md:text-start mb-2 md:mb-5">
-            Lorem ipsum dolor
+            How We Started
           </h1>
           <p className="text-justify">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam

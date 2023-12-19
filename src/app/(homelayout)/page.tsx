@@ -82,9 +82,9 @@ export default function Home() {
       <PricingSection />
       <TopCompanies />
       <ReviewSection />
-      <AboutUs />
       <ContactUs /> 
     */}
+      <AboutUs />
       <Feedback />
     </>
   );

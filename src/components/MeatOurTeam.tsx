@@ -1,153 +1,159 @@
 import Image from "next/image";
 import profileImg from "../../public/assets/profile.png";
 import {
-  FacebookFilled,
-  GithubFilled,
   LinkedinFilled,
+  TwitterOutlined,
+  InstagramOutlined,
 } from "@ant-design/icons";
 import Link from "next/link";
 
 const TeamMemberDetails = [
   {
     name: "John Doe",
-    designation: "Full Stack Developer",
+    description:
+      "lorem ipsum dolor sit amet consectetur adipisicing elit lorem ipsum dolor sit amet consectetur adipisicing elit",
     image: profileImg,
     social: {
-      facebook: "https://www.facebook.com",
       linkedin: "https://www.linkedin.com",
-      github: "https://www.github.com",
+      twitter: "https://www.twitter.com",
+      instagram: "https://www.instagram.com",
     },
   },
   {
     name: "John Doe",
-    designation: "Full Stack Developer",
+    description:
+      "lorem ipsum dolor sit amet consectetur adipisicing elit lorem ipsum dolor sit amet consectetur adipisicing elit",
     image: profileImg,
     social: {
-      facebook: "https://www.facebook.com",
       linkedin: "https://www.linkedin.com",
-      github: "https://www.github.com",
+      twitter: "https://www.twitter.com",
+      instagram: "https://www.instagram.com",
     },
   },
   {
     name: "John Doe",
-    designation: "Full Stack Developer",
+    description:
+      "lorem ipsum dolor sit amet consectetur adipisicing elit lorem ipsum dolor sit amet consectetur adipisicing elit",
     image: profileImg,
     social: {
-      facebook: "https://www.facebook.com",
       linkedin: "https://www.linkedin.com",
-      github: "https://www.github.com",
+      twitter: "https://www.twitter.com",
+      instagram: "https://www.instagram.com",
     },
   },
   {
     name: "John Doe",
-    designation: "Full Stack Developer",
+    description:
+      "lorem ipsum dolor sit amet consectetur adipisicing elit lorem ipsum dolor sit amet consectetur adipisicing elit",
     image: profileImg,
     social: {
-      facebook: "https://www.facebook.com",
       linkedin: "https://www.linkedin.com",
-      github: "https://www.github.com",
+      twitter: "https://www.twitter.com",
+      instagram: "https://www.instagram.com",
     },
   },
   {
     name: "John Doe",
-    designation: "Full Stack Developer",
+    description:
+      "lorem ipsum dolor sit amet consectetur adipisicing elit lorem ipsum dolor sit amet consectetur adipisicing elit",
     image: profileImg,
     social: {
-      facebook: "https://www.facebook.com",
       linkedin: "https://www.linkedin.com",
-      github: "https://www.github.com",
+      twitter: "https://www.twitter.com",
+      instagram: "https://www.instagram.com",
     },
   },
   {
     name: "John Doe",
-    designation: "Full Stack Developer",
+    description:
+      "lorem ipsum dolor sit amet consectetur adipisicing elit lorem ipsum dolor sit amet consectetur adipisicing elit",
     image: profileImg,
     social: {
-      facebook: "https://www.facebook.com",
       linkedin: "https://www.linkedin.com",
-      github: "https://www.github.com",
+      twitter: "https://www.twitter.com",
+      instagram: "https://www.instagram.com",
     },
   },
 ];
 
 const TeamMember = ({
   name,
-  designation,
+  description,
   image,
   social,
   desktopFlipped = false,
   mobileFlipped = false,
 }: {
   name: string;
-  designation: string;
+  description: string;
   image: any;
   social: {
-    facebook: string;
+    twitter: string;
     linkedin: string;
-    github: string;
+    instagram: string;
   };
   desktopFlipped?: boolean;
   mobileFlipped?: boolean;
 }) => {
   return (
     <div
-      className={`flex justify-center  ${
-        !desktopFlipped ? "md:justify-start" : "md:justify-end"
+      className={`flex justify-center ${
+        !desktopFlipped ? "lg:justify-start" : "lg:justify-end"
       }`}
     >
-      <Image
-        className={`rounded-full max-w-[150px] border-8 border-white shadow-lg shadow-[#6ec7567d] z-10 ${
-          !desktopFlipped ? "md:order-first" : "md:order-last"
-        } ${!mobileFlipped ? "order-first" : "order-last"}`}
-        src={image}
-        width={0}
-        height={0}
-        alt="Profile image"
-      />
+      <div
+        className={`${!desktopFlipped ? "lg:order-first" : "lg:order-last"} ${
+          !mobileFlipped ? "order-first" : "order-last"
+        } z-10 flex flex-col justify-center`}
+      >
+        <div className="">
+          <Image
+            width={300}
+            height={300}
+            className={`rounded-full border-8 border-white shadow-lg`}
+            src={image}
+            alt="Profile image"
+          />
+        </div>
+      </div>
       <div
         className={`flex flex-col justify-center z-0 ${
-          !desktopFlipped ? "md:order-last" : "md:order-first"
+          !desktopFlipped ? "lg:order-last" : "lg:order-first"
         } ${!mobileFlipped ? "order-last" : "order-first"}`}
       >
         <div
-          className={`py-2 px-14 md:px-10 lg:px-20 shadow-lg shadow-[#6ec7567d] rounded-xl ${
+          className={`py-2 shadow-lg rounded-xl ${
             !desktopFlipped
-              ? "md:ml-[-30px] md:text-start"
-              : "md:mr-[-30px] md:text-end"
+              ? "lg:ml-[-75px] lg:text-start lg:pl-24 lg:pr-4"
+              : "lg:mr-[-75px] lg:text-end lg:pr-24 lg:pl-4"
           } ${
             !mobileFlipped
-              ? "ml-[-30px] text-start"
-              : "mr-[-30px] text-end"
+              ? "ml-[-30px] text-start pl-14 pr-4"
+              : "mr-[-30px] text-end pr-14 pl-4"
           }`}
         >
           <h1 className="text-lg font-bold">{name}</h1>
-          <h2 className="mb-2">{designation}</h2>
+          <p className="mb-2">{description}</p>
           <div
             className={`flex gap-5 ${
-              !desktopFlipped
-                ? "md:justify-start"
-                : "md:justify-end"
-            } ${
-              !mobileFlipped
-                ? "justify-start"
-                : "justify-end"
-            }`}
+              !desktopFlipped ? "lg:justify-start" : "lg:justify-end"
+            } ${!mobileFlipped ? "justify-start" : "justify-end"}`}
           >
-            <Link href={social.github}>
-              <GithubFilled
-                className={`text-gray-500 hover:text-black  transition-transform duration-300 transform hover:scale-125`}
-                style={{ fontSize: "18px" }}
-              />
-            </Link>
             <Link href={social.linkedin}>
               <LinkedinFilled
                 className={`text-gray-500 hover:text-blue-700  transition-transform duration-300 transform hover:scale-125`}
                 style={{ fontSize: "18px" }}
               />
             </Link>
-            <Link href={social.facebook}>
-              <FacebookFilled
-                className={`text-gray-500 hover:text-blue-800  transition-transform duration-300 transform hover:scale-125`}
+            <Link href={social.twitter}>
+              <TwitterOutlined
+                className={`text-gray-500 hover:text-sky-500 transition-transform duration-300 transform hover:scale-125`}
+                style={{ fontSize: "18px" }}
+              />
+            </Link>
+            <Link href={social.instagram}>
+              <InstagramOutlined
+                className={`text-gray-500 hover:text-pink-700  transition-transform duration-300 transform hover:scale-125`}
                 style={{ fontSize: "18px" }}
               />
             </Link>
@@ -167,7 +173,7 @@ const MeatOurTeam = () => {
         voluptatum, voluptate quibusdam, quia voluptas, eaque aperiam
         necessitatibus quos doloribus quod voluptatem
       </p>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-24 md:gap-x-10 md:gap-y-24 lg:gap-24">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-24">
         {TeamMemberDetails.map((member, index) => {
           const isMobileFlipped = index % 2 !== 0;
           const isDesktopFlipped = index % 4 >= 2;
@@ -176,7 +182,7 @@ const MeatOurTeam = () => {
             <TeamMember
               key={index}
               name={member.name}
-              designation={member.designation}
+              description={member.description}
               image={member.image}
               social={member.social}
               desktopFlipped={isDesktopFlipped}

@@ -20,7 +20,7 @@ const TopCompanies = () => {
               width={100}
               src="https://i.ibb.co/8jJfgkc/5847f8aecef1014c0b5e48af.png"
               alt="Fabemi Logo"
-              className="block object-contain h-16 grayscale hover:grayscale-0 cursor-pointer"
+              className="block object-contain h-16  cursor-pointer hover:scale-110 duration-100"
             />
           </div>
           <div className="flex items-center justify-center">
@@ -29,7 +29,7 @@ const TopCompanies = () => {
               width={100}
               src="https://i.ibb.co/phD2q0h/5847f44acef1014c0b5e4892.png"
               alt="Spoon Logo"
-              className="block object-contain h-16 grayscale hover:grayscale-0 cursor-pointer"
+              className="block object-contain h-16  cursor-pointer hover:scale-110 duration-100"
             />
           </div>
           <div className="flex items-center justify-center">
@@ -38,7 +38,7 @@ const TopCompanies = () => {
               width={100}
               src="https://i.ibb.co/VxGQ1Qd/5847f42bcef1014c0b5e488e.png"
               alt="Atlassian Logo"
-              className="block object-contain h-16 grayscale hover:grayscale-0 cursor-pointer"
+              className="block object-contain h-16  cursor-pointer hover:scale-110 duration-100"
             />
           </div>
           <div className="flex items-center justify-center">
@@ -47,7 +47,7 @@ const TopCompanies = () => {
               width={100}
               src="https://i.ibb.co/Cvd50zK/5847f415cef1014c0b5e488b.png"
               alt="Z Logo"
-              className="block object-contain h-16 grayscale hover:grayscale-0 cursor-pointer"
+              className="block object-contain h-16  cursor-pointer hover:scale-110 duration-100"
             />
           </div>
           <div className="flex items-center justify-center">
@@ -56,7 +56,7 @@ const TopCompanies = () => {
               width={100}
               src="https://i.ibb.co/7VNmQ2H/5847f3f8cef1014c0b5e4887.png"
               alt="Apple Logo"
-              className="block object-contain h-16 grayscale hover:grayscale-0 cursor-pointer"
+              className="block object-contain h-16  cursor-pointer hover:scale-110 duration-100"
             />
           </div>
           <div className="flex items-center justify-center">
@@ -65,7 +65,7 @@ const TopCompanies = () => {
               width={100}
               src="https://i.ibb.co/SyrVKFM/5847f997cef1014c0b5e48c1.png"
               alt="Nikon Logo"
-              className="block object-contain h-16 grayscale hover:grayscale-0 cursor-pointer"
+              className="block object-contain h-16  cursor-pointer hover:scale-110 duration-100"
             />
           </div>
         </div>

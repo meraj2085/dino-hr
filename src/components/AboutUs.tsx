@@ -5,30 +5,33 @@ const AboutUs = () => {
   return (
     <div className="max-w-[1200px] mx-auto px-5 my-40">
       <div className="mb-5 md:mb-8">
-        <h1 className="text-4xl  font-bold text-center mb-3">Our Story</h1>
+        <h1 className="text-4xl  font-bold text-center mb-3">About Us</h1>
         <p className="max-w-2xl text-center mx-auto">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam
-          voluptatum, quae, atque quia, voluptatem voluptates dolorum.
+          Welcome to the heart of our story. In our About Us
+          section, we invite you to delve into the essence of who we are
         </p>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-8">
         <div>
-          <Image src={aboutUsImg} alt="about img" className="rounded-lg shadow-xl"/>
+          <Image
+            src={aboutUsImg}
+            alt="about img"
+            className="rounded-lg shadow-xl"
+          />
         </div>
         <div className="flex flex-col justify-center">
-          <h1 className="text-2xl text-center md:text-start mb-2 md:mb-5">
-            How We Started
-          </h1>
           <p className="text-justify">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam
-            voluptatum, quae, atque quia, voluptatem voluptates dolorum
-            necessitatibus voluptas quod quibusdam consequatur? Quisquam
-            voluptatum, quae, atque quia,{" "}
+            Dive into the core of Dino HR, where the synergy of technology and
+            human resources transforms the way businesses thrive. At the heart
+            of our platform is a team of dedicated professionals who envision a
+            workplace where HR processes are not just streamlined but are
+            catalysts for organizational success.
             <span className="hidden lg:block">
-              voluptatem voluptates dolorum necessitatibus voluptas quod
-              quibusdam consequatur? voluptatum, quae, atque quia, voluptatem
-              voluptates dolorum necessitatibus voluptas quod quibusdam
-              consequatur?
+              As pioneers in the realm of HR innovation, we understand the
+              intricate balance between people and technology. Our mission is to
+              empower businesses with a comprehensive HR solution that goes
+              beyond mere management—it&apos;s about fostering a culture of
+              collaboration, growth, and employee well-being.
             </span>
           </p>
         </div>

@@ -6,6 +6,7 @@ import PricingSection from "@/components/PricingSection";
 import TopCompanies from "@/components/TopCompanies";
 import VideoSection from "@/components/VideoSection";
 import ReviewSection from "@/components/Review/review";
+import BookCall from "@/components/BookCall";
 
 export default function Home() {
   return (

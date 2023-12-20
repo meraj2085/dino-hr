@@ -51,7 +51,9 @@ const LoginPage = () => {
                 alt="Dino-HR-Logo"
               />
             </Link>
-            <h1 className="pl-2 text-2xl lg:text-4xl font-bold text-[#00684a]">Dino</h1>
+            <h1 className="pl-2 text-2xl lg:text-4xl font-bold text-[#00684a]">
+              Dino
+            </h1>
           </div>
           <h1 className="text-3xl font-normal text-[#00684a] mb-4">
             Log in to your account
@@ -95,12 +97,12 @@ const LoginPage = () => {
           <div className="flex ">
             <div className="text-white my-10 ml-12">
               <h1 className="text-xl lg:text-3xl font-bold my-4">
-                Unlock the power of AI with Vector Search
+                Simplify HR tasks using Dino HR
               </h1>
               <p className="text-md mb-4">
-                Introducing Vector Search. Build intelligent applications
-                powered by semantic search and generative AI over any type of
-                data.
+                All in one human resource management system. From effortlessly
+                managing teams to managing employee salaries, Dino simplifies
+                every aspect of HRMS.
               </p>
               <Link className="underline" href="/">
                 Learn more

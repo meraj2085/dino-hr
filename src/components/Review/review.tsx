@@ -44,33 +44,45 @@ const ReviewSection = () => {
   };
   const dummyData = [
     {
-      title: "Mangrove Software & IT",
-      img: "https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1180&q=80",
+      title: "Apex Solutions",
+      client_name: "CEO of Alex Johnson",
+      img: "https://www.apexfootwearltd.com/media/images/2._SNM.466072d2.fill-494x620-c100.jpg",
       content:
-        "Lorem ipsum dolor sit, amet consectetur adipisicing elit Lorem ipsum dolor sit, amet consectetur adipisicing elit Lorem ipsum dolor sit, amet consectetur adipisicing elit ",
+        "HR Management transformed our processes, offering efficiency and seamless recruitment. User-friendly interface, excellent support. Exceeded expectations, positively impacting productivity.",
     },
     {
-      title: "Programming Hero",
-      img: "https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1180&q=80",
+      title: "Quantu Innovation",
+      client_name: "CEO of Emily Rodriguez",
+      img: "https://static.theceomagazine.net/wp-content/uploads/2023/04/21154637/jack-hidary-sandboxaq-1.png",
       content:
-        "Lorem ipsum dolor sit, amet consectetur adipisicing elit Lorem ipsum dolor sit, amet consectetur adipisicing elit Lorem ipsum dolor sit, amet consectetur adipisicing elit ",
+        "Integral to our company, HR Management's recruitment and performance tools are invaluable. Scalable, with insightful reporting. Enhances operations, fosters growth, and ensures transparency.",
     },
     {
-      title: "Google",
-      img: "https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1180&q=80",
+      title: "Horizon Enterprises",
+      client_name: "CEO of Jason Taylor",
+      img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTLdmVVSKBgiPk1LIqf0rjsoE3X7M5cuJFDeg&usqp=CAU",
       content:
-        "Lorem ipsum dolor sit, amet consectetur adipisicing elit Lorem ipsum dolor sit",
+        "Game-changer for our organization. Employee self-service empowers, analytics offer insights, and compliance features align with regulations. Seamless onboarding and improved overall employee experience.",
     },
     {
-      title: "Life Time Software & IT",
-      img: "https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1180&q=80",
+      title: "Stellar Services",
+      client_name: "CEO of Olivia Chen",
+      img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQS3MvMZtLocES4CUQGO0es6iQXREI7k9ZtO_yzAHIQG0NOXZxe2y7ofeZ2qs5_rEJBlTk&usqp=CAU",
       content:
-        "Lorem ipsum dolor sit, amet consectetur adipisicing elit Lorem ipsum dolor sit, amet consectetur adipisicing elit Lorem ipsum dolor sit, amet consectetur adipisicing elit ",
+        "Cost-effective and essential for our small business. Simple implementation, efficient time-tracking, and leave management. Responsive customer support. Streamlined HR processes, compliant and user-friendly.",
     },
   ];
 
   return (
     <div className="max-w-[1200px]  mx-auto my-20">
+      <div className="text-center py-4">
+        <h1 className="text-2xl font-semibold text-gray-800 capitalize lg:text-4xl lg:font-bold ">
+          Client Reviews
+        </h1>
+        <p className="max-w-lg mx-auto mt-4 text-gray-500">
+          What our Clients say about us
+        </p>
+      </div>
       <Slider {...settings}>
         {dummyData?.map((data, index) => (
           <div key={index}>
@@ -82,7 +94,7 @@ const ReviewSection = () => {
                   </h3>
 
                   <p className="mt-1 text-xs font-medium text-gray-600">
-                    By Nafis Faisal
+                    {data?.client_name}
                   </p>
                 </div>
 

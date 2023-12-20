@@ -1,7 +1,7 @@
 import globalMap from "../../../public/assets/globalMap.png";
 import Image from "next/image";
 import ContactUs from "@/components/ContactUs";
-import MeatOurTeam from "@/components/MeatOurTeam";
+import MeetOurTeam from "@/components/MeetOurTeam";
 import PricingSection from "@/components/PricingSection";
 import TopCompanies from "@/components/TopCompanies";
 import VideoSection from "@/components/VideoSection";
@@ -96,7 +96,7 @@ export default function Home() {
         </div>
       </section>
       <VideoSection />
-      <MeatOurTeam />
+      <MeetOurTeam />
       <PricingSection />
       <TopCompanies />
       <ReviewSection />

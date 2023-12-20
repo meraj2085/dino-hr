@@ -1,6 +1,6 @@
 "use client";
-import { Button, Col, Row, message } from "antd";
-import loginImage from "../../../../public/assets/login-pana.png";
+import { Button, message } from "antd";
+import vectorImg from "../../../../public/assets/vector.png";
 import Image from "next/image";
 import Form from "@/components/Forms/Form";
 import FormInput from "@/components/Forms/FormInput";
@@ -37,28 +37,35 @@ const LoginPage = () => {
   };
 
   return (
-    <Row
-      justify="center"
-      align="middle"
-      style={{
-        minHeight: "100vh",
-      }}
-    >
-      <Col className="hidden md:block" sm={12} md={16} lg={10}>
-        <Image src={loginImage} width={500} alt="login image" />
-      </Col>
-      <Col className="mx-10 md:mx-0" sm={12} md={8} lg={8}>
-        <h1 className="my-4 text-center text-xl">Login your account</h1>
-        <div>
+    <div>
+      {/* main layout  */}
+      <div className="grid grid-cols-1 sm:grid-cols-7 h-[100vh] ">
+        {/* login colum */}
+        <div className="col-span-2 p-8 ml-2 mb-10">
+          <div className="flex items-center my-5">
+            <Link className="" href="/">
+              <Image
+                src="https://res.cloudinary.com/dn163fium/image/upload/v1702705615/usmjqqtg18c9j7bnwh4f.png"
+                height={52}
+                width={52}
+                alt="Dino HR Logo"
+              />
+            </Link>
+            <h1 className="pl-2 text-4xl font-bold text-[#00684a]">Dino</h1>
+          </div>
+          <h1 className="text-3xl font-normal text-[#00684a] mb-4">
+            Log in to your account
+          </h1>
           <Form submitHandler={onSubmit} resolver={yupResolver(loginSchema)}>
             <div>
-              <FormInput name="email" type="email" size="large" label="Email" />
+              <FormInput
+                name="email"
+                type="email"
+                size="large"
+                label="Email Address"
+              />
             </div>
-            <div
-              style={{
-                margin: "15px 0px",
-              }}
-            >
+            <div>
               <FormInput
                 name="password"
                 type="password"
@@ -75,13 +82,42 @@ const LoginPage = () => {
                 </a>
               </div>
             </div>
-            <div className="flex justify-center">
-              <Button htmlType="submit">Login</Button>
+            <div className="flex justify-left">
+              <Button shape="default" htmlType="submit">
+                Login
+              </Button>
             </div>
           </Form>
         </div>
-      </Col>
-    </Row>
+
+        {/* text colum  */}
+        <div className=" hidden sm:block col-span-5 bg-[#00684a] ">
+          <div className="flex ">
+            <div className="text-white my-10 ml-12">
+              <h1 className="text-3xl font-bold my-4">
+                Unlock the power of AI <br /> with Vector Search
+              </h1>
+              <p className="text-md mb-4">
+                Introducing Vector Search. Build intelligent applications
+                powered by semantic search and generative AI over any type of
+                data.
+              </p>
+              <Link className="underline" href="/">
+                Learn more
+              </Link>
+            </div>
+
+            {/* img colum */}
+            <Image className="h-[100vh]"
+              src={vectorImg}
+        
+              width={586}
+              alt="Dino HR Logo"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
   );
 };
 

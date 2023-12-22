@@ -4,6 +4,9 @@ import OrganizationInfo1 from "@/components/OrganizationForms/OrganizationForm1"
 import OrganizationInfo2 from "@/components/OrganizationForms/OrganizationForm2";
 import OrganizationInfo3 from "@/components/OrganizationForms/OrganizationForm3";
 import StepperForm from "@/components/StepperForm/StepperForm";
+import ActionBar from "@/components/ui/ActionBar";
+import BreadCrumb from "@/components/ui/BreadCrumb";
+import { Space } from "antd";
 
 const AddOrganization = () => {
   const steps = [
@@ -31,7 +34,20 @@ const AddOrganization = () => {
 
   return (
     <div>
-      <h1 className="text-3xl font-extrabold text-center my-8">Add Organization</h1>
+      <BreadCrumb
+        items={[
+          {
+            label: "Super Admin",
+            link: "/dashboard/super_admin",
+          },
+          {
+            label: "Add Organization",
+            link: "/dashboard/super_admin/organizations/addOrganization",
+          },
+        ]}
+      />
+      <ActionBar title="Add Organization"></ActionBar>
+      <div className="w-full h-4"/>
       <StepperForm
         persistKey="addOrganizationForm"
         navigateLink="/dashboard/super_admin/organizations/viewOrganization"

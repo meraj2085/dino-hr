@@ -1,10 +1,11 @@
 "use client";
 
 import { getFromLocalStorage, setToLocalStorage } from "@/utils/localStorage";
-import { Button, message, Steps } from "antd";
+import { Button, ConfigProvider, message, Steps } from "antd";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
+import { LeftOutlined, RightOutlined } from "@ant-design/icons";
 
 interface ISteps {
   title?: string;
@@ -71,33 +72,50 @@ const StepperForm = ({
 
   return (
     <>
-      <Steps current={current} items={items} />
-      <FormProvider {...methods}>
-        <form onSubmit={handleSubmit(handleStudentOnSubmit)}>
-          <div>{steps[current].content}</div>
-          <div style={{ marginTop: 24 }}>
-            {current < steps.length - 1 && (
-              <Button type="primary" onClick={() => next()}>
-                Next
-              </Button>
-            )}
-            {current === steps.length - 1 && (
-              <Button
-                type="primary"
-                htmlType="submit"
-                onClick={() => message.success("Processing complete!")}
-              >
-                Done
-              </Button>
-            )}
-            {current > 0 && (
-              <Button style={{ margin: "0 8px" }} onClick={() => prev()}>
-                Previous
-              </Button>
-            )}
-          </div>
-        </form>
-      </FormProvider>
+      <ConfigProvider
+        theme={{
+          token: {
+            colorPrimary: "#00674A",
+          },
+        }}
+      >
+        <Steps current={current} items={items} />
+        <FormProvider {...methods}>
+          <form onSubmit={handleSubmit(handleStudentOnSubmit)}>
+            <div>{steps[current].content}</div>
+            <div style={{ marginTop: 24 }}>
+              {current > 0 && (
+                <Button
+                className="mr-5"  
+                onClick={() => prev()}
+                >
+                  <span>
+                    <LeftOutlined /> Previous
+                  </span>
+                </Button>
+              )}
+
+              {current < steps.length - 1 && (
+                <Button onClick={() => next()}>
+                  <span>
+                    Next <RightOutlined />
+                  </span>
+                </Button>
+              )}
+              {current === steps.length - 1 && (
+                <Button
+                  type="primary"
+                  className="bg-[#00674A]"
+                  htmlType="submit"
+                  onClick={() => message.success("Processing complete!")}
+                >
+                  Done
+                </Button>
+              )}
+            </div>
+          </form>
+        </FormProvider>
+      </ConfigProvider>
     </>
   );
 };

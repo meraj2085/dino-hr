@@ -1,34 +1,42 @@
 "use client";
 
-import OrganizationInfo1 from "@/components/OrganizationForms/OrganizationForm1";
-import OrganizationInfo2 from "@/components/OrganizationForms/OrganizationForm2";
-import OrganizationInfo3 from "@/components/OrganizationForms/OrganizationForm3";
+import BasicInfoForm from "@/components/OrganizationForms/BasicInfo";
 import StepperForm from "@/components/StepperForm/StepperForm";
 import ActionBar from "@/components/ui/ActionBar";
 import BreadCrumb from "@/components/ui/BreadCrumb";
-import { Space } from "antd";
+import ContactPersonForm from "@/components/OrganizationForms/ContactPerson";
+import BillingDetailsForm from "@/components/OrganizationForms/BillingDetails";
+import { useAddOrganizationMutation } from "@/redux/api/organizationApi";
+import { message } from "antd";
 
 const AddOrganization = () => {
   const steps = [
     {
-      title: "Organization Info 1",
-      content: <OrganizationInfo1 />,
+      title: "Basic Info",
+      content: <BasicInfoForm />,
     },
     {
-      title: "Organization Info 2",
-      content: <OrganizationInfo2 />,
+      title: "Contact Person",
+      content: <ContactPersonForm />,
     },
     {
-      title: "Organization Info 3",
-      content: <OrganizationInfo3 />,
+      title: "Billing Details",
+      content: <BillingDetailsForm />,
     },
   ];
 
+  const [addOrganization, { isLoading }] = useAddOrganizationMutation();
+
   const handleStudentSubmit = async (values: any) => {
     try {
-      console.log(values);
+      // console.log(values);
+      const res = await addOrganization(values).unwrap();
+      console.log(res);
+      if(res.id){
+        message.success("Organization Added Successfully");
+      }
     } catch (err: any) {
-      console.error(err.message);
+      message.error(err.message);
     }
   };
 
@@ -47,7 +55,7 @@ const AddOrganization = () => {
         ]}
       />
       <ActionBar title="Add Organization"></ActionBar>
-      <div className="w-full h-4"/>
+      <div className="w-full h-4" />
       <StepperForm
         persistKey="addOrganizationForm"
         navigateLink="/dashboard/super_admin/organizations/viewOrganization"

@@ -1,6 +1,10 @@
 "use client";
 
-import { getFromLocalStorage, removeFromLocalStorage, setToLocalStorage } from "@/utils/localStorage";
+import {
+  getFromLocalStorage,
+  removeFromLocalStorage,
+  setToLocalStorage,
+} from "@/utils/localStorage";
 import { Button, ConfigProvider, message, Steps } from "antd";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -85,10 +89,7 @@ const StepperForm = ({
             <div>{steps[current].content}</div>
             <div style={{ marginTop: 24 }}>
               {current > 0 && (
-                <Button
-                className="mr-5"  
-                onClick={() => prev()}
-                >
+                <Button className="mr-5" onClick={() => prev()}>
                   <span>
                     <LeftOutlined /> Previous
                   </span>

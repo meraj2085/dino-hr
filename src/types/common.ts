@@ -10,9 +10,11 @@ export type ResponseSuccessType = {
 };
 
 export type IGenericErrorResponse = {
-  statusCode: number;
-  message: string;
-  errorMessages: IGenericErrorMessage[];
+  error: {
+    statusCode: number;
+    message: string;
+    errorMessages: IGenericErrorMessage[];
+  };
 };
 
 export type IGenericErrorMessage = {

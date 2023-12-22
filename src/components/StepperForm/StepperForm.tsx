@@ -1,6 +1,6 @@
 "use client";
 
-import { getFromLocalStorage, setToLocalStorage } from "@/utils/localStorage";
+import { getFromLocalStorage, removeFromLocalStorage, setToLocalStorage } from "@/utils/localStorage";
 import { Button, ConfigProvider, message, Steps } from "antd";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -65,8 +65,8 @@ const StepperForm = ({
   const handleStudentOnSubmit = (data: any) => {
     submitHandler(data);
     reset();
-    setToLocalStorage("step", JSON.stringify({ step: 0 }));
-    setToLocalStorage(persistKey, JSON.stringify({}));
+    removeFromLocalStorage("step");
+    removeFromLocalStorage(persistKey);
     navigateLink && router.push(navigateLink);
   };
 

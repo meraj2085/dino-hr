@@ -33,7 +33,7 @@ const AddOrganization = () => {
     <div>
       <h1 className="text-3xl font-extrabold text-center my-8">Add Organization</h1>
       <StepperForm
-        persistKey="add-organization-form"
+        persistKey="addOrganizationForm"
         navigateLink="/dashboard/super_admin/organizations/viewOrganization"
         submitHandler={(value) => {
           handleStudentSubmit(value);

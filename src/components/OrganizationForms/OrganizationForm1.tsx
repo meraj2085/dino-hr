@@ -9,56 +9,56 @@ const OrganizationForm1 = () => {
         <Row gutter={{ xs: 4, md: 20 }}>
           <Col xs={24} md={12} lg={6} className="mt-3">
             <FormInput
-              name="student.guardian.fatherName"
-              label="Father name"
+              name="organization.form1.field1"
+              label="Field 1"
               size="large"
             />
           </Col>
 
           <Col xs={24} md={12} lg={6} className="mt-3">
             <FormInput
-              name="student.guardian.fatherOccupation"
-              label="Father occupation"
+              name="organization.form1.field2"
+              label="Field 2"
               size="large"
             />
           </Col>
 
           <Col xs={24} md={12} lg={6} className="mt-3">
             <FormInput
-              name="student.guardian.fatherContactNo"
-              label="Father contact no."
+              name="organization.form1.field3"
+              label="Field 3"
               size="large"
             />
           </Col>
 
           <Col xs={24} md={12} lg={6} className="mt-3">
             <FormInput
-              name="student.guardian.motherName"
-              label="Mother name"
+              name="organization.form1.field4"
+              label="Field 4"
               size="large"
             />
           </Col>
 
           <Col xs={24} md={12} lg={6} className="mt-3">
             <FormInput
-              name="student.guardian.motherOccupation"
-              label="Mother occupation"
+              name="organization.form1.field5"
+              label="Field 5"
               size="large"
             />
           </Col>
 
           <Col xs={24} md={12} lg={6} className="mt-3">
             <FormInput
-              name="student.guardian.motherContactNo"
-              label="Mother contact no."
+              name="organization.form1.field6"
+              label="Field 6"
               size="large"
             />
           </Col>
 
           <Col xs={24} md={12} lg={6} className="mt-3">
             <FormInput
-              name="student.guardian.address"
-              label="Address"
+              name="organization.form1.field7"
+              label="Field 7"
               size="large"
             />
           </Col>

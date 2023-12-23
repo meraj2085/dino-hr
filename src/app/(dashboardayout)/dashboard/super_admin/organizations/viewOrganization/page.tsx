@@ -4,17 +4,13 @@ import BreadCrumb from "@/components/ui/BreadCrumb";
 import { Button, Input } from "antd";
 import Link from "next/link";
 import {
-  DeleteOutlined,
-  EditOutlined,
   PlusOutlined,
-  ReloadOutlined,
 } from "@ant-design/icons";
 import { useState } from "react";
 import { useDebounced } from "@/redux/hooks";
 import PPTable from "@/components/ui/PPTable";
-import { IUser } from "@/types";
 import dayjs from "dayjs";
-import { useGetAllUsersQuery } from "@/redux/api/userApi";
+import { useGetAllOrganizationQuery } from "@/redux/api/organizationApi";
 
 const ViewOrganization = () => {
   const query: Record<string, any> = {};
@@ -38,25 +34,31 @@ const ViewOrganization = () => {
   if (!!debouncedSearchTerm) {
     query["searchTerm"] = debouncedSearchTerm;
   }
-  const { data, isLoading } = useGetAllUsersQuery({ ...query });
+
+  const { data, isLoading } = useGetAllOrganizationQuery({ ...query });
   const meta = data?.meta;
+
+  // console.log(data);
 
   const columns = [
     {
-      title: "Name",
-      dataIndex: "name",
-      render: function (data: Record<string, string>) {
-        const fullName = `${data?.firstName} ${data?.lastName}`;
-        return <>{fullName}</>;
-      },
+      title: "Organization Name",
+      dataIndex: "company_name",
     },
     {
       title: "Email",
       dataIndex: "email",
     },
     {
+      title: "Contact Person",
+      render: function (data: Record<string, string>) {
+        const fullName = `${data?.contact_person_first_name} ${data?.contact_person_last_name}`;
+        return <>{fullName}</>;
+      },
+    },
+    {
       title: "Contact No.",
-      dataIndex: "mobileNumber",
+      dataIndex: "contact_person_phone_number",
     },
     {
       title: "Created at",
@@ -72,7 +74,9 @@ const ViewOrganization = () => {
       render: function (data: any) {
         return (
           <>
-            <Link href={`/dashboard/admin/userManagement/edit/${data}`}>
+            <Link
+              href={`/dashboard/super_admin/organizations/viewOrganization`}
+            >
               <Button
                 style={{
                   margin: "0px 5px",
@@ -125,7 +129,7 @@ const ViewOrganization = () => {
       <PPTable
         loading={isLoading}
         columns={columns}
-        dataSource={data?.users}
+        dataSource={data?.organizations}
         pageSize={size}
         totalPages={meta?.total}
         showSizeChanger={true}

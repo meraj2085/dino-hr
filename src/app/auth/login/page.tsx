@@ -13,7 +13,7 @@ import Link from "next/link";
 import { yupResolver } from "@hookform/resolvers/yup";
 
 type FormValues = {
-  email: string;
+  office_email: string;
   password: string;
 };
 
@@ -61,7 +61,7 @@ const LoginPage = () => {
           <Form submitHandler={onSubmit} resolver={yupResolver(loginSchema)}>
             <div>
               <FormInput
-                name="email"
+                name="office_email"
                 type="email"
                 size="large"
                 label="Email Address"

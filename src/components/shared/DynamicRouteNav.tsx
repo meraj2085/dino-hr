@@ -4,14 +4,14 @@ import { getUserInfo } from "@/services/auth.service";
 import Link from "next/link";
 
 const DynamicRouteNav = () => {
-  const { role } = getUserInfo() as any;
+  const { user_type } = getUserInfo() as any;
   return (
     <>
-      {role && (role === "admin" || role === "super_admin") && (
+      {user_type && (user_type === "admin" || user_type === "super_admin") && (
         <li>
           <Link
             className="text-gray-500 transition hover:text-gray-500/75"
-            href={`/dashboard/${role}`}
+            href={`/dashboard/${user_type}`}
           >
             Dashboard
           </Link>

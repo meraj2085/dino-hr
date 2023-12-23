@@ -13,7 +13,7 @@ import Link from "next/link";
 const SideBar = () => {
   const theme = useAppSelector((state) => state.config.theme);
   const [collapsed, setCollapsed] = useState(false);
-  const { role } = getUserInfo() as any;
+  const { user_type } = getUserInfo() as any;
 
   return (
     <ConfigProvider
@@ -43,7 +43,7 @@ const SideBar = () => {
         }}
       >
         <div className="flex justify-center cursor-pointer m-2">
-          <Link href={`/dashboard/${role}`}>
+          <Link href={`/dashboard/${user_type}`}>
             <Image
               src="https://res.cloudinary.com/dn163fium/image/upload/v1702705615/usmjqqtg18c9j7bnwh4f.png"
               height={49}
@@ -61,7 +61,7 @@ const SideBar = () => {
           // theme="dark"
           defaultSelectedKeys={["1"]}
           mode="inline"
-          items={sidebarItems(role)}
+          items={sidebarItems(user_type)}
         />
       </Sider>
     </ConfigProvider>

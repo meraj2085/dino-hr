@@ -8,7 +8,7 @@ import { useRouter } from "next/navigation";
 import { authKey } from "@/constants/storageKey";
 
 const DynamicAuthNav = () => {
-  const { role } = getUserInfo() as any;
+  const { user_type } = getUserInfo() as any;
   const router = useRouter();
 
   const logOut = () => {
@@ -37,7 +37,7 @@ const DynamicAuthNav = () => {
 
   return (
     <div>
-      {!role ? (
+      {!user_type ? (
         <div className="hidden sm:flex sm:gap-4">
           <>
             <Link

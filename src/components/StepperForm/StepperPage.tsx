@@ -1,10 +1,8 @@
-"use client";
+// "use client" 
 
-import { getFromLocalStorage, setToLocalStorage } from "@/utils/localStorage";
-import { Button, ConfigProvider, message, Steps } from "antd";
-import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { Button, ConfigProvider, Steps } from "antd";
 import { LeftOutlined, RightOutlined } from "@ant-design/icons";
+import { useState } from "react";
 
 interface ISteps {
   title?: string;

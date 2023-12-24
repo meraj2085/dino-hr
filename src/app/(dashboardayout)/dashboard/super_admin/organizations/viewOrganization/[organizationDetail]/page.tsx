@@ -3,43 +3,40 @@
 import StepperForm from "@/components/StepperForm/StepperForm";
 import ActionBar from "@/components/ui/ActionBar";
 import BreadCrumb from "@/components/ui/BreadCrumb";
-import { useAddOrganizationMutation } from "@/redux/api/organizationApi";
-import { message } from "antd";
+import {
+  useAddOrganizationMutation,
+  useGetSingleOrganizationQuery,
+} from "@/redux/api/organizationApi";
+import { Button, message } from "antd";
 import BasicInfo from "@/components/Organization/OrganizationDetails/BasicInfo";
 import ContactPerson from "@/components/Organization/OrganizationDetails/ContactPerson";
 import BillingDetails from "@/components/Organization/OrganizationDetails/BillingDetails";
 import StepperPage from "@/components/StepperForm/StepperPage";
+import { PlusOutlined, EditOutlined, DeleteOutlined } from "@ant-design/icons";
 
-const OrgDetailPage = () => {
+const OrgDetailPage = ({
+  params,
+}: {
+  params: { organizationDetail: string };
+}) => {
+  const availableServiceId = params.organizationDetail;
+  const { data, isLoading } = useGetSingleOrganizationQuery(availableServiceId);
+
+  console.log(params, data);
   const steps = [
     {
       title: "Basic Info",
-      content: <BasicInfo />,
+      content: <BasicInfo organization={data} />,
     },
     {
       title: "Contact Person",
-      content: <ContactPerson />,
+      content: <ContactPerson organization={data} />,
     },
     {
       title: "Billing Details",
-      content: <BillingDetails />,
+      content: <BillingDetails organization={data} />,
     },
   ];
-
-  // const [addOrganization, { isLoading }] = useAddOrganizationMutation();
-
-  // const handleStudentSubmit = async (values: any) => {
-  //   try {
-  //     // console.log(values);
-  //     const res = await addOrganization(values).unwrap();
-  //     console.log(res);
-  //     if (res.id) {
-  //       message.success("Organization Added Successfully");
-  //     }
-  //   } catch (err: any) {
-  //     message.error(err.message);
-  //   }
-  // };
 
   return (
     <div>
@@ -55,16 +52,16 @@ const OrgDetailPage = () => {
           },
         ]}
       />
-      <ActionBar title="Add Organization"></ActionBar>
+      <ActionBar title="Organization Detail">
+        <span></span>
+        <div className="flex gap-5">
+          <Button icon={<PlusOutlined />}>ADD ADMIN</Button>
+          <Button icon={<EditOutlined />}>UPDATE</Button>
+          <Button icon={<DeleteOutlined />}>DELETE</Button>
+        </div>
+      </ActionBar>
       <div className="w-full h-4" />
-      <StepperPage
-        // persistKey="addOrganizationForm"
-        // navigateLink="/dashboard/super_admin/organizations/viewOrganization"
-        // submitHandler={(value) => {
-        //   handleStudentSubmit(value);
-        // }}
-        steps={steps}
-      />
+      <StepperPage steps={steps} />
     </div>
   );
 };

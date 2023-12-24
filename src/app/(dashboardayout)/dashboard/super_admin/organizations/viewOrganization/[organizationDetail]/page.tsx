@@ -1,28 +1,27 @@
 "use client";
 
-import StepperForm from "@/components/StepperForm/StepperForm";
 import ActionBar from "@/components/ui/ActionBar";
 import BreadCrumb from "@/components/ui/BreadCrumb";
 import {
-  useAddOrganizationMutation,
   useGetSingleOrganizationQuery,
 } from "@/redux/api/organizationApi";
-import { Button, message } from "antd";
+import { Button } from "antd";
 import BasicInfo from "@/components/Organization/OrganizationDetails/BasicInfo";
 import ContactPerson from "@/components/Organization/OrganizationDetails/ContactPerson";
 import BillingDetails from "@/components/Organization/OrganizationDetails/BillingDetails";
 import StepperPage from "@/components/StepperForm/StepperPage";
 import { PlusOutlined, EditOutlined, DeleteOutlined } from "@ant-design/icons";
+import Link from "next/link";
 
 const OrgDetailPage = ({
   params,
 }: {
   params: { organizationDetail: string };
 }) => {
-  const availableServiceId = params.organizationDetail;
-  const { data, isLoading } = useGetSingleOrganizationQuery(availableServiceId);
+  const orgId = params.organizationDetail;
+  const { data, isLoading } = useGetSingleOrganizationQuery(orgId);
 
-  console.log(params, data);
+  // console.log(params, data);
   const steps = [
     {
       title: "Basic Info",
@@ -56,7 +55,11 @@ const OrgDetailPage = ({
         <span></span>
         <div className="flex gap-5">
           <Button icon={<PlusOutlined />}>ADD ADMIN</Button>
-          <Button icon={<EditOutlined />}>UPDATE</Button>
+          <Link
+          href={`/dashboard/super_admin/organizations/updateOrganization/${orgId}`}
+          >
+            <Button icon={<EditOutlined />}>UPDATE</Button>
+          </Link>
           <Button icon={<DeleteOutlined />}>DELETE</Button>
         </div>
       </ActionBar>

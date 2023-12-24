@@ -205,9 +205,9 @@ export const sidebarItems = (user_type: string) => {
       ],
     },
     {
-      label: <Link href={`/dashboard/${user_type}/bookCall`}>Book Call</Link>,
+      label: <Link href={`/dashboard/${user_type}/bookings`}>Bookings</Link>,
       icon: <PhoneOutlined />,
-      key: `/dashboard/${user_type}/bookCall`,
+      key: `/dashboard/${user_type}/bookings`,
     },
     {
       label: <Link href={`/dashboard/${user_type}/feedback`}>Feedback</Link>,

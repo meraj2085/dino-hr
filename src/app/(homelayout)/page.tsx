@@ -6,9 +6,7 @@ import PricingSection from "@/components/PricingSection";
 import TopCompanies from "@/components/TopCompanies";
 import VideoSection from "@/components/VideoSection";
 import ReviewSection from "@/components/Review/review";
-import BookCall from "@/components/BookCall";
 import Footer from "@/components/Footer";
-import FAQsSection from "@/components/FAQs/faqs";
 import AboutUs from "@/components/AboutUs";
 import Feedback from "@/components/Feedback";
 

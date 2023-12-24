@@ -7,8 +7,7 @@ const AboutUs = () => {
       <div className="mb-5 md:mb-8">
         <h1 className="text-4xl  font-bold text-center mb-3">About Us</h1>
         <p className="max-w-2xl text-center mx-auto">
-          Welcome to the heart of our story. In our About Us
-          section, we invite you to delve into the essence of who we are
+          Know more about Dino HR and how we can help you.
         </p>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-8">

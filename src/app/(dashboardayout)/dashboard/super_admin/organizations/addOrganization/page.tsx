@@ -1,11 +1,11 @@
 "use client";
 
-import BasicInfoForm from "@/components/OrganizationForms/BasicInfo";
+import BasicInfoForm from "@/components/Organization/OrganizationForms/BasicInfo";
 import StepperForm from "@/components/StepperForm/StepperForm";
 import ActionBar from "@/components/ui/ActionBar";
 import BreadCrumb from "@/components/ui/BreadCrumb";
-import ContactPersonForm from "@/components/OrganizationForms/ContactPerson";
-import BillingDetailsForm from "@/components/OrganizationForms/BillingDetails";
+import ContactPersonForm from "@/components/Organization/OrganizationForms/ContactPerson";
+import BillingDetailsForm from "@/components/Organization/OrganizationForms/BillingDetails";
 import { useAddOrganizationMutation } from "@/redux/api/organizationApi";
 import { message } from "antd";
 
@@ -32,7 +32,7 @@ const AddOrganization = () => {
       // console.log(values);
       const res = await addOrganization(values).unwrap();
       console.log(res);
-      if(res.id){
+      if (res.id) {
         message.success("Organization Added Successfully");
       }
     } catch (err: any) {

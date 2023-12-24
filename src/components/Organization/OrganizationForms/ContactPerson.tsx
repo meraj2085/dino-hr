@@ -1,5 +1,5 @@
 import React from "react";
-import FormInput from "../Forms/FormInput";
+import FormInput from "../../Forms/FormInput";
 import { Col, Row } from "antd";
 import exp from "constants";
 
@@ -113,6 +113,6 @@ const ContactPersonForm = () => {
       </div>
     </>
   );
-}
+};
 
 export default ContactPersonForm;

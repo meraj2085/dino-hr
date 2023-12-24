@@ -88,13 +88,15 @@ const StepperForm = ({
           <form onSubmit={handleSubmit(handleStudentOnSubmit)}>
             <div>{steps[current].content}</div>
             <div style={{ marginTop: 24 }}>
-              {current > 0 && (
-                <Button className="mr-5" onClick={() => prev()}>
-                  <span>
-                    <LeftOutlined /> Previous
-                  </span>
-                </Button>
-              )}
+              <Button
+                disabled={!(current > 0)}
+                className="mr-5"
+                onClick={() => prev()}
+              >
+                <span>
+                  <LeftOutlined /> Previous
+                </span>
+              </Button>
 
               {current < steps.length - 1 && (
                 <Button onClick={() => next()}>

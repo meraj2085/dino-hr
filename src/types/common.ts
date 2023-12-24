@@ -82,6 +82,15 @@ export type IFaq = {
   __v?: number;
 };
 
+export type IAddress = {
+  id?: string;
+  first_name?: string;
+  last_name?: string;
+  phone_number?: number;
+  office_email?: string;
+  __v?: number;
+};
+
 export type IOrganization = {
   bin_number?: string;
   nid_number?: string;

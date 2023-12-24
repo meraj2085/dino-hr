@@ -1,11 +1,10 @@
 "use client";
 
 import Form from "@/components/Forms/Form";
-import FormInput from "./Forms/FormInput";
-import FormTextArea from "./Forms/FormTextArea";
+import FormInput from "../../../components/Forms/FormInput";
+import FormTextArea from "../../../components/Forms/FormTextArea";
 import Image from "next/image";
-import bookcall from "./../../public/assets/book a call.png";
-import ContactUsImg from "./../../public/assets/ContactUsImg.png";
+import ContactUsImg from "../../../../public/assets/ContactUsImg.png";
 
 const BookCall = () => {
   const onSubmit = async (values: any) => {
@@ -17,8 +16,8 @@ const BookCall = () => {
   };
 
   return (
-    <div className="mt-5 text-gray-800">
-      <div className="text-center py-4">
+    <div className="mt-20 text-gray-800">
+      <div className="text-center">
         <h1 className="text-2xl font-semibold text-gray-800 capitalize lg:text-4xl lg:font-bold ">
           Book A Call
         </h1>
@@ -27,7 +26,7 @@ const BookCall = () => {
           services.
         </p>
       </div>
-      <section className="py-16 max-w-[1200px] mx-auto">
+      <section className="pb-16 pt-5 max-w-[1200px] mx-auto">
         <div className="grid gap-8 grid-cols-1 px-6 mx-auto lg:px-8 md:grid-cols-2 md:divide-x">
           <div className="p-4">
             <Image

@@ -96,14 +96,14 @@ export default function Home() {
         </div>
       </section>
       <VideoSection />
+      <AboutUs />
+      <TopCompanies />
       <MeetOurTeam />
       <PricingSection />
-      <TopCompanies />
       <ReviewSection />
-      <ContactUs />
-      <FAQsSection />
-      <BookCall />
-      <AboutUs />
+      {/* <ContactUs /> */}
+      {/* <FAQsSection /> */}
+      {/* <BookCall /> */}
       <Feedback />
       <Footer />
     </>

@@ -10,6 +10,7 @@ import {
   FieldTimeOutlined,
   UserAddOutlined,
   FileTextOutlined,
+  MailOutlined,
 } from "@ant-design/icons";
 import Link from "next/link";
 import { USER_TYPE } from "./role";
@@ -58,7 +59,9 @@ export const sidebarItems = (user_type: string) => {
       key: `/dashboard/${user_type}/sendNotification`,
     },
     {
-      label: <Link href={`/dashboard/${user_type}/addressBook`}>Address Book</Link>,
+      label: (
+        <Link href={`/dashboard/${user_type}/addressBook`}>Address Book</Link>
+      ),
       icon: <PhoneOutlined />,
       key: `/dashboard/${user_type}/addressBook`,
     },
@@ -136,7 +139,9 @@ export const sidebarItems = (user_type: string) => {
       children: [
         {
           label: (
-            <Link href={`/dashboard/${user_type}/events/addEvent`}>Add Event</Link>
+            <Link href={`/dashboard/${user_type}/events/addEvent`}>
+              Add Event
+            </Link>
           ),
           key: `/dashboard/${user_type}/events/addEvent`,
         },
@@ -152,7 +157,9 @@ export const sidebarItems = (user_type: string) => {
     },
     {
       label: (
-        <Link href={`/dashboard/${user_type}/userManagement`}>User Management</Link>
+        <Link href={`/dashboard/${user_type}/userManagement`}>
+          User Management
+        </Link>
       ),
       icon: <UserOutlined />,
       key: `/dashboard/${user_type}/userManagement`,
@@ -177,7 +184,9 @@ export const sidebarItems = (user_type: string) => {
       children: [
         {
           label: (
-            <Link href={`/dashboard/${user_type}/organizations/addOrganization`}>
+            <Link
+              href={`/dashboard/${user_type}/organizations/addOrganization`}
+            >
               Add Organization
             </Link>
           ),
@@ -185,13 +194,25 @@ export const sidebarItems = (user_type: string) => {
         },
         {
           label: (
-            <Link href={`/dashboard/${user_type}/organizations/viewOrganization`}>
+            <Link
+              href={`/dashboard/${user_type}/organizations/viewOrganization`}
+            >
               View Organizations
             </Link>
           ),
           key: `/dashboard/${user_type}/organizations/viewOrganization`,
         },
       ],
+    },
+    {
+      label: <Link href={`/dashboard/${user_type}/bookCall`}>Book Call</Link>,
+      icon: <PhoneOutlined />,
+      key: `/dashboard/${user_type}/bookCall`,
+    },
+    {
+      label: <Link href={`/dashboard/${user_type}/feedback`}>Feedback</Link>,
+      icon: <MailOutlined />,
+      key: `/dashboard/${user_type}/feedback`,
     },
   ];
 

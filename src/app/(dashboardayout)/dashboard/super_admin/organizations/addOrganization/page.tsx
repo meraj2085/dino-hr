@@ -29,8 +29,9 @@ const AddOrganization = () => {
 
   const handleStudentSubmit = async (values: any) => {
     try {
-      // console.log(values);
-      const res = await addOrganization(values).unwrap();
+      const { profile_picture, ...orgData } = values;
+      console.log(orgData, profile_picture);
+      const res = await addOrganization(orgData).unwrap();
       console.log(res);
       if (res.id) {
         message.success("Organization Added Successfully");

@@ -1,10 +1,20 @@
 import { IOrganization } from "@/types";
 import { Col, Row } from "antd";
-import React from "react";
+import Image from "next/image";
 
 const BasicInfo = ({ organization }: { organization: IOrganization }) => {
   return (
     <div className="bg-white border border-gray-300 rounded-md p-6 my-4">
+      <Image
+        src={
+          organization?.profile_picture ||
+          "https://res.cloudinary.com/df5c6zeao/image/upload/v1703432735/uploads/organization.png"
+        }
+        className="rounded-lg border border-gray-400"
+        height={100}
+        width={100}
+        alt="profile_picture"
+      />
       <Row gutter={{ xs: 4, md: 20 }}>
         <Col xs={24} md={12} lg={6} className="mt-3">
           <h4 className="text-[16px]">Organization Name</h4>

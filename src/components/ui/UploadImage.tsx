@@ -26,9 +26,10 @@ const beforeUpload = (file: RcFile) => {
 
 type ImageUploadProps = {
   name: string;
+  defaultImageUrl?: string;
 };
 
-const UploadImage = ({ name }: ImageUploadProps) => {
+const UploadImage = ({ name, defaultImageUrl }: ImageUploadProps) => {
   const [loading, setLoading] = useState(false);
   const [imageUrl, setImageUrl] = useState<string>();
   const { setValue } = useFormContext();
@@ -41,6 +42,7 @@ const UploadImage = ({ name }: ImageUploadProps) => {
       return;
     }
     if (info.file.status === "done") {
+      // Get this url from response in real world.
       setValue(name, info.file.originFileObj);
       getBase64(info.file.originFileObj as RcFile, (url) => {
         setLoading(false);
@@ -71,7 +73,13 @@ const UploadImage = ({ name }: ImageUploadProps) => {
           <Image
             src={imageUrl}
             alt="avatar"
-            style={{ width: "100%" }}
+            width={100}
+            height={100}
+          />
+        ) : defaultImageUrl ? (
+          <Image
+            src={defaultImageUrl}
+            alt="avatar"
             width={100}
             height={100}
           />

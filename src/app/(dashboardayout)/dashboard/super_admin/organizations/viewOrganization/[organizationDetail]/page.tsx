@@ -12,6 +12,7 @@ import BillingDetails from "@/components/Organization/OrganizationDetails/Billin
 import StepperPage from "@/components/StepperForm/StepperPage";
 import { PlusOutlined, EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import Link from "next/link";
+import Image from "next/image";
 
 const OrgDetailPage = ({
   params,
@@ -52,11 +53,13 @@ const OrgDetailPage = ({
         ]}
       />
       <ActionBar title="Organization Detail">
-        <span></span>
+        <span>
+  
+        </span>
         <div className="flex gap-5">
           <Button icon={<PlusOutlined />}>ADD ADMIN</Button>
           <Link
-          href={`/dashboard/super_admin/organizations/updateOrganization/${orgId}`}
+            href={`/dashboard/super_admin/organizations/updateOrganization/${orgId}`}
           >
             <Button icon={<EditOutlined />}>UPDATE</Button>
           </Link>

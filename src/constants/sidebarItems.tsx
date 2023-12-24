@@ -12,8 +12,8 @@ import {
   FileTextOutlined,
 } from "@ant-design/icons";
 import Link from "next/link";
-import { USER_ROLE } from "./role";
-export const sidebarItems = (role: string) => {
+import { USER_TYPE } from "./role";
+export const sidebarItems = (user_type: string) => {
   const adminSidebarItems: MenuProps["items"] = [
     {
       label: <Link href="/">Back To Website</Link>,
@@ -21,9 +21,9 @@ export const sidebarItems = (role: string) => {
       key: `/`,
     },
     {
-      label: <Link href={`/dashboard/${role}/`}>Dashboard</Link>,
+      label: <Link href={`/dashboard/${user_type}/`}>Dashboard</Link>,
       icon: <DashboardOutlined />,
-      key: `/dashboard/${role}/`,
+      key: `/dashboard/${user_type}/`,
     },
     {
       label: "Employees",
@@ -32,40 +32,40 @@ export const sidebarItems = (role: string) => {
       children: [
         {
           label: (
-            <Link href={`/dashboard/${role}/employees/addEmployee`}>
+            <Link href={`/dashboard/${user_type}/employees/addEmployee`}>
               Add Employee
             </Link>
           ),
-          key: `/dashboard/${role}/employees/addEmployee`,
+          key: `/dashboard/${user_type}/employees/addEmployee`,
         },
         {
           label: (
-            <Link href={`/dashboard/${role}/employees/viewEmployee`}>
+            <Link href={`/dashboard/${user_type}/employees/viewEmployee`}>
               View Employees
             </Link>
           ),
-          key: `/dashboard/${role}/employees/viewEmployee`,
+          key: `/dashboard/${user_type}/employees/viewEmployee`,
         },
       ],
     },
     {
       label: (
-        <Link href={`/dashboard/${role}/sendNotification`}>
+        <Link href={`/dashboard/${user_type}/sendNotification`}>
           Send Notification
         </Link>
       ),
       icon: <NotificationOutlined />,
-      key: `/dashboard/${role}/sendNotification`,
+      key: `/dashboard/${user_type}/sendNotification`,
     },
     {
-      label: <Link href={`/dashboard/${role}/addressBook`}>Address Book</Link>,
+      label: <Link href={`/dashboard/${user_type}/addressBook`}>Address Book</Link>,
       icon: <PhoneOutlined />,
-      key: `/dashboard/${role}/addressBook`,
+      key: `/dashboard/${user_type}/addressBook`,
     },
     {
-      label: <Link href={`/dashboard/${role}/myTeam`}>My Team</Link>,
+      label: <Link href={`/dashboard/${user_type}/myTeam`}>My Team</Link>,
       icon: <UsergroupAddOutlined />,
-      key: `/dashboard/${role}/myTeam`,
+      key: `/dashboard/${user_type}/myTeam`,
     },
     {
       label: "Attendance",
@@ -74,27 +74,27 @@ export const sidebarItems = (role: string) => {
       children: [
         {
           label: (
-            <Link href={`/dashboard/${role}/attendance/addAttendance`}>
+            <Link href={`/dashboard/${user_type}/attendance/addAttendance`}>
               Add Attendance
             </Link>
           ),
-          key: `/dashboard/${role}/attendance/addAttendance`,
+          key: `/dashboard/${user_type}/attendance/addAttendance`,
         },
         {
           label: (
-            <Link href={`/dashboard/${role}/attendance/viewAttendance`}>
+            <Link href={`/dashboard/${user_type}/attendance/viewAttendance`}>
               View Attendance
             </Link>
           ),
-          key: `/dashboard/${role}/attendance/viewAttendance`,
+          key: `/dashboard/${user_type}/attendance/viewAttendance`,
         },
         {
           label: (
-            <Link href={`/dashboard/${role}/attendance/teamManagement`}>
+            <Link href={`/dashboard/${user_type}/attendance/teamManagement`}>
               Team Attendance
             </Link>
           ),
-          key: `/dashboard/${role}/attendance/teamManagement`,
+          key: `/dashboard/${user_type}/attendance/teamManagement`,
         },
       ],
     },
@@ -105,27 +105,27 @@ export const sidebarItems = (role: string) => {
       children: [
         {
           label: (
-            <Link href={`/dashboard/${role}/leave/applyForLeave`}>
+            <Link href={`/dashboard/${user_type}/leave/applyForLeave`}>
               Apply For Leave
             </Link>
           ),
-          key: `/dashboard/${role}/leave/applyForLeave`,
+          key: `/dashboard/${user_type}/leave/applyForLeave`,
         },
         {
           label: (
-            <Link href={`/dashboard/${role}/leave/appliedLeaves`}>
+            <Link href={`/dashboard/${user_type}/leave/appliedLeaves`}>
               Applied Leaves
             </Link>
           ),
-          key: `/dashboard/${role}/leave/appliedLeaves`,
+          key: `/dashboard/${user_type}/leave/appliedLeaves`,
         },
         {
           label: (
-            <Link href={`/dashboard/${role}/leave/approveLeaves`}>
+            <Link href={`/dashboard/${user_type}/leave/approveLeaves`}>
               Approve Leaves
             </Link>
           ),
-          key: `/dashboard/${role}/leave/approveLeaves`,
+          key: `/dashboard/${user_type}/leave/approveLeaves`,
         },
       ],
     },
@@ -136,26 +136,26 @@ export const sidebarItems = (role: string) => {
       children: [
         {
           label: (
-            <Link href={`/dashboard/${role}/events/addEvent`}>Add Event</Link>
+            <Link href={`/dashboard/${user_type}/events/addEvent`}>Add Event</Link>
           ),
-          key: `/dashboard/${role}/events/addEvent`,
+          key: `/dashboard/${user_type}/events/addEvent`,
         },
         {
           label: (
-            <Link href={`/dashboard/${role}/events/viewEvents`}>
+            <Link href={`/dashboard/${user_type}/events/viewEvents`}>
               View Events
             </Link>
           ),
-          key: `/dashboard/${role}/events/viewEvents`,
+          key: `/dashboard/${user_type}/events/viewEvents`,
         },
       ],
     },
     {
       label: (
-        <Link href={`/dashboard/${role}/userManagement`}>User Management</Link>
+        <Link href={`/dashboard/${user_type}/userManagement`}>User Management</Link>
       ),
       icon: <UserOutlined />,
-      key: `/dashboard/${role}/userManagement`,
+      key: `/dashboard/${user_type}/userManagement`,
     },
   ];
 
@@ -166,9 +166,9 @@ export const sidebarItems = (role: string) => {
       key: `/`,
     },
     {
-      label: <Link href={`/dashboard/${role}/`}>Dashboard</Link>,
+      label: <Link href={`/dashboard/${user_type}/`}>Dashboard</Link>,
       icon: <DashboardOutlined />,
-      key: `/dashboard/${role}/`,
+      key: `/dashboard/${user_type}/`,
     },
     {
       label: "Organizations",
@@ -177,24 +177,24 @@ export const sidebarItems = (role: string) => {
       children: [
         {
           label: (
-            <Link href={`/dashboard/${role}/organizations/addOrganization`}>
+            <Link href={`/dashboard/${user_type}/organizations/addOrganization`}>
               Add Organization
             </Link>
           ),
-          key: `/dashboard/${role}/organizations/addOrganization`,
+          key: `/dashboard/${user_type}/organizations/addOrganization`,
         },
         {
           label: (
-            <Link href={`/dashboard/${role}/organizations/viewOrganization`}>
+            <Link href={`/dashboard/${user_type}/organizations/viewOrganization`}>
               View Organizations
             </Link>
           ),
-          key: `/dashboard/${role}/organizations/viewOrganization`,
+          key: `/dashboard/${user_type}/organizations/viewOrganization`,
         },
       ],
     },
   ];
 
-  if (role === USER_ROLE.SUPER_ADMIN) return superAdminSidebarItems;
-  else if (role === USER_ROLE.ADMIN) return adminSidebarItems;
+  if (user_type === USER_TYPE.SUPER_ADMIN) return superAdminSidebarItems;
+  else if (user_type === USER_TYPE.ADMIN) return adminSidebarItems;
 };

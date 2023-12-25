@@ -1,3 +1,4 @@
+import { IAppointment, IMeta } from "@/types";
 import { tagTypes } from "../tagTypes";
 import { baseApi } from "./baseApi";
 const APPOINTMENT_API = "/appointment";
@@ -12,10 +13,19 @@ export const appointmentApi = baseApi.injectEndpoints({
       providesTags: [tagTypes.appointment],
     }),
     getAllAppointment: build.query({
-      query: () => ({
-        url: `${APPOINTMENT_API}/`,
-        method: "GET",
-      }),
+      query: (arg: Record<string, any>) => {
+        return {
+          url: `${APPOINTMENT_API}`,
+          method: "GET",
+          params: arg,
+        };
+      },
+      transformResponse: (response: IAppointment[], meta: IMeta) => {
+        return {
+          appointments: response,
+          meta,
+        };
+      },
       providesTags: [tagTypes.appointment],
     }),
     addAppointment: build.mutation({

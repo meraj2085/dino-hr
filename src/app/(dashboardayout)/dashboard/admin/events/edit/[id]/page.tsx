@@ -1,15 +1,19 @@
 "use client";
-
 import Form from "@/components/Forms/Form";
 import FormDatePicker from "@/components/Forms/FormDatePicker";
 import FormInput from "@/components/Forms/FormInput";
 import FormSelectField from "@/components/Forms/FormSelectField";
+import ActionBar from "@/components/ui/ActionBar";
 import BreadCrumb from "@/components/ui/BreadCrumb";
-import { eventSchema } from "@/schema/event";
-import { yupResolver } from "@hookform/resolvers/yup";
 import { Button, Col, Row, message } from "antd";
+import React from "react";
 
-const AddEvent = () => {
+type IDProps = {
+  params: any;
+};
+const EditEventPage = ({ params }: IDProps) => {
+  const { id } = params;
+  console.log({ id });
   const typeData = [
     {
       label: "Event",
@@ -35,21 +39,18 @@ const AddEvent = () => {
         items={[
           {
             label: "Admin",
-            link: "/admin",
+            link: "/dashboard/admin",
           },
           {
-            label: "Add Event",
-            link: "/dashboard/admin/events/addEvent",
+            label: "View Events",
+            link: "/dashboard/admin/event/viewEvents",
           },
         ]}
       />
-      <h1 className="text-center text-4xl font-bold leadi">
-        Add Holiday & Event
-      </h1>
-      <div className="max-w-[400px] mx-auto mt-3">
-        <hr className="border-t-1 border-gray-500" />
-      </div>
-      <Form submitHandler={onSubmit} resolver={yupResolver(eventSchema)}>
+
+      <ActionBar title="Update Events" />
+
+      <Form submitHandler={onSubmit}>
         <Row gutter={{ xs: 4, md: 20 }}>
           <Col xs={24} md={12} lg={12} className="mt-3">
             <div>
@@ -95,4 +96,4 @@ const AddEvent = () => {
   );
 };
 
-export default AddEvent;
+export default EditEventPage;

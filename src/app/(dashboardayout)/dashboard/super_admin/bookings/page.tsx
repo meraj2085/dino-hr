@@ -108,7 +108,7 @@ const BookingManagementPage = () => {
   };
 
   return (
-    <div>
+    <div style={{ overflowX: "auto" }}>
       <BreadCrumb
         items={[
           {
@@ -142,6 +142,7 @@ const BookingManagementPage = () => {
         onPaginationChange={onPaginationChange}
         onTableChange={onTableChange}
         showPagination={true}
+        scroll={{ x: true }}
       />
     </div>
   );

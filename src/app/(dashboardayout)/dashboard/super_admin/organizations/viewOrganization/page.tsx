@@ -3,9 +3,7 @@ import ActionBar from "@/components/ui/ActionBar";
 import BreadCrumb from "@/components/ui/BreadCrumb";
 import { Button, Input } from "antd";
 import Link from "next/link";
-import {
-  EyeOutlined,
-} from "@ant-design/icons";
+import { EyeOutlined } from "@ant-design/icons";
 import { useState } from "react";
 import { useDebounced } from "@/redux/hooks";
 import PPTable from "@/components/ui/PPTable";
@@ -64,11 +62,7 @@ const ViewOrganization = () => {
             <Link
               href={`/dashboard/super_admin/organizations/viewOrganization/${data}`}
             >
-              <Button
-                icon={<EyeOutlined />}
-              >
-                View
-              </Button>
+              <Button icon={<EyeOutlined />}>View</Button>
             </Link>
           </>
         );
@@ -86,7 +80,7 @@ const ViewOrganization = () => {
   };
 
   return (
-    <div>
+    <div style={{ overflowX: "auto" }}>
       <BreadCrumb
         items={[
           {
@@ -120,6 +114,7 @@ const ViewOrganization = () => {
         onPaginationChange={onPaginationChange}
         onTableChange={onTableChange}
         showPagination={true}
+        scroll={{ x: true }}
       />
     </div>
   );

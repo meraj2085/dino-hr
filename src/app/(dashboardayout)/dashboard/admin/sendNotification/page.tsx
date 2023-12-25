@@ -8,9 +8,11 @@ import FormSelectField, {
 import FormTextArea from "@/components/Forms/FormTextArea";
 import FormToggleButton from "@/components/Forms/FormToggleButton";
 import BreadCrumb from "@/components/ui/BreadCrumb";
+import { useAddNotificationMutation } from "@/redux/api/notificationApi";
 import { sendNotificationSchema } from "@/schema/sendNotification";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Button, Col, Row, message } from "antd";
+import { useState } from "react";
 
 const SendNotification = () => {
   const sendPreference = [
@@ -23,8 +25,8 @@ const SendNotification = () => {
       value: "employee",
     },
     {
-      label: "Manager",
-      value: "manager",
+      label: "Department",
+      value: "department",
     },
   ];
   const onSubmit = async (data: any) => {
@@ -35,8 +37,38 @@ const SendNotification = () => {
       message.error(err.message);
     }
   };
+
+  const [selectedPreference, setSelectedPreference] = useState<string>("all");
+
+  const handlePreferenceChange = (value: string) => {
+    setSelectedPreference(value);
+  };
+
+  const [addNotification, { isLoading }] = useAddNotificationMutation();
+
+  const handleStudentSubmit = async (values: any) => {
+    try {
+      // console.log(values);
+      const res = await addNotification(values).unwrap();
+      console.log(res);
+      if (res.id) {
+        message.success("Notification Send Successfully");
+      }
+    } catch (err: any) {
+      message.error(err.message);
+    }
+  };
+
   return (
-    <div>
+    <div
+      style={{
+        backgroundColor: "#FFFFFF",
+        margin: "20px",
+        borderRadius: "20px",
+        padding: "24px 24px",
+        boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
+      }}
+    >
       <BreadCrumb
         items={[
           {
@@ -49,7 +81,7 @@ const SendNotification = () => {
           },
         ]}
       />
-      <h1>Send Notification</h1>
+      {/* <h1>Send Notification</h1> */}
       <Form
         submitHandler={onSubmit}
         resolver={yupResolver(sendNotificationSchema)}
@@ -67,7 +99,12 @@ const SendNotification = () => {
           </Col>
         </Row>
         <Row gutter={{ xs: 24, xl: 8, lg: 8, md: 24 }}>
-          <Col span={8} style={{ margin: "10px 20px" }}>
+          <Col
+            span={8}
+            style={{
+              margin: "10px 20px",
+            }}
+          >
             <div>
               <FormToggleButton name="sendPush" label="Send Push" />
             </div>
@@ -88,26 +125,31 @@ const SendNotification = () => {
                 options={sendPreference}
                 label="Preference"
                 placeholder="Select"
+                handleChange={(value: any) => handlePreferenceChange(value)}
               />
             </div>
           </Col>
 
-          <Col span={8} style={{ margin: "10px 20px" }}>
-            <div>
-              <FormMultiSelectField
-                options={sendPreference as SelectOptions[]}
-                name="person"
-                label="multi-select"
-              />
-            </div>
-          </Col>
+          {["employee", "department"].includes(selectedPreference) && (
+            <Col span={8} style={{ margin: "10px 20px" }}>
+              <div>
+                <FormMultiSelectField
+                  options={sendPreference as SelectOptions[]}
+                  name="person"
+                  label="multi-select"
+                />
+              </div>
+            </Col>
+          )}
         </Row>
 
         <Button
           htmlType="submit"
-          className="bg-[#00674A] text-white hover:text-white flex justify-end item-end"
-          style={{ margin: "10px 20px" }}
-          onClick={() => message.success(" complete!")}
+          className="bg-[#00674A] text-white flex justify-end item-end"
+          style={{ margin: "10px 20px", borderRadius: "10px" }}
+          onClick={(value) => {
+            handleStudentSubmit(value);
+          }}
         >
           Send Notification
         </Button>

@@ -4,12 +4,11 @@ import BreadCrumb from "@/components/ui/BreadCrumb";
 import { Button, Input } from "antd";
 import Link from "next/link";
 import {
-  PlusOutlined,
+  EyeOutlined,
 } from "@ant-design/icons";
 import { useState } from "react";
 import { useDebounced } from "@/redux/hooks";
 import PPTable from "@/components/ui/PPTable";
-import dayjs from "dayjs";
 import { useGetAllOrganizationQuery } from "@/redux/api/organizationApi";
 
 const ViewOrganization = () => {
@@ -46,7 +45,7 @@ const ViewOrganization = () => {
       dataIndex: "company_name",
     },
     {
-      title: "Email",
+      title: "Organization Email",
       dataIndex: "email",
     },
     {
@@ -57,33 +56,18 @@ const ViewOrganization = () => {
       },
     },
     {
-      title: "Contact No.",
-      dataIndex: "contact_person_phone_number",
-    },
-    {
-      title: "Created at",
-      dataIndex: "createdAt",
-      render: function (data: any) {
-        return data && dayjs(data).format("MMM D, YYYY hh:mm A");
-      },
-      sorter: true,
-    },
-    {
-      title: "Create Admin",
+      title: "Action",
       dataIndex: "id",
       render: function (data: any) {
         return (
           <>
             <Link
-              href={`/dashboard/super_admin/organizations/viewOrganization`}
+              href={`/dashboard/super_admin/organizations/viewOrganization/${data}`}
             >
               <Button
-                style={{
-                  margin: "0px 5px",
-                }}
-                icon={<PlusOutlined />}
+                icon={<EyeOutlined />}
               >
-                Create
+                View
               </Button>
             </Link>
           </>

@@ -1,4 +1,4 @@
-import FormInput from "../Forms/FormInput";
+import FormInput from "../../Forms/FormInput";
 import { Col, Row } from "antd";
 
 const BillingDetailsForm = () => {

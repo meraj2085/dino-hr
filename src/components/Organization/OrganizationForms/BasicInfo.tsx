@@ -1,11 +1,16 @@
 import { Col, Row } from "antd";
-import FormInput from "../Forms/FormInput";
+import FormInput from "../../Forms/FormInput";
+import UploadImage from "@/components/ui/UploadImage";
 
 const BasicInfoForm = () => {
   return (
     <>
       <div className="border border-gray-300 rounded-md p-4 my-4">
         {/* <p className="text-xl font-medium my-2">Organization Form 1</p> */}
+        <UploadImage
+          name="profile_picture"
+          // defaultImageUrl={defaultValues.profileImg}
+        />
         <Row gutter={{ xs: 4, md: 20 }}>
           <Col xs={24} md={12} lg={6} className="mt-3">
             <FormInput

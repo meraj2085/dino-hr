@@ -1,17 +1,17 @@
 "use client";
+
 import ActionBar from "@/components/ui/ActionBar";
 import BreadCrumb from "@/components/ui/BreadCrumb";
 import { Button, Input } from "antd";
 import Link from "next/link";
-import {
-  EyeOutlined,
-} from "@ant-design/icons";
+import { EditOutlined, ReloadOutlined } from "@ant-design/icons";
 import { useState } from "react";
 import { useDebounced } from "@/redux/hooks";
 import PPTable from "@/components/ui/PPTable";
-import { useGetAllOrganizationQuery } from "@/redux/api/organizationApi";
+import dayjs from "dayjs";
+import { useGetAllAppointmentQuery } from "@/redux/api/appointmentApi";
 
-const ViewOrganization = () => {
+const BookingManagementPage = () => {
   const query: Record<string, any> = {};
 
   const [page, setPage] = useState<number>(1);
@@ -33,26 +33,43 @@ const ViewOrganization = () => {
   if (!!debouncedSearchTerm) {
     query["searchTerm"] = debouncedSearchTerm;
   }
-
-  const { data, isLoading } = useGetAllOrganizationQuery({ ...query });
+  const { data, isLoading } = useGetAllAppointmentQuery({ ...query });
   const meta = data?.meta;
-
-  // console.log(data);
 
   const columns = [
     {
-      title: "Organization Name",
-      dataIndex: "company_name",
+      title: "Name",
+      dataIndex: "fullName",
     },
     {
-      title: "Organization Email",
+      title: "Mobile Number",
+      dataIndex: "mobileNumber",
+    },
+    {
+      title: "Email",
       dataIndex: "email",
     },
     {
-      title: "Contact Person",
-      render: function (data: Record<string, string>) {
-        const fullName = `${data?.contact_person_first_name} ${data?.contact_person_last_name}`;
-        return <>{fullName}</>;
+      title: "Date",
+      dataIndex: "appointment_date",
+      render: function (data: any) {
+        return data && dayjs(data).format("MMM D, YYYY");
+      },
+      sorter: true,
+    },
+    {
+      title: "Time",
+      dataIndex: "appointment_time",
+    },
+    {
+      title: "Status",
+      dataIndex: "appointment_status",
+      render: function (data: any) {
+        if (data === "pending") {
+          return <span style={{ color: "#8384BF" }}>{data}</span>;
+        } else if (data === "completed") {
+          return <span style={{ color: "green" }}>{data}</span>;
+        }
       },
     },
     {
@@ -61,13 +78,13 @@ const ViewOrganization = () => {
       render: function (data: any) {
         return (
           <>
-            <Link
-              href={`/dashboard/super_admin/organizations/viewOrganization/${data}`}
-            >
+            <Link href={`/dashboard/super_admin/bookings/edit/${data}`}>
               <Button
-                icon={<EyeOutlined />}
+                style={{
+                  margin: "0px 5px",
+                }}
               >
-                View
+                <EditOutlined />
               </Button>
             </Link>
           </>
@@ -90,16 +107,16 @@ const ViewOrganization = () => {
       <BreadCrumb
         items={[
           {
-            label: "Super Admin",
+            label: "Dashboard",
             link: "/dashboard/super_admin",
           },
           {
-            label: "View Organization",
-            link: "/dashboard/super_admin/organizations/viewOrganization",
+            label: "Bookings",
+            link: "/dashboard/super_admin/bookings",
           },
         ]}
       />
-      <ActionBar title="Organization List">
+      <ActionBar title="Bookings List">
         <Input
           size="large"
           placeholder="Search"
@@ -113,7 +130,7 @@ const ViewOrganization = () => {
       <PPTable
         loading={isLoading}
         columns={columns}
-        dataSource={data?.organizations}
+        dataSource={data}
         pageSize={size}
         totalPages={meta?.total}
         showSizeChanger={true}
@@ -125,4 +142,4 @@ const ViewOrganization = () => {
   );
 };
 
-export default ViewOrganization;
+export default BookingManagementPage;

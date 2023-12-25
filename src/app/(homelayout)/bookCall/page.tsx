@@ -1,11 +1,12 @@
 "use client";
 
 import Form from "@/components/Forms/Form";
-import FormInput from "./Forms/FormInput";
-import FormTextArea from "./Forms/FormTextArea";
+import FormInput from "../../../components/Forms/FormInput";
+import FormTextArea from "../../../components/Forms/FormTextArea";
 import Image from "next/image";
-import bookcall from "./../../public/assets/book a call.png";
-import ContactUsImg from "./../../public/assets/ContactUsImg.png";
+import ContactUsImg from "../../../../public/assets/ContactUsImg.png";
+import FormTimePicker from "@/components/Forms/FormTimePicker";
+import FormDatePicker from "@/components/Forms/FormDatePicker";
 
 const BookCall = () => {
   const onSubmit = async (values: any) => {
@@ -17,8 +18,8 @@ const BookCall = () => {
   };
 
   return (
-    <div className="mt-5 text-gray-800">
-      <div className="text-center py-4">
+    <div className="mt-20 text-gray-800">
+      <div className="text-center">
         <h1 className="text-2xl font-semibold text-gray-800 capitalize lg:text-4xl lg:font-bold ">
           Book A Call
         </h1>
@@ -27,7 +28,7 @@ const BookCall = () => {
           services.
         </p>
       </div>
-      <section className="py-16 max-w-[1200px] mx-auto">
+      <section className="pb-16 pt-5 max-w-[1200px] mx-auto">
         <div className="grid gap-8 grid-cols-1 px-6 mx-auto lg:px-8 md:grid-cols-2 md:divide-x">
           <div className="p-4">
             <Image
@@ -82,37 +83,38 @@ const BookCall = () => {
           <div className="space-y-6 p-4">
             <Form submitHandler={onSubmit}>
               <div className="flex flex-col md:flex-row">
-                <div className="mb-4 md:mr-5">
+                <div className="mb-3 md:mr-5">
                   <label className="block">
                     <FormInput
-                      name="name"
+                      name="fullName"
                       type="text"
                       size="large"
                       label="Full Name"
                     />
                   </label>
                 </div>
-                <div className="mb-4 md:ml-0">
+                <div className="mb-3 md:ml-0">
                   <label className="block">
                     <FormInput
-                      name="phone_number"
+                      name="mobileNumber"
                       type="text"
                       size="large"
-                      label="Phone Number"
+                      label="Mobile Number"
                     />
                   </label>
                 </div>
               </div>
 
-              <label className="block mt-3">
+              <label className="block mb-3">
                 <FormInput
-                  name="compant_name"
+                  name="company_name"
                   type="text"
                   size="large"
                   label="Company Name (If Applicable)"
                 />
               </label>
-              <label className="block mt-3">
+
+              <label className="block mb-3">
                 <FormInput
                   name="email"
                   type="email"
@@ -120,7 +122,28 @@ const BookCall = () => {
                   label="Email"
                 />
               </label>
-              <label className="block mt-3">
+
+              <div>
+                <div className="mb-3">
+                  <label className="block">
+                    <FormDatePicker
+                      name="appointment_date"
+                      label="Appointment date"
+                      size="large"
+                    />
+                  </label>
+                </div>
+                <div className="mb-3">
+                  <label className="block">
+                    <FormTimePicker
+                      name="appointment_time"
+                      label="Appointment time"
+                    />
+                  </label>
+                </div>
+              </div>
+
+              <label className="block mb-3">
                 <FormInput
                   name="subject"
                   type="text"
@@ -136,11 +159,11 @@ const BookCall = () => {
                 className="mr-2 mt-2 ml-0 h-4 w-4 text-green-500"
               />
               <span className="text-gray-700">
-                I agree to the terms and conditions
+                I agree to the storage of my data
               </span>
               <div className="flex justify-start mt-4">
                 <button className="rounded-md bg-[#00674A] px-5 py-2.5 text-sm font-medium text-white shadow hover:bg-green-400 transition duration-300">
-                  Send Message
+                  Book Call
                 </button>
               </div>
             </Form>

@@ -1,8 +1,10 @@
 "use client";
 
+import Loading from "@/app/loading";
 import Form from "@/components/Forms/Form";
 import FormDatePicker from "@/components/Forms/FormDatePicker";
 import FormSelectField from "@/components/Forms/FormSelectField";
+import FormTimePicker from "@/components/Forms/FormTimePicker";
 import ActionBar from "@/components/ui/ActionBar";
 import BreadCrumb from "@/components/ui/BreadCrumb";
 import {
@@ -28,10 +30,10 @@ const EditBookingPage = ({ params }: IDProps) => {
     const formattedDate = originalDate?.toISOString();
     values.appointment_date = formattedDate;
     try {
-      const data = { id: id, data: values };
+      const data = { id: id, ...values };
       const response = await updateScheduleAndStatus(data).unwrap();
       if (response?._id) {
-        router.push("/dashboard/admin/bookingManagement");
+        router.push("/dashboard/super_admin/bookings");
         message.success("Booking updated successfully");
       } else {
         message.error("Failed to update booking");
@@ -44,6 +46,7 @@ const EditBookingPage = ({ params }: IDProps) => {
   const defaultValues = {
     appointment_date:
       dayjs(data?.appointment_date).format("YYYY-MM-DD HH:mm:ss.SSS") || "",
+    appointment_time: data?.appointment_time || "",
     appointment_status: data?.appointment_status || "",
   };
 
@@ -57,6 +60,8 @@ const EditBookingPage = ({ params }: IDProps) => {
       value: "completed",
     },
   ];
+
+  if (isLoading) return <Loading />;
 
   return (
     <div>
@@ -98,6 +103,15 @@ const EditBookingPage = ({ params }: IDProps) => {
                 />
               </Col>
               <Col xs={24} sm={12} md={12} lg={12} style={{ margin: "10px 0" }}>
+                <FormTimePicker
+                  name="appointment_time"
+                  label="Appointment time"
+                />
+              </Col>
+            </Row>
+
+            <Row>
+              <Col xs={24} style={{ margin: "10px 0" }}>
                 <FormSelectField
                   size="large"
                   name="appointment_status"
@@ -107,6 +121,7 @@ const EditBookingPage = ({ params }: IDProps) => {
                 />
               </Col>
             </Row>
+
             <div className="flex md:justify-end justify-center mt-5">
               <Button htmlType="submit">Update</Button>
             </div>

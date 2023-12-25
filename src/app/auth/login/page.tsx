@@ -6,7 +6,7 @@ import Form from "@/components/Forms/Form";
 import FormInput from "@/components/Forms/FormInput";
 import { SubmitHandler } from "react-hook-form";
 import { useUserLoginMutation } from "@/redux/api/authApi";
-import { storeUserInfo } from "@/services/auth.service";
+import { getUserInfo, storeUserInfo } from "@/services/auth.service";
 import { useRouter } from "next/navigation";
 import { loginSchema } from "@/schema/login";
 import Link from "next/link";
@@ -25,12 +25,13 @@ const LoginPage = () => {
     try {
       const res = await userLogin({ ...data }).unwrap();
       if (res?.accessToken) {
-        router.push("/");
+        storeUserInfo({ accessToken: res?.accessToken });
+        const { user_type } = getUserInfo() as any;
+        router.push(`/dashboard/${user_type}`);
         message.success("User logged in successfully!");
       } else {
         message.error("Email or password is incorrect!");
       }
-      storeUserInfo({ accessToken: res?.accessToken });
     } catch (err: any) {
       console.error(err.message);
     }

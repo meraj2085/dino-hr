@@ -82,6 +82,37 @@ export type IFaq = {
   __v?: number;
 };
 
+export type IFeedback = {
+  id?: string;
+  name?: string;
+  email?: string;
+  feedback?: string;
+  createdAt?: string;
+  updatedAt?: string;
+  __v?: number;
+};
+
+export enum AppointmentStatus {
+  PENDING = 'pending',
+  APPROVED = 'completed',
+}
+
+export type IAppointment = {
+  id?: string;
+  fullName?: string;
+  email?: string;
+  mobileNumber?: string;
+  company_name?: string;
+  appointment_date?: string;
+  appointment_time?: string;
+  subject?: string;
+  message?: string;
+  appointment_status?: AppointmentStatus;
+  createdAt?: string;
+  updatedAt?: string;
+  __v?: number;
+};
+
 export type IAddress = {
   id?: string;
   first_name?: string;

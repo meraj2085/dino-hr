@@ -83,7 +83,7 @@ const Feedback = () => {
   };
 
   return (
-    <div>
+    <div style={{ overflowX: "auto" }}>
       <BreadCrumb
         items={[
           {
@@ -117,6 +117,7 @@ const Feedback = () => {
         onPaginationChange={onPaginationChange}
         onTableChange={onTableChange}
         showPagination={true}
+        scroll={{ x: true }}
       />
     </div>
   );

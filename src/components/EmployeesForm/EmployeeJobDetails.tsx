@@ -1,5 +1,4 @@
 import { Col, Row } from "antd";
-import FormInput from "../Forms/FormInput";
 import FormSelectField from "../Forms/FormSelectField";
 import { designationStatus, teamStatus } from "@/constants/global";
 

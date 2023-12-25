@@ -1,5 +1,3 @@
-/* eslint-disable react-hooks/rules-of-hooks */
-
 "use client";
 import EmployeeBankDetails from "@/components/EmployeesForm/EmployeeBankDetails";
 import EmployeeContact from "@/components/EmployeesForm/EmployeeContact";
@@ -39,22 +37,21 @@ const steps = [
     content: <EmployeeEmergencyContact />,
   },
 ];
-// const [addEmployee] = useAddEmployeeMutation();
-
-const handleEmployeesSubmit = async (values: any) => {
-  console.log(values);
-  // try {
-  //   const res = await addEmployee(values).unwrap();
-  //   console.log(res);
-  //   if (res.id) {
-  //     message.success("Employee Added Successfully");
-  //   }
-  // } catch (err: any) {
-  //   message.error(err.message);
-  // }
-};
 
 const AddEmployee = () => {
+  const [addEmployee] = useAddEmployeeMutation();
+  const handleEmployeesSubmit = async (values: any) => {
+    // console.log(values);
+    try {
+      const res = await addEmployee(values).unwrap();
+      console.log(res);
+      if (res.id) {
+        message.success("Employee Added Successfully");
+      }
+    } catch (err: any) {
+      message.error(err.message);
+    }
+  };
   return (
     <div>
       <BreadCrumb
@@ -71,9 +68,7 @@ const AddEmployee = () => {
       />
       <ActionBar title="Add Employee"></ActionBar>
       <div className="w-full h-4" />
-      <h1 className="text-3xl font-extrabold text-center my-8">
-        Add Employees
-      </h1>
+
       <StepperForm
         persistKey="addEmployeesForm"
         navigateLink="/dashboard/admin/employees/addEmployee"

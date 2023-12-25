@@ -1,12 +1,12 @@
 import { Col, Row } from "antd";
 import FormInput from "../Forms/FormInput";
-import FormDatePicker from "../Forms/FormDatePicker";
 import FormSelectField from "../Forms/FormSelectField";
 import {
   countryOptions,
   employmentStatus,
   genderOptions,
 } from "@/constants/global";
+import NormalDatePicker from "../Forms/NormalDatePicker";
 
 const EmployeeBasicInfoForm = () => {
   return (
@@ -41,7 +41,7 @@ const EmployeeBasicInfoForm = () => {
           </Col>
 
           <Col xs={24} md={12} lg={12} className="mt-3">
-            <FormDatePicker
+            <NormalDatePicker
               name="date_of_birth"
               label="Date of birth"
               size="large"
@@ -84,7 +84,7 @@ const EmployeeBasicInfoForm = () => {
             />
           </Col>
           <Col xs={24} md={12} lg={12} className="mt-3">
-            <FormDatePicker
+            <NormalDatePicker
               name="date_of_joining"
               label="Date of Joining"
               size="large"

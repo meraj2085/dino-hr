@@ -7,16 +7,37 @@ import Image from "next/image";
 import ContactUsImg from "../../../../public/assets/ContactUsImg.png";
 import FormTimePicker from "@/components/Forms/FormTimePicker";
 import FormDatePicker from "@/components/Forms/FormDatePicker";
+import { useRouter } from "next/navigation";
+import { useAddAppointmentMutation } from "@/redux/api/appointmentApi";
+import { message } from "antd";
+import { SubmitHandler } from "react-hook-form";
 
 const BookCall = () => {
-  const onSubmit = async (values: any) => {
+  const router = useRouter();
+  const [addAppointment] = useAddAppointmentMutation();
+
+  type FormValues = {
+    fullName: string;
+    mobileNumber: string;
+    company_name?: string;
+    email: string;
+    appointment_date: string;
+    appointment_time: string;
+    subject: string;
+    message: string;
+  };
+
+  const onSubmit: SubmitHandler<FormValues> = async (data: any) => {
     try {
-      console.log(values);
+      const response = await addAppointment(data).unwrap();
+      if (response?._id) {
+        message.success("Your call has been booked");
+        router.push("/");
+      }
     } catch (err: any) {
       console.error(err.message);
     }
   };
-
   return (
     <div className="mt-20 text-gray-800">
       <div className="text-center">

@@ -4,7 +4,7 @@ import ActionBar from "@/components/ui/ActionBar";
 import BreadCrumb from "@/components/ui/BreadCrumb";
 import { Button, Input } from "antd";
 import Link from "next/link";
-import { EditOutlined, ReloadOutlined } from "@ant-design/icons";
+import { EditOutlined, EyeOutlined } from "@ant-design/icons";
 import { useState } from "react";
 import { useDebounced } from "@/redux/hooks";
 import PPTable from "@/components/ui/PPTable";
@@ -78,6 +78,11 @@ const BookingManagementPage = () => {
       render: function (data: any) {
         return (
           <>
+            <Link href={`/dashboard/super_admin/bookings/view/${data}`}>
+              <Button>
+                <EyeOutlined />
+              </Button>
+            </Link>
             <Link href={`/dashboard/super_admin/bookings/edit/${data}`}>
               <Button
                 style={{

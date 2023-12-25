@@ -135,7 +135,7 @@ const BookingManagementPage = () => {
       <PPTable
         loading={isLoading}
         columns={columns}
-        dataSource={data}
+        dataSource={data?.appointments}
         pageSize={size}
         totalPages={meta?.total}
         showSizeChanger={true}

@@ -1,21 +1,36 @@
 "use client";
-import EmployeesFormOne from "@/components/EmployeesForm/EmployeesFormOne";
-import EmployeesFormThree from "@/components/EmployeesForm/EmployeesFormThree";
-import EmployeesFormTwo from "@/components/EmployeesForm/EmployeesFormTwo";
+import EmployeeBankDetails from "@/components/EmployeesForm/EmployeeBankDetails";
+import EmployeeContact from "@/components/EmployeesForm/EmployeeContact";
+import EmployeeEmergencyContact from "@/components/EmployeesForm/EmployeeEmergencyContact";
+import EmployeeIdentity from "@/components/EmployeesForm/EmployeeIdentity";
+import EmployeeJobDetails from "@/components/EmployeesForm/EmployeeJobDetails";
+import EmployeeBasicInfoForm from "@/components/EmployeesForm/EmployeesBasicInfo";
 import StepperForm from "@/components/StepperForm/StepperForm";
 
 const steps = [
   {
-    title: "Employees Info 1",
-    content: <EmployeesFormOne />,
+    title: "Basic info",
+    content: <EmployeeBasicInfoForm />,
   },
   {
-    title: "Employees Info 2",
-    content: <EmployeesFormTwo />,
+    title: "Commiunication",
+    content: <EmployeeContact />,
   },
   {
-    title: "Employees Info 3",
-    content: <EmployeesFormThree />,
+    title: "Identity",
+    content: <EmployeeIdentity />,
+  },
+  {
+    title: "Bank Details",
+    content: <EmployeeBankDetails />,
+  },
+  {
+    title: "Job Details",
+    content: <EmployeeJobDetails />,
+  },
+  {
+    title: "Emergency Contact",
+    content: <EmployeeEmergencyContact />,
   },
 ];
 

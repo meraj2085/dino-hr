@@ -32,7 +32,7 @@ const AddOrganization = () => {
       // console.log(values);
       const res = await addOrganization(values).unwrap();
       console.log(res);
-      if(res.id){
+      if (res.id) {
         message.success("Organization Added Successfully");
       }
     } catch (err: any) {

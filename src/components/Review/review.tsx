@@ -74,7 +74,7 @@ const ReviewSection = () => {
   ];
 
   return (
-    <div className="max-w-[1200px]  mx-auto my-20">
+    <div className="max-w-[1200px]  mx-auto my-20 px-7">
       <div className="text-center py-4">
         <h1 className="text-2xl font-semibold text-gray-800 capitalize lg:text-4xl lg:font-bold ">
           Client Reviews

@@ -41,7 +41,7 @@ const steps = [
 const AddEmployee = () => {
   const [addEmployee] = useAddEmployeeMutation();
   const handleEmployeesSubmit = async (values: any) => {
-    // console.log(values);
+    console.log(values);
     try {
       const res = await addEmployee(values).unwrap();
       console.log(res);

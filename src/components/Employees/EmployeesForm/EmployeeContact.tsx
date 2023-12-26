@@ -1,5 +1,5 @@
 import { Col, Row } from "antd";
-import FormInput from "../Forms/FormInput";
+import FormInput from "../../Forms/FormInput";
 
 const EmployeeContact = () => {
   return (

@@ -21,6 +21,7 @@ const EmployeeBankDetails = () => {
             placeholder="Enter Account Number"
             label="Account Number"
             size="large"
+            type="number"
           />
         </Col>
         <Col xs={24} md={12} lg={12} className="mt-3">

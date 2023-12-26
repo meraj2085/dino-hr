@@ -141,6 +141,7 @@ const EmployeeBasicInfoForm = () => {
               label="Post code"
               placeholder="Enter post code"
               size="large"
+              type="number"
             />
           </Col>
           <Col xs={24} md={12} lg={12} className="mt-3">
@@ -211,6 +212,7 @@ const EmployeeBasicInfoForm = () => {
               label="Post code"
               placeholder="Enter post code"
               size="large"
+              type="number"
             />
           </Col>
           <Col xs={24} md={12} lg={12} className="mt-3">

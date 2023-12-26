@@ -38,6 +38,15 @@ const EmployeeIdentity = () => {
               size="large"
             />
           </Col>
+          <Col xs={24} md={12} lg={24} className="mt-3">
+            <FormInput
+              name="password"
+              placeholder="Enter password"
+              label="Password"
+              size="large"
+              type="password"
+            />
+          </Col>
         </Row>
       </div>
     </div>

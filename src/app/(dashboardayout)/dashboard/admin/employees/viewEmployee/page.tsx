@@ -7,7 +7,7 @@ import { EyeOutlined } from "@ant-design/icons";
 import { useState } from "react";
 import { useDebounced } from "@/redux/hooks";
 import PPTable from "@/components/ui/PPTable";
-import { useGetAllOrganizationQuery } from "@/redux/api/organizationApi";
+import { useGetAllEmployeeQuery } from "@/redux/api/employeeApi";
 
 const ViewEmployees = () => {
   const query: Record<string, any> = {};
@@ -32,26 +32,24 @@ const ViewEmployees = () => {
     query["searchTerm"] = debouncedSearchTerm;
   }
 
-  const { data, isLoading } = useGetAllOrganizationQuery({ ...query });
+  const { data, isLoading } = useGetAllEmployeeQuery({ ...query });
   const meta = data?.meta;
-
-  // console.log(data);
 
   const columns = [
     {
-      title: "Organization Name",
-      dataIndex: "company_name",
-    },
-    {
-      title: "Organization Email",
-      dataIndex: "email",
-    },
-    {
-      title: "Contact Person",
+      title: "Employee Name",
       render: function (data: Record<string, string>) {
-        const fullName = `${data?.contact_person_first_name} ${data?.contact_person_last_name}`;
+        const fullName = `${data?.first_name} ${data?.last_name}`;
         return <>{fullName}</>;
       },
+    },
+    {
+      title: "Employee Email",
+      dataIndex: "office_email",
+    },
+    {
+      title: "Employee Phone",
+      dataIndex: "phone_number",
     },
     {
       title: "Action",
@@ -105,7 +103,7 @@ const ViewEmployees = () => {
       <PPTable
         loading={isLoading}
         columns={columns}
-        dataSource={data?.organizations}
+        dataSource={data?.employees}
         pageSize={size}
         totalPages={meta?.total}
         showSizeChanger={true}

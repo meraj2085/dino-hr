@@ -1,12 +1,12 @@
 import { Col, Row } from "antd";
-import FormInput from "../Forms/FormInput";
-import FormSelectField from "../Forms/FormSelectField";
+import FormInput from "../../Forms/FormInput";
+import FormSelectField from "../../Forms/FormSelectField";
 import {
   countryOptions,
   employmentStatus,
   genderOptions,
 } from "@/constants/global";
-import NormalDatePicker from "../Forms/NormalDatePicker";
+import NormalDatePicker from "../../Forms/NormalDatePicker";
 
 const EmployeeBasicInfoForm = () => {
   return (

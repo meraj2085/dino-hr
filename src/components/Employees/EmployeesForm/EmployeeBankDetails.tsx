@@ -1,42 +1,43 @@
 import { Col, Row } from "antd";
-import FormInput from "../Forms/FormInput";
-import FormSelectField from "../Forms/FormSelectField";
-import { EmargencyRelationStatus } from "@/constants/global";
+import FormInput from "../../Forms/FormInput";
+import FormSelectField from "../../Forms/FormSelectField";
+import { accountType } from "@/constants/global";
 
-const EmployeeEmergencyContact = () => {
+const EmployeeBankDetails = () => {
   return (
     <div className="border border-gray-300 rounded-md p-4 my-4">
       <Row gutter={{ xs: 4, md: 20 }}>
         <Col xs={24} md={12} lg={24} className="mt-3">
           <FormInput
-            name="emergency_contact.name"
-            placeholder="Enter Full Name"
-            label="Full Name"
+            name="bank_name"
+            placeholder="Enter Bank Name"
+            label="Bank Name"
             size="large"
           />
         </Col>
         <Col xs={24} md={12} lg={24} className="mt-3">
           <FormInput
-            name="emergency_contact_details.phone_number"
-            placeholder="Enter phone number"
-            label="Phone Number"
+            name="account_number"
+            placeholder="Enter Account Number"
+            label="Account Number"
             size="large"
+            type="number"
           />
         </Col>
         <Col xs={24} md={12} lg={12} className="mt-3">
           <FormInput
-            name="emergency_contact_details.email"
-            placeholder="Enter Email"
-            label="Email"
+            name="bank_details.branch"
+            placeholder="Enter Branch Name"
+            label="Branch Name"
             size="large"
           />
         </Col>
         <Col xs={24} md={12} lg={12} className="mt-3">
           <FormSelectField
             size="large"
-            name="emergency_contact.relationship"
-            options={EmargencyRelationStatus}
-            label="Relation"
+            name="bank_details.account_type"
+            options={accountType}
+            label="Account Type"
             placeholder="Select"
           />
         </Col>
@@ -45,4 +46,4 @@ const EmployeeEmergencyContact = () => {
   );
 };
 
-export default EmployeeEmergencyContact;
+export default EmployeeBankDetails;

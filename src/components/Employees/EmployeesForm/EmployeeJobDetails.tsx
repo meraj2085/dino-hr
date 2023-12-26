@@ -1,5 +1,5 @@
 import { Col, Row } from "antd";
-import FormSelectField from "../Forms/FormSelectField";
+import FormSelectField from "../../Forms/FormSelectField";
 import { designationStatus, teamStatus } from "@/constants/global";
 
 const EmployeeJobDetails = () => {

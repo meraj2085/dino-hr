@@ -33,7 +33,7 @@ const Feedback = () => {
   };
 
   return (
-    <div className="max-w-[1200px] mx-auto px-5 mt-16">
+    <div className="max-w-[1200px] mx-auto px-5 mt-16 md:mt-20 lg:mt-24">
       <div className="mb-12">
         <h1 className="text-4xl  font-bold text-center">
           We&apos;d Love To Hear From You!

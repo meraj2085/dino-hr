@@ -3,7 +3,7 @@ import aboutUsImg from "../../public/assets/about-us.png";
 
 const AboutUs = () => {
   return (
-    <div className="max-w-[1200px] mx-auto px-5 my-40">
+    <div className="max-w-[1200px] mx-auto px-5 mt-14 md:mt-16 lg:mt-24">
       <div className="mb-5 md:mb-8">
         <h1 className="text-4xl  font-bold text-center mb-3">About Us</h1>
         <p className="max-w-2xl text-center mx-auto">

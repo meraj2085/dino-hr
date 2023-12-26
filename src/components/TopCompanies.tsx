@@ -2,7 +2,7 @@ import Image from "next/image";
 
 const TopCompanies = () => {
   return (
-    <section className="bg-gray-100 my-10 mt-20">
+    <section className="bg-gray-100 my-10 mt-14 md:mt-16 lg:mt-24">
       <div className="max-w-[1200px] mx-auto">
         <div className="text-center py-10 mb-10">
           <h1 className="text-2xl font-semibold text-gray-800 capitalize lg:text-4xl lg:font-bold ">

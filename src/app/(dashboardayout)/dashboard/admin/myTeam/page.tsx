@@ -57,16 +57,17 @@ const dummyData = [
 const MyTeam = () => {
   return (
     <div>
-      <ActionBar title="My Team">
-      </ActionBar>
-      <Row gutter={32}>
+      <ActionBar title="My Team"></ActionBar>
+      <Row gutter={10}>
         {dummyData?.map((data, index) => (
           <Col key={index} xs={24} sm={18} md={16} lg={12}>
             <Card>
               {/* Card content */}
-              <div className="flex">
-                <Avatar size={64} src={data.img} />
-                <div className="ml-4 mt-[-10px]">
+              <div className="md:flex justify-center items-center gap-4">
+                <div className="flex justify-center">
+                  <Avatar size={64} src={data.img} />
+                </div>
+                <div className="ml-4">
                   <h1 className="text-md font-bold">{data.name}</h1>
                   <h5>Phone : {data.phone}</h5>
                   <h5>Email : {data.email}</h5>

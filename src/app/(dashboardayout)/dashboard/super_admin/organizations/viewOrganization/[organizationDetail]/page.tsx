@@ -53,17 +53,18 @@ const OrgDetailPage = ({
         ]}
       />
       <ActionBar title="Organization Detail">
-        <span>
-  
-        </span>
+        <span></span>
         <div className="flex gap-5">
-          <Button icon={<PlusOutlined />}>ADD ADMIN</Button>
+          <Link
+            href={`/dashboard/super_admin/organizations/updateOrganization/createAdmin/${orgId}`}
+          >
+            <Button icon={<PlusOutlined />}>CREATE ADMIN</Button>
+          </Link>
           <Link
             href={`/dashboard/super_admin/organizations/updateOrganization/${orgId}`}
           >
             <Button icon={<EditOutlined />}>UPDATE</Button>
           </Link>
-          <Button icon={<DeleteOutlined />}>DELETE</Button>
         </div>
       </ActionBar>
       <div className="w-full h-4" />

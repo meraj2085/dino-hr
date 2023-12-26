@@ -1,7 +1,7 @@
 "use client";
 
 import { useDebounced } from "@/redux/hooks";
-import { Button, Input } from "antd";
+import { Button, Input, message } from "antd";
 import { useState } from "react";
 import dayjs from "dayjs";
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
@@ -9,7 +9,11 @@ import Link from "next/link";
 import BreadCrumb from "@/components/ui/BreadCrumb";
 import ActionBar from "@/components/ui/ActionBar";
 import PPTable from "@/components/ui/PPTable";
-import { useGetAllEventQuery } from "@/redux/api/eventApi";
+import {
+  useDeleteEventMutation,
+  useGetAllEventQuery,
+} from "@/redux/api/eventApi";
+import PPModal from "@/components/ui/Modal";
 
 const ViewEvents = () => {
   const query: Record<string, any> = {};
@@ -19,6 +23,9 @@ const ViewEvents = () => {
   const [sortBy, setSortBy] = useState<string>("");
   const [sortOrder, setSortOrder] = useState<string>("");
   const [searchTerm, setSearchTerm] = useState<string>("");
+
+  const [open, setOpen] = useState<boolean>(false);
+  const [eventId, setEventId] = useState<string>("");
 
   query["limit"] = size;
   query["page"] = page;
@@ -34,8 +41,20 @@ const ViewEvents = () => {
     query["searchTerm"] = debouncedSearchTerm;
   }
   const { data, isLoading } = useGetAllEventQuery({ ...query });
+  const [deleteEvent] = useDeleteEventMutation();
   const meta = data?.meta;
-  console.log(data);
+
+  const deleteEventHandler = async (id: string) => {
+    try {
+      const res = await deleteEvent(id);
+      if (res) {
+        message.success("Event Successfully Deleted!");
+        setOpen(false);
+      }
+    } catch (error: any) {
+      message.error(error.message);
+    }
+  };
 
   const columns = [
     {
@@ -78,15 +97,17 @@ const ViewEvents = () => {
                 <EditOutlined />
               </Button>
             </Link>
-            <Link href={`/dashboard/admin/`}>
-              <Button
-                style={{
-                  margin: "0px 5px",
-                }}
-              >
-                <DeleteOutlined />
-              </Button>
-            </Link>
+            <Button
+              onClick={() => {
+                setOpen(true);
+                setEventId(data);
+              }}
+              style={{
+                margin: "0px 5px",
+              }}
+            >
+              <DeleteOutlined />
+            </Button>
           </>
         );
       },
@@ -139,6 +160,15 @@ const ViewEvents = () => {
         onTableChange={onTableChange}
         showPagination={true}
       />
+
+      <PPModal
+        title="Remove Event"
+        isOpen={open}
+        closeModal={() => setOpen(false)}
+        handleOk={() => deleteEventHandler(eventId)}
+      >
+        <p className="my-5">Do you want to remove this Event?</p>
+      </PPModal>
     </div>
   );
 };

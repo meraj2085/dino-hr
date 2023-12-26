@@ -1,18 +1,15 @@
 "use client";
 
-import { useGetAllUsersQuery } from "@/redux/api/userApi";
 import { useDebounced } from "@/redux/hooks";
 import { Button, Input } from "antd";
 import { useState } from "react";
 import dayjs from "dayjs";
-import {
-  DeleteOutlined,
-  EditOutlined,
-} from "@ant-design/icons";
+import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 import Link from "next/link";
 import BreadCrumb from "@/components/ui/BreadCrumb";
 import ActionBar from "@/components/ui/ActionBar";
 import PPTable from "@/components/ui/PPTable";
+import { useGetAllEventQuery } from "@/redux/api/eventApi";
 
 const ViewEvents = () => {
   const query: Record<string, any> = {};
@@ -36,34 +33,36 @@ const ViewEvents = () => {
   if (!!debouncedSearchTerm) {
     query["searchTerm"] = debouncedSearchTerm;
   }
-  const { data, isLoading } = useGetAllUsersQuery({ ...query });
+  const { data, isLoading } = useGetAllEventQuery({ ...query });
   const meta = data?.meta;
+  console.log(data);
 
   const columns = [
     {
+      title: "Title",
+      dataIndex: "title",
+    },
+    {
       title: "From Date",
-      dataIndex: "name",
-      render: function (data: Record<string, string>) {
-        const fullName = `${data?.firstName} ${data?.lastName}`;
-        return <>{fullName}</>;
-      },
-    },
-    {
-      title: "To Date",
-      dataIndex: "data?.email",
-    },
-    {
-      title: "Type",
-      dataIndex: "mobileNumber",
-    },
-    {
-      title: "Created at",
-      dataIndex: "createdAt",
+      dataIndex: "from_date",
       render: function (data: any) {
         return data && dayjs(data).format("MMM D, YYYY hh:mm A");
       },
       sorter: true,
     },
+    {
+      title: "To Date",
+      dataIndex: "to_date",
+      render: function (data: any) {
+        return data && dayjs(data).format("MMM D, YYYY hh:mm A");
+      },
+      sorter: true,
+    },
+    {
+      title: "Type",
+      dataIndex: "type",
+    },
+
     {
       title: "Action",
       dataIndex: "id",
@@ -114,7 +113,7 @@ const ViewEvents = () => {
           },
           {
             label: "View Event",
-            link: "/dashboard/admin/event/viewEvent",
+            link: "/dashboard/admin/events/viewEvent",
           },
         ]}
       />
@@ -132,7 +131,7 @@ const ViewEvents = () => {
       <PPTable
         loading={isLoading}
         columns={columns}
-        dataSource={data?.users}
+        dataSource={data?.events}
         pageSize={size}
         totalPages={meta?.total}
         showSizeChanger={true}

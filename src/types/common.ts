@@ -93,8 +93,8 @@ export type IFeedback = {
 };
 
 export enum AppointmentStatus {
-  PENDING = 'pending',
-  APPROVED = 'completed',
+  PENDING = "pending",
+  APPROVED = "completed",
 }
 
 export type IAppointment = {
@@ -110,6 +110,20 @@ export type IAppointment = {
   appointment_status?: AppointmentStatus;
   createdAt?: string;
   updatedAt?: string;
+  __v?: number;
+};
+
+export enum EventType {
+  EVENT = "event",
+  HOLIDAY = "holiday",
+}
+
+export type IEvent = {
+  id?: string;
+  from_date?: string;
+  to_date?: string;
+  title?: string;
+  type?: EventType;
   __v?: number;
 };
 

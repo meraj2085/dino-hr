@@ -5,15 +5,23 @@ import FormInput from "@/components/Forms/FormInput";
 import FormSelectField from "@/components/Forms/FormSelectField";
 import ActionBar from "@/components/ui/ActionBar";
 import BreadCrumb from "@/components/ui/BreadCrumb";
+import {
+  useGetSingleEventQuery,
+  useUpdateEventMutation,
+} from "@/redux/api/eventApi";
+import { eventSchema } from "@/schema/event";
+import { yupResolver } from "@hookform/resolvers/yup";
 import { Button, Col, Row, message } from "antd";
-import React from "react";
+import dayjs from "dayjs";
+import { useRouter } from "next/navigation";
 
 type IDProps = {
   params: any;
 };
 const EditEventPage = ({ params }: IDProps) => {
   const { id } = params;
-  console.log({ id });
+  const router = useRouter();
+
   const typeData = [
     {
       label: "Event",
@@ -25,9 +33,27 @@ const EditEventPage = ({ params }: IDProps) => {
     },
   ];
 
-  const onSubmit = async (data: any) => {
+  const { data, isLoading } = useGetSingleEventQuery(id);
+
+  const [updateEvent] = useUpdateEventMutation();
+
+  const defaultValues = {
+    from_date: dayjs(data?.from_date).format("YYYY-MM-DD HH:mm:ss.SSS") || "",
+    to_date: data?.to_date || "",
+    title: data?.title || "",
+    type: data?.type || "",
+  };
+
+  const onSubmit = async (values: any) => {
     try {
-      console.log(data);
+      const data = { id: id, ...values };
+      const response = await updateEvent(data).unwrap();
+      if (response?._id) {
+        router.push("/dashboard/admin/events/viewEvents");
+        message.success("Event updated successfully");
+      } else {
+        message.error("Failed to update Event");
+      }
     } catch (err: any) {
       console.error(err.message);
       message.error(err.message);
@@ -43,14 +69,18 @@ const EditEventPage = ({ params }: IDProps) => {
           },
           {
             label: "View Events",
-            link: "/dashboard/admin/event/viewEvents",
+            link: "/dashboard/admin/events/viewEvents",
           },
         ]}
       />
 
       <ActionBar title="Update Events" />
 
-      <Form submitHandler={onSubmit}>
+      <Form
+        submitHandler={onSubmit}
+        defaultValues={defaultValues}
+        resolver={yupResolver(eventSchema)}
+      >
         <Row gutter={{ xs: 4, md: 20 }}>
           <Col xs={24} md={12} lg={12} className="mt-3">
             <div>
@@ -87,9 +117,8 @@ const EditEventPage = ({ params }: IDProps) => {
           htmlType="submit"
           className="bg-[#00674A] text-white hover:text-white flex justify-end item-end"
           style={{ margin: "10px 0px" }}
-          onClick={() => message.success(" complete!")}
         >
-          Add Event
+          Update Event
         </Button>
       </Form>
     </div>

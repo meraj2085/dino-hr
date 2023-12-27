@@ -23,25 +23,27 @@ const AddressBook = () => {
 
   return (
     <div>
-      <ActionBar title="Address Book">
+      <ActionBar title="Address Book">      
+      </ActionBar>
         <Input
           className="w-52 mb-2"
           size="large"
           placeholder="Search"
           onChange={(e) => setSearchTerm(e.target.value)}
         />
-      </ActionBar>
-      <Row gutter={32}>
+      <Row gutter={10}>
         {data?.address?.map((data: IAddress) => (
           <Col xs={24} sm={18} md={16} lg={12} key={data.id}>
             <Card loading={isLoading}>
               {/* Card content */}
-              <div className="flex">
-                <Avatar
-                  size={64}
-                  src="https://www.apexfootwearltd.com/media/images/2._SNM.466072d2.fill-494x620-c100.jpg"
-                />
-                <div className="ml-4">
+              <div className="md:flex justify-center items-center gap-4">
+                <div className="flex justify-center">
+                  <Avatar
+                    size={64}
+                    src="https://www.apexfootwearltd.com/media/images/2._SNM.466072d2.fill-494x620-c100.jpg"
+                  />
+                </div>
+                <div className="">
                   <h1 className="text-md font-bold">
                     {data.first_name} {data.last_name}
                   </h1>

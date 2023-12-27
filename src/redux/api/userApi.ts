@@ -1,7 +1,7 @@
 import { IMeta, IService, IUser } from "@/types";
 import { tagTypes } from "../tagTypes";
 import { baseApi } from "./baseApi";
-const USER_URL = "/users";
+const USER_URL = "/user";
 
 export const userApi = baseApi.injectEndpoints({
   endpoints: (build) => ({

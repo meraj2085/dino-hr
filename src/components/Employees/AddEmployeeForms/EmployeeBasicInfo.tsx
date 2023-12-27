@@ -7,7 +7,7 @@ import NormalDatePicker from "@/components/Forms/NormalDatePicker";
 import FormSelectField from "@/components/Forms/FormSelectField";
 import UploadImage from "@/components/ui/UploadImage";
 
-const AdminBasicInfoForm = () => {
+const EmployeeBasicInfoForm = () => {
   return (
     <>
       <div className="border border-gray-300 rounded-md p-4 my-4">
@@ -85,4 +85,4 @@ const AdminBasicInfoForm = () => {
   );
 };
 
-export default AdminBasicInfoForm;
+export default EmployeeBasicInfoForm;

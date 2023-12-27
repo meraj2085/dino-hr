@@ -56,14 +56,13 @@ const dummyData = [
 ];
 const MyTeam = () => {
   return (
-    <div>
+    <div style={{ overflowX: "auto" }} className="min-w-[250px]">
       <ActionBar title="My Team"></ActionBar>
       <Row gutter={10}>
         {dummyData?.map((data, index) => (
           <Col key={index} xs={24} sm={18} md={16} lg={12}>
-            <Card>
-              {/* Card content */}
-              <div className="md:flex justify-center items-center gap-4">
+            <Card className="mb-2">
+              <div className="md:flex gap-4">
                 <div className="flex justify-center">
                   <Avatar size={64} src={data.img} />
                 </div>

@@ -22,21 +22,19 @@ const AddressBook = () => {
   const { data, isLoading } = useGetAllAddressQuery({ ...query });
 
   return (
-    <div>
-      <ActionBar title="Address Book">      
-      </ActionBar>
-        <Input
-          className="w-52 mb-2"
-          size="large"
-          placeholder="Search"
-          onChange={(e) => setSearchTerm(e.target.value)}
-        />
+    <div style={{ overflowX: "auto" }} className="min-w-[250px]">
+      <ActionBar title="Address Book"></ActionBar>
+      <Input
+        className="w-52 mb-2"
+        size="large"
+        placeholder="Search"
+        onChange={(e) => setSearchTerm(e.target.value)}
+      />
       <Row gutter={10}>
         {data?.address?.map((data: IAddress) => (
           <Col xs={24} sm={18} md={16} lg={12} key={data.id}>
-            <Card loading={isLoading}>
-              {/* Card content */}
-              <div className="md:flex justify-center items-center gap-4">
+            <Card className="mb-2" loading={isLoading}>
+              <div className="md:flex gap-4">
                 <div className="flex justify-center">
                   <Avatar
                     size={64}

@@ -11,6 +11,7 @@ const Contents = ({ children }: { children: React.ReactNode }) => {
         minHeight: "100vh",
         color: "black",
         backgroundColor: "#ECEDEF",
+        overflowX: "auto"
       }}
     >
       <Header />

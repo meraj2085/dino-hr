@@ -2,7 +2,7 @@
 import { tagTypes } from "../tagTypes";
 import { baseApi } from "./baseApi";
 
-const NOTIFICATION_URL = "/organization";
+const NOTIFICATION_URL = "/notification";
 
 export const notificationApi = baseApi.injectEndpoints({
   endpoints: (build) => ({

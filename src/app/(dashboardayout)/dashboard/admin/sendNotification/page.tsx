@@ -1,11 +1,9 @@
 "use client";
+import Loading from "@/app/loading";
 import DSNotificationField from "@/components/Forms/DSNotificationField";
 import Form from "@/components/Forms/Form";
 import FormInput from "@/components/Forms/FormInput";
-import FormMultiSelectField from "@/components/Forms/FormMultiSelectField";
-import FormSelectField, {
-  SelectOptions,
-} from "@/components/Forms/FormSelectField";
+import FormSelectField from "@/components/Forms/FormSelectField";
 import FormTextArea from "@/components/Forms/FormTextArea";
 import FormToggleButton from "@/components/Forms/FormToggleButton";
 import BreadCrumb from "@/components/ui/BreadCrumb";
@@ -61,6 +59,7 @@ const SendNotification = () => {
   ];
 
   const [addNotification, { isLoading }] = useAddNotificationMutation();
+
   const onSubmit = async (data: any) => {
     data.preference = selectedPreference;
     data.organization_id = organization_id;
@@ -80,7 +79,7 @@ const SendNotification = () => {
         delete data?.toAll;
       }
       const res = await addNotification(data).unwrap();
-      if (res._id) {
+      if (res) {
         message.success("Notification Send Successfully");
       }
     } catch (err: any) {
@@ -92,6 +91,8 @@ const SendNotification = () => {
   const handlePreferenceChange = (value: string) => {
     setSelectedPreference(value);
   };
+
+  if (isLoading) return <Loading />;
 
   return (
     <div
@@ -107,7 +108,7 @@ const SendNotification = () => {
         items={[
           {
             label: "Admin",
-            link: "/admin",
+            link: "/dashboard/admin",
           },
           {
             label: "Send Notification",

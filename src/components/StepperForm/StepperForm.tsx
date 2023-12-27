@@ -90,7 +90,7 @@ IStepsProps) => {
         <Steps current={current} items={items} />
         <FormProvider {...methods}>
           <form onSubmit={handleSubmit(handleStudentOnSubmit)}>
-            <div>{steps[current].content}</div>
+            <div>{steps[current]?.content}</div>
             <div style={{ marginTop: 24 }}>
               <Button
                 disabled={!(current > 0)}

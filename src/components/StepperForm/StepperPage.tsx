@@ -36,7 +36,7 @@ const StepperPage = ({ steps }: IStepsProps) => {
         }}
       >
         <Steps current={current} items={items} />
-        <div>{steps[current].content}</div>
+        <div>{steps[current]?.content}</div>
         <div style={{ marginTop: 24 }}>
           {
             <Button

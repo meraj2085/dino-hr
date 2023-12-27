@@ -1,5 +1,6 @@
 "use client";
 
+import Loading from "@/app/loading";
 import Form from "@/components/Forms/Form";
 import FormDatePicker from "@/components/Forms/FormDatePicker";
 import FormInput from "@/components/Forms/FormInput";
@@ -38,8 +39,13 @@ const AddEvent = () => {
       message.error(err.message);
     }
   };
+
+  if (isLoading) {
+    return <Loading />;
+  }
+
   return (
-    <div>
+    <div className="min-w-[250px]" style={{ overflowX: "auto" }}>
       <BreadCrumb
         items={[
           {

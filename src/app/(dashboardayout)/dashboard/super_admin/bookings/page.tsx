@@ -108,7 +108,7 @@ const BookingManagementPage = () => {
   };
 
   return (
-    <div style={{ overflowX: "auto" }}>
+    <div style={{ overflowX: "auto" }} className="min-w-[250px]">
       <BreadCrumb
         items={[
           {

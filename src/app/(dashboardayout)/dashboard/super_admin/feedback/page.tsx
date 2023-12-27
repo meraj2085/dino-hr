@@ -62,9 +62,7 @@ const Feedback = () => {
       render: function (data: any) {
         return (
           <>
-            <Link
-              href={`/dashboard/super_admin/feedback/view/${data}`}
-            >
+            <Link href={`/dashboard/super_admin/feedback/view/${data}`}>
               <Button icon={<EyeOutlined />}>View</Button>
             </Link>
           </>
@@ -83,7 +81,7 @@ const Feedback = () => {
   };
 
   return (
-    <div style={{ overflowX: "auto" }}>
+    <div style={{ overflowX: "auto" }} className="min-w-[250px]">
       <BreadCrumb
         items={[
           {

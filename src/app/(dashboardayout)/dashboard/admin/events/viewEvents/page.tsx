@@ -125,7 +125,7 @@ const ViewEvents = () => {
   };
 
   return (
-    <div>
+    <div style={{ overflowX: "auto" }}>
       <BreadCrumb
         items={[
           {
@@ -133,7 +133,7 @@ const ViewEvents = () => {
             link: "/dashboard/admin",
           },
           {
-            label: "View Event",
+            label: "Events / View Event",
             link: "/dashboard/admin/events/viewEvent",
           },
         ]}
@@ -159,6 +159,7 @@ const ViewEvents = () => {
         onPaginationChange={onPaginationChange}
         onTableChange={onTableChange}
         showPagination={true}
+        scroll={{ x: true }}
       />
 
       <PPModal

@@ -47,7 +47,7 @@ const AddEvent = () => {
             link: "/admin",
           },
           {
-            label: "Add Event",
+            label: "Events / Add Event",
             link: "/dashboard/admin/events/addEvent",
           },
         ]}

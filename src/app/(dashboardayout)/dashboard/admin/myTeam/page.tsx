@@ -57,7 +57,7 @@ const dummyData = [
 const MyTeam = () => {
   return (
     <div style={{ overflowX: "auto" }} className="min-w-[250px]">
-      <ActionBar title="My Team"></ActionBar>
+      <ActionBar title="My Team" />
       <Row gutter={10}>
         {dummyData?.map((data, index) => (
           <Col key={index} xs={24} sm={18} md={16} lg={12}>

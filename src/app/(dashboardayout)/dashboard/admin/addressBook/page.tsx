@@ -5,6 +5,7 @@ import { useGetAllAddressQuery } from "@/redux/api/addressApi";
 import { useDebounced } from "@/redux/hooks";
 import { IAddress } from "@/types";
 import ActionBar from "@/components/ui/ActionBar";
+import Loading from "@/app/loading";
 
 const AddressBook = () => {
   const query: Record<string, any> = {};
@@ -20,6 +21,10 @@ const AddressBook = () => {
   }
 
   const { data, isLoading } = useGetAllAddressQuery({ ...query });
+
+  if (isLoading) {
+    return <Loading />;
+  }
 
   return (
     <div style={{ overflowX: "auto" }} className="min-w-[250px]">

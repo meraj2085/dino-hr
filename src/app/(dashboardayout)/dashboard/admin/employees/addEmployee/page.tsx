@@ -61,7 +61,7 @@ import { message } from "antd";
               link: "/dashboard/admin",
             },
             {
-              label: "Add Employee",
+              label: "Employees / Add Employee",
               link: "/dashboard/admin/employees/addEmployee",
             },
           ]}

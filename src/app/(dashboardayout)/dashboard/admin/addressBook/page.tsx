@@ -5,6 +5,7 @@ import { useGetAllAddressQuery } from "@/redux/api/addressApi";
 import { useDebounced } from "@/redux/hooks";
 import { IAddress } from "@/types";
 import ActionBar from "@/components/ui/ActionBar";
+import BreadCrumb from "@/components/ui/BreadCrumb";
 
 const AddressBook = () => {
   const query: Record<string, any> = {};
@@ -23,6 +24,20 @@ const AddressBook = () => {
 
   return (
     <div>
+
+<BreadCrumb
+        items={[
+          {
+            label: "Admin",
+            link: "/admin",
+          },
+          {
+            label: "Address Book",
+            link: "/dashboard/admin/addressBook",
+          },
+        ]}
+      />
+
       <ActionBar title="Address Book">
         <Input
           className="w-52 mb-2"

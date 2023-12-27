@@ -2,6 +2,7 @@
 import React from "react";
 import ActionBar from "@/components/ui/ActionBar";
 import { Avatar, Card, Col, Input, Row } from "antd";
+import BreadCrumb from "@/components/ui/BreadCrumb";
 
 const dummyData = [
   {
@@ -57,6 +58,18 @@ const dummyData = [
 const MyTeam = () => {
   return (
     <div>
+      <BreadCrumb
+        items={[
+          {
+            label: "Admin",
+            link: "/admin",
+          },
+          {
+            label: "My Team",
+            link: "/dashboard/admin/myTeam",
+          },
+        ]}
+      />
       <ActionBar title="My Team"></ActionBar>
       <Row gutter={10}>
         {dummyData?.map((data, index) => (

@@ -112,7 +112,7 @@ const BookingManagementPage = () => {
       <BreadCrumb
         items={[
           {
-            label: "Dashboard",
+            label: "Super Admin",
             link: "/dashboard/super_admin",
           },
           {

@@ -76,7 +76,7 @@ const ViewEmployees = () => {
   };
 
   return (
-    <div>
+    <div style={{ overflowX: "auto" }}>
       <BreadCrumb
         items={[
           {
@@ -84,7 +84,7 @@ const ViewEmployees = () => {
             link: "/dashboard/admin",
           },
           {
-            label: "View Employee",
+            label: "Employees / View Employee",
             link: "/dashboard/admin/Employees/viewEmployee",
           },
         ]}
@@ -110,6 +110,7 @@ const ViewEmployees = () => {
         onPaginationChange={onPaginationChange}
         onTableChange={onTableChange}
         showPagination={true}
+        scroll={{ x: true }}
       />
     </div>
   );

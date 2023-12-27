@@ -10,3 +10,8 @@
   font-family: "Open Sans", sans-serif;
   scroll-behavior: smooth;
 }
+
+.ant-btn {
+  color: #fff;
+  background-color: #00674a;
+}

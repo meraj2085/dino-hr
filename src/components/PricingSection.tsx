@@ -1,13 +1,13 @@
 const PricingSection = () => {
   return (
-    <div className="max-w-[1200px] mx-auto">
-      <div className="flex flex-col items-center justify-center min-h-screen p-10 text-gray-700  md:p-20">
+    <div className="max-w-[1200px] mx-auto  mt-14 md:mt-16 lg:mt-24">
+      <div className="flex flex-col items-center justify-center px-5 md:px-10 text-gray-700">
         <h2 className="text-2xl font-semibold text-gray-800  lg:text-4xl lg:font-bold capitalize">
           OUR PRICING
         </h2>
 
         {/* <!-- Component Start --> */}
-        <div className="flex flex-wrap items-center justify-center w-full max-w-4xl mt-8 transition-all">
+        <div className="flex flex-wrap items-center justify-center w-full max-w-4xl mt-0 md:mt-8 transition-all">
           <div className=" md:w-64 flex flex-col flex-grow mt-8 overflow-hidden bg-white rounded-lg shadow-lg hover:md:scale-110 hover:md:z-20 duration-75">
             <div className="flex flex-col items-center p-10 bg-gray-200">
               <span className="font-semibold">Starter</span>

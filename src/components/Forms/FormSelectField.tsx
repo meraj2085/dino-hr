@@ -47,6 +47,7 @@ const FormSelectField = ({
           <Select
             onChange={handleChange ? handleChange : onChange}
             size={size}
+            defaultValue={defaultValue}
             options={options}
             value={value}
             style={{ width: "100%" }}

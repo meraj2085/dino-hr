@@ -35,7 +35,7 @@ const FormTextArea = ({
               rows={rows}
               placeholder={placeholder}
               {...field}
-              defaultValue={value}
+              defaultValue={value ? value : field.value}
             />
           )}
         />

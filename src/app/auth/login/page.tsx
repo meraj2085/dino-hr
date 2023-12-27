@@ -6,14 +6,14 @@ import Form from "@/components/Forms/Form";
 import FormInput from "@/components/Forms/FormInput";
 import { SubmitHandler } from "react-hook-form";
 import { useUserLoginMutation } from "@/redux/api/authApi";
-import { storeUserInfo } from "@/services/auth.service";
+import { getUserInfo, storeUserInfo } from "@/services/auth.service";
 import { useRouter } from "next/navigation";
 import { loginSchema } from "@/schema/login";
 import Link from "next/link";
 import { yupResolver } from "@hookform/resolvers/yup";
 
 type FormValues = {
-  email: string;
+  office_email: string;
   password: string;
 };
 
@@ -25,12 +25,13 @@ const LoginPage = () => {
     try {
       const res = await userLogin({ ...data }).unwrap();
       if (res?.accessToken) {
-        router.push("/");
+        storeUserInfo({ accessToken: res?.accessToken });
+        const { user_type } = getUserInfo() as any;
+        router.push(`/dashboard/${user_type}`);
         message.success("User logged in successfully!");
       } else {
         message.error("Email or password is incorrect!");
       }
-      storeUserInfo({ accessToken: res?.accessToken });
     } catch (err: any) {
       console.error(err.message);
     }
@@ -61,7 +62,7 @@ const LoginPage = () => {
           <Form submitHandler={onSubmit} resolver={yupResolver(loginSchema)}>
             <div>
               <FormInput
-                name="email"
+                name="office_email"
                 type="email"
                 size="large"
                 label="Email Address"

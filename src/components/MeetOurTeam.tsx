@@ -166,7 +166,7 @@ const TeamMember = ({
 
 const MeatOurTeam = () => {
   return (
-    <div className="max-w-[1200px] mx-auto px-5 my-40">
+    <div className="max-w-[1200px] mx-auto px-5 mt-14 md:mt-16 lg:mt-24">
       <h1 className="text-5xl font-extrabold text-center">Meet Our Team</h1>
       <p className="text-center max-w-2xl mx-auto mt-4 mb-10">
         Welcome to the heart of our innovation—the brilliant minds that make up

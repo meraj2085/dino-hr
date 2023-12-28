@@ -57,7 +57,6 @@ const BasicInfoForm = () => {
             <FormInput
               name="postal_code"
               label="Postal Code"
-              type="number"
               size="large"
             />
           </Col>
@@ -89,7 +88,6 @@ const BasicInfoForm = () => {
             <FormInput
               name="registered_postal_code"
               label="Postal Code"
-              type="number"
               size="large"
             />
           </Col>

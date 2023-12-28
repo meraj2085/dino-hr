@@ -1,14 +1,12 @@
 import globalMap from "../../../public/assets/globalMap.png";
 import Image from "next/image";
 import ContactUs from "@/components/ContactUs";
-import MeatOurTeam from "@/components/MeatOurTeam";
+import MeetOurTeam from "@/components/MeetOurTeam";
 import PricingSection from "@/components/PricingSection";
 import TopCompanies from "@/components/TopCompanies";
 import VideoSection from "@/components/VideoSection";
 import ReviewSection from "@/components/Review/review";
-import BookCall from "@/components/BookCall";
 import Footer from "@/components/Footer";
-import FAQsSection from "@/components/FAQs/faqs";
 import AboutUs from "@/components/AboutUs";
 import Feedback from "@/components/Feedback";
 
@@ -96,14 +94,14 @@ export default function Home() {
         </div>
       </section>
       <VideoSection />
-      <MeatOurTeam />
-      <PricingSection />
-      <TopCompanies />
-      <ReviewSection />
-      <ContactUs />
-      <FAQsSection />
-      <BookCall />
       <AboutUs />
+      <TopCompanies />
+      <MeetOurTeam />
+      <PricingSection />
+      <ReviewSection />
+      {/* <ContactUs /> */}
+      {/* <FAQsSection /> */}
+      {/* <BookCall /> */}
       <Feedback />
       <Footer />
     </>

@@ -5,17 +5,35 @@ import FeedbackImg from "../../public/assets/Feedback.png";
 import Form from "./Forms/Form";
 import FormInput from "./Forms/FormInput";
 import FormTextArea from "./Forms/FormTextArea";
+import { useRouter } from "next/navigation";
+import { useAddFeedbackMutation } from "@/redux/api/feedbackApi";
+import { SubmitHandler } from "react-hook-form";
+import { message } from "antd";
 
 const Feedback = () => {
-  const onSubmit = async (values: any) => {
+  const router = useRouter();
+  const [addFeedback] = useAddFeedbackMutation();
+
+  type FormValues = {
+    name: string;
+    email: string;
+    feedback: string;
+  };
+
+  const onSubmit: SubmitHandler<FormValues> = async (data: any) => {
     try {
-      console.log(values);
+      const response = await addFeedback(data).unwrap();
+      if (response?._id) {
+        message.success("Thank you for your feedback");
+        router.push("/");
+      }
     } catch (err: any) {
       console.error(err.message);
     }
   };
+
   return (
-    <div className="max-w-[1200px] mx-auto px-5 my-40 ">
+    <div className="max-w-[1200px] mx-auto px-5 mt-16 md:mt-20 lg:mt-24">
       <div className="mb-12">
         <h1 className="text-4xl  font-bold text-center">
           We&apos;d Love To Hear From You!
@@ -30,7 +48,7 @@ const Feedback = () => {
         <div className="">
           <div className="max-w-lg mx-auto px-5 bg-gray-100 text-gray-800 pt-10 pb-5 rounded-md">
             <h1 className="text-2xl font-bold text-center mb-5">
-                Send us your feedback
+              Send us your feedback
             </h1>
             <Form submitHandler={onSubmit}>
               <label className="block">

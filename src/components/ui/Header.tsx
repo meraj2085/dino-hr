@@ -50,9 +50,11 @@ const Header = () => {
 
   return (
     <AntHeader
+      className="min-w-[300px]"
       style={{
         height: "65.5px",
         background: "#FFFFFF",
+        overflowX: "auto",
       }}
     >
       <Row

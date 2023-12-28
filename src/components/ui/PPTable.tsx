@@ -12,6 +12,7 @@ type PPTableProps = {
   onPaginationChange?: (page: number, pageSize: number) => void;
   onTableChange?: (pagination: any, filter: any, sorter: any) => void;
   showPagination?: boolean;
+  scroll?: any;
 };
 
 const PPTable = ({
@@ -24,6 +25,7 @@ const PPTable = ({
   onPaginationChange,
   onTableChange,
   showPagination = true,
+  scroll,
 }: PPTableProps) => {
   const paginationConfig = showPagination
     ? {
@@ -42,6 +44,7 @@ const PPTable = ({
       dataSource={dataSource}
       pagination={paginationConfig}
       onChange={onTableChange}
+      scroll={scroll}
     />
   );
 };

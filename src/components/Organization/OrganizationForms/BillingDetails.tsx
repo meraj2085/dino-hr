@@ -15,7 +15,6 @@ const BillingDetailsForm = () => {
             <FormInput
               name="account_number"
               label="Account Number"
-              type="number"
               size="large"
             />
           </Col>
@@ -109,7 +108,6 @@ const BillingDetailsForm = () => {
             <FormInput
               name="billing_postal_code"
               label="Postal Code"
-              type="number"
               size="large"
             />
           </Col>

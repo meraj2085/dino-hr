@@ -45,14 +45,6 @@ const ContactPersonForm = () => {
             />
           </Col>
 
-          {/* <Col xs={24} md={12} lg={6} className="mt-3">
-            <FormInput
-              name="profile_picture"
-              label="Profile Picture"
-              size="large"
-            />
-          </Col> */}
-
           <Col xs={24} md={12} lg={6} className="mt-3">
             <FormInput name="nid_number" label="NID Number" size="large" />
           </Col>

@@ -57,7 +57,7 @@ const AdminBasicInfoForm = () => {
             <FormInput
               name="other_phone_number"
               placeholder="Enter Other Phone Number"
-              label="Phone Number"
+              label="Other Phone Number"
               size="large"
             />
           </Col>

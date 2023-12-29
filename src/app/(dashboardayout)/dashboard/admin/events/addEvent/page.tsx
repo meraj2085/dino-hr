@@ -5,11 +5,14 @@ import FormDatePicker from "@/components/Forms/FormDatePicker";
 import FormInput from "@/components/Forms/FormInput";
 import FormSelectField from "@/components/Forms/FormSelectField";
 import BreadCrumb from "@/components/ui/BreadCrumb";
+import { useAddEventMutation } from "@/redux/api/eventApi";
 import { eventSchema } from "@/schema/event";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Button, Col, Row, message } from "antd";
+import { useRouter } from "next/navigation";
 
 const AddEvent = () => {
+  const router = useRouter();
   const typeData = [
     {
       label: "Event",
@@ -21,9 +24,15 @@ const AddEvent = () => {
     },
   ];
 
+  const [addEvent, { isLoading }] = useAddEventMutation();
+
   const onSubmit = async (data: any) => {
     try {
-      console.log(data);
+      const res = await addEvent(data).unwrap();
+      if (res._id) {
+        router.push("/dashboard/admin/events/viewEvents");
+        message.success("Event Added Successfully");
+      }
     } catch (err: any) {
       console.error(err.message);
       message.error(err.message);
@@ -86,7 +95,6 @@ const AddEvent = () => {
           htmlType="submit"
           className="bg-[#00674A] text-white hover:text-white flex justify-end item-end"
           style={{ margin: "10px 0px" }}
-          onClick={() => message.success(" complete!")}
         >
           Add Event
         </Button>

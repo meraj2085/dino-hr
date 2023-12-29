@@ -23,6 +23,7 @@ const FormToggleButton = ({ name, label, value }: TextAreaProps) => {
           control={control}
           render={({ field }) => (
             <Switch
+            className="bg-gray-300"
               defaultChecked={value ? value : field.value}
               {...field}
               checkedChildren={<CheckOutlined />}

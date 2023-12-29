@@ -10,7 +10,12 @@ export enum tagTypes {
   category = "category",
   organization = "organization",
   address = "address",
+<<<<<<< HEAD
   employee = "employee",
+=======
+  event = "event",
+  notification = "notification"
+>>>>>>> 80179d833c5a7230b93ab8dd583fa9059aace10f
 }
 
 export const tagTypesList = [
@@ -25,5 +30,10 @@ export const tagTypesList = [
   tagTypes.category,
   tagTypes.organization,
   tagTypes.address,
+<<<<<<< HEAD
   tagTypes.employee,
+=======
+  tagTypes.event,
+  tagTypes.notification,
+>>>>>>> 80179d833c5a7230b93ab8dd583fa9059aace10f
 ];

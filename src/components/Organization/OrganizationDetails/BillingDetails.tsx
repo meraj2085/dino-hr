@@ -41,11 +41,6 @@ const BillingDetails = ({ organization }: { organization: IOrganization }) => {
         </Col>
 
         <Col xs={24} md={12} lg={6} className="mt-3">
-          <h4 className="text-[16px]">Middle Name</h4>
-          <p>{organization?.billing_contact_person_middle_name}</p>
-        </Col>
-
-        <Col xs={24} md={12} lg={6} className="mt-3">
           <h4 className="text-[16px]">Last Name</h4>
           <p>{organization?.billing_contact_person_last_name}</p>
         </Col>

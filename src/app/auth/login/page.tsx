@@ -18,7 +18,7 @@ type FormValues = {
 };
 
 const LoginPage = () => {
-  const [userLogin] = useUserLoginMutation();
+  const [userLogin, { isLoading }] = useUserLoginMutation();
   const router = useRouter();
 
   const onSubmit: SubmitHandler<FormValues> = async (data: any) => {
@@ -56,41 +56,52 @@ const LoginPage = () => {
               Dino
             </h1>
           </div>
-          <h1 className="text-3xl font-normal text-[#00684a] mb-4">
-            Log in to your account
-          </h1>
-          <Form submitHandler={onSubmit} resolver={yupResolver(loginSchema)}>
-            <div>
-              <FormInput
-                name="office_email"
-                type="email"
-                size="large"
-                label="Email Address"
-              />
+          {isLoading ? (
+            <div className="flex justify-center items-center h-[450px]">
+              <div className="animate-spin rounded-full border-t-4 border-[#00674A] border-solid h-16 w-16"></div>
             </div>
-            <div>
-              <FormInput
-                name="password"
-                type="password"
-                size="large"
-                label="Password"
-              />
-              <div className="flex justify-end mt-1">
-                <a
-                  rel="noopener noreferrer"
-                  href="#"
-                  className="text-xs hover:underline text-gray-400 hover:text-gray-800"
-                >
-                  Forgot password?
-                </a>
-              </div>
-            </div>
-            <div className="flex justify-left">
-              <Button shape="default" htmlType="submit">
-                Login
-              </Button>
-            </div>
-          </Form>
+          ) : (
+            <>
+              <h1 className="text-3xl font-normal text-[#00684a] mb-4">
+                Log in to your account
+              </h1>
+              <Form
+                submitHandler={onSubmit}
+                resolver={yupResolver(loginSchema)}
+              >
+                <div>
+                  <FormInput
+                    name="office_email"
+                    type="email"
+                    size="large"
+                    label="Email Address"
+                  />
+                </div>
+                <div>
+                  <FormInput
+                    name="password"
+                    type="password"
+                    size="large"
+                    label="Password"
+                  />
+                  <div className="flex justify-end mt-1">
+                    <a
+                      rel="noopener noreferrer"
+                      href="#"
+                      className="text-xs hover:underline text-gray-400 hover:text-gray-800"
+                    >
+                      Forgot password?
+                    </a>
+                  </div>
+                </div>
+                <div className="flex justify-left">
+                  <Button shape="default" htmlType="submit">
+                    Login
+                  </Button>
+                </div>
+              </Form>
+            </>
+          )}
         </div>
 
         {/* text colum  */}

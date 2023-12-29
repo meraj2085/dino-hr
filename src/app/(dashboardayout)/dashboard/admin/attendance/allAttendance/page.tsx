@@ -1,6 +1,6 @@
 import BreadCrumb from "@/components/ui/BreadCrumb";
 
-const AddAttendance = () => {
+const AllAttendance = () => {
   return (
     <div>
       <BreadCrumb
@@ -10,14 +10,14 @@ const AddAttendance = () => {
             link: "/admin",
           },
           {
-            label: "Attendance / Add Attendance",
-            link: "/dashboard/admin/attendance/addAttendance",
+            label: "All Attendance",
+            link: "/dashboard/admin/attendance/allAttendance",
           },
         ]}
       />
-      <h2>add Attendance</h2>
+      <h2>All Attendance</h2>
     </div>
   );
 };
 
-export default AddAttendance;
+export default AllAttendance;

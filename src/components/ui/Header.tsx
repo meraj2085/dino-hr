@@ -65,22 +65,9 @@ const Header = () => {
         }}
       >
         <div className="mr-10">
-          {theme?.theme === "dark" ||
-          localTheme === "dark" ||
+          {theme?.theme === "light" ||
+          localTheme === "light" ||
           theme?.theme === undefined ? (
-            <Image
-              height={25}
-              width={25}
-              src={sun}
-              alt="Sun Logo"
-              className="block object-contain h-16"
-              onClick={() => {
-                setLocalTheme("light");
-                setToLocalStorage("theme", JSON.stringify({ theme: "light" }));
-                dispatch({ type: "config/setTheme", payload: "light" });
-              }}
-            />
-          ) : (
             <Image
               height={25}
               width={25}
@@ -91,6 +78,19 @@ const Header = () => {
                 setLocalTheme("dark");
                 setToLocalStorage("theme", JSON.stringify({ theme: "dark" }));
                 dispatch({ type: "config/setTheme", payload: "dark" });
+              }}
+            />
+          ) : (
+            <Image
+              height={25}
+              width={25}
+              src={sun}
+              alt="Sun Logo"
+              className="block object-contain h-16"
+              onClick={() => {
+                setLocalTheme("light");
+                setToLocalStorage("theme", JSON.stringify({ theme: "light" }));
+                dispatch({ type: "config/setTheme", payload: "light" });
               }}
             />
           )}

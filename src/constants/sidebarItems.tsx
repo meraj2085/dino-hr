@@ -77,11 +77,11 @@ export const sidebarItems = (user_type: string) => {
       children: [
         {
           label: (
-            <Link href={`/dashboard/${user_type}/attendance/addAttendance`}>
-              Add Attendance
+            <Link href={`/dashboard/${user_type}/attendance/allAttendance`}>
+              All Attendance
             </Link>
           ),
-          key: `/dashboard/${user_type}/attendance/addAttendance`,
+          key: `/dashboard/${user_type}/attendance/allAttendance`,
         },
         {
           label: (
@@ -215,7 +215,7 @@ export const sidebarItems = (user_type: string) => {
       key: `/dashboard/${user_type}/feedback`,
     },
   ];
-  
+
   const employeeSidebarItems: MenuProps["items"] = [
     {
       label: <Link href="/">Back To Website</Link>,

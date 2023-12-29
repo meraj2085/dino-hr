@@ -5,7 +5,7 @@ const localStorageTheme = getFromLocalStorage("theme");
 const theme = localStorageTheme ? JSON.parse(localStorageTheme) : null;
 
 const initialState = {
-  theme: theme?.theme ? theme?.theme : "dark",
+  theme: theme?.theme ? theme?.theme : "light",
 };
 
 const configSlice = createSlice({

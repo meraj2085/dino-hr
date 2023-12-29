@@ -10,7 +10,7 @@ const ViewAttendance = () => {
             link: "/admin",
           },
           {
-            label: "Attendance / View Attendance",
+            label: "View Attendance",
             link: "/dashboard/admin/attendance/viewAttendance",
           },
         ]}

@@ -1,5 +1,6 @@
 import { IOrganization } from '@/types';
 import { Col, Row } from 'antd';
+import dayjs from 'dayjs';
 
 const BillingDetails = ({ organization }: { organization: IOrganization }) => {
   return (
@@ -17,7 +18,7 @@ const BillingDetails = ({ organization }: { organization: IOrganization }) => {
 
         <Col xs={24} md={12} lg={6} className="mt-3">
           <h4 className="text-[16px]">Plan Validity</h4>
-          <p>{organization?.plan_validity}</p>
+          <p>{dayjs(organization?.plan_validity).format("DD MMM YYYY")}</p>
         </Col>
 
         <Col xs={24} md={12} lg={6} className="mt-3">

@@ -10,7 +10,7 @@ const AppliedLeaves = () => {
             link: "/admin",
           },
           {
-            label: "Leave / Applied Leaves",
+            label: "Applied Leaves",
             link: "/dashboard/admin/leave/appliedLeaves",
           },
         ]}

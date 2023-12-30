@@ -7,7 +7,7 @@ export const leaveApi = baseApi.injectEndpoints({
   endpoints: (build) => ({
     singleLeave: build.query({
       query: (id) => ({
-        url: `${LEAVE_API}/${id}`,
+        url: `${LEAVE_API}/view/${id}`,
         method: "GET",
       }),
       providesTags: [tagTypes.leave],

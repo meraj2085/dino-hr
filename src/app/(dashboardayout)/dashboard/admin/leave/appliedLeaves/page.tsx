@@ -4,19 +4,16 @@ import { useDebounced } from "@/redux/hooks";
 import { Button, Input, message } from "antd";
 import { useState } from "react";
 import dayjs from "dayjs";
-import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
+import { FolderViewOutlined, EditOutlined } from "@ant-design/icons";
 import Link from "next/link";
 import BreadCrumb from "@/components/ui/BreadCrumb";
 import ActionBar from "@/components/ui/ActionBar";
 import PPTable from "@/components/ui/PPTable";
-import {
-  useDeleteEventMutation,
-  useGetAllEventQuery,
-} from "@/redux/api/eventApi";
-import PPModal from "@/components/ui/Modal";
-import { useGetAllAppointmentQuery } from "@/redux/api/appointmentApi";
+import { useGetAllLeavesQuery } from "@/redux/api/leaveApi";
+import { getUserInfo } from "@/services/auth.service";
 
 const AppliedLeaves = () => {
+  const { userId } = getUserInfo() as any;
   const query: Record<string, any> = {};
 
   const [page, setPage] = useState<number>(1);
@@ -24,9 +21,6 @@ const AppliedLeaves = () => {
   const [sortBy, setSortBy] = useState<string>("");
   const [sortOrder, setSortOrder] = useState<string>("");
   const [searchTerm, setSearchTerm] = useState<string>("");
-
-  const [open, setOpen] = useState<boolean>(false);
-  const [eventId, setEventId] = useState<string>("");
 
   query["limit"] = size;
   query["page"] = page;
@@ -41,38 +35,21 @@ const AppliedLeaves = () => {
   if (!!debouncedSearchTerm) {
     query["searchTerm"] = debouncedSearchTerm;
   }
-  const [deleteEvent] = useDeleteEventMutation();
-  const { data, isLoading } = useGetAllAppointmentQuery({ ...query });
+  const { data, isLoading } = useGetAllLeavesQuery({ ...query });
   const meta = data?.meta;
-
-  const deleteEventHandler = async (id: string) => {
-    try {
-      const res = await deleteEvent(id);
-      if (res) {
-        message.success("Event Successfully Deleted!");
-        setOpen(false);
-      }
-    } catch (error: any) {
-      message.error(error.message);
-    }
-  };
 
   const columns = [
     {
-      title: "Name",
-      dataIndex: "name",
-    },
-    {
-      title: "Email",
-      dataIndex: "email",
-    },
-    {
       title: "Leave Types",
-      dataIndex: "leave_types",
+      dataIndex: "leave_type",
     },
     {
       title: "Status",
       dataIndex: "status",
+    },
+    {
+      title: "Days",
+      dataIndex: "no_of_days",
     },
     {
       title: "From Date",
@@ -106,17 +83,15 @@ const AppliedLeaves = () => {
                 <EditOutlined />
               </Button>
             </Link>
-            <Button
-              onClick={() => {
-                setOpen(true);
-                setEventId(data);
-              }}
-              style={{
-                margin: "0px 5px",
-              }}
-            >
-              <DeleteOutlined />
-            </Button>
+            <Link href={`/dashboard/admin/leave/appliedLeaves/view/${data}`}>
+              <Button
+                style={{
+                  margin: "0px 5px",
+                }}
+              >
+                <FolderViewOutlined />
+              </Button>
+            </Link>
           </>
         );
       },
@@ -161,7 +136,7 @@ const AppliedLeaves = () => {
       <PPTable
         loading={isLoading}
         columns={columns}
-        dataSource={data?.appointments}
+        dataSource={data?.leaves}
         pageSize={size}
         totalPages={meta?.total}
         showSizeChanger={true}
@@ -170,15 +145,6 @@ const AppliedLeaves = () => {
         showPagination={true}
         scroll={{ x: true }}
       />
-
-      <PPModal
-        title="Remove leaves"
-        isOpen={open}
-        closeModal={() => setOpen(false)}
-        handleOk={() => deleteEventHandler(eventId)}
-      >
-        <p className="my-5">Do you want to remove this Leaves?</p>
-      </PPModal>
     </div>
   );
 };

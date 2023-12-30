@@ -14,6 +14,7 @@ import {
   useGetAllEventQuery,
 } from "@/redux/api/eventApi";
 import PPModal from "@/components/ui/Modal";
+import { useGetAllAppointmentQuery } from "@/redux/api/appointmentApi";
 
 const AppliedLeaves = () => {
   const query: Record<string, any> = {};
@@ -40,8 +41,8 @@ const AppliedLeaves = () => {
   if (!!debouncedSearchTerm) {
     query["searchTerm"] = debouncedSearchTerm;
   }
-  const { data, isLoading } = useGetAllEventQuery({ ...query });
   const [deleteEvent] = useDeleteEventMutation();
+  const { data, isLoading } = useGetAllAppointmentQuery({ ...query });
   const meta = data?.meta;
 
   const deleteEventHandler = async (id: string) => {
@@ -160,7 +161,7 @@ const AppliedLeaves = () => {
       <PPTable
         loading={isLoading}
         columns={columns}
-        dataSource={data?.events}
+        dataSource={data?.appointments}
         pageSize={size}
         totalPages={meta?.total}
         showSizeChanger={true}

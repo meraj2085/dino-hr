@@ -6,7 +6,6 @@ import FormInput from "@/components/Forms/FormInput";
 import FormSelectField from "@/components/Forms/FormSelectField";
 import FormTextArea from "@/components/Forms/FormTextArea";
 import BreadCrumb from "@/components/ui/BreadCrumb";
-import UploadImage from "@/components/ui/UploadImage";
 import { useUserSignUpMutation } from "@/redux/api/authApi";
 import { IUser } from "@/types";
 import { yupResolver } from "@hookform/resolvers/yup";

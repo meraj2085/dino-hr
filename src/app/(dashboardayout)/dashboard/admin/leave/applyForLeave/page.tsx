@@ -5,11 +5,30 @@ import FormSelectField from "@/components/Forms/FormSelectField";
 import NormalDatePicker from "@/components/Forms/NormalDatePicker";
 import BreadCrumb from "@/components/ui/BreadCrumb";
 import { leaveType } from "@/constants/global";
-import { Button, Col, Row } from "antd";
+import { useAddLeaveMutation } from "@/redux/api/leaveApi";
+import { getUserInfo } from "@/services/auth.service";
+import { Button, Col, Row, message } from "antd";
 
 const ApplyForLeaves = () => {
+  const { organization_id, userId } = getUserInfo() as any;
+  const [addLeave, { isLoading }] = useAddLeaveMutation();
   const onSubmit = async (data: any) => {
-    console.log(data);
+    const leaveData = {
+      leave_type: data?.leave_type,
+      reason: data?.reason,
+      from_date: data?.from_date,
+      to_date: data?.to_date,
+      user_id: userId,
+      organization_id: organization_id,
+    };
+    try {
+      const res = await addLeave(leaveData).unwrap();
+      if (res._id) {
+        message.success("Leave applied Successfully");
+      }
+    } catch (err: any) {
+      message.error(err.message);
+    }
   };
   return (
     <div>
@@ -35,7 +54,7 @@ const ApplyForLeaves = () => {
             <div>
               <FormSelectField
                 size="large"
-                name="leave_types"
+                name="leave_type"
                 options={leaveType}
                 label="Leave Types"
                 placeholder="Select"
@@ -45,11 +64,11 @@ const ApplyForLeaves = () => {
           <Col xs={24} md={12} lg={12} className="mt-3">
             <div>
               <FormInput
-                name="note"
+                name="reason"
                 type="text"
                 size="large"
-                label="Note"
-                placeholder="Note"
+                label="Reason"
+                placeholder="Write reason"
               />
             </div>
           </Col>
@@ -65,7 +84,7 @@ const ApplyForLeaves = () => {
 
           <Col xs={24} md={12} lg={12} className="mt-3">
             <div>
-              <NormalDatePicker name="end_date" label="End Date" size="large" />
+              <NormalDatePicker name="to_date" label="To Date" size="large" />
             </div>
           </Col>
         </Row>

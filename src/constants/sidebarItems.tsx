@@ -155,15 +155,6 @@ export const sidebarItems = (user_type: string) => {
         },
       ],
     },
-    {
-      label: (
-        <Link href={`/dashboard/${user_type}/userManagement`}>
-          User Management
-        </Link>
-      ),
-      icon: <UserOutlined />,
-      key: `/dashboard/${user_type}/userManagement`,
-    },
   ];
 
   const superAdminSidebarItems: MenuProps["items"] = [

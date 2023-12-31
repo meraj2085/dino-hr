@@ -31,7 +31,7 @@ const PPModal = ({
       }}
       okButtonProps={{
         style: {
-          background: "#8484BD",
+          background: "#6E97D4",
           display: showOkButton ? "inline" : "none",
         },
       }}

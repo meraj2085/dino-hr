@@ -3,15 +3,14 @@
 import ActionBar from "@/components/ui/ActionBar";
 import BreadCrumb from "@/components/ui/BreadCrumb";
 import { Button } from "antd";
-import BasicInfo from "@/components/Organization/OrganizationDetails/BasicInfo";
-import ContactPerson from "@/components/Organization/OrganizationDetails/ContactPerson";
-import BillingDetails from "@/components/Organization/OrganizationDetails/BillingDetails";
 import StepperPage from "@/components/StepperForm/StepperPage";
 import { EditOutlined } from "@ant-design/icons";
 import Link from "next/link";
 import { useGetSingleEmployeeQuery } from "@/redux/api/employeeApi";
-import EmployeeBasicDetails from "@/components/Employees/EmployeeDetails/EmployeeBasicDetails";
-import EmployeeCommiunication from "@/components/Employees/EmployeeDetails/EmployeeCommiunication";
+import EmployeeBasicInfo from "@/components/Employees/EmployeeDetails/EmployeeBasicInfo";
+import EmployeeContactInfo from "@/components/Employees/EmployeeDetails/EmployeeContactInfo";
+import EmployeeEmploymentInfo from "@/components/Employees/EmployeeDetails/EmployeeEmploymentInfo";
+import EmployeeFinancialInfo from "@/components/Employees/EmployeeDetails/EmployeeFinancialInfo";
 
 const EmployeeDetails = ({
   params,
@@ -20,18 +19,23 @@ const EmployeeDetails = ({
 }) => {
   const employeeId = params.employeeDetails;
   const { data, isLoading } = useGetSingleEmployeeQuery(employeeId);
+
   const steps = [
     {
       title: "Basic Info",
-      content: <EmployeeBasicDetails employee={data} />,
+      content: <EmployeeBasicInfo user={data} />,
     },
     {
-      title: "Commiunication",
-      content: <EmployeeCommiunication employee={data} />,
+      title: "Contact Info",
+      content: <EmployeeContactInfo user={data} />,
     },
     {
-      title: "Billing Details",
-      content: <BillingDetails organization={data} />,
+      title: "Employment Info",
+      content: <EmployeeEmploymentInfo user={data} />,
+    },
+    {
+      title: "Financial Info",
+      content: <EmployeeFinancialInfo user={data} />,
     },
   ];
 

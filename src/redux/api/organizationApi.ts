@@ -7,11 +7,20 @@ const ORGANIZATION_URL = "/organization";
 export const organizationApi = baseApi.injectEndpoints({
   endpoints: (build) => ({
     addOrganization: build.mutation({
-      query: (organizationData) => ({
-        url: `${ORGANIZATION_URL}`,
-        method: "POST",
-        data: organizationData,
-      }),
+      query: (organizationData) => {
+        const formData = new FormData();
+        const { profile_picture, ...data } = organizationData;
+
+        formData.append("profile_picture", profile_picture);
+        formData.append("data", JSON.stringify(data));
+        // console.log(formData);
+        return {
+          url: `${ORGANIZATION_URL}`,
+          method: "POST",
+          data: formData,
+          contentType: "multipart/form-data",
+        };
+      },
       invalidatesTags: [tagTypes.organization],
     }),
     getAllOrganization: build.query({
@@ -38,11 +47,21 @@ export const organizationApi = baseApi.injectEndpoints({
       providesTags: [tagTypes.organization],
     }),
     updateOrganization: build.mutation({
-      query: ({ id, data }) => ({
-        url: `${ORGANIZATION_URL}/${id}`,
-        method: "PATCH",
-        data: data,
-      }),
+      query: ({ id, updatedData }) => {
+        const formData = new FormData();
+        // console.log(id, updatedData);
+        const { profile_picture, ...data } = updatedData;
+
+        formData.append("profile_picture", profile_picture);
+        formData.append("data", JSON.stringify(data));
+        // console.log(formData);
+        return {
+          url: `${ORGANIZATION_URL}/${id}`,
+          method: "PATCH",
+          data: formData,
+          contentType: "multipart/form-data",
+        };
+      },
       invalidatesTags: [tagTypes.organization],
     }),
     deleteOrganization: build.mutation({

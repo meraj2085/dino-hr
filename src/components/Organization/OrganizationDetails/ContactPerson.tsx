@@ -12,11 +12,6 @@ const ContactPerson = ({ organization }: { organization: IOrganization }) => {
         </Col>
 
         <Col xs={24} md={12} lg={6} className="mt-3">
-          <h4 className="text-[16px]">Middle Name</h4>
-          <p>{organization?.contact_person_middle_name}</p>
-        </Col>
-
-        <Col xs={24} md={12} lg={6} className="mt-3">
           <h4 className="text-[16px]">Last Name</h4>
           <p>{organization?.contact_person_last_name}</p>
         </Col>
@@ -44,12 +39,7 @@ const ContactPerson = ({ organization }: { organization: IOrganization }) => {
           <h4 className="text-[16px]">First Name</h4>
           <p>{organization?.account_manager_first_name}</p>
         </Col>
-
-        <Col xs={24} md={12} lg={6} className="mt-3">
-          <h4 className="text-[16px]">Middle Name</h4>
-          <p>{organization?.account_manager_middle_name}</p>
-        </Col>
-
+        
         <Col xs={24} md={12} lg={6} className="mt-3">
           <h4 className="text-[16px]">Last Name</h4>
           <p>{organization?.account_manager_last_name}</p>

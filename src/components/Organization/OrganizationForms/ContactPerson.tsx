@@ -19,14 +19,6 @@ const ContactPersonForm = () => {
 
           <Col xs={24} md={12} lg={6} className="mt-3">
             <FormInput
-              name="contact_person_middle_name"
-              label="Middle Name"
-              size="large"
-            />
-          </Col>
-
-          <Col xs={24} md={12} lg={6} className="mt-3">
-            <FormInput
               name="contact_person_last_name"
               label="Last Name"
               size="large"
@@ -57,14 +49,6 @@ const ContactPersonForm = () => {
             <FormInput
               name="account_manager_first_name"
               label="First Name"
-              size="large"
-            />
-          </Col>
-
-          <Col xs={24} md={12} lg={6} className="mt-3">
-            <FormInput
-              name="account_manager_middle_name"
-              label="Middle Name"
               size="large"
             />
           </Col>

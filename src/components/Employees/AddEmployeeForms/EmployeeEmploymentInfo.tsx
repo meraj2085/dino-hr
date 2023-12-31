@@ -13,29 +13,16 @@ import { useGetAllOrganizationQuery } from "@/redux/api/organizationApi";
 import { useGetAllUsersQuery } from "@/redux/api/userApi";
 
 const EmployeeEmploymentInfoForm = () => {
-  const { data: OrgData, isLoading: isOrgLoading } = useGetAllOrganizationQuery(
-    {}
-  );
+  const { data, isLoading } = useGetAllUsersQuery({});
 
-  const { data:UserData } = useGetAllUsersQuery({});
-
-    const { data, isLoading } = useGetAllUsersQuery({});
-
-  const organizationOptions = OrgData?.organizations?.map((org: any) => {
-    return {
-      label: org?.company_name,
-      value: org?._id,
-    };
-  });
-
-  const managerOptions:any = data?.users
+  const managerOptions: any = data?.users
     ?.filter((user: any) => user.role === "Manager")
     .map((user: any) => ({
       label: user.first_name + " " + user.last_name,
       value: user._id,
     }));
 
-  console.log(data);
+  // console.log(data);
 
   return (
     <div className="border border-gray-300 rounded-md p-4 my-4">
@@ -105,8 +92,8 @@ const EmployeeEmploymentInfoForm = () => {
             size="large"
             name="manager_id"
             options={managerOptions || []}
-            label="Manager ID"
-            placeholder="Your Manager ID"
+            label="Manager"
+            placeholder="Your Manager"
           />
         </Col>
         <Col xs={24} md={12} lg={6} className="mt-3">
@@ -116,15 +103,6 @@ const EmployeeEmploymentInfoForm = () => {
             size="large"
           />
         </Col>
-        {/* <Col xs={24} md={12} lg={6} className="mt-3">
-          <FormSelectField
-            size="large"
-            name="user_type"
-            options={userTypeOptions}
-            label="User Type"
-            placeholder="Your User Type"
-          />
-        </Col> */}
       </Row>
     </div>
   );

@@ -1,3 +1,4 @@
+import NormalDatePicker from "@/components/Forms/NormalDatePicker";
 import FormInput from "../../Forms/FormInput";
 import { Col, Row } from "antd";
 
@@ -20,7 +21,7 @@ const BillingDetailsForm = () => {
           </Col>
 
           <Col xs={24} md={12} lg={6} className="mt-3">
-            <FormInput
+            <NormalDatePicker
               name="plan_validity"
               label="Plan Validity"
               size="large"
@@ -51,14 +52,6 @@ const BillingDetailsForm = () => {
             <FormInput
               name="billing_contact_person_first_name"
               label="First Name"
-              size="large"
-            />
-          </Col>
-
-          <Col xs={24} md={12} lg={6} className="mt-3">
-            <FormInput
-              name="billing_contact_person_middle_name"
-              label="Middle Name"
               size="large"
             />
           </Col>

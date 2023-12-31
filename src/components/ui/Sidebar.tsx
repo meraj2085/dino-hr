@@ -19,7 +19,7 @@ const SideBar = () => {
     <ConfigProvider
       theme={{
         token: {
-          colorPrimary: "#4c92d4",
+          colorPrimary: "#33AA89",
           borderRadius: 2,
           fontSize: 16,
         },

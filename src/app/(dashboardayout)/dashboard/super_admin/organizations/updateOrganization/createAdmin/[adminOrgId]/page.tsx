@@ -32,24 +32,19 @@ const steps = [
 const AddAdmin = ({ params }: { params: Record<"adminOrgId", string> }) => {
   const [addAdmin] = useAddEmployeeMutation();
   const handleAdminsSubmit = async (values: any) => {
-    const { profile_picture, ...rest } = values;
     const total_ctc =
-    Number(rest.salaryDetails.basic_salary) +
-    Number(rest.salaryDetails.total_allowance) +
-    Number(rest.salaryDetails.annual_bonus);
-    rest.salaryDetails.total_ctc = total_ctc.toString();
-    
-    // console.log(values);
-    
+      Number(values.salaryDetails.basic_salary) +
+      Number(values.salaryDetails.total_allowance) +
+      Number(values.salaryDetails.annual_bonus);
+    values.salaryDetails.total_ctc = total_ctc.toString();
+    values.user_type = "admin";
+    values.organization_id = params.adminOrgId;
+        
     try {
-      const res = await addAdmin({
-        ...rest,
-        organization_id: params.adminOrgId,
-        user_type: "admin",
-      }).unwrap();
+      const res = await addAdmin(values).unwrap();
       console.log(res);
       if (res.id) {
-        message.success("Admin Added Successfully");
+        message.success("Employee Added Successfully");
       }
     } catch (err: any) {
       message.error(err.message);

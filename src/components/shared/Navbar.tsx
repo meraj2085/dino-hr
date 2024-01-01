@@ -40,7 +40,7 @@ const NavBar = () => {
       <div className="max-w-[1200px] mx-auto px-6 lg:px-0">
         <div className="flex h-16 items-center justify-between">
           <div className="flex-1 md:flex md:items-center md:gap-12">
-            <Link className="block text-[#8484BD]" href="/">
+            <Link className="block text-[#00674A]" href="/">
               <span className="sr-only">Home</span>
               <Image
                 src="https://res.cloudinary.com/dn163fium/image/upload/v1702705615/usmjqqtg18c9j7bnwh4f.png"

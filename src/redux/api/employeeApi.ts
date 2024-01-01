@@ -7,11 +7,20 @@ const EMPLOYEE_URL = "/user";
 export const employeeApi = baseApi.injectEndpoints({
   endpoints: (build) => ({
     addEmployee: build.mutation({
-      query: (employeeData) => ({
-        url: `${EMPLOYEE_URL}`,
-        method: "POST",
-        data: employeeData,
-      }),
+      query: (employeeData) => {
+        const formData = new FormData();
+        const { profile_picture, ...data } = employeeData;
+
+        formData.append("profile_picture", profile_picture);
+        formData.append("data", JSON.stringify(data));
+        // console.log(formData);
+        return {
+          url: `${EMPLOYEE_URL}`,
+          method: "POST",
+          data: formData,
+          contentType: "multipart/form-data",
+        };
+      },
       invalidatesTags: [tagTypes.employee],
     }),
     getAllEmployee: build.query({

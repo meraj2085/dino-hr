@@ -17,10 +17,15 @@ const UpdateOrganization = ({
 }: {
   params: { organizationId: string };
 }) => {
+
+  const orgId = params.organizationId;
+
+  const { data, isLoading } = useGetSingleOrganizationQuery(orgId);
+
   const steps = [
     {
       title: "Basic Info",
-      content: <BasicInfoForm />,
+      content: <BasicInfoForm defaultImageUrl={data?.profile_picture} />,
     },
     {
       title: "Contact Person",
@@ -32,10 +37,6 @@ const UpdateOrganization = ({
     },
   ];
 
-  const orgId = params.organizationId;
-
-  const { data, isLoading } = useGetSingleOrganizationQuery(orgId);
-
   const [updateOrganization, { isLoading: isUpdateLoading }] =
     useUpdateOrganizationMutation();
 
@@ -44,9 +45,9 @@ const UpdateOrganization = ({
       // console.log(values);
       const res = await updateOrganization({
         id: orgId,
-        data: values,
+        updatedData: values,
       }).unwrap();
-      // console.log(res);
+      console.log(res);
       if (res.id) {
         message.success("Organization Updated Successfully");
       }
@@ -109,7 +110,7 @@ const UpdateOrganization = ({
     number_of_users: data?.number_of_users,
     company_name: data?.company_name,
     company_code: data?.company_code,
-    profile_picture: data?.profile_picture,
+    // profile_picture: data?.profile_picture,
   };
 
   return (

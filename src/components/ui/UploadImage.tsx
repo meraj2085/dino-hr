@@ -5,6 +5,7 @@ import type { RcFile, UploadFile, UploadProps } from "antd/es/upload/interface";
 import Image from "next/image";
 import { useState } from "react";
 import { useFormContext } from "react-hook-form";
+import ImgCrop from "antd-img-crop";
 
 const getBase64 = (img: RcFile, callback: (url: string) => void) => {
   const reader = new FileReader();
@@ -27,9 +28,16 @@ const beforeUpload = (file: RcFile) => {
 type ImageUploadProps = {
   name: string;
   defaultImageUrl?: string;
+  listType?: UploadProps["listType"];
+  aspect?: number;
 };
 
-const UploadImage = ({ name, defaultImageUrl }: ImageUploadProps) => {
+const UploadImage = ({
+  name,
+  defaultImageUrl,
+  listType = "picture-card",
+  aspect = 1 / 1,
+}: ImageUploadProps) => {
   const [loading, setLoading] = useState(false);
   const [imageUrl, setImageUrl] = useState<string>();
   const { setValue } = useFormContext();
@@ -60,33 +68,41 @@ const UploadImage = ({ name, defaultImageUrl }: ImageUploadProps) => {
 
   return (
     <>
-      <Upload
-        name={name}
-        listType="picture-card"
-        className="avatar-uploader"
-        showUploadList={false}
-        action="/api/file"
-        beforeUpload={beforeUpload}
-        onChange={handleChange}
-      >
-        {imageUrl ? (
-          <Image
-            src={imageUrl}
-            alt="avatar"
-            width={100}
-            height={100}
-          />
-        ) : defaultImageUrl ? (
-          <Image
-            src={defaultImageUrl}
-            alt="avatar"
-            width={100}
-            height={100}
-          />
-        ) : (
-          uploadButton
-        )}
-      </Upload>
+      <ImgCrop rotationSlider aspect={aspect} showGrid>
+        <Upload
+          name={name}
+          listType={listType}
+          // className="avatar-uploader"
+          showUploadList={false}
+          action="/api/file"
+          beforeUpload={beforeUpload}
+          onChange={handleChange}
+        >
+          {imageUrl ? (
+            <Image
+              src={imageUrl}
+              alt="avatar"
+              style={{
+                borderRadius: listType === "picture-circle" ? "50%" : "7px",
+              }}
+              width={100}
+              height={100}
+            />
+          ) : defaultImageUrl ? (
+            <Image
+              src={defaultImageUrl}
+              alt="avatar"
+              style={{
+                borderRadius: listType === "picture-circle" ? "50%" : "7px",
+              }}
+              width={100}
+              height={100}
+            />
+          ) : (
+            uploadButton
+          )}
+        </Upload>
+      </ImgCrop>
     </>
   );
 };

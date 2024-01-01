@@ -11,27 +11,21 @@ import { useRouter } from "next/navigation";
 import { loginSchema } from "@/schema/login";
 import Link from "next/link";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { useState } from "react";
 
 type FormValues = {
-  office_email: string;
-  password: string;
+  old_password: string;
+  new_password: string;
+  confirm_new_password: string;
 };
 
-const LoginPage = () => {
-  const [userLogin, { isLoading }] = useUserLoginMutation();
+const ChangePassword = () => {
+  const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
 
   const onSubmit: SubmitHandler<FormValues> = async (data: any) => {
     try {
-      const res = await userLogin({ ...data }).unwrap();
-      if (res?.accessToken) {
-        storeUserInfo({ accessToken: res?.accessToken });
-        const { user_type } = getUserInfo() as any;
-        router.push(`/dashboard/${user_type}`);
-        message.success("User logged in successfully!");
-      } else {
-        message.error("Email or password is incorrect!");
-      }
+      console.log(data);
     } catch (err: any) {
       console.error(err.message);
     }
@@ -63,7 +57,7 @@ const LoginPage = () => {
           ) : (
             <>
               <h1 className="text-3xl font-normal text-[#00684a] mb-4">
-                Log in to your account
+                Change Password
               </h1>
               <Form
                 submitHandler={onSubmit}
@@ -71,32 +65,31 @@ const LoginPage = () => {
               >
                 <div>
                   <FormInput
-                    name="office_email"
-                    type="email"
-                    size="large"
-                    label="Email Address"
-                  />
-                </div>
-                <div>
-                  <FormInput
-                    name="password"
+                    name="old_password"
                     type="password"
                     size="large"
-                    label="Password"
+                    label="Old Password"
                   />
-                  <div className="flex justify-end mt-1">
-                    <a
-                      rel="noopener noreferrer"
-                      href="#"
-                      className="text-xs hover:underline text-gray-400 hover:text-gray-800"
-                    >
-                      Forgot password?
-                    </a>
-                  </div>
                 </div>
-                <div className="flex justify-left">
+                <div className="mt-2">
+                  <FormInput
+                    name="new_password"
+                    type="password"
+                    size="large"
+                    label="New Password"
+                  />
+                </div>
+                <div className="mt-2">
+                  <FormInput
+                    name="confirm_new_password"
+                    type="password"
+                    size="large"
+                    label="Confirm Password"
+                  />
+                </div>
+                <div className="flex justify-left mt-5">
                   <Button shape="default" htmlType="submit">
-                    Login
+                    Change Password
                   </Button>
                 </div>
               </Form>
@@ -135,4 +128,4 @@ const LoginPage = () => {
   );
 };
 
-export default LoginPage;
+export default ChangePassword;

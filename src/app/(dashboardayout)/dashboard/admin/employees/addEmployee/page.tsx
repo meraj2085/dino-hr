@@ -34,16 +34,16 @@ const AddEmployee = () => {
   const { organization_id } = getUserInfo() as any;
   const [addEmployee] = useAddEmployeeMutation();
   const handleEmployeesSubmit = async (values: any) => {
-    const { profile_picture, ...rest } = values;
-
+    // const { profile_picture, ...rest } = values;
     const total_ctc =
-      Number(rest.salaryDetails.basic_salary) +
-      Number(rest.salaryDetails.total_allowance) +
-      Number(rest.salaryDetails.annual_bonus);
-    rest.salaryDetails.total_ctc = total_ctc.toString();
+      Number(values.salaryDetails.basic_salary) +
+      Number(values.salaryDetails.total_allowance) +
+      Number(values.salaryDetails.annual_bonus);
+    values.salaryDetails.total_ctc = total_ctc.toString();
+    values.organization_id = organization_id;
     // console.log(values);
     try {
-      const res = await addEmployee({ ...rest, organization_id }).unwrap();
+      const res = await addEmployee(values).unwrap();
       console.log(res);
       if (res.id) {
         message.success("Employee Added Successfully");

@@ -1,4 +1,4 @@
-
+import { IMeta, INotification } from "@/types";
 import { tagTypes } from "../tagTypes";
 import { baseApi } from "./baseApi";
 
@@ -13,10 +13,26 @@ export const notificationApi = baseApi.injectEndpoints({
         data: notificationApiData,
       }),
       invalidatesTags: [tagTypes.notification],
-    })
+    }),
+
+    getNotifications: build.query({
+      query: (arg: Record<string, any>) => {
+        return {
+          url: `${NOTIFICATION_URL}`,
+          method: "GET",
+          params: arg,
+        };
+      },
+      transformResponse: (response: INotification[], meta: IMeta) => {
+        return {
+          notifications: response,
+          meta,
+        };
+      },
+      providesTags: [tagTypes.notification],
+    }),
   }),
 });
 
-export const {
-  useAddNotificationMutation
-} = notificationApi;
+export const { useAddNotificationMutation, useGetNotificationsQuery } =
+  notificationApi;

@@ -9,7 +9,10 @@ import Link from "next/link";
 import BreadCrumb from "@/components/ui/BreadCrumb";
 import ActionBar from "@/components/ui/ActionBar";
 import PPTable from "@/components/ui/PPTable";
-import { useGetAllLeavesQuery } from "@/redux/api/leaveApi";
+import {
+  useLeavesByEmailQuery,
+  useUpdateLeaveMutation,
+} from "@/redux/api/leaveApi";
 import { getUserInfo } from "@/services/auth.service";
 
 const AppliedLeaves = () => {
@@ -35,7 +38,20 @@ const AppliedLeaves = () => {
   if (!!debouncedSearchTerm) {
     query["searchTerm"] = debouncedSearchTerm;
   }
-  const { data, isLoading } = useGetAllLeavesQuery({ ...query });
+
+  const { data, isLoading } = useLeavesByEmailQuery(userId);
+  const [updateLeave] = useUpdateLeaveMutation();
+
+  const handleCancel = async (id: string) => {
+    try {
+      await updateLeave({
+        id,
+        body: { status: "Cancelled" },
+      }).unwrap();
+    } catch (error) {
+      console.error(error);
+    }
+  };
   const meta = data?.meta;
 
   const columns = [
@@ -70,11 +86,11 @@ const AppliedLeaves = () => {
 
     {
       title: "Action",
-      dataIndex: "id",
+      // dataIndex: "id",
       render: function (data: any) {
         return (
           <>
-            <Link href={`/dashboard/admin/leave/appliedLeaves/${data}`}>
+            <Link href={`/dashboard/admin/leave/appliedLeaves/${data?._id}`}>
               <Button
                 style={{
                   margin: "0px 5px",
@@ -83,7 +99,9 @@ const AppliedLeaves = () => {
                 <EditOutlined />
               </Button>
             </Link>
-            <Link href={`/dashboard/admin/leave/appliedLeaves/view/${data}`}>
+            <Link
+              href={`/dashboard/admin/leave/appliedLeaves/view/${data?._id}`}
+            >
               <Button
                 style={{
                   margin: "0px 5px",
@@ -92,6 +110,11 @@ const AppliedLeaves = () => {
                 <FolderViewOutlined />
               </Button>
             </Link>
+            {data?.status !== "Cancelled" && (
+              <Button onClick={() => handleCancel(data)} type="primary" danger>
+                Cancel
+              </Button>
+            )}
           </>
         );
       },
@@ -136,7 +159,7 @@ const AppliedLeaves = () => {
       <PPTable
         loading={isLoading}
         columns={columns}
-        dataSource={data?.leaves}
+        dataSource={data}
         pageSize={size}
         totalPages={meta?.total}
         showSizeChanger={true}

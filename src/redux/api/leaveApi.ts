@@ -38,11 +38,19 @@ export const leaveApi = baseApi.injectEndpoints({
     }),
     updateLeave: build.mutation({
       query: (data) => ({
-        url: `${LEAVE_API}`,
+        url: `${LEAVE_API}/update/${data.id}`,
         method: "PATCH",
-        data: data,
+        data: data.body,
       }),
       invalidatesTags: [tagTypes.leave],
+    }),
+
+    leavesByEmail: build.query({
+      query: (userId: string | string[] | undefined) => ({
+        url: `${LEAVE_API}?user_id=${userId}`,
+        method: "GET",
+      }),
+      providesTags: [tagTypes.leave],
     }),
   }),
 });
@@ -52,4 +60,5 @@ export const {
   useGetAllLeavesQuery,
   useSingleLeaveQuery,
   useUpdateLeaveMutation,
+  useLeavesByEmailQuery,
 } = leaveApi;

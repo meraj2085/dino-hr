@@ -175,6 +175,17 @@ export type INotification = {
   __v?: number;
 };
 
+export type IAttendance = {
+  id?: string;
+  name?: string,
+  check_in_date?: string;
+  check_out_date?: string;
+  time?: string;
+  status?: string;
+  type?: EventType;
+  __v?: number;
+};
+
 export type IAddress = {
   id?: string;
   first_name?: string;

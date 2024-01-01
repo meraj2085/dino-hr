@@ -13,7 +13,8 @@ export enum tagTypes {
   event = "event",
   notification = "notification",
   employee = "employee",
-  attendance = "attendance"
+  attendance = "attendance",
+  leave = "leave",
 }
 
 export const tagTypesList = [
@@ -32,4 +33,5 @@ export const tagTypesList = [
   tagTypes.notification,
   tagTypes.employee,
   tagTypes.attendance,
+  tagTypes.leave,
 ];

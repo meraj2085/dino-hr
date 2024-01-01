@@ -13,8 +13,16 @@ export enum tagTypes {
   event = "event",
   notification = "notification",
   employee = "employee",
+<<<<<<< HEAD
+<<<<<<< HEAD
+  leave = "leave",
+=======
+  attendance = "attendance"
+>>>>>>> aeafeb6b99a829c451a5c7beff37c1266e4ad053
+=======
   attendance = "attendance",
   leave = "leave",
+>>>>>>> f5931bbc678f27265766c244722f18e7ea63c9d9
 }
 
 export const tagTypesList = [
@@ -32,6 +40,14 @@ export const tagTypesList = [
   tagTypes.event,
   tagTypes.notification,
   tagTypes.employee,
+<<<<<<< HEAD
+<<<<<<< HEAD
+  tagTypes.leave,
+=======
+  tagTypes.attendance,
+>>>>>>> aeafeb6b99a829c451a5c7beff37c1266e4ad053
+=======
   tagTypes.attendance,
   tagTypes.leave,
+>>>>>>> f5931bbc678f27265766c244722f18e7ea63c9d9
 ];

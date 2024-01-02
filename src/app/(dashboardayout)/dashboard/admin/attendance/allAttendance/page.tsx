@@ -48,8 +48,6 @@ const AllAttendance = () => {
   const { data, isLoading } = useGetAllOrganizationQuery({ ...query });
   const meta = data?.meta;
 
-  // console.log(data);
-
   const columns = [
     {
       title: "Check in time",

@@ -42,12 +42,10 @@ const UpdateOrganization = ({
 
   const handleSubmit = async (values: any) => {
     try {
-      // console.log(values);
       const res = await updateOrganization({
         id: orgId,
         updatedData: values,
       }).unwrap();
-      console.log(res);
       if (res.id) {
         message.success("Organization Updated Successfully");
       }
@@ -57,8 +55,6 @@ const UpdateOrganization = ({
   };
 
   if (isLoading) return <Spin />;
-
-  // console.log(data);
 
   const defaultValues = {
     bin_number: data?.bin_number,

@@ -23,7 +23,6 @@ const notification = () => {
   const deleteHandler = async () => {
     try {
       const res = await deleteNotification(null);
-      console.log(res);
       if (res) {
         message.success("Notification cleared");
       }

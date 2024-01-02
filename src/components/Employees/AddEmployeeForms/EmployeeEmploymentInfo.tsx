@@ -22,8 +22,6 @@ const EmployeeEmploymentInfoForm = () => {
       value: user._id,
     }));
 
-  // console.log(data);
-
   return (
     <div className="border border-gray-300 rounded-md p-4 my-4">
       <Row gutter={{ xs: 4, md: 20 }}>

@@ -41,10 +41,8 @@ const AddEmployee = () => {
       Number(values.salaryDetails.annual_bonus);
     values.salaryDetails.total_ctc = total_ctc.toString();
     values.organization_id = organization_id;
-    // console.log(values);
     try {
       const res = await addEmployee(values).unwrap();
-      console.log(res);
       if (res.id) {
         message.success("Employee Added Successfully");
       }

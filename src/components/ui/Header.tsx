@@ -20,8 +20,6 @@ const Header = () => {
   const router = useRouter();
   const dispatch = useAppDispatch();
 
-  console.log(data, "count");
-
   const logOut = () => {
     removeUserInfo(authKey);
     router.push("/auth/login");

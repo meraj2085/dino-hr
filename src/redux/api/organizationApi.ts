@@ -13,7 +13,6 @@ export const organizationApi = baseApi.injectEndpoints({
 
         formData.append("profile_picture", profile_picture);
         formData.append("data", JSON.stringify(data));
-        // console.log(formData);
         return {
           url: `${ORGANIZATION_URL}`,
           method: "POST",
@@ -49,12 +48,10 @@ export const organizationApi = baseApi.injectEndpoints({
     updateOrganization: build.mutation({
       query: ({ id, updatedData }) => {
         const formData = new FormData();
-        // console.log(id, updatedData);
         const { profile_picture, ...data } = updatedData;
 
         formData.append("profile_picture", profile_picture);
         formData.append("data", JSON.stringify(data));
-        // console.log(formData);
         return {
           url: `${ORGANIZATION_URL}/${id}`,
           method: "PATCH",

@@ -13,7 +13,6 @@ export const employeeApi = baseApi.injectEndpoints({
 
         formData.append("profile_picture", profile_picture);
         formData.append("data", JSON.stringify(data));
-        // console.log(formData);
         return {
           url: `${EMPLOYEE_URL}`,
           method: "POST",

@@ -31,8 +31,35 @@ export const notificationApi = baseApi.injectEndpoints({
       },
       providesTags: [tagTypes.notification],
     }),
+    getUnreadCount: build.query({
+      query: () => ({
+        url: `${NOTIFICATION_URL}/getUnreadCount`,
+        method: "GET",
+      }),
+      providesTags: [tagTypes.notification],
+    }),
+    markRead: build.mutation({
+      query: (data) => ({
+        url: `${NOTIFICATION_URL}/markRead`,
+        method: "PATCH",
+        data: data.body,
+      }),
+      invalidatesTags: [tagTypes.notification],
+    }),
+    deleteNotification: build.mutation({
+      query: () => ({
+        url: `${NOTIFICATION_URL}/`,
+        method: "DELETE",
+      }),
+      invalidatesTags: [tagTypes.notification],
+    }),
   }),
 });
 
-export const { useAddNotificationMutation, useGetNotificationsQuery } =
-  notificationApi;
+export const {
+  useAddNotificationMutation,
+  useGetNotificationsQuery,
+  useGetUnreadCountQuery,
+  useMarkReadMutation,
+  useDeleteNotificationMutation,
+} = notificationApi;

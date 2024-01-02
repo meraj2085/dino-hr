@@ -178,7 +178,6 @@ const MeatOurTeam = () => {
         {TeamMemberDetails.map((member, index) => {
           const isMobileFlipped = index % 2 !== 0;
           const isDesktopFlipped = index % 4 >= 2;
-          //   console.log(isDesktopFlipped, isMobileFlipped);
           return (
             <TeamMember
               key={index}

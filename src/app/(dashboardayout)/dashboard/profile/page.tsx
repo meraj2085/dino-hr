@@ -1,3 +1,4 @@
+
 /* eslint-disable react-hooks/rules-of-hooks */
 "use client";
 import BreadCrumb from "@/components/ui/BreadCrumb";
@@ -91,7 +92,10 @@ const profile = () => {
                 </Button>
               </div>
             </div>
-
+          </div>
+        </Flex>
+      </Card>
+      {/* </Col> */}
             {/* right */}
             <div className="flex border-dashed lg:border-l-2 border-gray-500 pl-4">
               {/* input */}

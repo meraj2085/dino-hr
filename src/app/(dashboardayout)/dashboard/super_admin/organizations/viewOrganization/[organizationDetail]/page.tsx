@@ -22,7 +22,6 @@ const OrgDetailPage = ({
   const orgId = params.organizationDetail;
   const { data, isLoading } = useGetSingleOrganizationQuery(orgId);
 
-  // console.log(params, data);
   const steps = [
     {
       title: "Basic Info",

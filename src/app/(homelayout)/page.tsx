@@ -9,6 +9,7 @@ import ReviewSection from "@/components/Review/review";
 import Footer from "@/components/Footer";
 import AboutUs from "@/components/AboutUs";
 import Feedback from "@/components/Feedback";
+import Link from "next/link";
 
 export default function Home() {
   return (
@@ -27,10 +28,7 @@ export default function Home() {
               many more.
             </p>
             <div className="flex flex-col space-y-4 sm:items-center sm:justify-center sm:flex-row sm:space-y-0 sm:space-x-4 lg:justify-start">
-              <a
-                href="#_"
-                className="relative inline-flex items-center justify-start py-3 pl-4 pr-12 overflow-hidden font-semibold transition-all duration-150 ease-in-out rounded hover:pl-10 hover:pr-6 bg-gray-50 group"
-              >
+              <button className="relative inline-flex items-center justify-start py-3 pl-4 pr-12 overflow-hidden font-semibold transition-all duration-150 ease-in-out rounded hover:pl-10 hover:pr-6 bg-gray-50 group">
                 <span className="absolute bottom-0 left-0 w-full h-1 transition-all duration-150 ease-in-out group-hover:h-full"></span>
                 <span className="absolute right-0 pr-4 duration-200 ease-out group-hover:translate-x-12">
                   <svg
@@ -67,9 +65,9 @@ export default function Home() {
                 <span className="relative w-full text-left transition-colors duration-200 ease-in-out text-[#00674A]">
                   Learn More
                 </span>
-              </a>
-              <a
-                href="#_"
+              </button>
+              <Link
+                href="/bookCall"
                 className="relative inline-flex items-center justify-start px-6 py-3 overflow-hidden font-medium transition-all bg-[#00674A] rounded-xl group"
               >
                 <span className="absolute top-0 right-0 inline-block w-4 h-4 transition-all duration-500 ease-in-out bg-[#124436] rounded group-hover:-mr-4 group-hover:-mt-4">
@@ -79,7 +77,7 @@ export default function Home() {
                 <span className="relative w-full text-left text-white transition-colors duration-200 ease-in-out group-hover:text-white">
                   Get HR Ready
                 </span>
-              </a>
+              </Link>
             </div>
           </div>
           <div className="flex items-center justify-center p-6 mt-8 lg:mt-0 h-72 sm:h-80 lg:h-96 xl:h-112 2xl:h-128">

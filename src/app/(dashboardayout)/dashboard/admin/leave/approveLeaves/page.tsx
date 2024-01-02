@@ -101,15 +101,6 @@ const Approveleave = () => {
       render: function (data: any) {
         return (
           <>
-            <Link href={`/dashboard/admin/leave/appliedLeaves/${data?._id}`}>
-              <Button
-                style={{
-                  margin: "0px 5px",
-                }}
-              >
-                <EditOutlined />
-              </Button>
-            </Link>
             <Link
               href={`/dashboard/admin/leave/appliedLeaves/view/${data?._id}`}
             >

@@ -222,7 +222,7 @@ const profile = () => {
           </Col>
         </Row> */}
         {/* Education-Experience Information */}
-        <Row gutter={10}>
+        {/* <Row gutter={10}>
           <Col xs={24} sm={18} md={16} lg={12}>
             <Card
               title="Education Information"
@@ -279,7 +279,7 @@ const profile = () => {
               />
             </Card>
           </Col>
-        </Row>
+        </Row> */}
       </div>
     </div>
   );

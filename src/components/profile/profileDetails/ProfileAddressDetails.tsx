@@ -1,6 +1,14 @@
 import { Avatar, Button, Card, Col, Divider, Flex, Row } from "antd";
 
 const ProfileAddressDetails = ({ userData }: any) => {
+  const {
+    phone_number,
+    personal_email,
+    office_email,
+    other_phone_number,
+    emergency_contact,
+  } = userData;
+  console.log(userData);
   return (
     <div>
       <Row gutter={10}>
@@ -9,25 +17,17 @@ const ProfileAddressDetails = ({ userData }: any) => {
             <div className="flex">
               {/* input */}
               <div className="text-md font-bold mr-10">
-                <h1>Passport No.</h1>
-                <h1>Passport Exp Date</h1>
-                <h1>Telephone No.</h1>
-                <h1>Nationality</h1>
-                <h1>Religion</h1>
-                <h1>Marital status</h1>
-                <h1>Employment of spouse No</h1>
-                <h1>No. of children</h1>
+                <h1>Phone No.</h1>
+                <h1>secondary Phone No.</h1>
+                <h1>Email: </h1>
+                <h1>Office Email: </h1>
               </div>
               {/* value */}
               <div>
-                <h2>849584958583</h2>
-                <h2>849584958583</h2>
-                <h2>849584958583</h2>
-                <h2>Indian</h2>
-                <h2>Islam</h2>
-                <h2>Married</h2>
-                <h2>2</h2>
-                <h2>2</h2>
+                <h2>{phone_number}</h2>
+                <h2>{other_phone_number}</h2>
+                <h2>{personal_email}</h2>
+                <h2>{office_email}</h2>
               </div>
             </div>
           </Card>
@@ -37,32 +37,30 @@ const ProfileAddressDetails = ({ userData }: any) => {
             <div className="flex">
               {/* input */}
               <div className="text-md font-bold mr-10">
-                <h1>Passport No.</h1>
-                <h1>Passport Exp Date</h1>
-                <h1>Telephone No.</h1>
+                <h1>Name: </h1>
+                <h1>Relation:</h1>
               </div>
               {/* value */}
               <div>
-                <h2>849584958583</h2>
-                <h2>849584958583</h2>
-                <h2>849584958583</h2>
+                <h2>{emergency_contact?.name}</h2>
+                <h2>{emergency_contact?.relationship}</h2>
               </div>
             </div>
-            <Divider dashed style={{ borderWidth: 2 }} />
+            {/* <Divider dashed style={{ borderWidth: 2 }} />
             <div className="flex">
-              {/* input */}
+             
               <div className="text-md font-bold mr-10">
                 <h1>Passport No.</h1>
                 <h1>Passport Exp Date</h1>
                 <h1>Telephone No.</h1>
               </div>
-              {/* value */}
+              
               <div>
                 <h2>849584958583</h2>
                 <h2>849584958583</h2>
                 <h2>849584958583</h2>
               </div>
-            </div>
+            </div> */}
           </Card>
         </Col>
       </Row>

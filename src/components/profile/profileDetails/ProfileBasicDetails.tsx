@@ -45,6 +45,18 @@ const columns = [
 ];
 
 const ProfileBasicDetails = ({ userData }: any) => {
+  const {
+    first_name,
+    middle_name,
+    last_name,
+    designation,
+    employee_code,
+    phone_number,
+    personal_email,
+    permanent_address,
+    date_of_birth,
+    gender,
+  } = userData;
   return (
     <div>
       <Card className="mt-5">
@@ -57,9 +69,11 @@ const ProfileBasicDetails = ({ userData }: any) => {
               src="https://smarthr.dreamstechnologies.com/html/template/assets/img/profiles/avatar-02.jpg"
             />
             <div className="pl-4">
-              <h1 className="text-xl font-bold">John Due</h1>
-              <h1 className="text-md font-bold">Web Developer</h1>
-              <h1 className="text-md font-bold">Employee ID:FT-0001</h1>
+              <h1 className="text-xl font-bold">
+                {first_name} {middle_name} {last_name}
+              </h1>
+              <h1 className="text-md font-bold">{designation}</h1>
+              <h1 className="text-md font-bold">{employee_code}</h1>
               <Button className="my-2" type="primary" danger>
                 Sent Message
               </Button>
@@ -78,11 +92,14 @@ const ProfileBasicDetails = ({ userData }: any) => {
             </div>
             {/* value */}
             <div>
-              <h2 className="text-blue-500">3847234784</h2>
-              <h2 className="text-blue-500">johndoe@example.com</h2>
-              <h2>24th July</h2>
-              <h2>1861 Bayonne Ave, NY, US</h2>
-              <h2>Male</h2>
+              <h2 className="text-blue-500"> {phone_number}</h2>
+              <h2 className="text-blue-500">{personal_email}</h2>
+              <h2>{date_of_birth}</h2>
+              <h2>
+                {permanent_address?.flat_number} {permanent_address?.street},
+                {permanent_address?.state}, {permanent_address?.country}
+              </h2>
+              <h2>{gender}</h2>
             </div>
           </div>
         </Flex>

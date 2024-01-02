@@ -1,35 +1,31 @@
 "use client";
-
 import BreadCrumb from "@/components/ui/BreadCrumb";
-import Loading from "@/app/loading";
+import { useSingleLeaveQuery } from "@/redux/api/leaveApi";
+import { useGetSingleUserQuery } from "@/redux/api/userApi";
 import dayjs from "dayjs";
-import { useSingleAppointmentQuery } from "@/redux/api/appointmentApi";
 
 type IDProps = {
   params: any;
 };
-
-const ViewBlogPage = ({ params }: IDProps) => {
-  const { id } = params;
-  const { data, isLoading } = useSingleAppointmentQuery(id);
-
-  if (isLoading) return <Loading />;
-
+const LeaveDetailsPage = ({ params }: IDProps) => {
+  const id = params?.id;
+  const { data } = useSingleLeaveQuery(id);
+  const { data: user } = useGetSingleUserQuery(data?.user_id);
   return (
     <div>
       <BreadCrumb
         items={[
           {
             label: "Admin",
-            link: "/dashboard/super_admin",
+            link: "/dashboard/admin",
           },
           {
-            label: "Bookings",
-            link: "/dashboard/super_admin/bookings",
+            label: "Leave",
+            link: "/dashboard/admin/leave/appliedLeaves",
           },
           {
             label: "View",
-            link: `/dashboard/super_admin/bookings/view/${id}`,
+            link: `/dashboard/admin/leave/appliedLeaves/view/${id}`,
           },
         ]}
       />
@@ -46,24 +42,19 @@ const ViewBlogPage = ({ params }: IDProps) => {
           <div className="relative block overflow-hidden rounded-lg border bg-white border-gray-100 p-4 sm:p-6 lg:p-8">
             <div className="sm:flex sm:justify-between sm:gap-4">
               <div>
-                <h3 className="text-lg font-bold text-gray-900 sm:text-xl">
-                  {data?.subject}
-                </h3>
+                <p className="mt-1 text-xs font-medium text-gray-600">
+                  {user?.first_name} {user?.middle_name} {user?.last_name}
+                </p>
 
                 <p className="mt-1 text-xs font-medium text-gray-600">
-                  {data?.fullName}
+                  {user?.personal_email}
                 </p>
                 <p className="mt-1 text-xs font-medium text-gray-600">
-                  {data?.email}
+                  {user?.phone_number}
                 </p>
-                <p className="mt-1 text-xs font-medium text-gray-600">
-                  {data?.mobileNumber}
-                </p>
-                {data?.company_name && (
-                  <p className="mt-5 text-xs font-medium text-gray-600">
-                    {data?.company_name}
-                  </p>
-                )}
+                <h3 className="text-lg font-bold text-gray-900 sm:text-xl mt-5">
+                  {data?.reason}
+                </h3>
               </div>
             </div>
 
@@ -73,20 +64,18 @@ const ViewBlogPage = ({ params }: IDProps) => {
 
             <dl className="mt-6 flex gap-4 sm:gap-6">
               <div className="flex flex-col-reverse">
-                <dt className="text-sm font-medium text-gray-600">
-                  Appointment At
-                </dt>
+                <dt className="text-sm font-medium text-gray-600">Leave At</dt>
                 <dd className="text-xs text-gray-500">
-                  {dayjs(data?.appointment_date).format("YYYY-MM-DD")}|
-                  {data?.appointment_time}
+                  {dayjs(data?.from_date).format("YYYY-MM-DD")}
+                  <span> to </span>
+                  {dayjs(data?.to_date).format("YYYY-MM-DD")}
                 </dd>
               </div>
+              <div>Total {data?.no_of_days} days</div>
 
               <div className="flex flex-col-reverse">
                 <dt className="text-sm font-medium text-gray-600">Status</dt>
-                <dd className="text-xs text-gray-500">
-                  {data?.appointment_status}
-                </dd>
+                <dd className="text-xs text-gray-500">{data?.status}</dd>
               </div>
             </dl>
           </div>
@@ -96,4 +85,4 @@ const ViewBlogPage = ({ params }: IDProps) => {
   );
 };
 
-export default ViewBlogPage;
+export default LeaveDetailsPage;

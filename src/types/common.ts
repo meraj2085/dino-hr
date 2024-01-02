@@ -164,6 +164,27 @@ export type IEvent = {
   type?: EventType;
   __v?: number;
 };
+export type INotification = {
+  createdAt: string | number | Date | null | undefined;
+  id?: string;
+  organization_id?: string;
+  user_ids?: string;
+  title?: string;
+  description?: string;
+  deleted_at?: string;
+  __v?: number;
+};
+
+export type IAttendance = {
+  id?: string;
+  name?: string,
+  check_in_date?: string;
+  check_out_date?: string;
+  time?: string;
+  status?: string;
+  type?: EventType;
+  __v?: number;
+};
 
 export type IAddress = {
   id?: string;

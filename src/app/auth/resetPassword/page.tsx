@@ -27,6 +27,7 @@ type passwordFormValues = {
 
 const ResetPassword = () => {
   const [isLoading, setIsLoading] = useState(false);
+  const [seconds, setSeconds] = useState(60);
   const [officeEmail, setOfficeEmail] = useState("");
   const [isVerifiedOtp, setIsVerifiedOtp] = useState(false);
 
@@ -37,19 +38,32 @@ const ResetPassword = () => {
   const [ResetPassword, { isLoading: isResetPasswordLoading }] =
     useResetPasswordMutation();
 
-    useEffect(() => {
-      
-    }, []);
+  useEffect(() => {
+    let timer: NodeJS.Timeout;
 
+    if (officeEmail && !isVerifiedOtp && seconds > 0) {
+      timer = setInterval(() => {
+        setSeconds((prevSeconds) => prevSeconds - 1);
+      }, 1000);
+    } else if (seconds === 0) {
+      setOfficeEmail("");
+      message.error("OTP expired");
+      setSeconds(60); // Reset the timer to 60 seconds
+    }
 
+    return () => clearInterval(timer); // Cleanup the timer on component unmount
+  }, [isVerifiedOtp, officeEmail, seconds]);
+
+  console.log(seconds, officeEmail, isVerifiedOtp);
   //send otp
   const onMailSubmit: SubmitHandler<mailFormValues> = async (data: any) => {
     try {
-      console.log(data);
+      // console.log(data);
       const res = await sendOtp(data).unwrap();
-      console.log(res);
+      // console.log(res);
       if (res?._id) {
         setOfficeEmail(data.office_email);
+        message.success("We've sent an OTP on your mail! Please check.");
       }
     } catch (err: any) {
       message.error(err.message);
@@ -71,7 +85,7 @@ const ResetPassword = () => {
     } catch (err: any) {
       message.error(err.message);
       if (err.message === "OTP expired") {
-        router.push("/auth/reset-password");
+        setOfficeEmail("");
       }
     }
   };
@@ -81,12 +95,13 @@ const ResetPassword = () => {
     data: any
   ) => {
     try {
-      console.log(data);
+      // console.log(data);
       const res = await ResetPassword({
         ...data,
         office_email: officeEmail,
       }).unwrap();
       if (res?._id) {
+        message.success("Password reset successfully!");
         router.push("/auth/login");
       }
     } catch (err: any) {
@@ -152,6 +167,9 @@ const ResetPassword = () => {
                       label="OTP"
                       placeholder="Enter OTP"
                     />
+                    <p className="text-xs text-gray-400 text-end">
+                      {seconds} seconds left
+                    </p>
                   </div>
                   <div className="flex justify-left mt-5">
                     <Button shape="default" htmlType="submit">

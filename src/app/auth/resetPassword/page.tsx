@@ -26,8 +26,7 @@ type passwordFormValues = {
 };
 
 const ResetPassword = () => {
-  const [isLoading, setIsLoading] = useState(false);
-  const [seconds, setSeconds] = useState(60);
+  const [seconds, setSeconds] = useState(0);
   const [officeEmail, setOfficeEmail] = useState("");
   const [isVerifiedOtp, setIsVerifiedOtp] = useState(false);
 
@@ -45,25 +44,26 @@ const ResetPassword = () => {
       timer = setInterval(() => {
         setSeconds((prevSeconds) => prevSeconds - 1);
       }, 1000);
-    } else if (seconds === 0) {
-      setOfficeEmail("");
+    } else if (seconds === 0 && officeEmail) {
+      // setOfficeEmail("");
       message.error("OTP expired");
-      setSeconds(60); // Reset the timer to 60 seconds
+      // setSeconds(60); // Reset the timer to 60 seconds
     }
 
     return () => clearInterval(timer); // Cleanup the timer on component unmount
   }, [isVerifiedOtp, officeEmail, seconds]);
 
-  console.log(seconds, officeEmail, isVerifiedOtp);
+  // console.log(seconds, officeEmail, isVerifiedOtp);
   //send otp
   const onMailSubmit: SubmitHandler<mailFormValues> = async (data: any) => {
     try {
       // console.log(data);
       const res = await sendOtp(data).unwrap();
-      // console.log(res);
+      console.log(res);
       if (res?._id) {
         setOfficeEmail(data.office_email);
         message.success("We've sent an OTP on your mail! Please check.");
+        setSeconds(60);
       }
     } catch (err: any) {
       message.error(err.message);
@@ -128,8 +128,7 @@ const ResetPassword = () => {
               Dino
             </h1>
           </div>
-          {isLoading ||
-          isSendOtpLoading ||
+          {isSendOtpLoading ||
           isVerifyOtpLoading ||
           isResetPasswordLoading ? (
             <div className="flex justify-center items-center h-[450px]">
@@ -151,9 +150,9 @@ const ResetPassword = () => {
                       placeholder="Enter your office mail"
                     />
                   </div>
-                  <div className="flex justify-left mt-5">
+                  <div className="flex justify-left mt-3">
                     <Button shape="default" htmlType="submit">
-                      Submit Email
+                      Submit
                     </Button>
                   </div>
                 </Form>
@@ -167,14 +166,27 @@ const ResetPassword = () => {
                       label="OTP"
                       placeholder="Enter OTP"
                     />
-                    <p className="text-xs text-gray-400 text-end">
-                      {seconds} seconds left
-                    </p>
+                    {!!seconds && (
+                      <p className="text-xs text-gray-400 text-end">
+                        {seconds} seconds left
+                      </p>
+                    )}
                   </div>
-                  <div className="flex justify-left mt-5">
-                    <Button shape="default" htmlType="submit">
-                      Submit OTP
-                    </Button>
+                  <div className="flex justify-left mt-3">
+                    {seconds > 0 ? (
+                      <Button shape="default" htmlType="submit">
+                        Verify
+                      </Button>
+                    ) : (
+                      <Button
+                        shape="default"
+                        onClick={() =>
+                          onMailSubmit({ office_email: officeEmail })
+                        }
+                      >
+                        Resend
+                      </Button>
+                    )}
                   </div>
                 </Form>
               )}
@@ -189,9 +201,9 @@ const ResetPassword = () => {
                       placeholder="Enter new password"
                     />
                   </div>
-                  <div className="flex justify-left mt-5">
+                  <div className="flex justify-left mt-3">
                     <Button shape="default" htmlType="submit">
-                      Submit Password
+                      Submit
                     </Button>
                   </div>
                 </Form>

@@ -5,13 +5,9 @@ import Image from "next/image";
 import Form from "@/components/Forms/Form";
 import FormInput from "@/components/Forms/FormInput";
 import { SubmitHandler } from "react-hook-form";
-import { useUserLoginMutation } from "@/redux/api/authApi";
-import { getUserInfo, storeUserInfo } from "@/services/auth.service";
 import { useRouter } from "next/navigation";
-import { loginSchema } from "@/schema/login";
 import Link from "next/link";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { useState } from "react";
+import { useChangePasswordMutation } from "@/redux/api/authApi";
 
 type FormValues = {
   old_password: string;
@@ -20,14 +16,26 @@ type FormValues = {
 };
 
 const ChangePassword = () => {
-  const [isLoading, setIsLoading] = useState(false);
+  // const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
 
+  const [changePassword, { isLoading }] = useChangePasswordMutation();
+
   const onSubmit: SubmitHandler<FormValues> = async (data: any) => {
+    // console.log(data);
     try {
-      console.log(data);
+      if (data.new_password !== data.confirm_new_password) {
+        message.error("Password does not match");
+        return;
+      }
+      const res = await changePassword(data).unwrap();
+      // console.log(res);
+      if (res._id) {
+        message.success("Password changed successfully");
+        router.push("/auth/login");
+      }
     } catch (err: any) {
-      console.error(err.message);
+      message.error(err.message);
     }
   };
 
@@ -61,7 +69,7 @@ const ChangePassword = () => {
               </h1>
               <Form
                 submitHandler={onSubmit}
-                resolver={yupResolver(loginSchema)}
+                // resolver={yupResolver(loginSchema)}
               >
                 <div>
                   <FormInput

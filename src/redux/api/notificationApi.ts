@@ -38,6 +38,14 @@ export const notificationApi = baseApi.injectEndpoints({
       }),
       providesTags: [tagTypes.notification],
     }),
+    markRead: build.mutation({
+      query: (data) => ({
+        url: `${NOTIFICATION_URL}/markRead`,
+        method: "PATCH",
+        data: data.body,
+      }),
+      invalidatesTags: [tagTypes.notification],
+    }),
     deleteNotification: build.mutation({
       query: () => ({
         url: `${NOTIFICATION_URL}/`,
@@ -52,5 +60,6 @@ export const {
   useAddNotificationMutation,
   useGetNotificationsQuery,
   useGetUnreadCountQuery,
+  useMarkReadMutation,
   useDeleteNotificationMutation,
 } = notificationApi;

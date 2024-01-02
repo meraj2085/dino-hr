@@ -6,6 +6,7 @@ import BreadCrumb from "@/components/ui/BreadCrumb";
 import {
   useDeleteNotificationMutation,
   useGetNotificationsQuery,
+  useMarkReadMutation,
 } from "@/redux/api/notificationApi";
 import { message } from "antd";
 import dayjs from "dayjs";
@@ -17,6 +18,7 @@ const notification = () => {
   });
 
   const [deleteNotification] = useDeleteNotificationMutation();
+  const [markRead] = useMarkReadMutation();
 
   const deleteHandler = async () => {
     try {
@@ -27,6 +29,18 @@ const notification = () => {
       }
     } catch (error: any) {
       message.error(error.message);
+    }
+  };
+
+  const handleMarkRead = async (id: string) => {
+    try {
+      await markRead({
+        body: {
+          notificationId: id,
+        },
+      });
+    } catch (error) {
+      console.error(error);
     }
   };
 
@@ -86,7 +100,7 @@ const notification = () => {
 
                 <svg
                   onClick={() => {
-                    console.log("clicked", notificationData?.id);
+                    handleMarkRead(notificationData?.id ?? "");
                   }}
                   className="h-7 w-7 font-bold shrink-0 transition duration-300 group-open:-rotate-180"
                   xmlns="http://www.w3.org/2000/svg"

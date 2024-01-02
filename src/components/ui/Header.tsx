@@ -20,6 +20,8 @@ const Header = () => {
   const router = useRouter();
   const dispatch = useAppDispatch();
 
+  console.log(data, "count");
+
   const logOut = () => {
     removeUserInfo(authKey);
     router.push("/auth/login");
@@ -246,7 +248,7 @@ const Header = () => {
               fill="currentColor"
             />
           </svg>
-          {data > 0 && (
+          {Number(data) > 0 && (
             <div className="absolute top-0 right-0 w-[10px] h-[10px]">
               <div className="bg-red-500 w-full h-full rounded-full animate-pulse"></div>
             </div>

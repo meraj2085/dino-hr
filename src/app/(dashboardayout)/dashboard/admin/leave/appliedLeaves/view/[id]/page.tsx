@@ -10,7 +10,6 @@ type IDProps = {
 const LeaveDetailsPage = ({ params }: IDProps) => {
   const id = params?.id;
   const { data } = useSingleLeaveQuery(id);
-  console.log(data);
   const { data: user } = useGetSingleUserQuery(data?.user_id);
   return (
     <div>

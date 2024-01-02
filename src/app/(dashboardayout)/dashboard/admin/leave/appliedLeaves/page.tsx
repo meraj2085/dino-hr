@@ -90,26 +90,32 @@ const AppliedLeaves = () => {
       render: function (data: any) {
         return (
           <>
-            <Link href={`/dashboard/admin/leave/appliedLeaves/${data?._id}`}>
-              <Button
-                style={{
-                  margin: "0px 5px",
-                }}
+            {data?.status !== "Cancelled" && (
+              <Link
+                href={`/dashboard/admin/leave/appliedLeaves/edit/${data?._id}`}
               >
-                <EditOutlined />
-              </Button>
-            </Link>
-            <Link
-              href={`/dashboard/admin/leave/appliedLeaves/view/${data?._id}`}
-            >
-              <Button
-                style={{
-                  margin: "0px 5px",
-                }}
+                <Button
+                  style={{
+                    margin: "0px 5px",
+                  }}
+                >
+                  <EditOutlined />
+                </Button>
+              </Link>
+            )}
+            {data?.status !== "Cancelled" && (
+              <Link
+                href={`/dashboard/admin/leave/appliedLeaves/view/${data?._id}`}
               >
-                <FolderViewOutlined />
-              </Button>
-            </Link>
+                <Button
+                  style={{
+                    margin: "0px 5px",
+                  }}
+                >
+                  <FolderViewOutlined />
+                </Button>
+              </Link>
+            )}
             {data?.status !== "Cancelled" && (
               <Button onClick={() => handleCancel(data)} type="primary" danger>
                 Cancel

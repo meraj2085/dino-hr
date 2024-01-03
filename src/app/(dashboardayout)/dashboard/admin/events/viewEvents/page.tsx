@@ -65,7 +65,7 @@ const ViewEvents = () => {
       title: "From Date",
       dataIndex: "from_date",
       render: function (data: any) {
-        return data && dayjs(data).format("MMM D, YYYY hh:mm A");
+        return data && dayjs(data).format("MMM D, YYYY");
       },
       sorter: true,
     },
@@ -73,7 +73,7 @@ const ViewEvents = () => {
       title: "To Date",
       dataIndex: "to_date",
       render: function (data: any) {
-        return data && dayjs(data).format("MMM D, YYYY hh:mm A");
+        return data && dayjs(data).format("MMM D, YYYY");
       },
       sorter: true,
     },

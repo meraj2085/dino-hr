@@ -11,7 +11,6 @@ import Loading from "@/app/loading";
 const profile = () => {
   const { userId } = getUserInfo() as any;
   const { data, isLoading } = useGetSingleUserQuery(userId);
-  console.log(data);
 
   if (isLoading) return <Loading />;
   return (
@@ -31,9 +30,9 @@ const profile = () => {
       />
       <div>
         <Card className="mt-5">
-          <div className="grid grid-cols-2 mx-auto">
+          <div className="grid lg:grid-cols-2 mx-auto ">
             {/* left  */}
-            <div className="flex justify-start items-center">
+            <div className="flex justify-start items-center mb-5 lg:mb-0">
               {" "}
               <Avatar
                 size={{ xs: 24, sm: 32, md: 40, lg: 80, xl: 100, xxl: 120 }}

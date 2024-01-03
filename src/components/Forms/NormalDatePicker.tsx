@@ -9,6 +9,7 @@ type DatePikerProps = {
   label?: string;
   value?: Dayjs;
   size?: "large" | "small";
+  defaultValue?: string;
 };
 
 const NormalDatePicker = ({
@@ -17,6 +18,7 @@ const NormalDatePicker = ({
   onChange,
   size = "large",
   value,
+  defaultValue,
 }: DatePikerProps) => {
   const { control, setValue } = useFormContext();
 
@@ -36,6 +38,7 @@ const NormalDatePicker = ({
       <Controller
         name={name}
         control={control}
+        defaultValue={defaultValue}
         render={({ field }) => (
           <DatePicker
             value={field.value ? dayjs(field.value) : undefined}

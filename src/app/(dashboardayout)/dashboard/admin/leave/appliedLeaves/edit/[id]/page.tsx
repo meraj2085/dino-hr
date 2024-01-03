@@ -1,11 +1,15 @@
 "use client";
+import Loading from "@/app/loading";
 import Form from "@/components/Forms/Form";
 import FormInput from "@/components/Forms/FormInput";
 import FormSelectField from "@/components/Forms/FormSelectField";
 import NormalDatePicker from "@/components/Forms/NormalDatePicker";
 import BreadCrumb from "@/components/ui/BreadCrumb";
 import { leaveType } from "@/constants/global";
-import { useUpdateLeaveMutation } from "@/redux/api/leaveApi";
+import {
+  useSingleLeaveQuery,
+  useUpdateLeaveMutation,
+} from "@/redux/api/leaveApi";
 import { getUserInfo } from "@/services/auth.service";
 import { Button, Col, Row, message } from "antd";
 import { useRouter } from "next/navigation";
@@ -16,6 +20,7 @@ type IDProps = {
 
 const EditForLeaves = ({ params }: IDProps) => {
   const id = params?.id;
+  const { data: leave, isLoading } = useSingleLeaveQuery(id);
   const router = useRouter();
   const { organization_id, userId } = getUserInfo() as any;
   const [updateLeave] = useUpdateLeaveMutation();
@@ -38,13 +43,14 @@ const EditForLeaves = ({ params }: IDProps) => {
       message.error(err.message);
     }
   };
+  if (isLoading) return <Loading />;
   return (
     <div>
       <BreadCrumb
         items={[
           {
             label: "Admin",
-            link: "/admin",
+            link: "/dashboard/admin",
           },
           {
             label: "Applied Leaves",
@@ -70,6 +76,7 @@ const EditForLeaves = ({ params }: IDProps) => {
                 options={leaveType}
                 label="Leave Types"
                 placeholder="Select"
+                defaultValue={leave?.leave_type}
               />
             </div>
           </Col>
@@ -81,6 +88,7 @@ const EditForLeaves = ({ params }: IDProps) => {
                 size="large"
                 label="Reason"
                 placeholder="Write reason"
+                defaultValue={leave?.reason}
               />
             </div>
           </Col>
@@ -90,13 +98,19 @@ const EditForLeaves = ({ params }: IDProps) => {
                 name="from_date"
                 label="From Date"
                 size="large"
+                // defaultValue={leave?.from_date}
               />
             </div>
           </Col>
 
           <Col xs={24} md={12} lg={12} className="mt-3">
             <div>
-              <NormalDatePicker name="to_date" label="To Date" size="large" />
+              <NormalDatePicker
+                name="to_date"
+                label="To Date"
+                size="large"
+                // defaultValue={leave?.to_date}
+              />
             </div>
           </Col>
         </Row>
@@ -106,7 +120,7 @@ const EditForLeaves = ({ params }: IDProps) => {
           className="bg-[#00674A] text-white hover:text-white flex justify-end item-end"
           style={{ margin: "10px 0px" }}
         >
-          Submit
+          Update
         </Button>
       </Form>
     </div>

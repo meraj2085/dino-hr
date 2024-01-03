@@ -4,17 +4,16 @@ import { useDebounced } from "@/redux/hooks";
 import { Button, Input, message } from "antd";
 import { useState } from "react";
 import dayjs from "dayjs";
-import { FolderViewOutlined, EditOutlined } from "@ant-design/icons";
+import { FolderViewOutlined } from "@ant-design/icons";
 import Link from "next/link";
 import BreadCrumb from "@/components/ui/BreadCrumb";
 import ActionBar from "@/components/ui/ActionBar";
 import PPTable from "@/components/ui/PPTable";
 import {
   useGetAllLeavesQuery,
-  useLeavesByEmailQuery,
   useUpdateLeaveMutation,
 } from "@/redux/api/leaveApi";
-import { getUserInfo } from "@/services/auth.service";
+import PPModal from "@/components/ui/Modal";
 
 const Approveleave = () => {
   const query: Record<string, any> = {};
@@ -24,6 +23,9 @@ const Approveleave = () => {
   const [sortBy, setSortBy] = useState<string>("");
   const [sortOrder, setSortOrder] = useState<string>("");
   const [searchTerm, setSearchTerm] = useState<string>("");
+
+  const [open, setOpen] = useState<boolean>(false);
+  const [leaveId, setLeaveId] = useState<string>("");
 
   query["limit"] = size;
   query["page"] = page;
@@ -54,10 +56,14 @@ const Approveleave = () => {
 
   const handleReject = async (id: string) => {
     try {
-      await updateLeave({
+      const res = await updateLeave({
         id,
         body: { status: "Rejected" },
       }).unwrap();
+      if (res) {
+        message.success("Your leave Reject successfully");
+        setOpen(false);
+      }
     } catch (error) {
       console.error(error);
     }
@@ -102,7 +108,7 @@ const Approveleave = () => {
         return (
           <>
             <Link
-              href={`/dashboard/admin/leave/appliedLeaves/view/${data?._id}`}
+              href={`/dashboard/admin/leave/approveLeaves/view/${data?._id}`}
             >
               <Button
                 style={{
@@ -125,9 +131,13 @@ const Approveleave = () => {
             )}
             {data?.status !== "Rejected" && (
               <Button
-                onClick={() => handleReject(data?._id)}
-                type="primary"
-                danger
+                onClick={() => {
+                  setOpen(true);
+                  setLeaveId(data?._id);
+                }}
+                style={{
+                  margin: "0px 5px",
+                }}
               >
                 Reject
               </Button>
@@ -185,6 +195,15 @@ const Approveleave = () => {
         showPagination={true}
         scroll={{ x: true }}
       />
+
+      <PPModal
+        title="Cancel Leave"
+        isOpen={open}
+        closeModal={() => setOpen(false)}
+        handleOk={() => handleReject(leaveId)}
+      >
+        <p className="my-5">Do you want to reject this leave?</p>
+      </PPModal>
     </div>
   );
 };

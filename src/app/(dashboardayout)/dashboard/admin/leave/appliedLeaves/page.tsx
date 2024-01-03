@@ -14,6 +14,8 @@ import {
   useUpdateLeaveMutation,
 } from "@/redux/api/leaveApi";
 import { getUserInfo } from "@/services/auth.service";
+import PPModal from "@/components/ui/Modal";
+import Loading from "@/app/loading";
 
 const AppliedLeaves = () => {
   const { userId } = getUserInfo() as any;
@@ -24,6 +26,9 @@ const AppliedLeaves = () => {
   const [sortBy, setSortBy] = useState<string>("");
   const [sortOrder, setSortOrder] = useState<string>("");
   const [searchTerm, setSearchTerm] = useState<string>("");
+
+  const [open, setOpen] = useState<boolean>(false);
+  const [leaveId, setLeaveId] = useState<string>("");
 
   query["limit"] = size;
   query["page"] = page;
@@ -44,10 +49,14 @@ const AppliedLeaves = () => {
 
   const handleCancel = async (id: string) => {
     try {
-      await updateLeave({
+      const res = await updateLeave({
         id,
         body: { status: "Cancelled" },
       }).unwrap();
+      if (res) {
+        message.success("Your leave cencel successfully");
+        setOpen(false);
+      }
     } catch (error) {
       console.error(error);
     }
@@ -117,7 +126,15 @@ const AppliedLeaves = () => {
               </Link>
             )}
             {data?.status !== "Cancelled" && (
-              <Button onClick={() => handleCancel(data)} type="primary" danger>
+              <Button
+                onClick={() => {
+                  setOpen(true);
+                  setLeaveId(data?._id);
+                }}
+                style={{
+                  margin: "0px 5px",
+                }}
+              >
                 Cancel
               </Button>
             )}
@@ -136,7 +153,7 @@ const AppliedLeaves = () => {
     setSortBy(field as string);
     setSortOrder(order === "ascend" ? "asc" : "desc");
   };
-
+  if (isLoading) return <Loading />;
   return (
     <div style={{ overflowX: "auto" }}>
       <BreadCrumb
@@ -174,6 +191,14 @@ const AppliedLeaves = () => {
         showPagination={true}
         scroll={{ x: true }}
       />
+      <PPModal
+        title="Cancel Leave"
+        isOpen={open}
+        closeModal={() => setOpen(false)}
+        handleOk={() => handleCancel(leaveId)}
+      >
+        <p className="my-5">Do you want to cancel this leave?</p>
+      </PPModal>
     </div>
   );
 };

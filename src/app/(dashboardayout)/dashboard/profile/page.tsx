@@ -53,7 +53,6 @@ import { useGetSingleUserQuery } from "@/redux/api/userApi";
 const profile = () => {
   const { userId } = getUserInfo() as any;
   const { data } = useGetSingleUserQuery(userId);
-  console.log(data);
 
   return (
     <div>

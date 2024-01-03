@@ -95,9 +95,13 @@ const ResetPassword = () => {
     data: any
   ) => {
     try {
-      // console.log(data);
+      const { password, confirm_password } = data;
+      if (password !== confirm_password) {
+        message.error("Password does not match");
+        return;
+      }
       const res = await ResetPassword({
-        ...data,
+        password,
         office_email: officeEmail,
       }).unwrap();
       if (res?._id) {
@@ -128,16 +132,14 @@ const ResetPassword = () => {
               Dino
             </h1>
           </div>
-          {isSendOtpLoading ||
-          isVerifyOtpLoading ||
-          isResetPasswordLoading ? (
+          {isSendOtpLoading || isVerifyOtpLoading || isResetPasswordLoading ? (
             <div className="flex justify-center items-center h-[450px]">
               <div className="animate-spin rounded-full border-t-4 border-[#00674A] border-solid h-16 w-16"></div>
             </div>
           ) : (
             <>
               <h1 className="text-3xl font-normal text-[#00684a] mb-4">
-                Reset Password
+                Forgot Password
               </h1>
               {!officeEmail && (
                 <Form submitHandler={onMailSubmit}>
@@ -199,6 +201,15 @@ const ResetPassword = () => {
                       size="large"
                       label="New Password"
                       placeholder="Enter new password"
+                    />
+                  </div>
+                  <div>
+                    <FormInput
+                      name="confirm_password"
+                      type="password"
+                      size="large"
+                      label="Confirm Password"
+                      placeholder="Enter new password again"
                     />
                   </div>
                   <div className="flex justify-left mt-3">

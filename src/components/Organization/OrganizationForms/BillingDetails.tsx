@@ -9,7 +9,12 @@ const BillingDetailsForm = () => {
         {/* <p className="text-xl font-medium my-2">Organization Form 3</p> */}
         <Row gutter={{ xs: 4, md: 20 }}>
           <Col xs={24} md={12} lg={6} className="mt-3">
-            <FormInput name="bank_name" label="Bank Name" size="large" />
+            <FormInput
+              name="bank_name"
+              label="Bank Name"
+              size="large"
+              required
+            />
           </Col>
 
           <Col xs={24} md={12} lg={6} className="mt-3">
@@ -17,6 +22,7 @@ const BillingDetailsForm = () => {
               name="account_number"
               label="Account Number"
               size="large"
+              required
             />
           </Col>
 
@@ -25,6 +31,7 @@ const BillingDetailsForm = () => {
               name="plan_validity"
               label="Plan Validity"
               size="large"
+              required
             />
           </Col>
 
@@ -33,6 +40,7 @@ const BillingDetailsForm = () => {
               name="number_of_users"
               label="Number of Users"
               size="large"
+              required
             />
           </Col>
 
@@ -53,6 +61,7 @@ const BillingDetailsForm = () => {
               name="billing_contact_person_first_name"
               label="First Name"
               size="large"
+              required
             />
           </Col>
 
@@ -61,6 +70,7 @@ const BillingDetailsForm = () => {
               name="billing_contact_person_last_name"
               label="Last Name"
               size="large"
+              required
             />
           </Col>
 
@@ -70,6 +80,7 @@ const BillingDetailsForm = () => {
               label="Email"
               type="email"
               size="large"
+              required
             />
           </Col>
 
@@ -78,6 +89,7 @@ const BillingDetailsForm = () => {
               name="billing_contact_person_phone_number"
               label="Phone Number"
               size="large"
+              required
             />
           </Col>
         </Row>

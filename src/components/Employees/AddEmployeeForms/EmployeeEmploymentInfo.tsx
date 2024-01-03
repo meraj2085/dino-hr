@@ -32,6 +32,7 @@ const EmployeeEmploymentInfoForm = () => {
             options={employmentStatus}
             label="Employment Status"
             placeholder="Your Employment Status"
+            required
           />
         </Col>
         <Col xs={24} md={12} lg={6} className="mt-3">
@@ -39,6 +40,7 @@ const EmployeeEmploymentInfoForm = () => {
             name="date_of_joining"
             label="Date of Joining"
             size="large"
+            required
           />
         </Col>
         <Col xs={24} md={12} lg={6} className="mt-3">
@@ -48,6 +50,7 @@ const EmployeeEmploymentInfoForm = () => {
             options={departmentOptions}
             label="Department"
             placeholder="Your Department"
+            required
           />
         </Col>
         <Col xs={24} md={12} lg={6} className="mt-3">
@@ -57,6 +60,7 @@ const EmployeeEmploymentInfoForm = () => {
             options={designationOptions}
             label="Designation"
             placeholder="Your Designation"
+            required
           />
         </Col>
         <Col xs={24} md={12} lg={6} className="mt-3">
@@ -66,6 +70,7 @@ const EmployeeEmploymentInfoForm = () => {
             options={teamOptions}
             label="Team"
             placeholder="Your Team"
+            required
           />
         </Col>
         <Col xs={24} md={12} lg={6} className="mt-3">
@@ -75,6 +80,7 @@ const EmployeeEmploymentInfoForm = () => {
             options={roleOptions}
             label="Role"
             placeholder="Your Role"
+            required
           />
         </Col>
         <Col xs={24} md={12} lg={6} className="mt-3">
@@ -84,6 +90,7 @@ const EmployeeEmploymentInfoForm = () => {
             options={managerOptions || []}
             label="Manager"
             placeholder="Your Manager"
+            required
           />
         </Col>
         <Col xs={24} md={12} lg={6} className="mt-3">
@@ -91,6 +98,7 @@ const EmployeeEmploymentInfoForm = () => {
             name="contract_date"
             label="Contract Date"
             size="large"
+            required
           />
         </Col>
       </Row>

@@ -8,6 +8,8 @@ import ContactPersonForm from "@/components/Organization/OrganizationForms/Conta
 import BillingDetailsForm from "@/components/Organization/OrganizationForms/BillingDetails";
 import { useAddOrganizationMutation } from "@/redux/api/organizationApi";
 import { message } from "antd";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { organizationSchema } from "@/schema/organization";
 
 const AddOrganization = () => {
   const steps = [
@@ -61,6 +63,7 @@ const AddOrganization = () => {
           handleStudentSubmit(value);
         }}
         steps={steps}
+        resolver={yupResolver(organizationSchema)}
       />
     </div>
   );

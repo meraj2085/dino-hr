@@ -10,6 +10,7 @@ type DatePikerProps = {
   label?: string;
   value?: Dayjs;
   size?: "large" | "small";
+  required?: boolean;
 };
 
 const NormalDatePicker = ({
@@ -18,6 +19,7 @@ const NormalDatePicker = ({
   onChange,
   size = "large",
   value,
+  required,
 }: DatePikerProps) => {
   const { control, setValue, formState:{errors} } = useFormContext();
 
@@ -34,6 +36,15 @@ const NormalDatePicker = ({
 
   return (
     <div>
+      {required ? (
+        <span
+          style={{
+            color: "red",
+          }}
+        >
+          *
+        </span>
+      ) : null}
       {label ? label : null}
       <br />
       <Controller

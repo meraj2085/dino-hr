@@ -18,6 +18,7 @@ type SelectFieldProps = {
   label?: string;
   defaultValue?: SelectOptions;
   handleChange?: (el: string) => void;
+  required?: boolean;
 };
 
 const FormSelectField = ({
@@ -29,6 +30,7 @@ const FormSelectField = ({
   label,
   defaultValue,
   handleChange,
+  required,
 }: SelectFieldProps) => {
   const {
     control,
@@ -39,6 +41,15 @@ const FormSelectField = ({
 
   return (
     <>
+      {required ? (
+        <span
+          style={{
+            color: "red",
+          }}
+        >
+          *
+        </span>
+      ) : null}
       {label ? label : null}
       <Controller
         control={control}

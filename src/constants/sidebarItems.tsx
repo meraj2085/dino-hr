@@ -290,14 +290,6 @@ export const sidebarItems = (user_type: string) => {
           ),
           key: `/dashboard/${user_type}/leave/appliedLeaves`,
         },
-        {
-          label: (
-            <Link href={`/dashboard/${user_type}/leave/approveLeaves`}>
-              Approve Leaves
-            </Link>
-          ),
-          key: `/dashboard/${user_type}/leave/approveLeaves`,
-        },
       ],
     },
     {

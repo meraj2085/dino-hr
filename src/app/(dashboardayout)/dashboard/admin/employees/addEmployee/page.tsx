@@ -71,7 +71,7 @@ const AddEmployee = () => {
 
       <StepperForm
         persistKey="addEmployeesForm"
-        navigateLink="/dashboard/admin/employees/addEmployee"
+        navigateLink="/dashboard/admin/employees/viewEmployee"
         submitHandler={(value) => {
           handleEmployeesSubmit(value);
         }}

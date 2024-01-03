@@ -118,7 +118,7 @@ const StepperForm = ({
                   type="primary"
                   className="bg-[#00674A]"
                   htmlType="submit"
-                  onClick={() => message.success("Processing complete!")}
+                  // onClick={() => message.success("Processing complete!")}
                 >
                   Done
                 </Button>

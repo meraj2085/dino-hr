@@ -22,6 +22,24 @@ export const employeeApi = baseApi.injectEndpoints({
       },
       invalidatesTags: [tagTypes.employee],
     }),
+    updateEmployee: build.mutation({
+      query: ({ id, updatedData }) => {
+        const formData = new FormData();
+        console.log(id, updatedData);
+        const { profile_picture, ...data } = updatedData;
+
+        formData.append("profile_picture", profile_picture);
+        formData.append("data", JSON.stringify(data));
+        // console.log(formData);
+        return {
+          url: `${EMPLOYEE_URL}/${id}`,
+          method: "PATCH",
+          data: formData,
+          contentType: "multipart/form-data",
+        };
+      },
+      invalidatesTags: [tagTypes.employee],
+    }),
     getAllEmployee: build.query({
       query: (arg: Record<string, any>) => {
         return {
@@ -52,4 +70,5 @@ export const {
   useAddEmployeeMutation,
   useGetAllEmployeeQuery,
   useGetSingleEmployeeQuery,
+  useUpdateEmployeeMutation,
 } = employeeApi;

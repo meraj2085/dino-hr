@@ -11,6 +11,7 @@ const EmployeeFinancialInfoForm = () => {
             placeholder="Enter Bank Name"
             label="Bank Name"
             size="large"
+            required
           />
         </Col>
         <Col xs={24} md={12} lg={6} className="mt-3">
@@ -19,6 +20,7 @@ const EmployeeFinancialInfoForm = () => {
             placeholder="Enter Account Number"
             label="Account Number"
             size="large"
+            required
           />
         </Col>
         <Col xs={24} md={12} lg={6} className="mt-3">
@@ -41,6 +43,7 @@ const EmployeeFinancialInfoForm = () => {
             placeholder="Enter Basic Salary"
             label="Basic Salary"
             size="large"
+            required
           />
         </Col>
         <Col xs={24} md={12} lg={6} className="mt-3">
@@ -49,6 +52,7 @@ const EmployeeFinancialInfoForm = () => {
             placeholder="Enter Total Allowance"
             label="Total Allowance"
             size="large"
+            required
           />
         </Col>
         <Col xs={24} md={12} lg={6} className="mt-3">
@@ -57,6 +61,7 @@ const EmployeeFinancialInfoForm = () => {
             placeholder="Enter Annual Bonus"
             label="Annual Bonus"
             size="large"
+            required
           />
         </Col>
       </Row>

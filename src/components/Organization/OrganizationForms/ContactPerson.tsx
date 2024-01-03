@@ -14,6 +14,7 @@ const ContactPersonForm = () => {
               name="contact_person_first_name"
               label="First Name"
               size="large"
+              required
             />
           </Col>
 
@@ -22,11 +23,17 @@ const ContactPersonForm = () => {
               name="contact_person_last_name"
               label="Last Name"
               size="large"
+              required
             />
           </Col>
 
           <Col xs={24} md={12} lg={6} className="mt-3">
-            <FormInput name="contact_person_email" label="Email" size="large" />
+            <FormInput
+              name="contact_person_email"
+              label="Email"
+              size="large"
+              required
+            />
           </Col>
 
           <Col xs={24} md={12} lg={6} className="mt-3">
@@ -34,11 +41,17 @@ const ContactPersonForm = () => {
               name="contact_person_phone_number"
               label="Phone Number"
               size="large"
+              required
             />
           </Col>
 
           <Col xs={24} md={12} lg={6} className="mt-3">
-            <FormInput name="nid_number" label="NID Number" size="large" />
+            <FormInput
+              name="nid_number"
+              label="NID Number"
+              size="large"
+              required
+            />
           </Col>
         </Row>
         <h3 className="text-lg mt-8 font-semibold underline">
@@ -50,6 +63,7 @@ const ContactPersonForm = () => {
               name="account_manager_first_name"
               label="First Name"
               size="large"
+              required
             />
           </Col>
 
@@ -58,6 +72,7 @@ const ContactPersonForm = () => {
               name="account_manager_last_name"
               label="Last Name"
               size="large"
+              required
             />
           </Col>
 

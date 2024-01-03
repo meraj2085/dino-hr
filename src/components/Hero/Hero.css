@@ -1,0 +1,44 @@
+.shape-bg {
+  width: 600px;
+  height: 600px;
+  border-radius: 999px;
+  position: absolute;
+  opacity: 0;
+  animation: one 20s infinite ease;
+  animation-delay: 2s;
+  z-index: 999;
+}
+
+.text-gradient {
+  background: linear-gradient(45deg, #3a3a3a, #00674A, #f8f8f8);
+  background-clip: text;
+  color: transparent;
+}
+
+@keyframes one {
+  0% {
+    opacity: 0;
+    left: 0;
+    bottom: 5%;
+  }
+  25% {
+    opacity: 1;
+    left: 50%;
+    bottom: 120%;
+  }
+  50% {
+    opacity: 1;
+    right: 10%;
+    bottom: 110%;
+  }
+  75% {
+    opacity: 0;
+    right: 20%;
+    bottom: -20%;
+  }
+  100% {
+    opacity: 0;
+    right: 100%;
+    bottom: 0%;
+  }
+}

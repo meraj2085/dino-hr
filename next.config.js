@@ -8,6 +8,7 @@ const nextConfig = {
       "source.unsplash.com",
       "i.ibb.co",
       "xsgames.co",
+      "example.com"
     ],
   },
 };

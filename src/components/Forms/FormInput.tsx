@@ -13,6 +13,8 @@ interface IInput {
   validation?: object;
   label?: string;
   disabled?: boolean;
+  required?: boolean;
+  defaultValue?: string;
 }
 
 const FormInput = ({
@@ -25,6 +27,8 @@ const FormInput = ({
   validation,
   label,
   disabled,
+  required,
+  defaultValue,
 }: IInput) => {
   const {
     control,
@@ -35,6 +39,15 @@ const FormInput = ({
 
   return (
     <>
+      {required ? (
+        <span
+          style={{
+            color: "red",
+          }}
+        >
+          *
+        </span>
+      ) : null}
       {label ? label : null}
       <Controller
         control={control}
@@ -56,6 +69,7 @@ const FormInput = ({
               {...field}
               value={value ? value : field.value}
               disabled={disabled ? disabled : false}
+              defaultValue={defaultValue}
             />
           )
         }

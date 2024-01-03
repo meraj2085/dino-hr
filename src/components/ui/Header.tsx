@@ -9,12 +9,17 @@ import Link from "next/link";
 const { Header: AntHeader } = Layout;
 import Image from "next/image";
 import { useState } from "react";
+import { useGetUnreadCountQuery } from "@/redux/api/notificationApi";
+import { useGetSingleUserQuery } from "@/redux/api/userApi";
 
 const Header = () => {
   const localStorageTheme = getFromLocalStorage("theme");
+  const { userId } = getUserInfo() as any;
+  const { data, isLoading } = useGetUnreadCountQuery(undefined);
   const theme = localStorageTheme ? JSON.parse(localStorageTheme) : null;
   const [localTheme, setLocalTheme] = useState(theme?.theme);
   const { user_type } = getUserInfo() as any;
+  const { data: userData } = useGetSingleUserQuery(userId);
   const router = useRouter();
   const dispatch = useAppDispatch();
 
@@ -36,11 +41,11 @@ const Header = () => {
             xmlns="http://www.w3.org/2000/svg"
             className="icon icon-tabler icon-tabler-user w-4 h-4"
             viewBox="0 0 24 24"
-            stroke-width="2"
+            strokeWidth="2"
             stroke="currentColor"
             fill="none"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           >
             <path stroke="none" d="M0 0h24v24H0z" fill="none" />
             <path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0" />
@@ -63,11 +68,11 @@ const Header = () => {
             xmlns="http://www.w3.org/2000/svg"
             className="icon icon-tabler icon-tabler-lock-open w-4 h-4"
             viewBox="0 0 24 24"
-            stroke-width="2"
+            strokeWidth="2"
             stroke="currentColor"
             fill="none"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           >
             <path stroke="none" d="M0 0h24v24H0z" fill="none" />
             <path d="M5 11m0 2a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v6a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2z" />
@@ -89,11 +94,11 @@ const Header = () => {
             xmlns="http://www.w3.org/2000/svg"
             className="icon icon-tabler icon-tabler-logout h-4 w-4"
             viewBox="0 0 24 24"
-            stroke-width="2"
+            strokeWidth="2"
             stroke="currentColor"
             fill="none"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           >
             <path stroke="none" d="M0 0h24v24H0z" fill="none" />
             <path d="M14 8v-2a2 2 0 0 0 -2 -2h-7a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h7a2 2 0 0 0 2 -2v-2" />
@@ -119,11 +124,11 @@ const Header = () => {
             xmlns="http://www.w3.org/2000/svg"
             className="icon icon-tabler icon-tabler-building-warehouse w-4 h-4"
             viewBox="0 0 24 24"
-            stroke-width="2"
+            strokeWidth="2"
             stroke="currentColor"
             fill="none"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           >
             <path stroke="none" d="M0 0h24v24H0z" fill="none" />
             <path d="M3 21v-13l9 -4l9 4v13" />
@@ -169,11 +174,11 @@ const Header = () => {
                 width="24"
                 height="24"
                 viewBox="0 0 24 24"
-                stroke-width="2"
+                strokeWidth="2"
                 stroke="currentColor"
                 fill="none"
-                stroke-linecap="round"
-                stroke-linejoin="round"
+                strokeLinecap="round"
+                strokeLinejoin="round"
               >
                 <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                 <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
@@ -193,11 +198,11 @@ const Header = () => {
                 width="25"
                 height="25"
                 viewBox="0 0 24 24"
-                stroke-width="2"
+                strokeWidth="2"
                 stroke="currentColor"
                 fill="none"
-                stroke-linecap="round"
-                stroke-linejoin="round"
+                strokeLinecap="round"
+                strokeLinejoin="round"
               >
                 <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                 <path d="M12 12m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0" />
@@ -216,37 +221,39 @@ const Header = () => {
             width="25"
             height="25"
             viewBox="0 0 24 24"
-            stroke-width="2"
+            strokeWidth="2"
             stroke="currentColor"
             fill="none"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           >
             <path stroke="none" d="M0 0h24v24H0z" fill="none" />
             <path
               d="M17.451 2.344a1 1 0 0 1 1.41 -.099a12.05 12.05 0 0 1 3.048 4.064a1 1 0 1 1 -1.818 .836a10.05 10.05 0 0 0 -2.54 -3.39a1 1 0 0 1 -.1 -1.41z"
-              stroke-width="0"
+              strokeWidth="0"
               fill="currentColor"
             />
             <path
               d="M5.136 2.245a1 1 0 0 1 1.312 1.51a10.05 10.05 0 0 0 -2.54 3.39a1 1 0 1 1 -1.817 -.835a12.05 12.05 0 0 1 3.045 -4.065z"
-              stroke-width="0"
+              strokeWidth="0"
               fill="currentColor"
             />
             <path
               d="M14.235 19c.865 0 1.322 1.024 .745 1.668a3.992 3.992 0 0 1 -2.98 1.332a3.992 3.992 0 0 1 -2.98 -1.332c-.552 -.616 -.158 -1.579 .634 -1.661l.11 -.006h4.471z"
-              stroke-width="0"
+              strokeWidth="0"
               fill="currentColor"
             />
             <path
               d="M12 2c1.358 0 2.506 .903 2.875 2.141l.046 .171l.008 .043a8.013 8.013 0 0 1 4.024 6.069l.028 .287l.019 .289v2.931l.021 .136a3 3 0 0 0 1.143 1.847l.167 .117l.162 .099c.86 .487 .56 1.766 -.377 1.864l-.116 .006h-16c-1.028 0 -1.387 -1.364 -.493 -1.87a3 3 0 0 0 1.472 -2.063l.021 -.143l.001 -2.97a8 8 0 0 1 3.821 -6.454l.248 -.146l.01 -.043a3.003 3.003 0 0 1 2.562 -2.29l.182 -.017l.176 -.004z"
-              stroke-width="0"
+              strokeWidth="0"
               fill="currentColor"
             />
           </svg>
-          <div className="absolute top-0 right-0 w-[10px] h-[10px]">
-            <div className="bg-red-500 w-full h-full rounded-full animate-pulse"></div>
-          </div>
+          {Number(data) > 0 && (
+            <div className="absolute top-0 right-0 w-[10px] h-[10px]">
+              <div className="bg-red-500 w-full h-full rounded-full animate-pulse"></div>
+            </div>
+          )}
         </Link>
         <Dropdown menu={{ items }}>
           <a>
@@ -254,14 +261,17 @@ const Header = () => {
               <Avatar
                 size="large"
                 icon={
-                  // <UserOutlined />
-                  <Image
-                    src="https://res.cloudinary.com/dn163fium/image/upload/v1703907617/the50wmbputcfuukvhbk.avif"
-                    alt="User Avatar"
-                    height={25}
-                    width={25}
-                    className="rounded-full"
-                  />
+                  userData?.profile_picture ? (
+                    <Image
+                      src={userData?.profile_picture}
+                      alt="User Avatar"
+                      height={25}
+                      width={25}
+                      className="rounded-full"
+                    />
+                  ) : (
+                    <UserOutlined />
+                  )
                 }
               />
             </Space>

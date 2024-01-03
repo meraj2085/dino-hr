@@ -61,6 +61,12 @@ const SendNotification = () => {
   const [addNotification, { isLoading }] = useAddNotificationMutation();
 
   const onSubmit = async (data: any) => {
+    if (!data.sendPush && !data.sendEmail) {
+      message.error(
+        "Please select atleast one option from Send Push or Send Email"
+      );
+      return;
+    }
     data.preference = selectedPreference;
     data.organization_id = organization_id;
 

@@ -87,7 +87,7 @@ const LoginPage = () => {
                   <div className="flex justify-end mt-1">
                     <a
                       rel="noopener noreferrer"
-                      href="#"
+                      href="/auth/forgotPassword"
                       className="text-xs hover:underline text-gray-400 hover:text-gray-800"
                     >
                       Forgot password?

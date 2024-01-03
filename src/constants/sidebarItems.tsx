@@ -133,7 +133,7 @@ export const sidebarItems = (user_type: string) => {
       ],
     },
     {
-      label: "Events",
+      label: "Events and Calendar",
       key: "events-management",
       icon: <FieldTimeOutlined />,
       children: [
@@ -152,6 +152,14 @@ export const sidebarItems = (user_type: string) => {
             </Link>
           ),
           key: `/dashboard/${user_type}/events/viewEvents`,
+        },
+        {
+          label: (
+            <Link href={`/dashboard/${user_type}/events/calendar`}>
+              Calendar
+            </Link>
+          ),
+          key: `/dashboard/${user_type}/events/calendar`,
         },
       ],
     },
@@ -282,22 +290,30 @@ export const sidebarItems = (user_type: string) => {
           ),
           key: `/dashboard/${user_type}/leave/appliedLeaves`,
         },
-        {
-          label: (
-            <Link href={`/dashboard/${user_type}/leave/approveLeaves`}>
-              Approve Leaves
-            </Link>
-          ),
-          key: `/dashboard/${user_type}/leave/approveLeaves`,
-        },
       ],
     },
     {
-      label: (
-        <Link href={`/dashboard/${user_type}/events`}>Events and Calendar</Link>
-      ),
+      label: "Events and Calendar",
+      key: "events-management",
       icon: <FieldTimeOutlined />,
-      key: `/dashboard/${user_type}/events`,
+      children: [
+        {
+          label: (
+            <Link href={`/dashboard/${user_type}/events/viewEvents`}>
+              View Events
+            </Link>
+          ),
+          key: `/dashboard/${user_type}/events/viewEvents`,
+        },
+        {
+          label: (
+            <Link href={`/dashboard/${user_type}/events/calendar`}>
+              Calendar
+            </Link>
+          ),
+          key: `/dashboard/${user_type}/events/calendar`,
+        },
+      ],
     },
   ];
 

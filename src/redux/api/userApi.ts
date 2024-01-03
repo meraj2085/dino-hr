@@ -21,6 +21,22 @@ export const userApi = baseApi.injectEndpoints({
       },
       providesTags: [tagTypes.user],
     }),
+    getMyTeam: build.query({
+      query: (arg: Record<string, any>) => {
+        return {
+          url: `${USER_URL}/my-team`,
+          method: "GET",
+          params: arg,
+        };
+      },
+      transformResponse: (response: IUser[], meta: IMeta) => {
+        return {
+          myTeam: response,
+          meta,
+        };
+      },
+      providesTags: [tagTypes.myTeam],
+    }),
     getAdmins: build.query({
       query: (arg: Record<string, any>) => {
         return {
@@ -85,4 +101,5 @@ export const {
   useUpdateUserMutation,
   useGetAdminsQuery,
   useUpdateUserAdminMutation,
+  useGetMyTeamQuery,
 } = userApi;

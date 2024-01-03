@@ -1,7 +1,6 @@
 "use client";
 
 import BreadCrumb from "@/components/ui/BreadCrumb";
-import Image from "next/image";
 import Loading from "@/app/loading";
 import dayjs from "dayjs";
 import { useSingleAppointmentQuery } from "@/redux/api/appointmentApi";

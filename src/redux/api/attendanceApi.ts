@@ -24,7 +24,7 @@ export const attendanceApi = baseApi.injectEndpoints({
       },
       transformResponse: (response: IAttendance[], meta: IMeta) => {
         return {
-          organizations: response,
+          attendances: response,
           meta,
         };
       },

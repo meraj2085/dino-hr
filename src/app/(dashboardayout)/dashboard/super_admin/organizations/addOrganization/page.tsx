@@ -8,6 +8,8 @@ import ContactPersonForm from "@/components/Organization/OrganizationForms/Conta
 import BillingDetailsForm from "@/components/Organization/OrganizationForms/BillingDetails";
 import { useAddOrganizationMutation } from "@/redux/api/organizationApi";
 import { message } from "antd";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { organizationSchema } from "@/schema/organization";
 
 const AddOrganization = () => {
   const steps = [
@@ -29,10 +31,7 @@ const AddOrganization = () => {
 
   const handleStudentSubmit = async (values: any) => {
     try {
-      // const { profile_picture, ...orgData } = values;
-      // console.log(orgData, profile_picture);
       const res = await addOrganization(values).unwrap();
-      console.log(res);
       if (res.id) {
         message.success("Organization Added Successfully");
       }
@@ -64,6 +63,7 @@ const AddOrganization = () => {
           handleStudentSubmit(value);
         }}
         steps={steps}
+        resolver={yupResolver(organizationSchema)}
       />
     </div>
   );

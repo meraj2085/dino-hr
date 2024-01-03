@@ -20,12 +20,12 @@ const LeaveDetailsPage = ({ params }: IDProps) => {
             link: "/dashboard/admin",
           },
           {
-            label: "Leave",
-            link: "/dashboard/admin/leave/appliedLeaves",
+            label: "Approve Leave",
+            link: "/dashboard/admin/leave/approveLeaves",
           },
           {
             label: "View",
-            link: `/dashboard/admin/leave/appliedLeaves/view/${id}`,
+            link: `/dashboard/admin/leave/approveLeaves/view/${id}`,
           },
         ]}
       />

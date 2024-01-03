@@ -27,7 +27,7 @@ const AddressBook = () => {
   }
 
   return (
-    <div style={{ overflowX: "auto" }} className="min-w-[250px]">
+    <div className="min-w-[250px]">
       <ActionBar title="Address Book" />
       <Input
         className="w-52 mb-2"

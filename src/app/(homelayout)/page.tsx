@@ -21,7 +21,7 @@ export default function Home() {
       <ReviewSection />
       {/* <ContactUs /> */}
       {/* <FAQsSection /> */}
-      {/* <BookCall /> */}
+      {/* <BookCall /> */} 
       <Feedback />
       <Footer />
     </>

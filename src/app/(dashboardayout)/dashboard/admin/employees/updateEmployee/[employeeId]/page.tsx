@@ -67,7 +67,6 @@ const UpdateEmployee = ({ params }: { params: { employeeId: string } }) => {
     date_of_birth: data?.date_of_birth,
     gender: data?.gender,
     employment_status: data?.employment_status, // ['Contract', 'Intern', 'Temporary', 'Part-time', 'Freelance']
-    employee_code: data?.employee_code, // [EMP00001]
     office_email: data?.office_email,
     date_of_joining: data?.date_of_joining,
     department: data?.department, // ['HR', 'IT', 'Finance', 'Marketing', 'Sales', 'Operations']

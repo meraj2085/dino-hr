@@ -42,14 +42,6 @@ const EmployeeEmploymentInfoForm = () => {
           />
         </Col>
         <Col xs={24} md={12} lg={6} className="mt-3">
-          <FormInput
-            size="large"
-            name="employee_code"
-            label="Enter Employee Code"
-            placeholder="eg: EMP00001"
-          />
-        </Col>
-        <Col xs={24} md={12} lg={6} className="mt-3">
           <FormSelectField
             size="large"
             name="department"

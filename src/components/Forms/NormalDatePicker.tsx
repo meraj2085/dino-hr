@@ -11,6 +11,7 @@ type DatePikerProps = {
   value?: Dayjs;
   size?: "large" | "small";
   required?: boolean;
+  defaultValue?: string;
 };
 
 const NormalDatePicker = ({
@@ -20,6 +21,7 @@ const NormalDatePicker = ({
   size = "large",
   value,
   required,
+  defaultValue,
 }: DatePikerProps) => {
   const { control, setValue, formState:{errors} } = useFormContext();
 
@@ -50,6 +52,7 @@ const NormalDatePicker = ({
       <Controller
         name={name}
         control={control}
+        defaultValue={defaultValue}
         render={({ field }) => (
           <DatePicker
             value={field.value ? dayjs(field.value) : undefined}

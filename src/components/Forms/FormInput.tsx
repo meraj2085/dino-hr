@@ -14,6 +14,7 @@ interface IInput {
   label?: string;
   disabled?: boolean;
   required?: boolean;
+  defaultValue?: string;
 }
 
 const FormInput = ({
@@ -27,6 +28,8 @@ const FormInput = ({
   label,
   disabled,
   required,
+  defaultValue,
+  dev
 }: IInput) => {
   const {
     control,
@@ -67,6 +70,7 @@ const FormInput = ({
               {...field}
               value={value ? value : field.value}
               disabled={disabled ? disabled : false}
+              defaultValue={defaultValue}
             />
           )
         }

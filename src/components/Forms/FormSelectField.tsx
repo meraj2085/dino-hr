@@ -43,9 +43,10 @@ const FormSelectField = ({
       <Controller
         control={control}
         name={name}
-        render={({ field: { value, onChange } }) => (
+        render={({ field: { value, onChange, onBlur } }) => (
           <Select
             onChange={handleChange ? handleChange : onChange}
+            onBlur={onBlur}
             size={size}
             defaultValue={defaultValue}
             options={options}

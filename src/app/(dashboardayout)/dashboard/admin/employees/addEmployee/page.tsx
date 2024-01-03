@@ -8,7 +8,9 @@ import StepperForm from "@/components/StepperForm/StepperForm";
 import ActionBar from "@/components/ui/ActionBar";
 import BreadCrumb from "@/components/ui/BreadCrumb";
 import { useAddEmployeeMutation } from "@/redux/api/employeeApi";
+import { userSchema } from "@/schema/user";
 import { getUserInfo } from "@/services/auth.service";
+import { yupResolver } from "@hookform/resolvers/yup";
 import { message } from "antd";
 
 const steps = [
@@ -74,6 +76,7 @@ const AddEmployee = () => {
           handleEmployeesSubmit(value);
         }}
         steps={steps}
+        resolver={yupResolver(userSchema)}
       />
     </div>
   );

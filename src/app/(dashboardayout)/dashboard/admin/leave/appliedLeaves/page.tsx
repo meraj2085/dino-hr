@@ -14,6 +14,7 @@ import {
   useUpdateLeaveMutation,
 } from "@/redux/api/leaveApi";
 import { getUserInfo } from "@/services/auth.service";
+import PPModal from "@/components/ui/Modal";
 
 const AppliedLeaves = () => {
   const { userId } = getUserInfo() as any;
@@ -39,15 +40,21 @@ const AppliedLeaves = () => {
     query["searchTerm"] = debouncedSearchTerm;
   }
 
+  const [leaveId, setLeaveId] = useState<string>("");
+  const [open, setOpen] = useState<boolean>(false);
   const { data, isLoading } = useLeavesByEmailQuery(userId);
   const [updateLeave] = useUpdateLeaveMutation();
 
   const handleCancel = async (id: string) => {
     try {
-      await updateLeave({
+      const res = await updateLeave({
         id,
         body: { status: "Cancelled" },
       }).unwrap();
+      if (res) {
+        message.success("Lave cancelled!");
+        setOpen(false);
+      }
     } catch (error) {
       console.error(error);
     }
@@ -62,16 +69,27 @@ const AppliedLeaves = () => {
     {
       title: "Status",
       dataIndex: "status",
+      render: function (data: any) {
+        if (data === "Applied") {
+          return <span>{data}</span>;
+        } else if (data === "Accepted") {
+          return <span style={{ color: "#00674A" }}>{data}</span>;
+        } else if (data === "Cancelled") {
+          return <span style={{ color: "Red" }}>{data}</span>;
+        } else if (data === "Rejected") {
+          return <span style={{ color: "Red" }}>{data}</span>;
+        }
+      },
     },
     {
-      title: "Days",
+      title: "Total Days",
       dataIndex: "no_of_days",
     },
     {
       title: "From Date",
       dataIndex: "from_date",
       render: function (data: any) {
-        return data && dayjs(data).format("MMM D, YYYY hh:mm A");
+        return data && dayjs(data).format("MMM D, YYYY");
       },
       sorter: true,
     },
@@ -79,18 +97,17 @@ const AppliedLeaves = () => {
       title: "To Date",
       dataIndex: "to_date",
       render: function (data: any) {
-        return data && dayjs(data).format("MMM D, YYYY hh:mm A");
+        return data && dayjs(data).format("MMM D, YYYY");
       },
       sorter: true,
     },
 
     {
       title: "Action",
-      // dataIndex: "id",
       render: function (data: any) {
         return (
           <>
-            {data?.status !== "Cancelled" && (
+            {data?.status === "Applied" && (
               <Link
                 href={`/dashboard/admin/leave/appliedLeaves/edit/${data?._id}`}
               >
@@ -99,25 +116,19 @@ const AppliedLeaves = () => {
                     margin: "0px 5px",
                   }}
                 >
-                  <EditOutlined />
+                  Edit
                 </Button>
               </Link>
             )}
-            {data?.status !== "Cancelled" && (
-              <Link
-                href={`/dashboard/admin/leave/appliedLeaves/view/${data?._id}`}
+            {data?.status === "Applied" && (
+              <Button
+                onClick={() => {
+                  setOpen(true);
+                  setLeaveId(data?.id);
+                }}
+                type="primary"
+                danger
               >
-                <Button
-                  style={{
-                    margin: "0px 5px",
-                  }}
-                >
-                  <FolderViewOutlined />
-                </Button>
-              </Link>
-            )}
-            {data?.status !== "Cancelled" && (
-              <Button onClick={() => handleCancel(data)} type="primary" danger>
                 Cancel
               </Button>
             )}
@@ -138,43 +149,53 @@ const AppliedLeaves = () => {
   };
 
   return (
-    <div style={{ overflowX: "auto" }}>
-      <BreadCrumb
-        items={[
-          {
-            label: "Admin",
-            link: "/dashboard/admin",
-          },
-          {
-            label: "Applied Leaves",
-            link: "/dashboard/admin/leave/appliedLeaves",
-          },
-        ]}
-      />
-      <ActionBar title="Applied List">
-        <Input
-          size="large"
-          placeholder="Search"
-          onChange={(e) => setSearchTerm(e.target.value)}
-          style={{
-            width: "20%",
-          }}
+    <>
+      <div style={{ overflowX: "auto" }}>
+        <BreadCrumb
+          items={[
+            {
+              label: "Admin",
+              link: "/dashboard/admin",
+            },
+            {
+              label: "Applied Leaves",
+              link: "/dashboard/admin/leave/appliedLeaves",
+            },
+          ]}
         />
-      </ActionBar>
+        <ActionBar title="Applied List">
+          <Input
+            size="large"
+            placeholder="Search"
+            onChange={(e) => setSearchTerm(e.target.value)}
+            style={{
+              width: "20%",
+            }}
+          />
+        </ActionBar>
 
-      <PPTable
-        loading={isLoading}
-        columns={columns}
-        dataSource={data}
-        pageSize={size}
-        totalPages={meta?.total}
-        showSizeChanger={true}
-        onPaginationChange={onPaginationChange}
-        onTableChange={onTableChange}
-        showPagination={true}
-        scroll={{ x: true }}
-      />
-    </div>
+        <PPTable
+          loading={isLoading}
+          columns={columns}
+          dataSource={data}
+          pageSize={size}
+          totalPages={meta?.total}
+          showSizeChanger={true}
+          onPaginationChange={onPaginationChange}
+          onTableChange={onTableChange}
+          showPagination={true}
+          scroll={{ x: true }}
+        />
+      </div>
+      <PPModal
+        title="Cancel Leave"
+        isOpen={open}
+        closeModal={() => setOpen(false)}
+        handleOk={() => handleCancel(leaveId)}
+      >
+        <p className="my-5">Are you sure you want to cancel this leave?</p>
+      </PPModal>
+    </>
   );
 };
 

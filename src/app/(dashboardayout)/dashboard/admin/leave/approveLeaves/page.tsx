@@ -15,6 +15,8 @@ import {
   useUpdateLeaveMutation,
 } from "@/redux/api/leaveApi";
 import { getUserInfo } from "@/services/auth.service";
+import { useGetSingleUserQuery } from "@/redux/api/userApi";
+import PPModal from "@/components/ui/Modal";
 
 const Approveleave = () => {
   const query: Record<string, any> = {};
@@ -40,13 +42,20 @@ const Approveleave = () => {
   }
   const { data, isLoading } = useGetAllLeavesQuery({ ...query });
   const [updateLeave] = useUpdateLeaveMutation();
+  const [leaveId, setLeaveId] = useState<string>("");
+  const [open, setOpen] = useState<boolean>(false);
+  const [open_2, setOpen_2] = useState<boolean>(false);
 
   const handleApprove = async (id: string) => {
     try {
-      await updateLeave({
+      const res = await updateLeave({
         id,
         body: { status: "Accepted" },
       }).unwrap();
+      if (res) {
+        message.success("Lave Approved!");
+        setOpen_2(false);
+      }
     } catch (error) {
       console.error(error);
     }
@@ -54,10 +63,14 @@ const Approveleave = () => {
 
   const handleReject = async (id: string) => {
     try {
-      await updateLeave({
+      const res = await updateLeave({
         id,
         body: { status: "Rejected" },
       }).unwrap();
+      if (res) {
+        message.success("Lave Rejected!");
+        setOpen(false);
+      }
     } catch (error) {
       console.error(error);
     }
@@ -73,6 +86,17 @@ const Approveleave = () => {
     {
       title: "Status",
       dataIndex: "status",
+      render: function (data: any) {
+        if (data === "Applied") {
+          return <span>{data}</span>;
+        } else if (data === "Accepted") {
+          return <span style={{ color: "#00674A" }}>{data}</span>;
+        } else if (data === "Cancelled") {
+          return <span style={{ color: "Red" }}>{data}</span>;
+        } else if (data === "Rejected") {
+          return <span style={{ color: "Red" }}>{data}</span>;
+        }
+      },
     },
     {
       title: "Days",
@@ -82,7 +106,7 @@ const Approveleave = () => {
       title: "From Date",
       dataIndex: "from_date",
       render: function (data: any) {
-        return data && dayjs(data).format("MMM D, YYYY hh:mm A");
+        return data && dayjs(data).format("MMM D, YYYY");
       },
       sorter: true,
     },
@@ -90,7 +114,7 @@ const Approveleave = () => {
       title: "To Date",
       dataIndex: "to_date",
       render: function (data: any) {
-        return data && dayjs(data).format("MMM D, YYYY hh:mm A");
+        return data && dayjs(data).format("MMM D, YYYY");
       },
       sorter: true,
     },
@@ -101,31 +125,26 @@ const Approveleave = () => {
       render: function (data: any) {
         return (
           <>
-            <Link
-              href={`/dashboard/admin/leave/appliedLeaves/view/${data?._id}`}
-            >
+            {data?.status === "Applied" && (
               <Button
                 style={{
                   margin: "0px 5px",
                 }}
-              >
-                <FolderViewOutlined />
-              </Button>
-            </Link>
-            {data?.status !== "Accepted" && (
-              <Button
-                style={{
-                  margin: "0px 5px",
+                onClick={() => {
+                  setOpen_2(true);
+                  setLeaveId(data?.id);
                 }}
-                onClick={() => handleApprove(data?._id)}
                 type="primary"
               >
                 Approve
               </Button>
             )}
-            {data?.status !== "Rejected" && (
+            {data?.status === "Applied" && (
               <Button
-                onClick={() => handleReject(data?._id)}
+                onClick={() => {
+                  setOpen(true);
+                  setLeaveId(data?.id);
+                }}
                 type="primary"
                 danger
               >
@@ -149,43 +168,61 @@ const Approveleave = () => {
   };
 
   return (
-    <div style={{ overflowX: "auto" }}>
-      <BreadCrumb
-        items={[
-          {
-            label: "Admin",
-            link: "/dashboard/admin",
-          },
-          {
-            label: "Applied Leaves",
-            link: "/dashboard/admin/leave/appliedLeaves",
-          },
-        ]}
-      />
-      <ActionBar title="Approve Leave List">
-        <Input
-          size="large"
-          placeholder="Search"
-          onChange={(e) => setSearchTerm(e.target.value)}
-          style={{
-            width: "20%",
-          }}
+    <>
+      <div style={{ overflowX: "auto" }}>
+        <BreadCrumb
+          items={[
+            {
+              label: "Admin",
+              link: "/dashboard/admin",
+            },
+            {
+              label: "Applied Leaves",
+              link: "/dashboard/admin/leave/appliedLeaves",
+            },
+          ]}
         />
-      </ActionBar>
+        <ActionBar title="Approve Leave List">
+          <Input
+            size="large"
+            placeholder="Search"
+            onChange={(e) => setSearchTerm(e.target.value)}
+            style={{
+              width: "20%",
+            }}
+          />
+        </ActionBar>
 
-      <PPTable
-        loading={isLoading}
-        columns={columns}
-        dataSource={data?.leaves}
-        pageSize={size}
-        totalPages={meta?.total}
-        showSizeChanger={true}
-        onPaginationChange={onPaginationChange}
-        onTableChange={onTableChange}
-        showPagination={true}
-        scroll={{ x: true }}
-      />
-    </div>
+        <PPTable
+          loading={isLoading}
+          columns={columns}
+          dataSource={data?.leaves}
+          pageSize={size}
+          totalPages={meta?.total}
+          showSizeChanger={true}
+          onPaginationChange={onPaginationChange}
+          onTableChange={onTableChange}
+          showPagination={true}
+          scroll={{ x: true }}
+        />
+      </div>
+      <PPModal
+        title="Reject Event"
+        isOpen={open}
+        closeModal={() => setOpen(false)}
+        handleOk={() => handleReject(leaveId)}
+      >
+        <p className="my-5">Are you sure you want to reject this leave?</p>
+      </PPModal>
+      <PPModal
+        title="Approve Event"
+        isOpen={open_2}
+        closeModal={() => setOpen_2(false)}
+        handleOk={() => handleApprove(leaveId)}
+      >
+        <p className="my-5">Are you sure you want to approve this leave?</p>
+      </PPModal>
+    </>
   );
 };
 

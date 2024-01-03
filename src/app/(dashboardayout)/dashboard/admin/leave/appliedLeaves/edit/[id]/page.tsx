@@ -1,11 +1,15 @@
 "use client";
+import Loading from "@/app/loading";
 import Form from "@/components/Forms/Form";
 import FormInput from "@/components/Forms/FormInput";
 import FormSelectField from "@/components/Forms/FormSelectField";
 import NormalDatePicker from "@/components/Forms/NormalDatePicker";
 import BreadCrumb from "@/components/ui/BreadCrumb";
 import { leaveType } from "@/constants/global";
-import { useUpdateLeaveMutation } from "@/redux/api/leaveApi";
+import {
+  useSingleLeaveQuery,
+  useUpdateLeaveMutation,
+} from "@/redux/api/leaveApi";
 import { getUserInfo } from "@/services/auth.service";
 import { Button, Col, Row, message } from "antd";
 import { useRouter } from "next/navigation";
@@ -18,18 +22,21 @@ const EditForLeaves = ({ params }: IDProps) => {
   const id = params?.id;
   const router = useRouter();
   const { organization_id, userId } = getUserInfo() as any;
-  const [updateLeave] = useUpdateLeaveMutation();
-  const onSubmit = async (data: any) => {
-    const leaveData = {
-      leave_type: data?.leave_type,
-      reason: data?.reason,
-      from_date: data?.from_date,
-      to_date: data?.to_date,
-      user_id: userId,
-      organization_id: organization_id,
-    };
+  const { data, isLoading } = useSingleLeaveQuery(id);
+  const [updateLeave, { isLoading: loading }] = useUpdateLeaveMutation();
+
+  const defaultValues = {
+    leave_type: data?.leave_type || "",
+    reason: data?.reason || "",
+    from_date: data?.from_date || "",
+    to_date: data?.to_date || "",
+    user_id: userId || "",
+    organization_id: organization_id || "",
+  };
+
+  const onSubmit = async (values: any) => {
     try {
-      const res = await updateLeave({ id, body: leaveData }).unwrap();
+      const res = await updateLeave({ id, body: values }).unwrap();
       if (res._id) {
         message.success("Leave update Successfully");
         router.push("/dashboard/admin/leave/appliedLeaves");
@@ -38,6 +45,9 @@ const EditForLeaves = ({ params }: IDProps) => {
       message.error(err.message);
     }
   };
+
+  if (isLoading || loading) return <Loading />;
+
   return (
     <div>
       <BreadCrumb
@@ -60,7 +70,7 @@ const EditForLeaves = ({ params }: IDProps) => {
       <div className="max-w-[400px] mx-auto mt-3">
         <hr className="border-t-1 border-gray-500" />
       </div>
-      <Form submitHandler={onSubmit}>
+      <Form submitHandler={onSubmit} defaultValues={defaultValues}>
         <Row gutter={{ xs: 4, md: 20 }}>
           <Col xs={24} md={12} lg={12} className="mt-3">
             <div>

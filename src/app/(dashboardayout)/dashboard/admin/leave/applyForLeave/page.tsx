@@ -8,9 +8,11 @@ import { leaveType } from "@/constants/global";
 import { useAddLeaveMutation } from "@/redux/api/leaveApi";
 import { getUserInfo } from "@/services/auth.service";
 import { Button, Col, Row, message } from "antd";
+import { useRouter } from "next/navigation";
 
 const ApplyForLeaves = () => {
-  const { organization_id, userId } = getUserInfo() as any;
+  const { organization_id, userId, user_type } = getUserInfo() as any;
+  const router = useRouter();
   const [addLeave, { isLoading }] = useAddLeaveMutation();
   const onSubmit = async (data: any) => {
     const leaveData = {
@@ -24,6 +26,7 @@ const ApplyForLeaves = () => {
     try {
       const res = await addLeave(leaveData).unwrap();
       if (res._id) {
+        router.push(`/dashboard/${user_type}/leave/appliedLeaves`);
         message.success("Leave applied Successfully");
       }
     } catch (err: any) {

@@ -1,59 +1,19 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 "use client";
 import BreadCrumb from "@/components/ui/BreadCrumb";
-import {
-  Avatar,
-  Button,
-  Card,
-  Col,
-  Divider,
-  Flex,
-  Row,
-  Table,
-  Timeline,
-} from "antd";
+import { Avatar, Card, Col, Row } from "antd";
 
 import React from "react";
 import { getUserInfo } from "@/services/auth.service";
 import { useGetSingleUserQuery } from "@/redux/api/userApi";
-
-// const dataSource = [
-//   {
-//     key: "1",
-//     name: "Mike",
-//     relationship: "brother",
-//     birthDate: "Feb 16th, 2019",
-//     phone: "0182398398",
-//   },
-// ];
-
-// const columns = [
-//   {
-//     title: "Name",
-//     dataIndex: "name",
-//     key: "name",
-//   },
-//   {
-//     title: "Relationship",
-//     dataIndex: "relationship",
-//     key: "Relationship",
-//   },
-//   {
-//     title: "Birth Date",
-//     dataIndex: "birthDate",
-//     key: "birthDate",
-//   },
-//   {
-//     title: "Phone",
-//     dataIndex: "phone",
-//     key: "phone",
-//   },
-// ];
+import Loading from "@/app/loading";
 
 const profile = () => {
   const { userId } = getUserInfo() as any;
-  const { data } = useGetSingleUserQuery(userId);
+  const { data, isLoading } = useGetSingleUserQuery(userId);
+  console.log(data);
 
+  if (isLoading) return <Loading />;
   return (
     <div>
       <h1 className="text-2xl font-semibold pb-1">Profile</h1>
@@ -71,9 +31,9 @@ const profile = () => {
       />
       <div>
         <Card className="mt-5">
-          <Flex className="flex flex-col md:flex-row lg:gap-56">
+          <div className="grid grid-cols-2 mx-auto">
             {/* left  */}
-            <div className="flex">
+            <div className="flex justify-start items-center">
               {" "}
               <Avatar
                 size={{ xs: 24, sm: 32, md: 40, lg: 80, xl: 100, xxl: 120 }}
@@ -85,15 +45,11 @@ const profile = () => {
                 </h1>
                 <h1 className="text-md font-bold">{data?.designation}</h1>
                 <h1 className="text-md font-bold">{data?.employee_code}</h1>
-                <Button className="my-2" type="primary" danger>
-                  Sent Message
-                </Button>
               </div>
             </div>
 
             {/* right */}
             <div className="flex border-dashed lg:border-l-2 border-gray-500 pl-4">
-              {/* input */}
               <div className="text-md font-bold mr-10">
                 <h1>Phone:</h1>
                 <h1>Email:</h1>
@@ -101,7 +57,6 @@ const profile = () => {
                 <h1>Address:</h1>
                 <h1>Gender:</h1>
               </div>
-              {/* value */}
               <div>
                 <h2 className="text-blue-500"> {data?.phone_number}</h2>
                 <h2 className="text-blue-500">{data?.personal_email}</h2>
@@ -115,7 +70,7 @@ const profile = () => {
                 <h2>{data?.gender}</h2>
               </div>
             </div>
-          </Flex>
+          </div>
         </Card>
         {/* </Col> */}
 
@@ -168,117 +123,54 @@ const profile = () => {
                     <h2>{data?.emergency_contact_details?.email}</h2>
                   </div>
                 </div>
-                {/* <Divider dashed /> */}
-                {/* <div className="flex">
-                  <div className="text-md font-bold mr-10">
-                    <h1>Passport No.</h1>
-                    <h1>Passport Exp Date</h1>
-                    <h1>Telephone No.</h1>
-                  </div>
-
-                  <div>
-                    <h2>849584958583</h2>
-                    <h2>849584958583</h2>
-                    <h2>849584958583</h2>
-                  </div>
-                </div> */}
               </Card>
             </Col>
           </Row>
         </div>
-
-        {/* Bank-family information */}
-        {/* <Row gutter={10}>
-          <Col xs={24} sm={18} md={16} lg={12}>
-            <Card title="Bank Information" bordered={false} className="mb-2">
-              <div className="flex">
-                
-                <div className="text-md font-bold mr-10">
-                  <h1>Passport No.</h1>
-                  <h1>Passport Exp Date</h1>
-                  <h1>Telephone No.</h1>
-                  <h1>Telephone No.</h1>
+        <div>
+          <Row gutter={10}>
+            <Col xs={24} sm={18} md={16} lg={12}>
+              <Card title="Bank Details" bordered={false} className="mb-2">
+                <div className="flex">
+                  {/* input */}
+                  <div className="text-md font-bold mr-10">
+                    <h1>Bank Name:</h1>
+                    <h1>Account No.</h1>
+                    <h1>Branch: </h1>
+                    <h1>Account Type: </h1>
+                  </div>
+                  {/* value */}
+                  <div>
+                    <h2>{data?.bank_name}</h2>
+                    <h2>{data?.account_number}</h2>
+                    <h2>{data?.bank_details?.branch}</h2>
+                    <h2>{data?.bank_details?.account_type}</h2>
+                  </div>
                 </div>
-                
-                <div>
-                  <h2>849584958583</h2>
-                  <h2>849584958583</h2>
-                  <h2>849584958583</h2>
-                  <h2>849584958583</h2>
+              </Card>
+            </Col>
+            <Col xs={24} sm={18} md={16} lg={12}>
+              <Card title="Other Information" bordered={false} className="mb-2">
+                <div className="flex">
+                  {/* input */}
+                  <div className="text-md font-bold mr-10">
+                    <h1>Team: </h1>
+                    <h1>Role:</h1>
+                    <h1>User Type:</h1>
+                    <h1>Manager Id:</h1>
+                  </div>
+                  {/* value */}
+                  <div>
+                    <h2>{data?.team}</h2>
+                    <h2>{data?.role}</h2>
+                    <h2>{data?.user_type}</h2>
+                    <h2>{data?.manager_id}</h2>
+                  </div>
                 </div>
-              </div>
-            </Card>
-          </Col>
-          <Col xs={24} sm={18} md={16} lg={12}>
-            <Card title="Family Contact" bordered={false} className="mb-2">
-              <Table
-                dataSource={dataSource}
-                columns={columns}
-                pagination={false}
-                bordered={false}
-              />
-            </Card>
-          </Col>
-        </Row> */}
-        {/* Education-Experience Information */}
-        {/* <Row gutter={10}>
-          <Col xs={24} sm={18} md={16} lg={12}>
-            <Card
-              title="Education Information"
-              bordered={false}
-              className="mb-2"
-            >
-              <Timeline
-                items={[
-                  {
-                    children: (
-                      <>
-                        <p>Technical testing 1</p>
-                        <p>Technical testing 2</p>
-                        <p>Technical testing 3</p>
-                      </>
-                    ),
-                  },
-                  {
-                    children: (
-                      <>
-                        <p>Technical testing 1</p>
-                        <p>Technical testing 2</p>
-                        <p>Technical testing 3</p>
-                      </>
-                    ),
-                  },
-                ]}
-              />
-            </Card>
-          </Col>
-          <Col xs={24} sm={18} md={16} lg={12}>
-            <Card title="Experience" bordered={false} className="mb-2">
-              <Timeline
-                items={[
-                  {
-                    children: (
-                      <>
-                        <p>Technical testing 1</p>
-                        <p>Technical testing 2</p>
-                        <p>Technical testing 3</p>
-                      </>
-                    ),
-                  },
-                  {
-                    children: (
-                      <>
-                        <p>Technical testing 1</p>
-                        <p>Technical testing 2</p>
-                        <p>Technical testing 3</p>
-                      </>
-                    ),
-                  },
-                ]}
-              />
-            </Card>
-          </Col>
-        </Row> */}
+              </Card>
+            </Col>
+          </Row>
+        </div>
       </div>
     </div>
   );

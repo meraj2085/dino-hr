@@ -117,10 +117,9 @@ const AllAttendance = () => {
       render: function (data: any) {
         return (
           <>
-          <Button onClick={() => setOpen(!open)}>Check in</Button>
           {
             data?
-            <Button onClick={() => setCheck(!open)} >Check out</Button>:
+            <Button onClick={() => setCheck(!check)} >Check out</Button>:
             <Button onClick={() => setOpen(!open)}>Check in</Button>
           }
           </>
@@ -238,7 +237,12 @@ const AllAttendance = () => {
 
             <Col xs={24} md={24} lg={24} className="mt-3">
               <div>
-                <FormTimePicker  name="check_in" label="Time" />
+                <FormTimePicker  name="check_in" label="Check_in_Time" />
+              </div>
+            </Col>
+            <Col xs={24} md={24} lg={24} className="mt-3">
+              <div>
+                <FormTimePicker  name="check_out" label="Check_Out" />
               </div>
             </Col>
             <div className="flex justify-end item-end">

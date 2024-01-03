@@ -10,13 +10,16 @@ const { Header: AntHeader } = Layout;
 import Image from "next/image";
 import { useState } from "react";
 import { useGetUnreadCountQuery } from "@/redux/api/notificationApi";
+import { useGetSingleUserQuery } from "@/redux/api/userApi";
 
 const Header = () => {
   const localStorageTheme = getFromLocalStorage("theme");
+  const { userId } = getUserInfo() as any;
   const { data, isLoading } = useGetUnreadCountQuery(undefined);
   const theme = localStorageTheme ? JSON.parse(localStorageTheme) : null;
   const [localTheme, setLocalTheme] = useState(theme?.theme);
   const { user_type } = getUserInfo() as any;
+  const { data: userData } = useGetSingleUserQuery(userId);
   const router = useRouter();
   const dispatch = useAppDispatch();
 
@@ -258,14 +261,17 @@ const Header = () => {
               <Avatar
                 size="large"
                 icon={
-                  // <UserOutlined />
-                  <Image
-                    src="https://res.cloudinary.com/dn163fium/image/upload/v1703907617/the50wmbputcfuukvhbk.avif"
-                    alt="User Avatar"
-                    height={25}
-                    width={25}
-                    className="rounded-full"
-                  />
+                  userData?.profile_picture ? (
+                    <Image
+                      src={userData?.profile_picture}
+                      alt="User Avatar"
+                      height={25}
+                      width={25}
+                      className="rounded-full"
+                    />
+                  ) : (
+                    <UserOutlined />
+                  )
                 }
               />
             </Space>

@@ -14,7 +14,7 @@ const profile = () => {
 
   if (isLoading) return <Loading />;
   return (
-    <div>
+    <div className="min-w-[200px]">
       <h1 className="text-2xl font-semibold pb-1">Profile</h1>
       <BreadCrumb
         items={[
@@ -36,7 +36,7 @@ const profile = () => {
               {" "}
               <Avatar
                 size={{ xs: 24, sm: 32, md: 40, lg: 80, xl: 100, xxl: 120 }}
-                src="https://smarthr.dreamstechnologies.com/html/template/assets/img/profiles/avatar-02.jpg"
+                src={data?.profile_picture}
               />
               <div className="pl-4">
                 <h1 className="text-xl font-bold">

@@ -1,23 +1,25 @@
 "use client";
 import ActionBar from "@/components/ui/ActionBar";
 import BreadCrumb from "@/components/ui/BreadCrumb";
-import { Button, Col, Input, Row } from "antd";
-import Link from "next/link";
-import dayjs from "dayjs";
+import { Button, Col, Input, Row, message } from "antd";
 import { useState } from "react";
 import { useDebounced } from "@/redux/hooks";
 import PPTable from "@/components/ui/PPTable";
-import { useGetAllOrganizationQuery } from "@/redux/api/organizationApi";
 import PPModal from "@/components/ui/Modal";
 import Form from "@/components/Forms/Form";
+import CustomDatePicker from "@/components/Forms/CustomDatePicker";
+import CustomTimePicker from "@/components/Forms/CustomTimePicker";
+import FormTextArea from "@/components/Forms/FormTextArea";
 import FormDatePicker from "@/components/Forms/FormDatePicker";
-import FormInput from "@/components/Forms/FormInput";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { eventSchema } from "@/schema/event";
+import { useAddAttendanceMutation, useGetAllAttendanceQuery, useGetSingleAttendanceQuery, useUpdateAttendanceMutation } from "@/redux/api/attendanceApi";
+import { getUserInfo } from "@/services/auth.service";
 import FormTimePicker from "@/components/Forms/FormTimePicker";
+import { useRouter } from "next/navigation";
 
 const AllAttendance = () => {
+  const  {userId}  = getUserInfo() as any;
   const query: Record<string, any> = {};
+  const router = useRouter();
 
   const [page, setPage] = useState<number>(1);
   const [size, setSize] = useState<number>(10);
@@ -25,7 +27,9 @@ const AllAttendance = () => {
   const [sortOrder, setSortOrder] = useState<string>("");
   const [searchTerm, setSearchTerm] = useState<string>("");
 
+
   const [open, setOpen] = useState<boolean>(false);
+  const [check, setCheck] = useState<boolean>(false);
 
   query["limit"] = size;
   query["page"] = page;
@@ -37,47 +41,87 @@ const AllAttendance = () => {
     delay: 600,
   });
 
+  const [updateAttendance] = useUpdateAttendanceMutation();
+
+  const [addAttendance] = useAddAttendanceMutation();
+
   const onSubmit = async (data: any) => {
-    console.log(data);
+    
+    try {
+      data.is_checkout=true;
+      data.check_out="00:00"
+      data.user_id= userId
+      console.log(data);
+      const res = await addAttendance(data).unwrap();
+      if (res._id) {
+        setOpen(false);
+        message.success("Attendance Added Successfully");
+      }
+    } catch (err: any) {
+      console.error(err.message);
+      message.error(err.message);
+    }
+    setOpen(false);
   };
 
   if (!!debouncedSearchTerm) {
     query["searchTerm"] = debouncedSearchTerm;
   }
 
-  const { data, isLoading } = useGetAllOrganizationQuery({ ...query });
+  const { data, isLoading } = useGetAllAttendanceQuery({ ...query });
+  const { data:myAttendanceData } = useGetSingleAttendanceQuery(userId);
+  
+ 
+  // console.log(myAttendanceData);
   const meta = data?.meta;
 
+  const handleClose = () => {
+    setOpen(false);
+  };
+  const handleCheckClose = () => {
+    setCheck(false);
+  };
+
+  // console.log(data);
+
   const columns = [
+
+    {
+      title: "Date",
+      dataIndex: "date",
+    },
+
     {
       title: "Check in time",
-      dataIndex: "check_in_time",
-      render: function (data: any) {
-        return data && dayjs(data).format("MMM D, YYYY hh:mm A");
-      },
+      dataIndex: "check_in",
+      // render: function (data: any) {
+      //   return data && dayjs(data).format("MMM D, YYYY hh:mm A");
+      // },
       sorter: true,
     },
     {
       title: "Check out time",
-      dataIndex: "Check_out_time",
-      render: function (data: any) {
-        return data && dayjs(data).format("MMM D, YYYY hh:mm A");
-      },
+      dataIndex: "check_out",
+      // render: function (data: any) {
+      //   return data && dayjs(data).format("MMM D, YYYY hh:mm A");
+      // },
       sorter: true,
     },
-    {
-      title: "Status",
-      dataIndex: "",
-    },
+    // {
+    //   title: "Status",
+    //   dataIndex: "",
+    // },
     {
       title: "Action",
-      dataIndex: "id",
+      dataIndex: "is_checkout",
       render: function (data: any) {
         return (
           <>
-            <Link href={``}>
-              <Button onClick={() => setOpen(!open)}>Add</Button>
-            </Link>
+          {
+            data?
+            <Button onClick={() => setCheck(!check)} >Check out</Button>:
+            <Button onClick={() => setOpen(!open)}>Check in</Button>
+          }
           </>
         );
       },
@@ -117,11 +161,12 @@ const AllAttendance = () => {
           }}
         />
       </ActionBar>
+      
 
       <PPTable
         loading={isLoading}
         columns={columns}
-        dataSource={data?.organizations}
+        dataSource={data?.attendances}
         pageSize={size}
         totalPages={meta?.total}
         showSizeChanger={true}
@@ -131,46 +176,84 @@ const AllAttendance = () => {
         scroll={{ x: true }}
       />
       <PPModal
-        title="Add Attendance"
+        title="Check In"
         isOpen={open}
-        closeModal={() => setOpen(false)}
+        closeModal={handleClose}
         handleOk={() => setOpen(false)}
+        showOkButton = {false}
+        showCancelButton = {false}
       >
-        <Form submitHandler={onSubmit} resolver={yupResolver(eventSchema)}>
+        <Form submitHandler={onSubmit}>
           <Row gutter={{ xs: 4, md: 20 }}>
-            <Col xs={24} md={12} lg={12} className="mt-3">
+            <Col xs={24} md={24} lg={24} className="mt-3">
               <div>
                 <FormDatePicker
-                  name="check_in_date"
+                // onChange={(value: any) => handlePreferenceChange(value)}
+                  name="date"
                   label="Check in Date"
                   size="large"
                 />
-                <FormTimePicker name="time" label="Time" />
               </div>
             </Col>
 
-            <Col xs={24} md={12} lg={12} className="mt-3">
+            <Col xs={24} md={24} lg={24} className="mt-3">
               <div>
-                <FormDatePicker
-                  name="check_out_date"
-                  label="Check out Date"
-                  size="large"
+                <FormTimePicker  name="check_in" label="Time" />
+              </div>
+            </Col>
+
+            <Col xs={24} md={24} lg={24} className="mt-3">
+              <div>
+                <FormTextArea
+                  name="description"
+                  placeholder="Description"
+                  label="Description"
                 />
-                <FormTimePicker name="time" label="Time" />
               </div>
             </Col>
+            <div className="flex justify-end item-end">
+            <Button
+              htmlType="submit"
+              className="bg-[#00674A] text-white hover:text-white "
+              style={{ margin: "10px 0px" }}
+            >
+              Check In
+            </Button>
+            </div>
+          </Row>
+        </Form>
+      </PPModal>
 
-            <Col xs={24} md={12} lg={12} className="mt-3">
-              <div>
-                <FormInput name="name" type="text" size="large" label="Name" />
-              </div>
-            </Col>
+      <PPModal
+        title="Check Out"
+        isOpen={check}
+        closeModal={handleCheckClose}
+        handleOk={() => setCheck(false)}
+        showOkButton = {false}
+        showCancelButton = {false}
+      >
+        <Form submitHandler={onSubmit}>
+          <Row gutter={{ xs: 4, md: 20 }}>
 
-            <Col xs={24} md={12} lg={12} className="mt-3">
+            <Col xs={24} md={24} lg={24} className="mt-3">
               <div>
-                <FormInput name="id" type="text" size="large" label="ID" />
+                <FormTimePicker  name="check_in" label="Check_in_Time" />
               </div>
             </Col>
+            <Col xs={24} md={24} lg={24} className="mt-3">
+              <div>
+                <FormTimePicker  name="check_out" label="Check_Out" />
+              </div>
+            </Col>
+            <div className="flex justify-end item-end">
+            <Button
+              htmlType="submit"
+              className="bg-[#00674A] text-white hover:text-white "
+              style={{ margin: "10px 0px" }}
+            >
+              Check Out Done
+            </Button>
+            </div>
           </Row>
         </Form>
       </PPModal>

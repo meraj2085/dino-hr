@@ -1,7 +1,7 @@
 "use client";
 
 import { useDebounced } from "@/redux/hooks";
-import { Button, Input, message } from "antd";
+import { Button, DatePicker, Input, message } from "antd";
 import { useState } from "react";
 import dayjs from "dayjs";
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
@@ -9,10 +9,8 @@ import Link from "next/link";
 import BreadCrumb from "@/components/ui/BreadCrumb";
 import ActionBar from "@/components/ui/ActionBar";
 import PPTable from "@/components/ui/PPTable";
-import {
-  useDeleteEventMutation,
-  useGetAllEventQuery,
-} from "@/redux/api/eventApi";
+import { useGetAllAttendanceQuery } from "@/redux/api/attendanceApi";
+import FormDatePicker from "@/components/Forms/FormDatePicker";
 
 const ViewAttendance = () => {
   const query: Record<string, any> = {};
@@ -39,53 +37,40 @@ const ViewAttendance = () => {
   if (!!debouncedSearchTerm) {
     query["searchTerm"] = debouncedSearchTerm;
   }
-  const { data, isLoading } = useGetAllEventQuery({ ...query });
-  const [deleteEvent] = useDeleteEventMutation();
-  const meta = data?.meta;
+  const { data, isLoading } = useGetAllAttendanceQuery({ ...query });
 
-  const deleteEventHandler = async (id: string) => {
-    try {
-      const res = await deleteEvent(id);
-      if (res) {
-        message.success("Event Successfully Deleted!");
-        setOpen(false);
-      }
-    } catch (error: any) {
-      message.error(error.message);
-    }
-  };
+  const meta = data?.meta;
+  console.log(data);
 
   const columns = [
     {
       title: "Name",
-      dataIndex: "name",
+      dataIndex: "userName",
     },
     {
-      title: "Employee ID",
-      dataIndex: "employee_id",
+      title: "Date",
+      dataIndex: "date",
     },
     {
       title: "Check in time",
-      dataIndex: "check_in_time",
-      render: function (data: any) {
-        return data && dayjs(data).format("MMM D, YYYY hh:mm A");
-      },
+      dataIndex: "check_in",
+      // render: function (data: any) {
+      //   return data && dayjs(data).format("MMM D, YYYY hh:mm A");
+      // },
       sorter: true,
     },
     {
       title: "Check out time",
-      dataIndex: "Check_out_time",
-      render: function (data: any) {
-        return data && dayjs(data).format("MMM D, YYYY hh:mm A");
-      },
+      dataIndex: "check_out",
+      // render: function (data: any) {
+      //   return data && dayjs(data).format("MMM D, YYYY hh:mm A");
+      // },
       sorter: true,
     },
     {
-      title: "Status",
-      dataIndex: "status",
+      title: "Description",
+      dataIndex: "description",
     },
-
-
   ];
 
   const onPaginationChange = (page: number, pageSize: number) => {
@@ -97,6 +82,8 @@ const ViewAttendance = () => {
     setSortBy(field as string);
     setSortOrder(order === "ascend" ? "asc" : "desc");
   };
+
+  const dateFormat = "YYYY/MM/DD";
 
   return (
     <div style={{ overflowX: "auto" }}>
@@ -112,6 +99,7 @@ const ViewAttendance = () => {
           },
         ]}
       />
+     
       <ActionBar title="View Attendance">
         <Input
           size="large"
@@ -122,11 +110,21 @@ const ViewAttendance = () => {
           }}
         />
       </ActionBar>
+      <DatePicker 
+      style={{
+        width: "20%",
+        marginBottom: "10px",
+      }}
+        
+        defaultValue={dayjs("2015/01/01", dateFormat)}
+        format={dateFormat}
+      />
+      
 
       <PPTable
         loading={isLoading}
         columns={columns}
-        dataSource={data?.events}
+        dataSource={data?.attendances}
         pageSize={size}
         totalPages={meta?.total}
         showSizeChanger={true}

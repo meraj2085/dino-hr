@@ -54,7 +54,7 @@ const EditForLeaves = ({ params }: IDProps) => {
         items={[
           {
             label: "Admin",
-            link: "/dashboard/admin",
+            link: "/admin",
           },
           {
             label: "Applied Leaves",
@@ -100,19 +100,13 @@ const EditForLeaves = ({ params }: IDProps) => {
                 name="from_date"
                 label="From Date"
                 size="large"
-                // defaultValue={leave?.from_date}
               />
             </div>
           </Col>
 
           <Col xs={24} md={12} lg={12} className="mt-3">
             <div>
-              <NormalDatePicker
-                name="to_date"
-                label="To Date"
-                size="large"
-                // defaultValue={leave?.to_date}
-              />
+              <NormalDatePicker name="to_date" label="To Date" size="large" />
             </div>
           </Col>
         </Row>
@@ -122,7 +116,7 @@ const EditForLeaves = ({ params }: IDProps) => {
           className="bg-[#00674A] text-white hover:text-white flex justify-end item-end"
           style={{ margin: "10px 0px" }}
         >
-          Update
+          Submit
         </Button>
       </Form>
     </div>

@@ -4,16 +4,19 @@ import { useDebounced } from "@/redux/hooks";
 import { Button, Input, message } from "antd";
 import { useState } from "react";
 import dayjs from "dayjs";
+import Link from "next/link";
 import BreadCrumb from "@/components/ui/BreadCrumb";
 import ActionBar from "@/components/ui/ActionBar";
 import PPTable from "@/components/ui/PPTable";
 import {
-  useGetAllLeavesQuery,
+  useLeavesByEmailQuery,
   useUpdateLeaveMutation,
 } from "@/redux/api/leaveApi";
+import { getUserInfo } from "@/services/auth.service";
 import PPModal from "@/components/ui/Modal";
 
-const ApproveLeave = () => {
+const AppliedLeaves = () => {
+  const { userId } = getUserInfo() as any;
   const query: Record<string, any> = {};
 
   const [page, setPage] = useState<number>(1);
@@ -35,42 +38,26 @@ const ApproveLeave = () => {
   if (!!debouncedSearchTerm) {
     query["searchTerm"] = debouncedSearchTerm;
   }
-  const { data, isLoading } = useGetAllLeavesQuery({ ...query });
-  const [updateLeave] = useUpdateLeaveMutation();
+
   const [leaveId, setLeaveId] = useState<string>("");
   const [open, setOpen] = useState<boolean>(false);
-  const [open_2, setOpen_2] = useState<boolean>(false);
+  const { data, isLoading } = useLeavesByEmailQuery(userId);
+  const [updateLeave] = useUpdateLeaveMutation();
 
-  const handleApprove = async (id: string) => {
+  const handleCancel = async (id: string) => {
     try {
       const res = await updateLeave({
         id,
-        body: { status: "Accepted" },
+        body: { status: "Cancelled" },
       }).unwrap();
       if (res) {
-        message.success("Lave Approved!");
-        setOpen_2(false);
-      }
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  const handleReject = async (id: string) => {
-    try {
-      const res = await updateLeave({
-        id,
-        body: { status: "Rejected" },
-      }).unwrap();
-      if (res) {
-        message.success("Lave Rejected!");
+        message.success("Lave cancelled!");
         setOpen(false);
       }
     } catch (error) {
       console.error(error);
     }
   };
-
   const meta = data?.meta;
 
   const columns = [
@@ -94,7 +81,7 @@ const ApproveLeave = () => {
       },
     },
     {
-      title: "Days",
+      title: "Total Days",
       dataIndex: "no_of_days",
     },
     {
@@ -116,23 +103,21 @@ const ApproveLeave = () => {
 
     {
       title: "Action",
-      // dataIndex: "id",
       render: function (data: any) {
         return (
           <>
             {data?.status === "Applied" && (
-              <Button
-                style={{
-                  margin: "0px 5px",
-                }}
-                onClick={() => {
-                  setOpen_2(true);
-                  setLeaveId(data?.id);
-                }}
-                type="primary"
+              <Link
+                href={`/dashboard/admin/leave/appliedLeaves/edit/${data?._id}`}
               >
-                Approve
-              </Button>
+                <Button
+                  style={{
+                    margin: "0px 5px",
+                  }}
+                >
+                  Edit
+                </Button>
+              </Link>
             )}
             {data?.status === "Applied" && (
               <Button
@@ -143,7 +128,7 @@ const ApproveLeave = () => {
                 type="primary"
                 danger
               >
-                Reject
+                Cancel
               </Button>
             )}
           </>
@@ -177,7 +162,7 @@ const ApproveLeave = () => {
             },
           ]}
         />
-        <ActionBar title="Approve Leave List">
+        <ActionBar title="Applied List">
           <Input
             size="large"
             placeholder="Search"
@@ -191,7 +176,7 @@ const ApproveLeave = () => {
         <PPTable
           loading={isLoading}
           columns={columns}
-          dataSource={data?.leaves}
+          dataSource={data}
           pageSize={size}
           totalPages={meta?.total}
           showSizeChanger={true}
@@ -202,23 +187,15 @@ const ApproveLeave = () => {
         />
       </div>
       <PPModal
-        title="Reject Event"
+        title="Cancel Leave"
         isOpen={open}
         closeModal={() => setOpen(false)}
-        handleOk={() => handleReject(leaveId)}
+        handleOk={() => handleCancel(leaveId)}
       >
-        <p className="my-5">Are you sure you want to reject this leave?</p>
-      </PPModal>
-      <PPModal
-        title="Approve Event"
-        isOpen={open_2}
-        closeModal={() => setOpen_2(false)}
-        handleOk={() => handleApprove(leaveId)}
-      >
-        <p className="my-5">Are you sure you want to approve this leave?</p>
+        <p className="my-5">Are you sure you want to cancel this leave?</p>
       </PPModal>
     </>
   );
 };
 
-export default ApproveLeave;
+export default AppliedLeaves;

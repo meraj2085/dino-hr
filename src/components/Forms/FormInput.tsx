@@ -29,7 +29,6 @@ const FormInput = ({
   disabled,
   required,
   defaultValue,
-  dev
 }: IInput) => {
   const {
     control,

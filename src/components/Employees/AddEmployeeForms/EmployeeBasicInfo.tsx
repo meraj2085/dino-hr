@@ -1,17 +1,19 @@
 import { Col, Row } from "antd";
-import {
-  genderOptions,
-} from "@/constants/global";
+import { genderOptions } from "@/constants/global";
 import FormInput from "@/components/Forms/FormInput";
 import NormalDatePicker from "@/components/Forms/NormalDatePicker";
 import FormSelectField from "@/components/Forms/FormSelectField";
 import UploadImage from "@/components/ui/UploadImage";
 
-const EmployeeBasicInfoForm = () => {
+const EmployeeBasicInfoForm = ({
+  defaultImageUrl,
+}: {
+  defaultImageUrl?: string;
+}) => {
   return (
     <>
       <div className="border border-gray-300 rounded-md p-4 my-4">
-        <UploadImage name="profile_picture" />
+        <UploadImage name="profile_picture" defaultImageUrl={defaultImageUrl} />
         <Row gutter={{ xs: 4, md: 20 }}>
           <Col xs={24} md={12} lg={6} className="mt-3">
             <FormInput
@@ -19,6 +21,7 @@ const EmployeeBasicInfoForm = () => {
               placeholder="Enter First Name"
               label="First Name"
               size="large"
+              required
             />
           </Col>
           <Col xs={24} md={12} lg={6} className="mt-3">
@@ -27,6 +30,7 @@ const EmployeeBasicInfoForm = () => {
               placeholder="Enter Last Name"
               label="Last Name"
               size="large"
+              required
             />
           </Col>
           <Col xs={24} md={12} lg={6} className="mt-3">
@@ -34,6 +38,7 @@ const EmployeeBasicInfoForm = () => {
               name="date_of_birth"
               label="Date of birth"
               size="large"
+              required
             />
           </Col>
           <Col xs={24} md={12} lg={6} className="mt-3">
@@ -43,6 +48,7 @@ const EmployeeBasicInfoForm = () => {
               options={genderOptions}
               label="Gender"
               placeholder="Select"
+              required
             />
           </Col>
           <Col xs={24} md={12} lg={6} className="mt-3">
@@ -51,13 +57,14 @@ const EmployeeBasicInfoForm = () => {
               placeholder="Enter Phone Number"
               label="Phone Number"
               size="large"
+              required
             />
           </Col>
           <Col xs={24} md={12} lg={6} className="mt-3">
             <FormInput
               name="other_phone_number"
               placeholder="Enter Other Phone Number"
-              label="Phone Number"
+              label="Other Phone Number"
               size="large"
             />
           </Col>
@@ -68,6 +75,7 @@ const EmployeeBasicInfoForm = () => {
               label="Enter Office Email"
               type="email"
               size="large"
+              required
             />
           </Col>
           <Col xs={24} md={12} lg={6} className="mt-3">

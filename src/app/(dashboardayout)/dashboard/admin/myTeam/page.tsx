@@ -1,17 +1,41 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import ActionBar from "@/components/ui/ActionBar";
 import { Avatar, Card, Col, Input, Row } from "antd";
 import { useGetMyTeamQuery } from "@/redux/api/userApi";
 import profileImg from "../../../../../../public/assets/profile.png"
 import Image from "next/image";
+import { useDebounced } from "@/redux/hooks";
+import Loading from "@/app/loading";
 
 const MyTeam = () => {
-  const { data: teamData, isLoading } = useGetMyTeamQuery({});
+    const query: Record<string, any> = {};
+    const [searchTerm, setSearchTerm] = useState<string>("");
+
+    const debouncedSearchTerm = useDebounced({
+      searchQuery: searchTerm,
+      delay: 600,
+    });
+
+    if (!!debouncedSearchTerm) {
+      query["searchTerm"] = debouncedSearchTerm;
+    }
+
+  const { data: teamData, isLoading } = useGetMyTeamQuery({ ...query });
+
+    if (isLoading) {
+      return <Loading />;
+    }
   // console.log(teamData);
   return (
     <div className="min-w-[250px]">
       <ActionBar title="My Team" />
+      <Input
+        className="w-52 mb-2"
+        size="large"
+        placeholder="Search"
+        onChange={(e) => setSearchTerm(e.target.value)}
+      />
       <Row gutter={10}>
         {teamData?.myTeam?.map((data, index) => (
           <Col key={index} xs={24} sm={18} md={16} lg={12}>

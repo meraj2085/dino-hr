@@ -22,7 +22,7 @@ interface IStepsProps {
   submitHandler: (el: any) => void;
   navigateLink?: string;
   defaultValues?: Record<string, any>;
-  // resolver?: any;
+  resolver?: any;
 }
 
 const StepperForm = ({
@@ -31,8 +31,8 @@ const StepperForm = ({
   navigateLink,
   persistKey,
   defaultValues,
-}: // resolver,
-IStepsProps) => {
+  resolver,
+}: IStepsProps) => {
   const router = useRouter();
 
   const [current, setCurrent] = useState<number>(
@@ -61,7 +61,11 @@ IStepsProps) => {
 
   const items = steps.map((item) => ({ key: item.title, title: item.title }));
 
-  const methods = useForm({ defaultValues: defaultValues || savedValues });
+  const methods = useForm({
+    defaultValues: defaultValues || savedValues,
+    resolver,
+    mode: "all",
+  });
   const watch = methods.watch();
 
   useEffect(() => {
@@ -70,7 +74,7 @@ IStepsProps) => {
 
   const { handleSubmit, reset } = methods;
 
-  const handleStudentOnSubmit = (data: any) => {
+  const handleOnSubmit = (data: any) => {
     submitHandler(data);
     reset();
     removeFromLocalStorage("step");
@@ -89,7 +93,7 @@ IStepsProps) => {
       >
         <Steps current={current} items={items} />
         <FormProvider {...methods}>
-          <form onSubmit={handleSubmit(handleStudentOnSubmit)}>
+          <form onSubmit={handleSubmit(handleOnSubmit)}>
             <div>{steps[current]?.content}</div>
             <div style={{ marginTop: 24 }}>
               <Button
@@ -114,7 +118,7 @@ IStepsProps) => {
                   type="primary"
                   className="bg-[#00674A]"
                   htmlType="submit"
-                  onClick={() => message.success("Processing complete!")}
+                  // onClick={() => message.success("Processing complete!")}
                 >
                   Done
                 </Button>

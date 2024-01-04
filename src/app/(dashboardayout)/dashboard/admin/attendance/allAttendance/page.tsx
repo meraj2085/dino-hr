@@ -33,8 +33,8 @@ const AllAttendance = () => {
     try {
       data.check_out = "";
       data.user_id = userId;
+      data.is_checkout = false;
       data.date = dayjs(data?.date).format("YYYY-MM-DD");
-      console.log("date: ",dayjs(data?.date).format("YYYY-MM-DD"))
       const res = await addAttendance(data).unwrap();
       if (res._id) {
         setOpen(false);
@@ -48,13 +48,24 @@ const AllAttendance = () => {
   };
 
   const { data, isLoading } = useGetSingleAttendanceQuery(userId);
-
   const handleClose = () => {
     setOpen(false);
   };
   const handleCheckClose = () => {
     setCheck(false);
   };
+
+  const currentDate = new Date().toISOString().split("T")[0];
+  const isCurrentDateAttendance = data && data.find((attendanceData: any) => attendanceData?.createdAt.split("T")[0] === currentDate);
+
+  const handleCheckOut = async () => {
+    const res = await updateAttendance({id: userId, data : {check_out: dayjs(new Date()).format("HH:mm"),
+    is_checkout: true}});
+    if (res) {
+      setCheck(false);
+      message.success("Attendance Updated Successfully");
+    }
+  }
 
   const columns = [
     {
@@ -80,7 +91,7 @@ const AllAttendance = () => {
         return (
           <>
             {
-              !data ? (
+               isCurrentDateAttendance && !data ? (
                 <Button onClick={() => setCheck(!check)}>Check out</Button>
               ) : null
               // <Button onClick={() => setOpen(!open)}>Check in </Button>
@@ -91,8 +102,7 @@ const AllAttendance = () => {
     },
   ];
 
-  const currentDate = new Date().toISOString().split("T")[0];
-const isCurrentDateAttendance = data && data.find((attendanceData: any) => attendanceData.createdAt === currentDate);
+
 
   return (
     <div style={{ overflowX: "auto" }}>
@@ -113,7 +123,7 @@ const isCurrentDateAttendance = data && data.find((attendanceData: any) => atten
         <span></span>
         <div className="flex gap-5">
           {
-            !isCurrentDateAttendance && <Button className="flex gap-5" onClick={() => setOpen(!open)}>Check in </Button>
+            !isCurrentDateAttendance?.date && <Button className="flex gap-5" onClick={() => setOpen(!open)}>Check in </Button>
           }
         </div>
       </ActionBar>
@@ -179,31 +189,24 @@ const isCurrentDateAttendance = data && data.find((attendanceData: any) => atten
         closeModal={handleCheckClose}
         handleOk={() => setCheck(false)}
         showOkButton={false}
-        showCancelButton={false}
+        showCancelButton={true}
       >
-        <Form submitHandler={onSubmit}>
-          <Row gutter={{ xs: 4, md: 20 }}>
-            <Col xs={24} md={24} lg={24} className="mt-3">
-              <div>
-                <FormTimePicker name="check_in" label="Check_in_Time" />
-              </div>
-            </Col>
-            <Col xs={24} md={24} lg={24} className="mt-3">
-              <div>
-                <FormTimePicker name="check_out" label="Check_Out" />
-              </div>
-            </Col>
-            <div className="flex justify-end item-end">
-              <Button
-                htmlType="submit"
-                className="bg-[#00674A] text-white hover:text-white "
-                style={{ margin: "10px 0px" }}
-              >
-                Check Out Done
-              </Button>
-            </div>
-          </Row>
-        </Form>
+     
+    
+
+<div>
+<div className="flex gap-3">
+<h1>Check In Time : </h1>
+<h2>{isCurrentDateAttendance?.check_in}</h2>
+</div>
+
+<div className="flex gap-3">
+<h1>Check Out Time : </h1>
+<h2>{dayjs(new Date()).format("HH:mm")}</h2>
+</div>
+<button className="bg-[blue] p-3 rounded-lg" onClick={() =>handleCheckOut()}>Submit</button>
+{/* <Button  onClick={() =>handleCheckOut()}>Check out</Button> */}
+</div>
       </PPModal>
     </div>
   );

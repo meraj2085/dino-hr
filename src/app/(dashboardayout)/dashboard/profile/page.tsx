@@ -1,12 +1,12 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 "use client";
+import React from "react";
+import Loading from "@/app/loading";
 import BreadCrumb from "@/components/ui/BreadCrumb";
 import { Avatar, Card, Col, Row } from "antd";
-
-import React from "react";
 import { getUserInfo } from "@/services/auth.service";
 import { useGetSingleUserQuery } from "@/redux/api/userApi";
-import Loading from "@/app/loading";
+
 
 const profile = () => {
   const { userId } = getUserInfo() as any;
@@ -42,7 +42,7 @@ const profile = () => {
               </div>
               <div className="flex justify-center">
                 <div className="pl-4">
-                  <h1 className="text-xl font-bold text-center md:text-left">
+                  <h1 className="text-xl font-bold text-center md:text-left text-gradient">
                     {data?.first_name} {data?.last_name}
                   </h1>
                   <h1 className="text-md font-bold text-center md:text-left">
@@ -58,11 +58,11 @@ const profile = () => {
             {/* right */}
             <div className="flex border-dashed lg:border-l-2 border-gray-500 pl-4">
               <div className="text-md font-bold mr-10">
-                <h1>Phone:</h1>
-                <h1>Email:</h1>
-                <h1>Birthday:</h1>
-                <h1>Address:</h1>
-                <h1>Gender:</h1>
+                <h1>Phone</h1>
+                <h1>Email</h1>
+                <h1>Birthday</h1>
+                <h1>Address</h1>
+                <h1>Gender</h1>
               </div>
               <div>
                 <h2 className="text-blue-500"> {data?.phone_number}</h2>
@@ -79,9 +79,7 @@ const profile = () => {
             </div>
           </div>
         </Card>
-        {/* </Col> */}
 
-        {/* 2nd section  */}
         <br />
 
         {/* Personal-Emergency row  */}
@@ -97,10 +95,10 @@ const profile = () => {
                 <div className="flex">
                   {/* input */}
                   <div className="text-md font-bold mr-10">
-                    <h1>Phone No.</h1>
-                    <h1>secondary Phone No.</h1>
-                    <h1>Email: </h1>
-                    <h1>Office Email: </h1>
+                    <h1>Phone No</h1>
+                    <h1>Secondary Phone No</h1>
+                    <h1>Email</h1>
+                    <h1>Office Email</h1>
                   </div>
                   {/* value */}
                   <div>
@@ -117,10 +115,10 @@ const profile = () => {
                 <div className="flex">
                   {/* input */}
                   <div className="text-md font-bold mr-10">
-                    <h1>Name: </h1>
-                    <h1>Relation:</h1>
-                    <h1>Phone No:</h1>
-                    <h1>Email:</h1>
+                    <h1>Name</h1>
+                    <h1>Relation</h1>
+                    <h1>Phone No</h1>
+                    <h1>Email</h1>
                   </div>
                   {/* value */}
                   <div>
@@ -141,10 +139,10 @@ const profile = () => {
                 <div className="flex">
                   {/* input */}
                   <div className="text-md font-bold mr-10">
-                    <h1>Bank Name:</h1>
-                    <h1>Account No.</h1>
-                    <h1>Branch: </h1>
-                    <h1>Account Type: </h1>
+                    <h1>Bank Name</h1>
+                    <h1>Account No</h1>
+                    <h1>Branch</h1>
+                    <h1>Account Type</h1>
                   </div>
                   {/* value */}
                   <div>
@@ -161,10 +159,10 @@ const profile = () => {
                 <div className="flex">
                   {/* input */}
                   <div className="text-md font-bold mr-10">
-                    <h1>Team: </h1>
-                    <h1>Role:</h1>
-                    <h1>User Type:</h1>
-                    <h1>Manager Id:</h1>
+                    <h1>Team</h1>
+                    <h1>Role</h1>
+                    <h1>User Type</h1>
+                    <h1>Manager Id</h1>
                   </div>
                   {/* value */}
                   <div>

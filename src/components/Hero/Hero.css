@@ -6,13 +6,8 @@
   opacity: 0;
   animation: one 20s infinite ease;
   animation-delay: 2s;
-  z-index: 999;
-}
-
-.text-gradient {
-  background: linear-gradient(45deg, #3a3a3a, #00674A, #f8f8f8);
-  background-clip: text;
-  color: transparent;
+  z-index: 11;
+  overflow: hidden;
 }
 
 @keyframes one {

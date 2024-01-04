@@ -40,15 +40,15 @@ const BookCall = () => {
   };
   return (
     <div className="mt-20 text-gray-800">
-      <div className="text-center">
-        <h1 className="text-2xl font-semibold text-gray-800 capitalize lg:text-4xl lg:font-bold ">
-          Book A Call
+      <div className="mb-5 md:mb-12">
+        <h1 className="text-5xl text-center font-bold leadi mb-3">
+          <span className="text-gradient">Book Call</span>
         </h1>
-        <p className="max-w-lg mx-auto mt-4 text-gray-500">
-          We are here to help you. Book a call with us to know more about our
-          services.
+        <p className="max-w-2xl text-center mx-auto">
+          Book a call with us to know more about our services.
         </p>
       </div>
+
       <section className="pb-16 pt-5 max-w-[1200px] mx-auto">
         <div className="grid gap-8 grid-cols-1 px-6 mx-auto lg:px-8 md:grid-cols-2 md:divide-x">
           <div className="p-4">

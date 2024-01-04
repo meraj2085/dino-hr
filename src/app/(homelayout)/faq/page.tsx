@@ -21,11 +21,15 @@ const FAQsSection = () => {
   ];
   return (
     <div className="max-w-[1200px]  mx-auto my-20">
-      <div className="text-center py-5 mb-5">
-        <h1 className="text-2xl font-semibold text-gray-800 capitalize lg:text-4xl lg:font-bold ">
-          frequently asked questions
+      <div className="mb-5 md:mb-12">
+        <h1 className="text-5xl text-center font-bold leadi mb-3">
+          <span className="text-gradient">FAQ & Ans</span>
         </h1>
+        <p className="max-w-2xl text-center mx-auto">
+          Know more about Dino HR and how we can help you.
+        </p>
       </div>
+
       <div className="space-y-4">
         {dummyData?.map((data, index) => (
           <details

@@ -11,6 +11,7 @@ import { useRouter } from "next/navigation";
 import { loginSchema } from "@/schema/login";
 import Link from "next/link";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { useState } from "react";
 
 type FormValues = {
   office_email: string;
@@ -18,22 +19,30 @@ type FormValues = {
 };
 
 const LoginPage = () => {
-  const [userLogin, { isLoading }] = useUserLoginMutation();
+  const [userLogin, { isLoading: loading }] = useUserLoginMutation();
   const router = useRouter();
+  const [isLoading, setIsLoading] = useState(false);
+
+  const [defaultValues, setDefaultValues] = useState<FormValues>({
+    office_email: "",
+    password: "",
+  });
 
   const onSubmit: SubmitHandler<FormValues> = async (data: any) => {
     try {
+      setIsLoading(true);
       const res = await userLogin({ ...data }).unwrap();
       if (res?.accessToken) {
         storeUserInfo({ accessToken: res?.accessToken });
         const { user_type } = getUserInfo() as any;
         router.push(`/dashboard/${user_type}`);
+        setIsLoading(false);
         message.success("User logged in successfully!");
-      } else {
-        message.error("Email or password is incorrect!");
       }
     } catch (err: any) {
+      setIsLoading(false);
       console.error(err.message);
+      message.error(err.message);
     }
   };
 
@@ -56,7 +65,7 @@ const LoginPage = () => {
               Dino
             </h1>
           </div>
-          {isLoading ? (
+          {isLoading || loading ? (
             <div className="flex justify-center items-center h-[450px]">
               <div className="animate-spin rounded-full border-t-4 border-[#00674A] border-solid h-16 w-16"></div>
             </div>
@@ -67,6 +76,7 @@ const LoginPage = () => {
               </h1>
               <Form
                 submitHandler={onSubmit}
+                defaultValues={defaultValues}
                 resolver={yupResolver(loginSchema)}
               >
                 <div>
@@ -98,6 +108,47 @@ const LoginPage = () => {
                   <Button shape="default" htmlType="submit">
                     Login
                   </Button>
+                </div>
+
+                <p className="text-center mt-10 mb-2 font-semibold">Login Credentials</p>
+                <div className="flex justify-center cursor-pointer">
+                  <span className="inline-flex -space-x-px overflow-hidden rounded-md border bg-white shadow-sm">
+                    <p
+                      onClick={() =>
+                        setDefaultValues({
+                          office_email: "admin@dino.com",
+                          password: "Dino-123",
+                        })
+                      }
+                      className="inline-block px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-100 focus:relative"
+                    >
+                      Admin
+                    </p>
+
+                    <p
+                      onClick={() =>
+                        setDefaultValues({
+                          office_email: "employee@dino.com",
+                          password: "Dino-123",
+                        })
+                      }
+                      className="inline-block px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-100 focus:relative"
+                    >
+                      Employee
+                    </p>
+
+                    <p
+                      onClick={() =>
+                        setDefaultValues({
+                          office_email: "super@admin.com",
+                          password: "Dino-123",
+                        })
+                      }
+                      className="inline-block px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-100 focus:relative"
+                    >
+                      Super Admin
+                    </p>
+                  </span>
                 </div>
               </Form>
             </>

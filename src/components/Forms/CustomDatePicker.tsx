@@ -45,7 +45,7 @@ const CustomDatePicker = ({
             onChange={handleOnChange}
             style={{ width: "100%" }}
             // disabledDate={disabledDate}
-            disabled // Make it read-only
+            disabled
           />
         )}
       />

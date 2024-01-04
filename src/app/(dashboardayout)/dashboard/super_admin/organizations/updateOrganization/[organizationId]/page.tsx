@@ -11,6 +11,8 @@ import {
   useUpdateOrganizationMutation,
 } from "@/redux/api/organizationApi";
 import { Spin, message } from "antd";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { organizationSchema } from "@/schema/organization";
 
 const UpdateOrganization = ({
   params,
@@ -132,6 +134,7 @@ const UpdateOrganization = ({
           handleSubmit(value);
         }}
         steps={steps}
+        resolver={yupResolver(organizationSchema)}
       />
     </div>
   );

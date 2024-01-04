@@ -11,6 +11,7 @@ const AdminFinancialInfoForm = () => {
             placeholder="Enter Bank Name"
             label="Bank Name"
             size="large"
+            required
           />
         </Col>
         <Col xs={24} md={12} lg={6} className="mt-3">
@@ -19,6 +20,7 @@ const AdminFinancialInfoForm = () => {
             placeholder="Enter Account Number"
             label="Account Number"
             size="large"
+            required
           />
         </Col>
         <Col xs={24} md={12} lg={6} className="mt-3">
@@ -31,9 +33,7 @@ const AdminFinancialInfoForm = () => {
         </Col>
       </Row>
 
-      <h3 className="text-lg mt-8 font-semibold underline">
-        Salary Details
-      </h3>
+      <h3 className="text-lg mt-8 font-semibold underline">Salary Details</h3>
       <Row gutter={{ xs: 4, md: 20 }}>
         <Col xs={24} md={12} lg={6} className="mt-3">
           <FormInput
@@ -41,6 +41,7 @@ const AdminFinancialInfoForm = () => {
             placeholder="Enter Basic Salary"
             label="Basic Salary"
             size="large"
+            required
           />
         </Col>
         <Col xs={24} md={12} lg={6} className="mt-3">
@@ -49,6 +50,7 @@ const AdminFinancialInfoForm = () => {
             placeholder="Enter Total Allowance"
             label="Total Allowance"
             size="large"
+            required
           />
         </Col>
         <Col xs={24} md={12} lg={6} className="mt-3">
@@ -57,17 +59,9 @@ const AdminFinancialInfoForm = () => {
             placeholder="Enter Annual Bonus"
             label="Annual Bonus"
             size="large"
+            required
           />
         </Col>
-        {/* <Col xs={24} md={12} lg={6} className="mt-3">
-          <FormInput
-            name="salaryDetails.total_ctc"
-            placeholder="Enter Total CTC"
-            label="Total CTC"
-            size="large"
-            type="number"
-          />
-        </Col> */}
       </Row>
     </div>
   );

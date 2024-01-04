@@ -33,11 +33,14 @@ const Feedback = () => {
   };
 
   return (
-    <div className="max-w-[1200px] mx-auto px-5 mt-16 md:mt-20 lg:mt-24">
-      <div className="mb-12">
-        <h1 className="text-4xl  font-bold text-center">
-          We&apos;d Love To Hear From You!
+    <div className="max-w-[1200px] mx-auto px-5 mt-16 md:mt-20 lg:mt-24 mb-28">
+      <div className="mb-5 md:mb-12">
+        <h1 className="text-5xl text-center font-bold leadi mb-3">
+          <span className="text-gradient">Feedback</span>
         </h1>
+        <p className="max-w-2xl text-center mx-auto">
+          We&apos;d love to hear service feedback from you
+        </p>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-8">
         <div className="hidden md:flex flex-col justify-center align-middle">
@@ -45,11 +48,8 @@ const Feedback = () => {
             <Image src={FeedbackImg} alt="about img" />
           </div>
         </div>
-        <div className="">
+        <div className="mt-10">
           <div className="max-w-lg mx-auto px-5 bg-gray-100 text-gray-800 pt-10 pb-5 rounded-md">
-            <h1 className="text-2xl font-bold text-center mb-5">
-              Send us your feedback
-            </h1>
             <Form submitHandler={onSubmit}>
               <label className="block">
                 <FormInput name="name" type="text" size="large" label="Name" />

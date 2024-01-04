@@ -91,6 +91,7 @@ const AdminContactInfoForm = () => {
               placeholder="Enter Full Name"
               label="Full Name"
               size="large"
+              required
             />
           </Col>
 
@@ -100,6 +101,7 @@ const AdminContactInfoForm = () => {
               placeholder="Enter Phone Number"
               label="Phone Number"
               size="large"
+              required
             />
           </Col>
 
@@ -119,6 +121,7 @@ const AdminContactInfoForm = () => {
               placeholder="Enter Relationship"
               label="Relationship"
               size="large"
+              required
             />
           </Col>
         </Row>

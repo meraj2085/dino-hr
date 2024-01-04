@@ -1,33 +1,34 @@
 "use client";
 
 import { useDebounced } from "@/redux/hooks";
-import { Button, DatePicker, Input, message } from "antd";
+import { DatePicker, Input } from "antd";
 import { useState } from "react";
-import dayjs from "dayjs";
-import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
-import Link from "next/link";
 import BreadCrumb from "@/components/ui/BreadCrumb";
 import ActionBar from "@/components/ui/ActionBar";
 import PPTable from "@/components/ui/PPTable";
 import { useGetAllAttendanceQuery } from "@/redux/api/attendanceApi";
-import FormDatePicker from "@/components/Forms/FormDatePicker";
+import dayjs from "dayjs";
+import moment from "moment";
 
-const ViewAttendance = () => {
+const AllAttendance = () => {
+  const currentDate = moment(new Date()).format("YYYY-MM-DD");
+  const [selectedDate, setSelectedDate] = useState(currentDate);
   const query: Record<string, any> = {};
-
   const [page, setPage] = useState<number>(1);
   const [size, setSize] = useState<number>(10);
   const [sortBy, setSortBy] = useState<string>("");
   const [sortOrder, setSortOrder] = useState<string>("");
   const [searchTerm, setSearchTerm] = useState<string>("");
 
-  const [open, setOpen] = useState<boolean>(false);
-  const [eventId, setEventId] = useState<string>("");
-
   query["limit"] = size;
   query["page"] = page;
   query["sortBy"] = sortBy;
   query["sortOrder"] = sortOrder;
+  query["date"] = selectedDate;
+
+  const handleDateChange = (date: any) => {
+    setSelectedDate(dayjs(date).format("YYYY-MM-DD"));
+  };
 
   const debouncedSearchTerm = useDebounced({
     searchQuery: searchTerm,
@@ -40,7 +41,6 @@ const ViewAttendance = () => {
   const { data, isLoading } = useGetAllAttendanceQuery({ ...query });
 
   const meta = data?.meta;
-  console.log(data);
 
   const columns = [
     {
@@ -54,18 +54,10 @@ const ViewAttendance = () => {
     {
       title: "Check in time",
       dataIndex: "check_in",
-      // render: function (data: any) {
-      //   return data && dayjs(data).format("MMM D, YYYY hh:mm A");
-      // },
-      sorter: true,
     },
     {
       title: "Check out time",
       dataIndex: "check_out",
-      // render: function (data: any) {
-      //   return data && dayjs(data).format("MMM D, YYYY hh:mm A");
-      // },
-      sorter: true,
     },
     {
       title: "Description",
@@ -99,8 +91,8 @@ const ViewAttendance = () => {
           },
         ]}
       />
-     
-      <ActionBar title="View Attendance">
+
+      <ActionBar title="All Attendance">
         <Input
           size="large"
           placeholder="Search"
@@ -109,17 +101,14 @@ const ViewAttendance = () => {
             width: "20%",
           }}
         />
+        <DatePicker
+          style={{ width: "20%" }}
+          className="py-2"
+          onChange={handleDateChange}
+          defaultValue={dayjs(selectedDate, dateFormat)}
+          format="YYYY-MM-DD"
+        />
       </ActionBar>
-      <DatePicker 
-      style={{
-        width: "20%",
-        marginBottom: "10px",
-      }}
-        
-        defaultValue={dayjs("2015/01/01", dateFormat)}
-        format={dateFormat}
-      />
-      
 
       <PPTable
         loading={isLoading}
@@ -137,4 +126,4 @@ const ViewAttendance = () => {
   );
 };
 
-export default ViewAttendance;
+export default AllAttendance;

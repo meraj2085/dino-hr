@@ -9,6 +9,8 @@ import AdminBasicInfoForm from "@/components/Organization/CreateAdminForms/Admin
 import AdminContactInfoForm from "@/components/Organization/CreateAdminForms/AdminContactInfo";
 import AdminFinancialInfoForm from "@/components/Organization/CreateAdminForms/AdminFinancialInfo";
 import AdminEmploymentInfoForm from "@/components/Organization/CreateAdminForms/AdminEmploymentInfo";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { userSchema } from "@/schema/user";
 
 const steps = [
   {
@@ -43,7 +45,7 @@ const AddAdmin = ({ params }: { params: Record<"adminOrgId", string> }) => {
     try {
       const res = await addAdmin(values).unwrap();
       if (res.id) {
-        message.success("Employee Added Successfully");
+        message.success("Admin Added Successfully");
       }
     } catch (err: any) {
       message.error(err.message);
@@ -73,6 +75,7 @@ const AddAdmin = ({ params }: { params: Record<"adminOrgId", string> }) => {
           handleAdminsSubmit(value);
         }}
         steps={steps}
+        resolver={yupResolver(userSchema)}
       />
     </div>
   );

@@ -19,6 +19,7 @@ const AdminBasicInfoForm = () => {
               placeholder="Enter First Name"
               label="First Name"
               size="large"
+              required
             />
           </Col>
           <Col xs={24} md={12} lg={6} className="mt-3">
@@ -27,6 +28,7 @@ const AdminBasicInfoForm = () => {
               placeholder="Enter Last Name"
               label="Last Name"
               size="large"
+              required
             />
           </Col>
           <Col xs={24} md={12} lg={6} className="mt-3">
@@ -34,6 +36,7 @@ const AdminBasicInfoForm = () => {
               name="date_of_birth"
               label="Date of birth"
               size="large"
+              required
             />
           </Col>
           <Col xs={24} md={12} lg={6} className="mt-3">
@@ -43,6 +46,7 @@ const AdminBasicInfoForm = () => {
               options={genderOptions}
               label="Gender"
               placeholder="Select"
+              required
             />
           </Col>
           <Col xs={24} md={12} lg={6} className="mt-3">
@@ -51,6 +55,7 @@ const AdminBasicInfoForm = () => {
               placeholder="Enter Phone Number"
               label="Phone Number"
               size="large"
+              required
             />
           </Col>
           <Col xs={24} md={12} lg={6} className="mt-3">
@@ -68,6 +73,7 @@ const AdminBasicInfoForm = () => {
               label="Enter Office Email"
               type="email"
               size="large"
+              required
             />
           </Col>
           <Col xs={24} md={12} lg={6} className="mt-3">

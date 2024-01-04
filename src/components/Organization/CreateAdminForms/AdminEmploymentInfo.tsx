@@ -1,22 +1,29 @@
 import { Col, Row } from "antd";
-import { departmentOptions, designationOptions, employmentStatus, roleOptions, teamOptions } from "@/constants/global";
+import {
+  departmentOptions,
+  designationOptions,
+  employmentStatus,
+  roleOptions,
+  teamOptions,
+} from "@/constants/global";
 import FormSelectField from "@/components/Forms/FormSelectField";
 import NormalDatePicker from "@/components/Forms/NormalDatePicker";
 import FormInput from "@/components/Forms/FormInput";
+import { useGetAllUsersQuery } from "@/redux/api/userApi";
 
 const AdminEmploymentInfoForm = () => {
+  const { data, isLoading } = useGetAllUsersQuery({});
+
+  const managerOptions: any = data?.users
+    ?.filter((user: any) => user.role === "Manager")
+    .map((user: any) => ({
+      label: user.first_name + " " + user.last_name,
+      value: user._id,
+    }));
+
   return (
     <div className="border border-gray-300 rounded-md p-4 my-4">
       <Row gutter={{ xs: 4, md: 20 }}>
-        {/* <Col xs={24} md={12} lg={6} className="mt-3">
-          <FormSelectField
-            size="large"
-            name="organization_id"
-            options={organizationIdOptions}
-            label="Organization ID"
-            placeholder="Your Organization ID"
-          />
-        </Col> */}
         <Col xs={24} md={12} lg={6} className="mt-3">
           <FormSelectField
             size="large"
@@ -24,6 +31,7 @@ const AdminEmploymentInfoForm = () => {
             options={employmentStatus}
             label="Employment Status"
             placeholder="Your Employment Status"
+            required
           />
         </Col>
         <Col xs={24} md={12} lg={6} className="mt-3">
@@ -31,14 +39,7 @@ const AdminEmploymentInfoForm = () => {
             name="date_of_joining"
             label="Date of Joining"
             size="large"
-          />
-        </Col>
-        <Col xs={24} md={12} lg={6} className="mt-3">
-          <FormInput
-            size="large"
-            name="employee_code"
-            label="Enter Employee Code"
-            placeholder="eg: EMP00001"
+            required
           />
         </Col>
         <Col xs={24} md={12} lg={6} className="mt-3">
@@ -48,6 +49,7 @@ const AdminEmploymentInfoForm = () => {
             options={departmentOptions}
             label="Department"
             placeholder="Your Department"
+            required
           />
         </Col>
         <Col xs={24} md={12} lg={6} className="mt-3">
@@ -57,6 +59,7 @@ const AdminEmploymentInfoForm = () => {
             options={designationOptions}
             label="Designation"
             placeholder="Your Designation"
+            required
           />
         </Col>
         <Col xs={24} md={12} lg={6} className="mt-3">
@@ -66,6 +69,7 @@ const AdminEmploymentInfoForm = () => {
             options={teamOptions}
             label="Team"
             placeholder="Your Team"
+            required
           />
         </Col>
         <Col xs={24} md={12} lg={6} className="mt-3">
@@ -75,33 +79,27 @@ const AdminEmploymentInfoForm = () => {
             options={roleOptions}
             label="Role"
             placeholder="Your Role"
+            required
           />
         </Col>
-        {/* <Col xs={24} md={12} lg={6} className="mt-3">
+        <Col xs={24} md={12} lg={6} className="mt-3">
           <FormSelectField
             size="large"
             name="manager_id"
-            options={managerIdOptions}
-            label="Manager ID"
+            options={managerOptions || [{ label: "No Manager", value: "no-manager" }]}
+            label="Manager"
             placeholder="Your Manager ID"
+            required
           />
-        </Col> */}
+        </Col>
         <Col xs={24} md={12} lg={6} className="mt-3">
           <NormalDatePicker
             name="contract_date"
             label="Contract Date"
             size="large"
+            required
           />
         </Col>
-        {/* <Col xs={24} md={12} lg={6} className="mt-3">
-          <FormSelectField
-            size="large"
-            name="user_type"
-            options={userTypeOptions}
-            label="User Type"
-            placeholder="Your User Type"
-          />
-        </Col> */}
       </Row>
     </div>
   );

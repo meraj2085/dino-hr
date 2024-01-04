@@ -75,6 +75,24 @@ const ApproveLeave = () => {
 
   const columns = [
     {
+      title: "Employee Name",
+      dataIndex: "user_id",
+      render: function (data: any) {
+        return (
+          <span>
+            {data?.first_name} {data?.last_name}
+          </span>
+        );
+      },
+    },
+    {
+      title: "Employee Code",
+      dataIndex: "user_id",
+      render: function (data: any) {
+        return <span>{data?.employee_code}</span>;
+      },
+    },
+    {
       title: "Leave Types",
       dataIndex: "leave_type",
     },

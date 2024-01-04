@@ -128,7 +128,7 @@ const LoginPage = () => {
                     <p
                       onClick={() =>
                         setDefaultValues({
-                          office_email: "merajhossain2086@gmail.com",
+                          office_email: "employee@dino.com",
                           password: "Dino-123",
                         })
                       }

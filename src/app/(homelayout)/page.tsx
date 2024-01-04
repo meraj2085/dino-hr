@@ -8,6 +8,8 @@ import Footer from "@/components/Footer";
 import AboutUs from "@/components/AboutUs";
 import Feedback from "@/components/Feedback";
 import Hero from "@/components/Hero/Hero";
+import Overview from "@/components/Overview";
+import OurTeam from "@/components/OurTeam";
 
 export default function Home() {
   return (
@@ -16,7 +18,9 @@ export default function Home() {
       <VideoSection />
       <AboutUs />
       <TopCompanies />
-      <MeetOurTeam />
+      {/* <MeetOurTeam /> */}
+      <OurTeam />
+      <Overview />
       <PricingSection />
       <ReviewSection />
       {/* <ContactUs /> */}

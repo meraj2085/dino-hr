@@ -5,13 +5,14 @@ import "./Hero.css";
 
 const Hero = () => {
   return (
-    <section className="min-h-[800px] relative">
+    <section className="min-h-[800px] relative overflow-hidden">
       <p className="shape-bg bg-gradient-to-t from-white via-[#179773] to-white blur-2xl"></p>
-      <div className="container flex flex-col-reverse justify-center p-6 mx-auto sm:py-12 lg:py-[150px] lg:flex-row lg:justify-between">
+      <div className="container flex flex-col-reverse justify-center p-6 mx-auto sm:py-12 lg:py-[70px] lg:flex-row lg:justify-between">
         <div className="flex flex-col justify-center p-6 text-center rounded-sm lg:max-w-md xl:max-w-lg lg:text-left">
           <h1 className="text-5xl font-bold leadi sm:text-6xl">
             Expert <br />
-            <span>HR Support</span> <span className="text-gradient">With Dino</span>
+            <span>HR Support</span>{" "}
+            <span className="text-gradient">With Dino</span>
           </h1>
           <p className="mt-6 mb-8 text-lg sm:mb-12">
             Simplify HR tasks with Dino, your all in one HR management system.
@@ -20,7 +21,10 @@ const Hero = () => {
             many more.
           </p>
           <div className="flex flex-col space-y-4 sm:items-center sm:justify-center sm:flex-row sm:space-y-0 sm:space-x-4 lg:justify-start">
-            <button className="relative inline-flex items-center justify-start py-3 pl-4 pr-12 overflow-hidden font-semibold transition-all duration-150 ease-in-out rounded hover:pl-10 hover:pr-6 bg-gray-50 group">
+            <a
+              href="#video-section"
+              className="relative inline-flex items-center justify-start py-3 pl-4 pr-12 overflow-hidden font-semibold transition-all duration-150 ease-in-out rounded hover:pl-10 hover:pr-6 bg-gray-50 group"
+            >
               <span className="absolute bottom-0 left-0 w-full h-1 transition-all duration-150 ease-in-out group-hover:h-full"></span>
               <span className="absolute right-0 pr-4 duration-200 ease-out group-hover:translate-x-12">
                 <svg
@@ -57,7 +61,7 @@ const Hero = () => {
               <span className="relative w-full text-left transition-colors duration-200 ease-in-out text-[#00674A]">
                 Learn More
               </span>
-            </button>
+            </a>
             <Link
               href="/bookCall"
               className="relative inline-flex items-center justify-start px-6 py-3 overflow-hidden font-medium transition-all bg-[#00674A] rounded-xl group"
@@ -72,17 +76,16 @@ const Hero = () => {
             </Link>
           </div>
         </div>
-        <div className="flex items-center justify-center p-6 mt-8 lg:mt-0 h-72 sm:h-80 lg:h-96 xl:h-112 2xl:h-128">
+        <div className="flex items-center justify-center p-6 mt-8 lg:mt-0 ">
           <Image
             src={globalMap}
             alt="global map"
-            height={500}
-            width={500}
-            className="object-contain h-72 sm:h-80 lg:h-96 xl:h-112 2xl:h-128"
+            height={800}
+            width={800}
+            className="object-contain "
           />
         </div>
       </div>
-      {/* <p className="hola bg-gradient-to-t from-white via-[#179773] to-white blur-2xl"></p> */}
     </section>
   );
 };

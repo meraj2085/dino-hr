@@ -28,3 +28,9 @@
 ::-webkit-scrollbar-track {
   background-color: #f1f1f1;
 }
+
+.text-gradient {
+  background: linear-gradient(45deg, #3a3a3a, #00674a, #f8f8f8);
+  background-clip: text;
+  color: transparent;
+}

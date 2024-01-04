@@ -32,18 +32,26 @@ const profile = () => {
         <Card className="mt-5">
           <div className="grid lg:grid-cols-2 mx-auto ">
             {/* left  */}
-            <div className="flex justify-start items-center mb-5 lg:mb-0">
+            <div className="md:flex justify-start items-center mb-5 lg:mb-0">
               {" "}
-              <Avatar
-                size={{ xs: 24, sm: 32, md: 40, lg: 80, xl: 100, xxl: 120 }}
-                src={data?.profile_picture}
-              />
-              <div className="pl-4">
-                <h1 className="text-xl font-bold">
-                  {data?.first_name} {data?.middle_name} {data?.last_name}
-                </h1>
-                <h1 className="text-md font-bold">{data?.designation}</h1>
-                <h1 className="text-md font-bold">{data?.employee_code}</h1>
+              <div className="flex justify-center">
+                <Avatar
+                  size={{ xs: 80, sm: 80, md: 80, lg: 80, xl: 100, xxl: 120 }}
+                  src={data?.profile_picture}
+                />
+              </div>
+              <div className="flex justify-center">
+                <div className="pl-4">
+                  <h1 className="text-xl font-bold text-center md:text-left">
+                    {data?.first_name} {data?.middle_name} {data?.last_name}
+                  </h1>
+                  <h1 className="text-md font-bold text-center md:text-left">
+                    {data?.designation}
+                  </h1>
+                  <h1 className="text-md font-bold text-center md:text-left">
+                    {data?.employee_code}
+                  </h1>
+                </div>
               </div>
             </div>
 
@@ -80,7 +88,7 @@ const profile = () => {
 
         <div>
           <Row gutter={10}>
-            <Col xs={24} sm={18} md={16} lg={12}>
+            <Col xs={24} md={24} lg={12}>
               <Card
                 title="Personal Information"
                 bordered={false}
@@ -104,7 +112,7 @@ const profile = () => {
                 </div>
               </Card>
             </Col>
-            <Col xs={24} sm={18} md={16} lg={12}>
+            <Col xs={24} md={24} lg={12}>
               <Card title="Emergency Contact" bordered={false} className="mb-2">
                 <div className="flex">
                   {/* input */}
@@ -128,7 +136,7 @@ const profile = () => {
         </div>
         <div>
           <Row gutter={10}>
-            <Col xs={24} sm={18} md={16} lg={12}>
+            <Col xs={24} md={24} lg={12}>
               <Card title="Bank Details" bordered={false} className="mb-2">
                 <div className="flex">
                   {/* input */}
@@ -148,7 +156,7 @@ const profile = () => {
                 </div>
               </Card>
             </Col>
-            <Col xs={24} sm={18} md={16} lg={12}>
+            <Col xs={24} md={24} lg={12}>
               <Card title="Other Information" bordered={false} className="mb-2">
                 <div className="flex">
                   {/* input */}

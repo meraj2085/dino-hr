@@ -1,88 +1,106 @@
 "use client";
 
-import { useDebounced } from "@/redux/hooks";
-import { DatePicker, Input } from "antd";
-import { useState } from "react";
-
 import BreadCrumb from "@/components/ui/BreadCrumb";
-import ActionBar from "@/components/ui/ActionBar";
+import { Button, Col, Row, message } from "antd";
+import { useState } from "react";
 import PPTable from "@/components/ui/PPTable";
-import { useGetAllAttendanceQuery } from "@/redux/api/attendanceApi";
+import PPModal from "@/components/ui/Modal";
+import Form from "@/components/Forms/Form";
+import FormTextArea from "@/components/Forms/FormTextArea";
 import dayjs from "dayjs";
-// import moment from "moment";
+import {
+  useAddAttendanceMutation,
+  useGetSingleAttendanceQuery,
+  useUpdateAttendanceMutation,
+} from "@/redux/api/attendanceApi";
+import { getUserInfo } from "@/services/auth.service";
+import ActionBar from "@/components/ui/ActionBar";
+import CustomDatePicker from "@/components/Forms/CustomDatePicker";
+import CustomTimePicker from "@/components/Forms/CustomTimePicker";
 
-const ViewAttendance = () => {
-  // con st [selectedDate, setSelectedDate] = useState(
-  //   new Date().toISOString().split("T")[0]
-  // );
-  const currentDate = new Date().toISOString().split("T")[0];
+const AllAttendance = () => {
+  const { userId } = getUserInfo() as any;
+  const [open, setOpen] = useState<boolean>(false);
+  const [check, setCheck] = useState<boolean>(false);
+  const [updateAttendance] = useUpdateAttendanceMutation();
+  const [addAttendance] = useAddAttendanceMutation();
 
-  const [selectedDate, setSelectedDate] = useState(currentDate);
-  const query: Record<string, any> = {};
-
-  const [page, setPage] = useState<number>(1);
-  const [size, setSize] = useState<number>(10);
-  const [sortBy, setSortBy] = useState<string>("");
-  const [sortOrder, setSortOrder] = useState<string>("");
-  const [searchTerm, setSearchTerm] = useState<string>("");
-
-  query["limit"] = size;
-  query["page"] = page;
-  query["sortBy"] = sortBy;
-  query["sortOrder"] = sortOrder;
-  query["date"] = selectedDate;
-  console.log(selectedDate);
-  const handleDateChange = (date: any) => {
-    setSelectedDate(dayjs(date).format("YYYY-MM-DD"));
-    // Your custom logic for handling date change
+  const onSubmit = async (data: any) => {
+    try {
+      data.check_in = dayjs(new Date()).format("HH:mm");
+      data.check_out = "";
+      data.user_id = userId;
+      data.is_checkout = false;
+      data.date = dayjs(new Date()).format("YYYY-MM-DD");
+      const res = await addAttendance(data).unwrap();
+      if (res._id) {
+        setOpen(false);
+        message.success("Attendance Added Successfully");
+      }
+    } catch (err: any) {
+      console.error(err.message);
+      message.error(err.message);
+    }
+    setOpen(false);
   };
 
-  const debouncedSearchTerm = useDebounced({
-    searchQuery: searchTerm,
-    delay: 600,
-  });
+  const { data, isLoading } = useGetSingleAttendanceQuery(userId);
+  const handleClose = () => {
+    setOpen(false);
+  };
+  const handleCheckClose = () => {
+    setCheck(false);
+  };
 
-  if (!!debouncedSearchTerm) {
-    query["searchTerm"] = debouncedSearchTerm;
-  }
-  const { data, isLoading } = useGetAllAttendanceQuery({ ...query });
+  const currentDate = new Date().toISOString().split("T")[0];
+  const isCurrentDateAttendance =
+    data &&
+    data.find(
+      (attendanceData: any) =>
+        attendanceData?.createdAt.split("T")[0] === currentDate
+    );
 
-  const meta = data?.meta;
+  const handleCheckOut = async (attendanceId: string) => {
+    const res = await updateAttendance({
+      id: attendanceId,
+      data: { check_out: dayjs(new Date()).format("HH:mm"), is_checkout: true },
+    });
+    if (res) {
+      setCheck(false);
+      message.success("Attendance Updated Successfully");
+    }
+  };
 
   const columns = [
-    {
-      title: "Name",
-      dataIndex: "userName",
-    },
     {
       title: "Date",
       dataIndex: "date",
     },
+
     {
       title: "Check in time",
       dataIndex: "check_in",
+      sorter: true,
     },
     {
       title: "Check out time",
       dataIndex: "check_out",
+      sorter: true,
     },
     {
-      title: "Description",
-      dataIndex: "description",
+      title: "Action",
+      dataIndex: "is_checkout",
+      render: function (data: any) {
+        return (
+          <>
+            {!data && (
+              <Button onClick={() => setCheck(!check)}>Check out</Button>
+            )}
+          </>
+        );
+      },
     },
   ];
-
-  const onPaginationChange = (page: number, pageSize: number) => {
-    setPage(page);
-    setSize(pageSize);
-  };
-  const onTableChange = (pagination: any, filter: any, sorter: any) => {
-    const { order, field } = sorter;
-    setSortBy(field as string);
-    setSortOrder(order === "ascend" ? "asc" : "desc");
-  };
-
-  const dateFormat = "YYYY/MM/DD";
 
   return (
     <div style={{ overflowX: "auto" }}>
@@ -93,44 +111,106 @@ const ViewAttendance = () => {
             link: "/admin",
           },
           {
-            label: "View Attendance",
-            link: "/dashboard/admin/attendance/viewAttendance",
+            label: "All Attendance",
+            link: "/dashboard/admin/attendance/allAttendance",
           },
         ]}
       />
 
-      <ActionBar title="View Attendance">
-        <Input
-          size="large"
-          placeholder="Search"
-          onChange={(e) => setSearchTerm(e.target.value)}
-          style={{
-            width: "20%",
-          }}
-        />
+      <ActionBar title="My Attendance">
+        <span></span>
+        <div className="flex gap-5">
+          {!isCurrentDateAttendance?.date && (
+            <Button className="flex gap-5" onClick={() => setOpen(!open)}>
+              Check in{" "}
+            </Button>
+          )}
+        </div>
       </ActionBar>
-      <DatePicker
-        status="error" // You can customize this as needed
-        style={{ width: "30%" }}
-        onChange={handleDateChange}
-        defaultValue={dayjs(selectedDate, dateFormat)}
-        format="YYYY-MM-DD"
-      />
 
       <PPTable
         loading={isLoading}
         columns={columns}
-        dataSource={data?.attendances}
-        pageSize={size}
-        totalPages={meta?.total}
+        dataSource={data}
         showSizeChanger={true}
-        onPaginationChange={onPaginationChange}
-        onTableChange={onTableChange}
-        showPagination={true}
         scroll={{ x: true }}
       />
+      <PPModal
+        title="Check In"
+        isOpen={open}
+        closeModal={handleClose}
+        handleOk={() => setOpen(false)}
+        showOkButton={false}
+        showCancelButton={false}
+      >
+        <Form submitHandler={onSubmit}>
+          <Row gutter={{ xs: 4, md: 20 }}>
+            <Col xs={24} md={24} lg={24} className="mt-3">
+              <div>
+                <CustomDatePicker
+                  name="date"
+                  label="Check in Date"
+                  size="large"
+                />
+              </div>
+            </Col>
+
+            <Col xs={24} md={24} lg={24} className="mt-3">
+              <div>
+                <CustomTimePicker name="check_in" label="Time" />
+              </div>
+            </Col>
+
+            <Col xs={24} md={24} lg={24} className="mt-3">
+              <div>
+                <FormTextArea
+                  name="description"
+                  placeholder="Description"
+                  label="Description"
+                />
+              </div>
+            </Col>
+            <div className="flex justify-end item-end">
+              <Button
+                htmlType="submit"
+                className="bg-[#00674A] text-white hover:text-white "
+                style={{ margin: "10px 0px" }}
+              >
+                Check In
+              </Button>
+            </div>
+          </Row>
+        </Form>
+      </PPModal>
+      <PPModal
+        title="Are you sure you want to check out?"
+        isOpen={check}
+        closeModal={handleCheckClose}
+        handleOk={() => handleCheckOut(isCurrentDateAttendance?._id)}
+      >
+        <div className="mb-10">
+          <Form submitHandler={onSubmit}>
+            <Row gutter={{ xs: 4, md: 20 }}>
+              <Col xs={24} md={24} lg={24} className="my-3">
+                <div>
+                  <CustomDatePicker
+                    name="date"
+                    label="Check Out Date"
+                    size="large"
+                  />
+                </div>
+              </Col>
+              <Col xs={24} md={24} lg={24} className="mt-3">
+                <div>
+                  <CustomTimePicker name="check_out" label="Check Out Time" />
+                </div>
+              </Col>
+            </Row>
+          </Form>
+        </div>
+      </PPModal>
     </div>
   );
 };
 
-export default ViewAttendance;
+export default AllAttendance;

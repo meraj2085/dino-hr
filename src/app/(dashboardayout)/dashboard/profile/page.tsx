@@ -14,7 +14,7 @@ const profile = () => {
 
   if (isLoading) return <Loading />;
   return (
-    <div className="min-w-[200px]">
+    <div className="min-w-[250px]">
       <h1 className="text-2xl font-semibold pb-1">Profile</h1>
       <BreadCrumb
         items={[
@@ -43,7 +43,7 @@ const profile = () => {
               <div className="flex justify-center">
                 <div className="pl-4">
                   <h1 className="text-xl font-bold text-center md:text-left">
-                    {data?.first_name} {data?.middle_name} {data?.last_name}
+                    {data?.first_name} {data?.last_name}
                   </h1>
                   <h1 className="text-md font-bold text-center md:text-left">
                     {data?.designation}

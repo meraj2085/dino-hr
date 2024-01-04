@@ -1,48 +1,60 @@
+import Image from "next/image";
+
 const TeamMemberDetails = [
   {
     name: "Emma Johnson",
     role: "HR Manager",
-    image: "https://xsgames.co/randomusers/assets/avatars/female/18.jpg",
+    image:
+      "https://res.cloudinary.com/dx2drcria/image/upload/v1704349714/team/gy8vvyjqqkhxaepexlwh.jpg",
   },
   {
     name: "Sophia Smith",
     role: "Software Developer",
-    image: "https://xsgames.co/randomusers/assets/avatars/female/44.jpg",
+    image:
+      "https://res.cloudinary.com/dx2drcria/image/upload/v1704349713/team/ejfomxbuhsgvw3ffosjz.jpg",
   },
   {
     name: "Oliver Williams",
     role: "System Analyst",
-    image: "https://xsgames.co/randomusers/assets/avatars/male/29.jpg",
+    image:
+      "https://res.cloudinary.com/dx2drcria/image/upload/v1704349714/team/jkhrrrrisvje0udyajks.jpg",
   },
   {
     name: "Ava Brown",
     role: "HR Specialist",
-    image: "https://xsgames.co/randomusers/assets/avatars/female/22.jpg",
+    image:
+      "https://res.cloudinary.com/dx2drcria/image/upload/v1704349713/team/zmd3lpwqgzqylo8yf0hr.jpg",
   },
   {
     name: "Liam Jones",
     role: "Software Engineer",
-    image: "https://xsgames.co/randomusers/assets/avatars/male/25.jpg",
+    image:
+      "https://res.cloudinary.com/dx2drcria/image/upload/v1704349714/team/wu9zy0kvg44hi8jiabyt.jpg",
   },
   {
     name: "Isabella Davis",
     role: "Quality Assurance",
-    image: "https://xsgames.co/randomusers/assets/avatars/female/39.jpg",
+    image:
+      "https://res.cloudinary.com/dx2drcria/image/upload/v1704349714/team/unlppefujkunlxe9l2tw.jpg",
   },
   {
     name: "Alexander Taylor",
     role: "Database Administrator",
-    image: "https://xsgames.co/randomusers/assets/avatars/male/58.jpg",
+    image:
+      "https://res.cloudinary.com/dx2drcria/image/upload/v1704349715/team/bkxouwxdszgbl5kd6je1.jpg",
   },
   {
     name: "Mia Evans",
     role: "UI/UX Designer",
-    image: "https://xsgames.co/randomusers/assets/avatars/female/69.jpg",
+    // image: "https://xsgames.co/randomusers/assets/avatars/female/5.jpg",
+    image:
+      "https://res.cloudinary.com/dx2drcria/image/upload/v1704349714/team/cqhbcjnhi1tncrcibiv3.jpg",
   },
   {
     name: "Noah White",
     role: "Project Manager",
-    image: "https://xsgames.co/randomusers/assets/avatars/male/60.jpg",
+    image:
+      "https://res.cloudinary.com/dx2drcria/image/upload/v1704349715/team/hovhiwo5yiqqri2bwy63.jpg",
   },
 ];
 
@@ -63,10 +75,12 @@ const OurTeam = () => {
             {TeamMemberDetails.map((member, index) => (
               <div key={index} className="p-2 lg:w-1/3 md:w-1/2 w-full">
                 <div className="h-full flex items-center border-gray-200 border p-4 rounded-lg hover:shadow-md">
-                  <img
-                    alt="team"
+                  <Image
                     className="w-16 h-16 bg-gray-100 object-cover object-center flex-shrink-0 rounded-full mr-4"
+                    alt="team"
                     src={member?.image}
+                    width={100}
+                    height={100}
                   />
 
                   <div className="flex-grow">

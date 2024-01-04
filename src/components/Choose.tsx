@@ -1,10 +1,15 @@
 const ChooseSection = () => {
   return (
-    <div>
+    <div className="bg-[#F3F4F6] py-10">
       <div className="max-w-[1200px] mx-auto my-10">
-        <h2 className="text-center text-5xl p-5 font-bold mb-8">
-          Why Choose us?
-        </h2>
+        <div className="mb-5 md:mb-12">
+          <h1 className="text-5xl text-center font-bold leadi mb-3">
+            <span className="text-gradient">Why Us</span>
+          </h1>
+          <p className="max-w-2xl text-center mx-auto">
+            Know why you should choose us for your brand?
+          </p>
+        </div>
         <div className="md:grid grid-cols-3 w-fit gap-20 text-center">
           <div className="p-8">
             <div className="flex justify-center mb-4">
@@ -22,11 +27,10 @@ const ChooseSection = () => {
               </svg>
             </div>
 
-            <h2 className="text-2xl my-3">Wide range of brands</h2>
+            <h2 className="text-2xl my-3">Wide range of support</h2>
             <p>
-              I sell cars all over the world. No complaints have ever been
-              received. Always try to give good products keeping in mind the
-              buyer.
+              We provide a wide range of support to our clients. We are always 24/7
+              ready to help you.
             </p>
           </div>
           <div className="p-8">
@@ -51,8 +55,8 @@ const ChooseSection = () => {
             </div>
             <h2 className="text-2xl my-3">Trusted by our clients</h2>
             <p>
-              I see all the cars in my stock. So our reputation is always. You
-              too can be an honorable buyer of this stock of mine.So have faith.
+              We have a large number of clients who are happy with our services.
+              We provide the best services to our clients.
             </p>
           </div>
           <div className="p-8">
@@ -71,11 +75,10 @@ const ChooseSection = () => {
                 <path d="M19 1H9c-1.1 0-2 .9-2 2v3h2V4h10v16H9v-2H7v3c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V3c0-1.1-.9-2-2-2zM7.01 13.47l-2.55-2.55-1.27 1.27L7 16l7.19-7.19-1.27-1.27-5.91 5.93z"></path>
               </svg>
             </div>
-            <h2 className="text-2xl my-3">Fast & easy financing</h2>
+            <h2 className="text-2xl my-3">Fast & easy UI/UX</h2>
             <p>
-              I can help with your financing plan, we can offer some tips and
-              tricks. Drive off with this dream car of yours regardless of your
-              credit history.
+              Fast and easy to use. You can easily use this HRMS software. Our
+              UI is very simple and easy to use.
             </p>
           </div>
         </div>

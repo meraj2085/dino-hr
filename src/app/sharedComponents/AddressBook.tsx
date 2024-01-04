@@ -7,7 +7,6 @@ import { IAddress } from "@/types";
 import ActionBar from "@/components/ui/ActionBar";
 import Loading from "@/app/loading";
 import Image from "next/image";
-import profileImg from "../../../../../../public/assets/profile.png";
 
 const AddressBook = () => {
   const query: Record<string, any> = {};
@@ -47,7 +46,7 @@ const AddressBook = () => {
                     size={64}
                     src={
                       data?.profile_picture || (
-                        <Image src={profileImg} alt="profile" />
+                        <Image src={data?.profile_picture || ""} alt="profile" />
                       )
                     }
                   />

@@ -4,8 +4,10 @@ import aboutUsImg from "../../public/assets/about-us.png";
 const AboutUs = () => {
   return (
     <div className="max-w-[1200px] mx-auto px-5 mt-14 md:mt-16 lg:mt-24">
-      <div className="mb-5 md:mb-8">
-        <h1 className="text-4xl  font-bold text-center mb-3">About Us</h1>
+      <div className="mb-5 md:mb-12">
+        <h1 className="text-5xl text-center font-bold leadi mb-3">
+          <span className="text-gradient">About Us</span>
+        </h1>
         <p className="max-w-2xl text-center mx-auto">
           Know more about Dino HR and how we can help you.
         </p>
@@ -20,12 +22,11 @@ const AboutUs = () => {
         </div>
         <div className="flex flex-col justify-center">
           <p className="text-justify">
-            Dive into the core of Dino HR, where the synergy of technology and
-            human resources transforms the way businesses thrive. At the heart
-            of our platform is a team of dedicated professionals who envision a
-            workplace where HR processes are not just streamlined but are
-            catalysts for organizational success.
-            <span className="hidden lg:block">
+            Simplify HR tasks with Dino, your all in one HR management system.
+            At the heart of our platform is a team of dedicated professionals
+            who envision a workplace where HR processes are not just streamlined
+            but are catalysts for organizational success.
+            <span className="hidden lg:block mt-5">
               As pioneers in the realm of HR innovation, we understand the
               intricate balance between people and technology. Our mission is to
               empower businesses with a comprehensive HR solution that goes

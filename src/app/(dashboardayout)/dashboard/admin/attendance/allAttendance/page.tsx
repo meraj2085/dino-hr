@@ -7,6 +7,7 @@ import PPModal from "@/components/ui/Modal";
 import Form from "@/components/Forms/Form";
 import FormTextArea from "@/components/Forms/FormTextArea";
 import FormDatePicker from "@/components/Forms/FormDatePicker";
+import dayjs from "dayjs";
 import {
   useAddAttendanceMutation,
   useGetSingleAttendanceQuery,
@@ -14,6 +15,9 @@ import {
 } from "@/redux/api/attendanceApi";
 import { getUserInfo } from "@/services/auth.service";
 import FormTimePicker from "@/components/Forms/FormTimePicker";
+import ActionBar from "@/components/ui/ActionBar";
+import Link from "next/link";
+import CustomDatePicker from "@/components/Forms/CustomDatePicker";
 
 const AllAttendance = () => {
   const { userId } = getUserInfo() as any;
@@ -29,6 +33,8 @@ const AllAttendance = () => {
     try {
       data.check_out = "";
       data.user_id = userId;
+      data.date = dayjs(data?.date).format("YYYY-MM-DD");
+      console.log("date: ",dayjs(data?.date).format("YYYY-MM-DD"))
       const res = await addAttendance(data).unwrap();
       if (res._id) {
         setOpen(false);
@@ -85,6 +91,9 @@ const AllAttendance = () => {
     },
   ];
 
+  const currentDate = new Date().toISOString().split("T")[0];
+const isCurrentDateAttendance = data && data.find((attendanceData: any) => attendanceData.createdAt === currentDate);
+
   return (
     <div style={{ overflowX: "auto" }}>
       <BreadCrumb
@@ -99,6 +108,15 @@ const AllAttendance = () => {
           },
         ]}
       />
+
+<ActionBar title="Organization Detail">
+        <span></span>
+        <div className="flex gap-5">
+          {
+            !isCurrentDateAttendance && <Button className="flex gap-5" onClick={() => setOpen(!open)}>Check in </Button>
+          }
+        </div>
+      </ActionBar>
 
       <PPTable
         loading={isLoading}
@@ -120,7 +138,6 @@ const AllAttendance = () => {
             <Col xs={24} md={24} lg={24} className="mt-3">
               <div>
                 <FormDatePicker
-                  // onChange={(value: any) => handlePreferenceChange(value)}
                   name="date"
                   label="Check in Date"
                   size="large"

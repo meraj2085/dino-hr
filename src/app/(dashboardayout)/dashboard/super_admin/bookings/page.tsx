@@ -79,18 +79,15 @@ const BookingManagementPage = () => {
         return (
           <>
             <Link href={`/dashboard/super_admin/bookings/view/${data}`}>
-              <Button>
-                <EyeOutlined />
-              </Button>
+              <Button icon={<EyeOutlined />} />
             </Link>
             <Link href={`/dashboard/super_admin/bookings/edit/${data}`}>
               <Button
                 style={{
                   margin: "0px 5px",
                 }}
-              >
-                <EditOutlined />
-              </Button>
+                icon={<EditOutlined />}
+              />
             </Link>
           </>
         );

@@ -8,6 +8,7 @@ import { SubmitHandler } from "react-hook-form";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { useChangePasswordMutation } from "@/redux/api/authApi";
+import { getUserInfo } from "@/services/auth.service";
 
 type FormValues = {
   old_password: string;
@@ -32,7 +33,8 @@ const ChangePassword = () => {
       // console.log(res);
       if (res._id) {
         message.success("Password changed successfully");
-        router.push("/auth/login");
+        const { user_type } = getUserInfo() as any;
+        router.push(`/dashboard/${user_type}`);
       }
     } catch (err: any) {
       message.error(err.message);

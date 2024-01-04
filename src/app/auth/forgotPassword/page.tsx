@@ -13,6 +13,7 @@ import {
   useSendOtpMutation,
   useVerifyOtpMutation,
 } from "@/redux/api/resetPasswordApi";
+import { getUserInfo } from "@/services/auth.service";
 
 type mailFormValues = {
   office_email: string;
@@ -106,7 +107,8 @@ const ResetPassword = () => {
       }).unwrap();
       if (res?._id) {
         message.success("Password reset successfully!");
-        router.push("/auth/login");
+        const { user_type } = getUserInfo() as any;
+        router.push(`/dashboard/${user_type}`);
       }
     } catch (err: any) {
       message.error(err.message);

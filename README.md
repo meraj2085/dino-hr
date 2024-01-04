@@ -6,6 +6,36 @@
 
 **Dino HR** is The HR Management system streamlines organizational processes, empowering Super Admins to manage tasks seamlessly. Admins oversee employee management, communication, and control attendance, leaves, and events. Employees benefit from a user-friendly interface for simplified management. Common features include secure authentication, user profiles, and responsiveness across devices, enhancing overall efficiency and communication. Emphasizing security and comprehensive documentation, the system optimizes human resources management.
 
+## Project Setup
+
+Follow these steps to set up and run the project:
+
+1. **Clone the repository:**
+
+    **For Windows:**
+    ```bash
+    git clone https://github.com/meraj2085/dino-hr.git
+    cd dino-hr
+    ```
+
+    **For macOS:**
+    ```bash
+    gh repo clone meraj2085/dino-hr
+    cd dino-hr
+    ```
+
+2. **Install dependencies using [Yarn](https://yarnpkg.com/):**
+    ```bash
+    yarn
+    ```
+
+3. **Run the project:**
+    ```bash
+    yarn dev
+    ```
+
+Make sure to have Git and Yarn installed globally before running the commands above.
+
 
 ## Credentials
 
@@ -29,38 +59,6 @@ Employee (Dino Corporation)
   merajhossain2086@gmail.com
   password: Dino-123
 ```
-
-
-## Project Setup
-
-Follow these steps to set up and run the project:
-
-1. **Clone the repository:**
-
-    **For Windows:**
-    ```bash
-    git clone https://github.com/your-username/your-repository.git
-    cd your-repository
-    ```
-
-    **For macOS:**
-    ```bash
-    git clone https://github.com/your-username/your-repository.git
-    cd your-repository
-    ```
-
-2. **Install dependencies using [Yarn](https://yarnpkg.com/):**
-    ```bash
-    yarn
-    ```
-
-3. **Run the project:**
-    ```bash
-    yarn dev
-    ```
-
-Make sure to have Git and Yarn installed globally before running the commands above.
-
 
 
 ## Tech Stack

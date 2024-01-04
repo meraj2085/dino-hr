@@ -6,6 +6,8 @@ import { useDebounced } from "@/redux/hooks";
 import { IAddress } from "@/types";
 import ActionBar from "@/components/ui/ActionBar";
 import Loading from "@/app/loading";
+import Image from "next/image";
+import profileImg from "../../../../../../public/assets/profile.png";
 
 const AddressBook = () => {
   const query: Record<string, any> = {};
@@ -43,7 +45,11 @@ const AddressBook = () => {
                 <div className="flex justify-center">
                   <Avatar
                     size={64}
-                    src="https://www.apexfootwearltd.com/media/images/2._SNM.466072d2.fill-494x620-c100.jpg"
+                    src={
+                      data?.profile_picture || (
+                        <Image src={profileImg} alt="profile" />
+                      )
+                    }
                   />
                 </div>
                 <div className="">

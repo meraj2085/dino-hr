@@ -192,6 +192,7 @@ export type IAddress = {
   last_name?: string;
   phone_number?: number;
   office_email?: string;
+  profile_picture?: string;
   __v?: number;
 };
 

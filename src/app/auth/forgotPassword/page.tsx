@@ -7,7 +7,7 @@ import FormInput from "@/components/Forms/FormInput";
 import { SubmitHandler } from "react-hook-form";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { use, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import {
   useResetPasswordMutation,
   useSendOtpMutation,
@@ -63,7 +63,7 @@ const ResetPassword = () => {
       if (res?._id) {
         setOfficeEmail(data.office_email);
         message.success("We've sent an OTP on your mail! Please check.");
-        setSeconds(60);
+        setSeconds(30);
       }
     } catch (err: any) {
       message.error(err.message);

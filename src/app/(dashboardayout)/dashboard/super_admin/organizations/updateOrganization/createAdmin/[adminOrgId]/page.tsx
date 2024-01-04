@@ -45,7 +45,7 @@ const AddAdmin = ({ params }: { params: Record<"adminOrgId", string> }) => {
     try {
       const res = await addAdmin(values).unwrap();
       if (res.id) {
-        message.success("Employee Added Successfully");
+        message.success("Admin Added Successfully");
       }
     } catch (err: any) {
       message.error(err.message);

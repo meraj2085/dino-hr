@@ -86,7 +86,7 @@ const AdminEmploymentInfoForm = () => {
           <FormSelectField
             size="large"
             name="manager_id"
-            options={managerOptions || [{ label: "No Manager", value: "" }]}
+            options={managerOptions || [{ label: "No Manager", value: "no-manager" }]}
             label="Manager"
             placeholder="Your Manager ID"
             required

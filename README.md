@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://res.cloudinary.com/df5c6zeao/image/upload/v1704388977/Dino%20HR/dono.png" alt="Logo" width="150" style="max-width: 200px;">
+  <img src="https://res.cloudinary.com/df5c6zeao/image/upload/v1704388977/Dino%20HR/dono.png" alt="Logo" width="70" style="max-width: 200px;">
 </p>
 
 #

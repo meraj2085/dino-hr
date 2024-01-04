@@ -47,7 +47,7 @@ export const leaveApi = baseApi.injectEndpoints({
 
     leavesByEmail: build.query({
       query: (userId: string | string[] | undefined) => ({
-        url: `${LEAVE_API}?user_id=${userId}`,
+        url: `${LEAVE_API}/leaves/${userId}`,
         method: "GET",
       }),
       providesTags: [tagTypes.leave],

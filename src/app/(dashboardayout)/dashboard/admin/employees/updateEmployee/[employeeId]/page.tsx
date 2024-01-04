@@ -84,6 +84,7 @@ const UpdateEmployee = ({ params }: { params: { employeeId: string } }) => {
     other_phone_number: data?.other_phone_number,
     personal_email: data?.personal_email,
     bank_name: data?.bank_name,
+    role: data?.role, // ['Employee', 'Manager', 'Admin', 'Super Admin']
     account_number: data?.account_number,
     branch_name: data?.branch_name,
     designation: data?.designation, // ['Software Engineer', 'Senior Software Engineer', 'Team Lead', 'Project Manager', 'Product Manager', 'CEO', 'CTO', 'COO', 'CFO', 'HR Manager', 'HR Executive', 'HR Intern', 'Marketing Manager', 'Marketing Executive', 'Marketing Intern', 'Sales Manager', 'Sales Executive', 'Sales Intern', 'Finance Manager', 'Finance Executive', 'Finance Intern', 'Operations Manager', 'Operations Executive', 'Operations Intern']

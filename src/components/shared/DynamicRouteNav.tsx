@@ -11,7 +11,7 @@ const DynamicRouteNav = () => {
         (user_type === "admin" ||
           user_type === "super_admin" ||
           user_type === "hr" ||
-          user_type === "employer") && (
+          user_type === "employee") && (
           <li>
             <Link
               className="text-gray-500 transition hover:text-gray-500/75"

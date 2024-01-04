@@ -11,6 +11,7 @@ import { useRouter } from "next/navigation";
 import { loginSchema } from "@/schema/login";
 import Link from "next/link";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { useState } from "react";
 
 type FormValues = {
   office_email: string;
@@ -18,22 +19,25 @@ type FormValues = {
 };
 
 const LoginPage = () => {
-  const [userLogin, { isLoading }] = useUserLoginMutation();
+  const [userLogin, { isLoading: loading }] = useUserLoginMutation();
   const router = useRouter();
+  const [isLoading, setIsLoading] = useState(false);
 
   const onSubmit: SubmitHandler<FormValues> = async (data: any) => {
     try {
+      setIsLoading(true);
       const res = await userLogin({ ...data }).unwrap();
       if (res?.accessToken) {
         storeUserInfo({ accessToken: res?.accessToken });
         const { user_type } = getUserInfo() as any;
         router.push(`/dashboard/${user_type}`);
+        setIsLoading(false);
         message.success("User logged in successfully!");
-      } else {
-        message.error("Email or password is incorrect!");
       }
     } catch (err: any) {
+      setIsLoading(false);
       console.error(err.message);
+      message.error(err.message);
     }
   };
 
@@ -56,7 +60,7 @@ const LoginPage = () => {
               Dino
             </h1>
           </div>
-          {isLoading ? (
+          {isLoading || loading ? (
             <div className="flex justify-center items-center h-[450px]">
               <div className="animate-spin rounded-full border-t-4 border-[#00674A] border-solid h-16 w-16"></div>
             </div>

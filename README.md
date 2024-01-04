@@ -56,7 +56,7 @@ Admin (Dino Corporation)
 Employee (Dino Corporation)
 
 ```bash
-  merajhossain2086@gmail.com
+  employee@dino.com
   password: Dino-123
 ```
 

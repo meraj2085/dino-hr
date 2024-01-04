@@ -23,6 +23,11 @@ const LoginPage = () => {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
 
+  const [defaultValues, setDefaultValues] = useState<FormValues>({
+    office_email: "",
+    password: "",
+  });
+
   const onSubmit: SubmitHandler<FormValues> = async (data: any) => {
     try {
       setIsLoading(true);
@@ -71,6 +76,7 @@ const LoginPage = () => {
               </h1>
               <Form
                 submitHandler={onSubmit}
+                defaultValues={defaultValues}
                 resolver={yupResolver(loginSchema)}
               >
                 <div>
@@ -102,6 +108,47 @@ const LoginPage = () => {
                   <Button shape="default" htmlType="submit">
                     Login
                   </Button>
+                </div>
+
+                <p className="text-center mt-10 mb-2 font-semibold">Login Credentials</p>
+                <div className="flex justify-center cursor-pointer">
+                  <span className="inline-flex -space-x-px overflow-hidden rounded-md border bg-white shadow-sm">
+                    <p
+                      onClick={() =>
+                        setDefaultValues({
+                          office_email: "admin@dino.com",
+                          password: "Dino-123",
+                        })
+                      }
+                      className="inline-block px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-100 focus:relative"
+                    >
+                      Admin
+                    </p>
+
+                    <p
+                      onClick={() =>
+                        setDefaultValues({
+                          office_email: "merajhossain2086@gmail.com",
+                          password: "Dino-123",
+                        })
+                      }
+                      className="inline-block px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-100 focus:relative"
+                    >
+                      Employee
+                    </p>
+
+                    <p
+                      onClick={() =>
+                        setDefaultValues({
+                          office_email: "super@admin.com",
+                          password: "Dino-123",
+                        })
+                      }
+                      className="inline-block px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-100 focus:relative"
+                    >
+                      Super Admin
+                    </p>
+                  </span>
                 </div>
               </Form>
             </>

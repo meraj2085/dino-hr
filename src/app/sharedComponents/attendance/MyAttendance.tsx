@@ -18,7 +18,7 @@ import ActionBar from "@/components/ui/ActionBar";
 import CustomDatePicker from "@/components/Forms/CustomDatePicker";
 import CustomTimePicker from "@/components/Forms/CustomTimePicker";
 
-const AllAttendance = () => {
+const MyAttendance = () => {
   const { userId } = getUserInfo() as any;
   const [open, setOpen] = useState<boolean>(false);
   const [check, setCheck] = useState<boolean>(false);
@@ -213,4 +213,4 @@ const AllAttendance = () => {
   );
 };
 
-export default AllAttendance;
+export default MyAttendance;

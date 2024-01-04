@@ -85,19 +85,11 @@ export const sidebarItems = (user_type: string) => {
         },
         {
           label: (
-            <Link href={`/dashboard/${user_type}/attendance/viewAttendance`}>
-              View Attendance
+            <Link href={`/dashboard/${user_type}/attendance/myAttendance`}>
+              My Attendance
             </Link>
           ),
-          key: `/dashboard/${user_type}/attendance/viewAttendance`,
-        },
-        {
-          label: (
-            <Link href={`/dashboard/${user_type}/attendance/teamManagement`}>
-              Team Attendance
-            </Link>
-          ),
-          key: `/dashboard/${user_type}/attendance/teamManagement`,
+          key: `/dashboard/${user_type}/attendance/myAttendance`,
         },
       ],
     },
@@ -245,27 +237,11 @@ export const sidebarItems = (user_type: string) => {
       children: [
         {
           label: (
-            <Link href={`/dashboard/${user_type}/attendance/addAttendance`}>
-              Add Attendance
+            <Link href={`/dashboard/${user_type}/attendance/myAttendance`}>
+              My Attendance
             </Link>
           ),
-          key: `/dashboard/${user_type}/attendance/addAttendance`,
-        },
-        {
-          label: (
-            <Link href={`/dashboard/${user_type}/attendance/viewAttendance`}>
-              View Attendance
-            </Link>
-          ),
-          key: `/dashboard/${user_type}/attendance/viewAttendance`,
-        },
-        {
-          label: (
-            <Link href={`/dashboard/${user_type}/attendance/teamManagement`}>
-              Team Attendance
-            </Link>
-          ),
-          key: `/dashboard/${user_type}/attendance/teamManagement`,
+          key: `/dashboard/${user_type}/attendance/myAttendance`,
         },
       ],
     },

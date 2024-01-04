@@ -8,8 +8,6 @@ import {
 } from "@/constants/global";
 import FormSelectField from "@/components/Forms/FormSelectField";
 import NormalDatePicker from "@/components/Forms/NormalDatePicker";
-import FormInput from "@/components/Forms/FormInput";
-import { useGetAllOrganizationQuery } from "@/redux/api/organizationApi";
 import { useGetAllUsersQuery } from "@/redux/api/userApi";
 
 const EmployeeEmploymentInfoForm = () => {
@@ -87,7 +85,7 @@ const EmployeeEmploymentInfoForm = () => {
           <FormSelectField
             size="large"
             name="manager_id"
-            options={managerOptions || []}
+            options={managerOptions || [{ label: "No Manager", value: ""}]}
             label="Manager"
             placeholder="Your Manager"
             required

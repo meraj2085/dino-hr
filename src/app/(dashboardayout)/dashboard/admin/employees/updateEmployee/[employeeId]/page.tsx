@@ -10,6 +10,8 @@ import EmployeeContactInfoForm from "@/components/Employees/AddEmployeeForms/Emp
 import EmployeeEmploymentInfoForm from "@/components/Employees/AddEmployeeForms/EmployeeEmploymentInfo";
 import EmployeeFinancialInfoForm from "@/components/Employees/AddEmployeeForms/EmployeeFinancialInfo";
 import { useUpdateEmployeeMutation } from "@/redux/api/employeeApi";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { userSchema } from "@/schema/user";
 
 const UpdateEmployee = ({ params }: { params: { employeeId: string } }) => {
   const empId = params.employeeId;
@@ -125,6 +127,7 @@ const UpdateEmployee = ({ params }: { params: { employeeId: string } }) => {
           handleSubmit(value);
         }}
         steps={steps}
+        resolver={yupResolver(userSchema)}
       />
     </div>
   );

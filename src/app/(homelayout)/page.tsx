@@ -27,7 +27,7 @@ export default function Home() {
       <ChooseSection />
       {/* <ContactUs /> */}
       {/* <FAQsSection /> */}
-      {/* <BookCall /> */}
+      {/* <BookCall /> */} 
       <Feedback />
       <Footer />
     </>

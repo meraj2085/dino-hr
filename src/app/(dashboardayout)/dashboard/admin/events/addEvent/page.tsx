@@ -45,7 +45,7 @@ const AddEvent = () => {
   }
 
   return (
-    <div className="min-w-[250px]" style={{ overflowX: "auto" }}>
+    <div className="min-w-[250px]">
       <BreadCrumb
         items={[
           {

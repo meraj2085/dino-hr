@@ -1,9 +1,5 @@
 "use client";
-import { Button, message } from "antd";
-import vectorImg from "../../../../public/assets/animated-hr.gif";
-import purple_login from "../../../../public/assets/purple_login.png";
-import gray from "../../../../public/assets/gray.png";
-import green from "../../../../public/assets/green.png";
+import { message } from "antd";
 import Image from "next/image";
 import Form from "@/components/Forms/Form";
 import FormInput from "@/components/Forms/FormInput";

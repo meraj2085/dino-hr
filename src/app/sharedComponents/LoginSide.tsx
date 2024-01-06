@@ -1,5 +1,5 @@
 import Image from "next/image";
-import green from "../../../public/assets/green.png";
+import green_new from "../../../public/assets/green_new.png";
 
 const LoginSide = () => {
   return (
@@ -35,10 +35,9 @@ const LoginSide = () => {
           </div>
         </div>
 
-        {/* img colum */}
         <Image
           className="h-[100vh] w-full object-cover overflow-hidden"
-          src={green}
+          src={green_new}
           width={700}
           alt="Dino HR Logo"
         />

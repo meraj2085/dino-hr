@@ -3,17 +3,17 @@ import green_new from "../../../public/assets/green_new.png";
 
 const LoginSide = () => {
   return (
-    <div className="hidden sm:block col-span-5">
+    <div className="hidden sm:block col-span-5 bg-[#00674A]">
       <div className="flex ">
-        <div className="my-10 ml-12 w-[330px]">
-          <h1 className="text-xl lg:text-3xl font-bold my-4">
-            Simplify HRMS By <span className="text-gradient">Dino HR</span>
+        <div className="my-10 ml-12 w-[400px]">
+          <h1 className="text-xl lg:text-3xl font-bold my-4 text-white">
+            Simplify HRMS By <span className="">Dino HR</span>
           </h1>
-          <p className="text-md mb-4">
+          <p className="text-md mb-4 text-white w-[300px]">
             All in one human resource management system. Dino simplifies every
             aspect of HRMS.
           </p>
-          <div className="inline-flex text-[#00674A] cursor-pointer hover:underline">
+          <div className="inline-flex text-white cursor-pointer hover:underline">
             <span>Learn more</span>
             <svg
               xmlns="http://www.w3.org/2000/svg"

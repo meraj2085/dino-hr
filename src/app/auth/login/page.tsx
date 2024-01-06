@@ -108,10 +108,10 @@ const LoginPage = () => {
                     </a>
                   </div>
                 </div>
-                <div className="flex center mt-5">
+                <div className="flex justify-center mt-5">
                   <button
                     type="submit"
-                    className="relative mx-10 w-full inline-flex items-center justify-start px-6 py-3 overflow-hidden font-medium transition-all bg-[#00674A] rounded-xl group"
+                    className="relative w-[200px] inline-flex items-center justify-start px-6 py-3 overflow-hidden font-medium transition-all bg-[#00674A] rounded-xl group"
                   >
                     <span className="absolute top-0 right-0 inline-block w-4 h-4 transition-all duration-500 ease-in-out bg-[#124436] rounded group-hover:-mr-4 group-hover:-mt-4">
                       <span className="absolute top-0 right-0 w-5 h-5 rotate-45 translate-x-1/2 -translate-y-1/2 bg-white"></span>

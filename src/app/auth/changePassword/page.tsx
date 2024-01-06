@@ -9,6 +9,7 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { useChangePasswordMutation } from "@/redux/api/authApi";
 import { getUserInfo } from "@/services/auth.service";
+import LoginSide from "@/app/sharedComponents/LoginSide";
 
 type FormValues = {
   old_password: string;
@@ -17,20 +18,16 @@ type FormValues = {
 };
 
 const ChangePassword = () => {
-  // const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
-
   const [changePassword, { isLoading }] = useChangePasswordMutation();
 
   const onSubmit: SubmitHandler<FormValues> = async (data: any) => {
-    // console.log(data);
     try {
       if (data.new_password !== data.confirm_new_password) {
         message.error("Password does not match");
         return;
       }
       const res = await changePassword(data).unwrap();
-      // console.log(res);
       if (res._id) {
         message.success("Password changed successfully");
         const { user_type } = getUserInfo() as any;
@@ -47,18 +44,20 @@ const ChangePassword = () => {
       <div className="grid grid-cols-1 sm:grid-cols-7 h-[100vh] ">
         {/* login colum */}
         <div className="col-span-2 lg:p-7 lg:mb-10 ml-4 p-4">
-          <div className="flex items-center lg:my-5 my-3">
-            <Link href="/">
-              <Image
-                src="https://res.cloudinary.com/dn163fium/image/upload/v1702705615/usmjqqtg18c9j7bnwh4f.png"
-                height={52}
-                width={52}
-                alt="Dino-HR-Logo"
-              />
-            </Link>
-            <h1 className="pl-2 text-2xl lg:text-4xl font-bold text-[#00684a]">
-              Dino
-            </h1>
+          <div className="flex justify-center mb-5">
+            <div className="flex items-center lg:my-5 my-3">
+              <Link href="/">
+                <Image
+                  src="https://res.cloudinary.com/dn163fium/image/upload/v1702705615/usmjqqtg18c9j7bnwh4f.png"
+                  height={52}
+                  width={52}
+                  alt="Dino-HR-Logo"
+                />
+              </Link>
+              <h1 className="pl-2 text-2xl lg:text-4xl font-bold text-gradient">
+                Dino
+              </h1>
+            </div>
           </div>
           {isLoading ? (
             <div className="flex justify-center items-center h-[450px]">
@@ -66,9 +65,6 @@ const ChangePassword = () => {
             </div>
           ) : (
             <>
-              <h1 className="text-3xl font-normal text-[#00684a] mb-4">
-                Change Password
-              </h1>
               <Form
                 submitHandler={onSubmit}
                 // resolver={yupResolver(loginSchema)}
@@ -108,31 +104,7 @@ const ChangePassword = () => {
         </div>
 
         {/* text colum  */}
-        <div className=" hidden sm:block col-span-5 bg-[#00684a] ">
-          <div className="flex ">
-            <div className="text-white my-10 ml-12">
-              <h1 className="text-xl lg:text-3xl font-bold my-4">
-                Simplify HR tasks using Dino HR
-              </h1>
-              <p className="text-md mb-4">
-                All in one human resource management system. From effortlessly
-                managing teams to managing employee salaries, Dino simplifies
-                every aspect of HRMS.
-              </p>
-              <Link className="underline" href="/">
-                Learn more
-              </Link>
-            </div>
-
-            {/* img colum */}
-            <Image
-              className="h-[100vh]"
-              src={vectorImg}
-              width={586}
-              alt="Dino HR Logo"
-            />
-          </div>
-        </div>
+        <LoginSide />
       </div>
     </div>
   );

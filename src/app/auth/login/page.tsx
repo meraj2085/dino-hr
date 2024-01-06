@@ -1,6 +1,5 @@
 "use client";
-import { Button, message } from "antd";
-import vectorImg from "../../../../public/assets/animated-hr.gif";
+import { message } from "antd";
 import Image from "next/image";
 import Form from "@/components/Forms/Form";
 import FormInput from "@/components/Forms/FormInput";
@@ -13,6 +12,7 @@ import Link from "next/link";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useState } from "react";
 import { decodedToken } from "@/utils/jwt";
+import LoginSide from "@/app/sharedComponents/LoginSide";
 
 type FormValues = {
   office_email: string;
@@ -54,21 +54,23 @@ const LoginPage = () => {
   return (
     <div>
       {/* main layout  */}
-      <div className="grid grid-cols-1 sm:grid-cols-7 h-[100vh] ">
+      <div className="grid grid-cols-1 sm:grid-cols-7 h-[100vh]">
         {/* login colum */}
-        <div className="col-span-2 lg:p-7 lg:mb-10 ml-4 p-4">
-          <div className="flex items-center lg:my-5 my-3">
-            <Link href="/">
-              <Image
-                src="https://res.cloudinary.com/dn163fium/image/upload/v1702705615/usmjqqtg18c9j7bnwh4f.png"
-                height={52}
-                width={52}
-                alt="Dino-HR-Logo"
-              />
-            </Link>
-            <h1 className="pl-2 text-2xl lg:text-4xl font-bold text-[#00684a]">
-              Dino
-            </h1>
+        <div className="col-span-2 lg:p-7 shadow-2xl p-4 ">
+          <div className="flex justify-center mb-5">
+            <div className="flex items-center lg:my-5 my-3">
+              <Link href="/">
+                <Image
+                  src="https://res.cloudinary.com/dn163fium/image/upload/v1702705615/usmjqqtg18c9j7bnwh4f.png"
+                  height={52}
+                  width={52}
+                  alt="Dino-HR-Logo"
+                />
+              </Link>
+              <h1 className="pl-2 text-2xl lg:text-4xl font-bold text-gradient">
+                Dino
+              </h1>
+            </div>
           </div>
           {isLoading || loading ? (
             <div className="flex justify-center items-center h-[450px]">
@@ -76,9 +78,6 @@ const LoginPage = () => {
             </div>
           ) : (
             <>
-              <h1 className="text-3xl font-normal text-[#00684a] mb-4">
-                Log in to your account
-              </h1>
               <Form
                 submitHandler={onSubmit}
                 defaultValues={defaultValues}
@@ -89,7 +88,7 @@ const LoginPage = () => {
                     name="office_email"
                     type="email"
                     size="large"
-                    label="Email Address"
+                    label="Email address"
                   />
                 </div>
                 <div>
@@ -109,15 +108,42 @@ const LoginPage = () => {
                     </a>
                   </div>
                 </div>
-                <div className="flex justify-left">
-                  <Button shape="default" htmlType="submit">
-                    Login
-                  </Button>
+                <div className="flex justify-center mt-5">
+                  <button
+                    type="submit"
+                    className="relative w-[200px] inline-flex items-center justify-start px-6 py-3 overflow-hidden font-medium transition-all bg-[#00674A] rounded-xl group"
+                  >
+                    <span className="absolute top-0 right-0 inline-block w-4 h-4 transition-all duration-500 ease-in-out bg-[#124436] rounded group-hover:-mr-4 group-hover:-mt-4">
+                      <span className="absolute top-0 right-0 w-5 h-5 rotate-45 translate-x-1/2 -translate-y-1/2 bg-white"></span>
+                    </span>
+                    <span className="absolute bottom-0 left-0 w-full h-full transition-all duration-500 ease-in-out delay-200 -translate-x-full translate-y-full bg-[#0d3a2d] rounded-2xl group-hover:mb-12 group-hover:translate-x-0"></span>
+                    <span className="relative text-center w-full text-white transition-colors duration-200 ease-in-out group-hover:text-white">
+                      Sign In
+                    </span>
+                  </button>
+                </div>
+                <div className="flex justify-center mt-16 mb-3">
+                  <div className="inline-flex items-center justify-center w-full">
+                    <span className="pr-2">Credentials</span>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="icon icon-tabler icon-tabler-key text-[#00674A]"
+                      width="20"
+                      height="20"
+                      viewBox="0 0 24 24"
+                      strokeWidth="2"
+                      stroke="currentColor"
+                      fill="none"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                      <path d="M16.555 3.843l3.602 3.602a2.877 2.877 0 0 1 0 4.069l-2.643 2.643a2.877 2.877 0 0 1 -4.069 0l-.301 -.301l-6.558 6.558a2 2 0 0 1 -1.239 .578l-.175 .008h-1.172a1 1 0 0 1 -.993 -.883l-.007 -.117v-1.172a2 2 0 0 1 .467 -1.284l.119 -.13l.414 -.414h2v-2h2v-2l2.144 -2.144l-.301 -.301a2.877 2.877 0 0 1 0 -4.069l2.643 -2.643a2.877 2.877 0 0 1 4.069 0z" />
+                      <path d="M15 9h.01" />
+                    </svg>
+                  </div>
                 </div>
 
-                <p className="text-center mt-10 mb-2 font-semibold">
-                  Login Credentials
-                </p>
                 <div className="flex justify-center cursor-pointer">
                   <span className="inline-flex -space-x-px overflow-hidden rounded-md border bg-white shadow-sm">
                     <p
@@ -127,11 +153,21 @@ const LoginPage = () => {
                           password: "Dino-123",
                         })
                       }
-                      className="inline-block px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-100 focus:relative"
+                      className="inline-block px-6 py-2 text-sm font-medium text-gray-700 hover:bg-gray-100 focus:relative"
                     >
                       Admin
                     </p>
-
+                    <p
+                      onClick={() =>
+                        setDefaultValues({
+                          office_email: "super@admin.com",
+                          password: "Dino-123",
+                        })
+                      }
+                      className="inline-block px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-100 bg-gray-50 focus:relative"
+                    >
+                      Super Admin
+                    </p>
                     <p
                       onClick={() =>
                         setDefaultValues({
@@ -143,18 +179,6 @@ const LoginPage = () => {
                     >
                       Employee
                     </p>
-
-                    <p
-                      onClick={() =>
-                        setDefaultValues({
-                          office_email: "super@admin.com",
-                          password: "Dino-123",
-                        })
-                      }
-                      className="inline-block px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-100 focus:relative"
-                    >
-                      Super Admin
-                    </p>
                   </span>
                 </div>
               </Form>
@@ -163,31 +187,7 @@ const LoginPage = () => {
         </div>
 
         {/* text colum  */}
-        <div className=" hidden sm:block col-span-5 bg-[#00684a] ">
-          <div className="flex ">
-            <div className="text-white my-10 ml-12">
-              <h1 className="text-xl lg:text-3xl font-bold my-4">
-                Simplify HR tasks using Dino HR
-              </h1>
-              <p className="text-md mb-4">
-                All in one human resource management system. From effortlessly
-                managing teams to managing employee salaries, Dino simplifies
-                every aspect of HRMS.
-              </p>
-              <Link className="underline" href="/">
-                Learn more
-              </Link>
-            </div>
-
-            {/* img colum */}
-            <Image
-              className="h-[100vh]"
-              src={vectorImg}
-              width={586}
-              alt="Dino HR Logo"
-            />
-          </div>
-        </div>
+        <LoginSide />
       </div>
     </div>
   );

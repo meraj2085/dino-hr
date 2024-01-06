@@ -162,7 +162,7 @@ const AppliedLeaves = () => {
             },
           ]}
         />
-        <ActionBar title="Applied List">
+        <ActionBar title="Applied Leave">
           <Input
             size="large"
             placeholder="Search"

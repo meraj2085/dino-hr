@@ -2,7 +2,7 @@ import Image from "next/image";
 
 const TopCompanies = () => {
   return (
-    <section className="bg-gray-100 my-10 mt-14 md:mt-16 lg:mt-36 mb-26">
+    <section className="bg-gray-100 mt-14 md:mt-16 lg:mt-24">
       <div className="max-w-[1200px] mx-auto">
         <div className="md:mb-10 pt-20 pb-8 mb-10">
           <h1 className="text-5xl text-center font-bold leadi mb-3">

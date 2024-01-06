@@ -33,8 +33,8 @@ const Feedback = () => {
   };
 
   return (
-    <div className="max-w-[1200px] mx-auto px-5 mt-16 md:mt-20 lg:mt-24 mb-28">
-      <div className="mb-5 md:mb-12">
+    <div className="max-w-[1200px] mx-auto px-5 mt-16 mb-10">
+      <div className="mb-5 md:mb-8">
         <h1 className="text-5xl text-center font-bold leadi mb-3">
           <span className="text-gradient">Feedback</span>
         </h1>

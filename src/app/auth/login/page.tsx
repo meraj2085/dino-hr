@@ -12,6 +12,7 @@ import { loginSchema } from "@/schema/login";
 import Link from "next/link";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useState } from "react";
+import { decodedToken } from "@/utils/jwt";
 
 type FormValues = {
   office_email: string;
@@ -33,11 +34,15 @@ const LoginPage = () => {
       setIsLoading(true);
       const res = await userLogin({ ...data }).unwrap();
       if (res?.accessToken) {
+        const { user_type } = decodedToken(res?.accessToken) as {
+          user_type: string;
+        };
+        if (user_type) {
+          router.push(`/dashboard/${user_type}`);
+          message.success("User logged in successfully!");
+          setIsLoading(false);
+        }
         storeUserInfo({ accessToken: res?.accessToken });
-        const { user_type } = getUserInfo() as any;
-        router.push(`/dashboard/${user_type}`);
-        setIsLoading(false);
-        message.success("User logged in successfully!");
       }
     } catch (err: any) {
       setIsLoading(false);
@@ -110,7 +115,9 @@ const LoginPage = () => {
                   </Button>
                 </div>
 
-                <p className="text-center mt-10 mb-2 font-semibold">Login Credentials</p>
+                <p className="text-center mt-10 mb-2 font-semibold">
+                  Login Credentials
+                </p>
                 <div className="flex justify-center cursor-pointer">
                   <span className="inline-flex -space-x-px overflow-hidden rounded-md border bg-white shadow-sm">
                     <p

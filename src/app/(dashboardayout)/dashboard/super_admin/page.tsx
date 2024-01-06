@@ -1,4 +1,5 @@
 import PiChart from "@/components/PiChart";
+import ActionBar from "@/components/ui/ActionBar";
 import { PieChartOutlined } from "@ant-design/icons";
 
 const Card = ({
@@ -28,8 +29,8 @@ const Card = ({
 const AdminPage = () => {
   return (
     <div
+      className="min-h-[680px]"
       style={{
-        minHeight: "100vh",
         backgroundColor: "#FFFFFF",
         borderRadius: "20px",
         padding: "24px 24px",
@@ -53,13 +54,13 @@ const AdminPage = () => {
           </div>
         </div>
         <div className="w-full md:w-1/3 order-0 md:order-1 bg-white rounded-md py-4">
-          <p className="text-lg mb-2 text-center ">Employee Summery</p>
+          <ActionBar title="Dashboard" />
           <div className="flex justify-center">
             <PiChart />
           </div>
           <div className="text-center">
             <span className="mr-4">
-              <span className="text-[#FF8F8F] text-[20px] mr-1">●</span>
+              <span className="text-[#a7daff] text-[20px] mr-1">●</span>
               Man
             </span>
             <span>

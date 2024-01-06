@@ -60,9 +60,9 @@ const TeamMemberDetails = [
 
 const OurTeam = () => {
   return (
-    <div className="max-w-[1200px] mx-auto px-5 mt-10">
+    <div className="max-w-[1200px] mx-auto px-5 pb-10 py-5">
       <section className="text-gray-600 body-font">
-        <div className="container px-5 py-16 mx-auto">
+        <div className="container px-5 mx-auto">
           <div className="mb-5 md:mb-16">
             <h1 className="text-5xl text-center font-bold leadi mb-3">
               <span className="text-gradient">Our Team</span>

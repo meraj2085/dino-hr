@@ -3,7 +3,7 @@ import aboutUsImg from "../../public/assets/about-us.png";
 
 const AboutUs = () => {
   return (
-    <div className="max-w-[1200px] mx-auto px-5 mt-14 md:mt-16 lg:mt-24">
+    <div className="max-w-[1200px] mx-auto px-5 mt-14 lg:mt-20">
       <div className="mb-5 md:mb-12">
         <h1 className="text-5xl text-center font-bold leadi mb-3">
           <span className="text-gradient">About Us</span>

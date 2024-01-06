@@ -21,7 +21,8 @@ const NavBar = () => {
   const [open, setOpen] = useState(false);
 
   return (
-    <header className="bg-white fixed top-0 left-0 right-0 z-[10]">
+    // <header className="bg-white fixed top-0 left-0 right-0 z-[10]">
+    <header className="bg-white fixed top-0 left-0 right-0 z-[10] backdrop-filter backdrop-blur-md bg-opacity-80">
       <div className="max-w-[1200px] mx-auto px-6 lg:px-0">
         <div className="flex h-16 items-center justify-between">
           <div className="flex-1 md:flex md:items-center md:gap-12">

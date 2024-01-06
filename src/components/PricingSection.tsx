@@ -2,7 +2,7 @@ import Link from "next/link";
 
 const PricingSection = () => {
   return (
-    <div className="max-w-[1200px] mx-auto  mt-14 md:mt-16 lg:mt-24 mb-40">
+    <div className="max-w-[1200px] mx-auto mt-14 md:mt-16 mb-[100px]">
       <div className="flex flex-col items-center justify-center px-5 md:px-10 text-gray-700">
         <div className="mb-5">
           <h1 className="text-5xl text-center font-bold leadi mb-3">
@@ -20,7 +20,7 @@ const PricingSection = () => {
               <span className="font-semibold">Monthly</span>
               <div className="flex items-center">
                 <span className="text-3xl">€</span>
-                <span className="text-5xl font-bold">80</span>
+                <span className="text-5xl font-bold text-gradient">80</span>
                 <span className="text-2xl text-gray-500">/mo</span>
               </div>
             </div>
@@ -92,7 +92,7 @@ const PricingSection = () => {
               <span className="font-semibold">Yearly</span>
               <div className="flex items-center">
                 <span className="text-3xl">€</span>
-                <span className="text-6xl font-bold">66</span>
+                <span className="text-6xl font-bold text-gradient">66</span>
                 <span className="text-2xl text-gray-500">/mo</span>
               </div>
             </div>
@@ -164,7 +164,7 @@ const PricingSection = () => {
               <span className="font-semibold">Quarterly</span>
               <div className="flex items-center">
                 <span className="text-3xl">€</span>
-                <span className="text-5xl font-bold">75</span>
+                <span className="text-5xl font-bold text-gradient">75</span>
                 <span className="text-2xl text-gray-500">/mo</span>
               </div>
             </div>

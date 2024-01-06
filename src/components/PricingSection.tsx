@@ -87,12 +87,12 @@ const PricingSection = () => {
           </div>
 
           {/* <!-- Tile 2 --> */}
-          <div className="z-5 md:w-64 flex flex-col flex-grow mt-8 overflow-hidden transform bg-white rounded-lg shadow-lg md:scale-110">
+          <div className="z-10 md:w-64 flex flex-col flex-grow mt-8 overflow-hidden transform bg-white rounded-lg shadow-lg md:scale-110">
             <div className="flex flex-col items-center p-10 bg-gray-200">
               <span className="font-semibold">Yearly</span>
               <div className="flex items-center">
                 <span className="text-3xl">€</span>
-                <span className="text-6xl font-bold text-gradient">66</span>
+                <span className="text-6xl font-bold text-gradient">75</span>
                 <span className="text-2xl text-gray-500">/mo</span>
               </div>
             </div>
@@ -164,7 +164,7 @@ const PricingSection = () => {
               <span className="font-semibold">Quarterly</span>
               <div className="flex items-center">
                 <span className="text-3xl">€</span>
-                <span className="text-5xl font-bold text-gradient">75</span>
+                <span className="text-5xl font-bold text-gradient">66</span>
                 <span className="text-2xl text-gray-500">/mo</span>
               </div>
             </div>

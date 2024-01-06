@@ -5,13 +5,14 @@ import { Col, Row } from "antd";
 const BillingDetailsForm = () => {
   return (
     <>
-      <div className="border border-gray-300 rounded-md p-4 my-4">
+      <div className="bg-white border border-gray-300 rounded-md p-4 my-4">
         {/* <p className="text-xl font-medium my-2">Organization Form 3</p> */}
         <Row gutter={{ xs: 4, md: 20 }}>
           <Col xs={24} md={12} lg={6} className="mt-3">
             <FormInput
               name="bank_name"
               label="Bank Name"
+              placeholder="Enter Bank Name"
               size="large"
               required
             />
@@ -21,6 +22,7 @@ const BillingDetailsForm = () => {
             <FormInput
               name="account_number"
               label="Account Number"
+              placeholder="Enter Account Number"
               size="large"
               required
             />
@@ -39,6 +41,7 @@ const BillingDetailsForm = () => {
             <FormInput
               name="number_of_users"
               label="Number of Users"
+              placeholder="Enter Number of Users"
               size="large"
               required
             />
@@ -48,6 +51,7 @@ const BillingDetailsForm = () => {
             <FormInput
               name="routing_number"
               label="Routing Number"
+              placeholder="Enter Routing Number"
               size="large"
             />
           </Col>
@@ -60,6 +64,7 @@ const BillingDetailsForm = () => {
             <FormInput
               name="billing_contact_person_first_name"
               label="First Name"
+              placeholder="Enter First Name"
               size="large"
               required
             />
@@ -69,6 +74,7 @@ const BillingDetailsForm = () => {
             <FormInput
               name="billing_contact_person_last_name"
               label="Last Name"
+              placeholder="Enter Last Name"
               size="large"
               required
             />
@@ -78,6 +84,7 @@ const BillingDetailsForm = () => {
             <FormInput
               name="billing_contact_person_email"
               label="Email"
+              placeholder="Enter Email"
               type="email"
               size="large"
               required
@@ -88,6 +95,7 @@ const BillingDetailsForm = () => {
             <FormInput
               name="billing_contact_person_phone_number"
               label="Phone Number"
+              placeholder="Enter Phone Number"
               size="large"
               required
             />
@@ -98,31 +106,57 @@ const BillingDetailsForm = () => {
         </h3>
         <Row gutter={{ xs: 4, md: 20 }}>
           <Col xs={24} md={12} lg={6} className="mt-3">
-            <FormInput name="billing_street" label="Street" size="large" />
+            <FormInput
+              name="billing_street"
+              label="Street"
+              placeholder="Enter Street"
+              size="large"
+            />
           </Col>
 
           <Col xs={24} md={12} lg={6} className="mt-3">
-            <FormInput name="billing_landmark" label="Landmark" size="large" />
+            <FormInput
+              name="billing_landmark"
+              label="Landmark"
+              placeholder="Enter Landmark"
+              size="large"
+            />
           </Col>
 
           <Col xs={24} md={12} lg={6} className="mt-3">
-            <FormInput name="billing_city" label="City" size="large" />
+            <FormInput
+              name="billing_city"
+              label="City"
+              placeholder="Enter City"
+              size="large"
+            />
           </Col>
 
           <Col xs={24} md={12} lg={6} className="mt-3">
             <FormInput
               name="billing_postal_code"
               label="Postal Code"
+              placeholder="Enter Postal Code"
               size="large"
             />
           </Col>
 
           <Col xs={24} md={12} lg={6} className="mt-3">
-            <FormInput name="billing_state" label="State" size="large" />
+            <FormInput
+              name="billing_state"
+              label="State"
+              placeholder="Enter State"
+              size="large"
+            />
           </Col>
 
           <Col xs={24} md={12} lg={6} className="mt-3">
-            <FormInput name="billing_country" label="Country" size="large" />
+            <FormInput
+              name="billing_country"
+              label="Country"
+              placeholder="Enter Country"
+              size="large"
+            />
           </Col>
         </Row>
       </div>

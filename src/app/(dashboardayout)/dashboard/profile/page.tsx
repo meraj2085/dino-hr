@@ -7,7 +7,6 @@ import { Avatar, Card, Col, Row } from "antd";
 import { getUserInfo } from "@/services/auth.service";
 import { useGetSingleUserQuery } from "@/redux/api/userApi";
 
-
 const profile = () => {
   const { userId } = getUserInfo() as any;
   const { data, isLoading } = useGetSingleUserQuery(userId);
@@ -96,7 +95,7 @@ const profile = () => {
                   {/* input */}
                   <div className="text-md font-bold mr-10">
                     <h1>Phone No</h1>
-                    <h1>Secondary Phone No</h1>
+                    <h1>Secondary No</h1>
                     <h1>Email</h1>
                     <h1>Office Email</h1>
                   </div>

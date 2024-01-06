@@ -35,9 +35,6 @@ const renderActiveShape = (props: any) => {
 
   return (
     <g>
-      <text style={{fontSize:"30px"}} x={cx} y={cy} dy={8} textAnchor="middle" fill={fill}>
-        Employee
-      </text>
       <Sector
         cx={cx}
         cy={cy}
@@ -90,15 +87,15 @@ const PiChart = () => {
 
   return (
     // <ResponsiveContainer width="100%" height="100%">
-    <PieChart width={500} height={500}>
+    <PieChart width={400} height={400}>
       <Pie
         activeIndex={activeIndex}
         activeShape={renderActiveShape}
         data={data}
         cx="50%"
         cy="50%"
-        innerRadius={140}
-        outerRadius={200}
+        innerRadius={90}
+        outerRadius={140}
         fill="#a7daff"
         dataKey="value"
         onMouseEnter={onPieEnter}

@@ -34,3 +34,12 @@
   background-clip: text;
   color: transparent;
 }
+
+/* event and odd table color  */
+.even-row {
+  background-color:#fff; /* or any color you prefer for even rows */
+}
+
+.odd-row {
+  background-color:  #f3f5f8; /* or any color you prefer for odd rows */
+}

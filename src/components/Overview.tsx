@@ -1,3 +1,6 @@
+'use client'
+import CountUp from "react-countup";
+import VisibilitySensor from 'react-visibility-sensor';
 const Overview = () => {
   return (
     <section className="bg-[#F3F4F6] mt-16">
@@ -14,27 +17,81 @@ const Overview = () => {
         <div>
           <div className="container mx-auto grid justify-center grid-cols-2 text-center lg:grid-cols-3">
             <div className="flex flex-col justify-start m-2 lg:m-6">
-              <p className="text-4xl font-bold leadi lg:text-6xl">87+</p>
+            <div className="text-4xl font-bold leadi lg:text-6xl">
+              
+              <VisibilitySensor partialVisibility offset={{ bottom: 200 }}>
+              {({ isVisible }: { isVisible: boolean }) => (
+  <div style={{ height: 100 }}>
+    {isVisible ? <CountUp end={86} duration={5}/> : null}+
+  </div>
+)}
+      </VisibilitySensor>
+              </div>
               <p className="text-sm sm:text-base">Clients</p>
             </div>
             <div className="flex flex-col justify-start m-2 lg:m-6">
-              <p className="text-4xl font-bold leadi lg:text-6xl">2000</p>
+              <div className="text-4xl font-bold leadi lg:text-6xl">
+              
+              <VisibilitySensor partialVisibility offset={{ bottom: 200 }}>
+              {({ isVisible }: { isVisible: boolean }) => (
+  <div style={{ height: 100 }}>
+    {isVisible ? <CountUp end={1000}  duration={5}/> : null}
+  </div>
+)}
+      </VisibilitySensor>
+              </div>
               <p className="text-sm sm:text-base">Active Employees</p>
             </div>
             <div className="flex flex-col justify-start m-2 lg:m-6">
-              <p className="text-4xl font-bold leadi lg:text-6xl">13+</p>
+            <div className="text-4xl font-bold leadi lg:text-6xl">
+              
+              <VisibilitySensor partialVisibility offset={{ bottom: 200 }}>
+              {({ isVisible }: { isVisible: boolean }) => (
+  <div style={{ height: 100 }}>
+    {isVisible ? <CountUp end={13}  duration={5}/> : null}+
+  </div>
+)}
+      </VisibilitySensor>
+              </div>
               <p className="text-sm sm:text-base">Active services</p>
             </div>
             <div className="flex flex-col justify-start m-2 lg:m-6">
-              <p className="text-4xl font-bold leadi lg:text-6xl">24</p>
+            <div className="text-4xl font-bold leadi lg:text-6xl">
+              
+              <VisibilitySensor partialVisibility offset={{ bottom: 200 }}>
+              {({ isVisible }: { isVisible: boolean }) => (
+  <div style={{ height: 100 }}>
+    {isVisible ? <CountUp end={24}  duration={5}/> : null}
+  </div>
+)}
+      </VisibilitySensor>
+              </div>
               <p className="text-sm sm:text-base">Service hours</p>
             </div>
             <div className="flex flex-col justify-start m-2 lg:m-6">
-              <p className="text-4xl font-bold leadi lg:text-6xl">5</p>
+            <div className="text-4xl font-bold leadi lg:text-6xl">
+              
+              <VisibilitySensor partialVisibility offset={{ bottom: 200 }}>
+              {({ isVisible }: { isVisible: boolean }) => (
+  <div style={{ height: 100 }}>
+    {isVisible ? <CountUp end={5}  duration={5}/> : null}
+  </div>
+)}
+      </VisibilitySensor>
+              </div>
               <p className="text-sm sm:text-base">Years of experience</p>
             </div>
             <div className="flex flex-col justify-start m-2 lg:m-6">
-              <p className="text-4xl font-bold leadi lg:text-6xl">10+</p>
+            <div className="text-4xl font-bold leadi lg:text-6xl">
+              
+              <VisibilitySensor partialVisibility offset={{ bottom: 200 }}>
+              {({ isVisible }: { isVisible: boolean }) => (
+  <div style={{ height: 100 }}>
+    {isVisible ? <CountUp end={10}  duration={5}/> : null}+
+  </div>
+)}
+      </VisibilitySensor>
+              </div>
               <p className="text-sm sm:text-base">Team Members</p>
             </div>
           </div>

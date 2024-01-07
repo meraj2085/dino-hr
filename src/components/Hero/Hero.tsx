@@ -10,8 +10,9 @@ const Hero = () => {
       <div className="container flex flex-col-reverse justify-center py-6 mx-auto sm:py-12 lg:py-[100px] lg:flex-row lg:justify-between">
         <div className="flex flex-col justify-center py-6 text-center rounded-sm lg:max-w-md xl:max-w-lg lg:text-left">
           <h1 className="text-5xl font-bold leadi sm:text-6xl">
-            Expert <br />
+            Expert<br />
             <span>HR Support</span>{" "}
+            <br />
             <span className="text-gradient">With Dino</span>
           </h1>
           <p className="mt-6 mb-8 text-lg sm:mb-12">

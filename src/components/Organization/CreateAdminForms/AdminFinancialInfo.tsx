@@ -3,7 +3,7 @@ import FormInput from "@/components/Forms/FormInput";
 
 const AdminFinancialInfoForm = () => {
   return (
-    <div className="border border-gray-300 rounded-md p-4 my-4">
+    <div className="bg-white border border-gray-300 rounded-md p-4 my-4">
       <Row gutter={{ xs: 4, md: 20 }}>
         <Col xs={24} md={12} lg={6} className="mt-3">
           <FormInput

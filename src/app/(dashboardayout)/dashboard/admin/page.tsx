@@ -103,11 +103,11 @@ const AdminPage = () => {
           <div className="text-center">
             <span className="mr-4">
               <span className="text-[#a7daff] text-[20px] mr-1">●</span>
-              Man
+              Male
             </span>
             <span>
               <span className="text-[#f5558d] text-[20px] mr-1">●</span>
-              Woman
+              Female
             </span>
           </div>
         </div>

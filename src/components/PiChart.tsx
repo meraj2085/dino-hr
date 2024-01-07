@@ -3,11 +3,6 @@
 import { useState } from "react";
 import { PieChart, Pie, Sector } from "recharts";
 
-const data = [
-  { name: "Man", value: 400 },
-  { name: "Woman", value: 300 },
-];
-
 const renderActiveShape = (props: any) => {
   const RADIAN = Math.PI / 180;
   const {
@@ -40,7 +35,7 @@ const renderActiveShape = (props: any) => {
         y={cy}
         dy={8}
         textAnchor="middle"
-        fill={payload.name === "Man" ? "#a7daff" : "#f5558d"}
+        fill={payload.name === "Male" ? "#a7daff" : "#f5558d"}
         className={`text-xl`}
         style={{ fontWeight: "bold" }}
       >
@@ -89,7 +84,11 @@ const renderActiveShape = (props: any) => {
   );
 };
 
-const PiChart = () => {
+const PiChart = ({
+  employeesByGender,
+}: {
+  employeesByGender: { name: string; value: number }[];
+}) => {
   const [activeIndex, setActiveIndex] = useState(0);
 
   const onPieEnter = (_: any, index: number) => {
@@ -102,7 +101,7 @@ const PiChart = () => {
       <Pie
         activeIndex={activeIndex}
         activeShape={renderActiveShape}
-        data={data}
+        data={employeesByGender}
         cx="50%"
         cy="50%"
         innerRadius={90}

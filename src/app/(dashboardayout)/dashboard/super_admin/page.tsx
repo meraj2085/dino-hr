@@ -1,8 +1,8 @@
 "use client";
+import LineChartComponent from "@/components/LineChart";
 import PiChart from "@/components/PiChart";
 import ActionBar from "@/components/ui/ActionBar";
 import { useGetSuperAdminStatsQuery } from "@/redux/api/statisticsApi";
-import { PieChartOutlined } from "@ant-design/icons";
 
 const Card = ({
   icon,
@@ -30,7 +30,7 @@ const Card = ({
 
 const AdminPage = () => {
   const { data, isLoading } = useGetSuperAdminStatsQuery(undefined);
-  console.log(data);
+
   return (
     <div
       className="min-h-[680px]"
@@ -98,7 +98,7 @@ const AdminPage = () => {
         <div className="w-full md:w-1/3 order-0 md:order-1 bg-white rounded-md py-4">
           <ActionBar title="Dashboard" />
           <div className="flex justify-center">
-            <PiChart />
+            <PiChart employeesByGender={data?.employeesByGender} />
           </div>
           <div className="text-center">
             <span className="mr-4">
@@ -166,6 +166,7 @@ const AdminPage = () => {
           </div>
         </div>
       </div>
+      <LineChartComponent activeByDate={data?.activeByDate} />
     </div>
   );
 };

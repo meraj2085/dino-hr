@@ -98,7 +98,7 @@ const AdminPage = () => {
         <div className="w-full lg:w-1/3 order-0 lg:order-1 bg-white rounded-md py-4">
           <ActionBar title="Dashboard" />
           <div className="flex justify-center">
-            <PiChart />
+            <PiChart employeesByGender={data?.employeesByGender} />
           </div>
           <div className="text-center">
             <span className="mr-4">
@@ -163,6 +163,7 @@ const AdminPage = () => {
           </div>
         </div>
       </div>
+      <LineChartComponent activeByDate={data?.activeByDate} />
     </div>
   );
 };

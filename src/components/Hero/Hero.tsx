@@ -1,13 +1,13 @@
-import globalMap from "../../../public/assets/globalMap.png";
+import globalMap from "../../../public/assets/globalMap_updated.jpg";
 import Image from "next/image";
 import Link from "next/link";
 import "./Hero.css";
 
 const Hero = () => {
   return (
-    <section className="min-h-[800px] relative overflow-hidden">
+    <section className="min-h-[600px] relative overflow-hidden">
       <p className="shape-bg bg-gradient-to-t from-white via-[#179773] to-white blur-2xl"></p>
-      <div className="container flex flex-col-reverse justify-center p-6 mx-auto sm:py-12 lg:py-[70px] lg:flex-row lg:justify-between">
+      <div className="container flex flex-col-reverse justify-center p-6 mx-auto sm:py-12 lg:py-[100px] lg:flex-row lg:justify-between">
         <div className="flex flex-col justify-center p-6 text-center rounded-sm lg:max-w-md xl:max-w-lg lg:text-left">
           <h1 className="text-5xl font-bold leadi sm:text-6xl">
             Expert <br />
@@ -76,12 +76,12 @@ const Hero = () => {
             </Link>
           </div>
         </div>
-        <div className="flex items-center justify-center p-6 mt-8 lg:mt-0 ">
+        <div className="flex items-center justify-center p-6 md:pr-16 mt-8 lg:mt-0 ">
           <Image
             src={globalMap}
             alt="global map"
-            height={800}
-            width={800}
+            height={500}
+            width={500}
             className="object-contain "
           />
         </div>

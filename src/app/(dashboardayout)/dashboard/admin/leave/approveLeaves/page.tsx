@@ -195,7 +195,7 @@ const ApproveLeave = () => {
             },
           ]}
         />
-        <ActionBar title="Approve Leave List">
+        <ActionBar title="Approve Leave">
           <Input
             size="large"
             placeholder="Search"

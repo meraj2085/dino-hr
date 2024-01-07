@@ -5,6 +5,7 @@ import Form from "@/components/Forms/Form";
 import FormDatePicker from "@/components/Forms/FormDatePicker";
 import FormInput from "@/components/Forms/FormInput";
 import FormSelectField from "@/components/Forms/FormSelectField";
+import ActionBar from "@/components/ui/ActionBar";
 import BreadCrumb from "@/components/ui/BreadCrumb";
 import { useAddEventMutation } from "@/redux/api/eventApi";
 import { eventSchema } from "@/schema/event";
@@ -45,7 +46,17 @@ const AddEvent = () => {
   }
 
   return (
-    <div className="min-w-[250px]">
+    <div
+      className="min-w-[250px] min-h-[650px]"
+      style={{
+        backgroundColor: "#FFFFFF",
+        margin: "20px",
+        borderRadius: "20px",
+        padding: "24px 24px",
+        boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
+        overflowX: "auto",
+      }}
+    >
       <BreadCrumb
         items={[
           {
@@ -58,12 +69,7 @@ const AddEvent = () => {
           },
         ]}
       />
-      <h1 className="text-center text-4xl font-bold leadi">
-        Add Holiday & Event
-      </h1>
-      <div className="max-w-[400px] mx-auto mt-3">
-        <hr className="border-t-1 border-gray-500" />
-      </div>
+      <ActionBar title="Add Event" />
       <Form submitHandler={onSubmit} resolver={yupResolver(eventSchema)}>
         <Row gutter={{ xs: 4, md: 20 }}>
           <Col xs={24} md={12} lg={12} className="mt-3">

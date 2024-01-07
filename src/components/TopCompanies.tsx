@@ -2,7 +2,7 @@ import Image from "next/image";
 
 const TopCompanies = () => {
   return (
-    <section className="bg-gray-100 my-10 mt-14 md:mt-16 lg:mt-36 mb-26">
+    <section className="bg-gray-100 mt-14 md:mt-16 lg:mt-24">
       <div className="max-w-[1200px] mx-auto">
         <div className="md:mb-10 pt-20 pb-8 mb-10">
           <h1 className="text-5xl text-center font-bold leadi mb-3">
@@ -17,7 +17,7 @@ const TopCompanies = () => {
             <Image
               height={100}
               width={100}
-              src="https://i.ibb.co/8jJfgkc/5847f8aecef1014c0b5e48af.png"
+              src="https://kutty.netlify.app/logos/slack-icon.svg"
               alt="Fabemi Logo"
               className="block object-contain h-16  cursor-pointer hover:scale-110 duration-100"
             />
@@ -31,20 +31,12 @@ const TopCompanies = () => {
               className="block object-contain h-16  cursor-pointer hover:scale-110 duration-100"
             />
           </div>
+
           <div className="flex items-center justify-center">
             <Image
               height={100}
               width={100}
-              src="https://i.ibb.co/VxGQ1Qd/5847f42bcef1014c0b5e488e.png"
-              alt="Atlassian Logo"
-              className="block object-contain h-16  cursor-pointer hover:scale-110 duration-100"
-            />
-          </div>
-          <div className="flex items-center justify-center">
-            <Image
-              height={100}
-              width={100}
-              src="https://i.ibb.co/Cvd50zK/5847f415cef1014c0b5e488b.png"
+              src="https://kutty.netlify.app/logos/atlassian.svg"
               alt="Z Logo"
               className="block object-contain h-16  cursor-pointer hover:scale-110 duration-100"
             />
@@ -53,7 +45,16 @@ const TopCompanies = () => {
             <Image
               height={100}
               width={100}
-              src="https://i.ibb.co/phD2q0h/5847f44acef1014c0b5e4892.png"
+              src="https://kutty.netlify.app/logos/vimeo.svg"
+              alt="Atlassian Logo"
+              className="block object-contain h-16  cursor-pointer hover:scale-110 duration-100"
+            />
+          </div>
+          <div className="flex items-center justify-center">
+            <Image
+              height={100}
+              width={100}
+              src="https://kutty.netlify.app/logos/zeplin.svg"
               alt="Spoon Logo"
               className="block object-contain h-16  cursor-pointer hover:scale-110 duration-100"
             />

@@ -74,7 +74,7 @@ const ReviewSection = () => {
   ];
 
   return (
-    <div className="max-w-[1200px]  mx-auto px-7 lg:px-0 mt-14 md:mt-16 lg:mt-24 mb-40">
+    <div className="max-w-[1200px] mx-auto px-7 lg:px-0 mt-14 md:mt-16 lg:mt-24 mb-20">
       <div className="mb-5 md:mb-12">
         <h1 className="text-5xl text-center font-bold leadi mb-3">
           <span className="text-gradient">Reviews</span>

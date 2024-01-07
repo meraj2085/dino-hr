@@ -6,7 +6,7 @@ import dayjs from "dayjs";
 const EmployeeBasicInfo = ({ user }: { user: IUser }) => {
   return (
     <>
-      <div className="border border-gray-300 rounded-md p-4 my-4">
+      <div className="border bg-white border-gray-300 rounded-md p-4 my-4">
         <Image
           src={
             user?.profile_picture ||

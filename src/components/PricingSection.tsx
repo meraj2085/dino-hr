@@ -2,7 +2,7 @@ import Link from "next/link";
 
 const PricingSection = () => {
   return (
-    <div className="max-w-[1200px] mx-auto  mt-14 md:mt-16 lg:mt-24 mb-40">
+    <div className="max-w-[1200px] mx-auto mt-14 md:mt-16 mb-[100px]">
       <div className="flex flex-col items-center justify-center px-5 md:px-10 text-gray-700">
         <div className="mb-5">
           <h1 className="text-5xl text-center font-bold leadi mb-3">
@@ -15,12 +15,12 @@ const PricingSection = () => {
 
         {/* <!-- Component Start --> */}
         <div className="flex flex-wrap items-center justify-center w-full max-w-4xl mt-0 md:mt-8 transition-all">
-          <div className=" md:w-64 flex flex-col flex-grow mt-8 overflow-hidden bg-white rounded-lg shadow-lg hover:md:scale-110 hover:md:z-3 duration-75">
+          <div className=" md:w-64 flex flex-col flex-grow mt-8 overflow-hidden bg-white rounded-lg shadow-lg hover:md:scale-110 hover:md:z-3 transition duration-300 ease-in-out">
             <div className="flex flex-col items-center p-10 bg-gray-200">
               <span className="font-semibold">Monthly</span>
               <div className="flex items-center">
                 <span className="text-3xl">€</span>
-                <span className="text-5xl font-bold">80</span>
+                <span className="text-5xl font-bold text-gradient">80</span>
                 <span className="text-2xl text-gray-500">/mo</span>
               </div>
             </div>
@@ -79,7 +79,7 @@ const PricingSection = () => {
             <div className="flex px-10 pb-10 justfy-center">
               <Link
                 href="/bookCall"
-                className="flex items-center justify-center w-full h-12 px-6 text-sm uppercase bg-gray-200 rounded-lg hover:bg-gray-300 duration-75"
+                className="flex items-center justify-center w-full h-12 px-6 text-sm uppercase bg-gray-200 rounded-lg hover:bg-gray-300 transition duration-300 ease-in-out"
               >
                 Buy plan
               </Link>
@@ -87,12 +87,12 @@ const PricingSection = () => {
           </div>
 
           {/* <!-- Tile 2 --> */}
-          <div className="z-5 md:w-64 flex flex-col flex-grow mt-8 overflow-hidden transform bg-white rounded-lg shadow-lg md:scale-110">
+          <div className="z-10 md:w-64 flex flex-col flex-grow mt-8 overflow-hidden transform bg-white rounded-lg shadow-lg md:scale-110">
             <div className="flex flex-col items-center p-10 bg-gray-200">
               <span className="font-semibold">Yearly</span>
               <div className="flex items-center">
                 <span className="text-3xl">€</span>
-                <span className="text-6xl font-bold">66</span>
+                <span className="text-6xl font-bold text-gradient">75</span>
                 <span className="text-2xl text-gray-500">/mo</span>
               </div>
             </div>
@@ -151,7 +151,7 @@ const PricingSection = () => {
             <div className="flex px-10 pb-10 justify-center">
               <Link
                 href="/bookCall"
-                className="flex items-center justify-center w-full h-12 px-6 text-sm uppercase bg-gray-200 rounded-lg hover:bg-gray-300 duration-75"
+                className="flex items-center justify-center w-full h-12 px-6 text-sm uppercase bg-gray-200 rounded-lg hover:bg-gray-300 transition duration-300 ease-in-out"
               >
                 Buy plan
               </Link>
@@ -159,12 +159,12 @@ const PricingSection = () => {
           </div>
 
           {/* <!-- Tile 3 --> */}
-          <div className="md:w-64 flex flex-col flex-grow overflow-hidden bg-white rounded-lg shadow-lg mt-8 hover:md:scale-110 hover:md:z-3 duration-75">
+          <div className="md:w-64 flex flex-col flex-grow overflow-hidden bg-white rounded-lg shadow-lg mt-8 hover:md:scale-110 hover:md:z-3 transition duration-300 ease-in-out">
             <div className="flex flex-col items-center p-10 bg-gray-200">
               <span className="font-semibold">Quarterly</span>
               <div className="flex items-center">
                 <span className="text-3xl">€</span>
-                <span className="text-5xl font-bold">75</span>
+                <span className="text-5xl font-bold text-gradient">66</span>
                 <span className="text-2xl text-gray-500">/mo</span>
               </div>
             </div>
@@ -223,7 +223,7 @@ const PricingSection = () => {
             <div className="flex px-10 pb-10 justfy-center">
               <Link
                 href="/bookCall"
-                className="flex items-center justify-center w-full h-12 px-6 text-sm uppercase bg-gray-200 rounded-lg hover:bg-gray-300 duration-75"
+                className="flex items-center justify-center w-full h-12 px-6 text-sm uppercase bg-gray-200 rounded-lg hover:bg-gray-300 transition duration-300 ease-in-out"
               >
                 Buy plan
               </Link>

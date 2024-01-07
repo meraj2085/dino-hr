@@ -26,9 +26,17 @@ const MyTeam = () => {
   if (isLoading) {
     return <Loading />;
   }
-  // console.log(teamData);
   return (
-    <div className="min-w-[250px]">
+    <div
+      className="min-w-[300px] min-h-[650px] m-0 md:m-[20px]"
+      style={{
+        backgroundColor: "#FFFFFF",
+        borderRadius: "20px",
+        padding: "24px 24px",
+        boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
+        overflowX: "auto",
+      }}
+    >
       <ActionBar title="My Team" />
       <Input
         className="w-52 mb-2"
@@ -39,7 +47,7 @@ const MyTeam = () => {
       <Row gutter={10}>
         {teamData?.myTeam?.map((data, index) => (
           <Col key={index} xs={24} sm={18} md={16} lg={12}>
-            <Card className="mb-2">
+            <Card className="mb-2 border-gray-300 shadow-sm min-w-[250px] hover:shadow-md transition duration-300 ease-in-out">
               <div className="md:flex gap-4">
                 <div className="flex justify-center">
                   <Avatar

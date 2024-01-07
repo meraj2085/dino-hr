@@ -60,9 +60,9 @@ const TeamMemberDetails = [
 
 const OurTeam = () => {
   return (
-    <div className="max-w-[1200px] mx-auto px-5 mt-10">
+    <div className="max-w-[1200px] mx-auto px-5 pb-10 py-5">
       <section className="text-gray-600 body-font">
-        <div className="container px-5 py-16 mx-auto">
+        <div className="container px-5 mx-auto">
           <div className="mb-5 md:mb-16">
             <h1 className="text-5xl text-center font-bold leadi mb-3">
               <span className="text-gradient">Our Team</span>
@@ -71,10 +71,14 @@ const OurTeam = () => {
               Meet our team of experts who are always ready to help you.
             </p>
           </div>
-          <div className="flex flex-wrap -m-2">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2">
             {TeamMemberDetails.map((member, index) => (
-              <div key={index} className="p-2 lg:w-1/3 md:w-1/2 w-full">
-                <div className="h-full flex items-center border-gray-200 border p-4 rounded-lg hover:shadow-md">
+              <div
+                key={index}
+                className="w-full group overflow-hidden relative hover:bg-gradient-to-r transition-all ease-out duration-300"
+              >
+                <span className="absolute right-0 w-8 h-32 -mt-1 transition-all duration-1000 transform translate-x-12 bg-[#4fad92] opacity-10 rotate-12 group-hover:-translate-x-[380px] ease"></span>
+                <div className="h-full flex items-center border-gray-200 border p-4 rounded-lg transition duration-300 ease-in-outd">
                   <Image
                     className="w-16 h-16 bg-gray-100 object-cover object-center flex-shrink-0 rounded-full mr-4"
                     alt="team"

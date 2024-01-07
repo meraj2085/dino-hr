@@ -37,6 +37,10 @@ const PPTable = ({
       }
     : false;
 
+    const getRowClassName = (record: any, index: number): string => {
+      return index % 2 === 0 ? 'even-row' : 'odd-row';
+    };
+
   return (
     <Table
       loading={loading}
@@ -45,6 +49,7 @@ const PPTable = ({
       pagination={paginationConfig}
       onChange={onTableChange}
       scroll={scroll}
+      rowClassName={getRowClassName}
     />
   );
 };

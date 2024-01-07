@@ -35,6 +35,17 @@ const renderActiveShape = (props: any) => {
 
   return (
     <g>
+      <text
+        x={cx}
+        y={cy}
+        dy={8}
+        textAnchor="middle"
+        fill={payload.name === "Man" ? "#a7daff" : "#f5558d"}
+        className={`text-xl`}
+        style={{ fontWeight: "bold" }}
+      >
+        {payload.name}
+      </text>
       <Sector
         cx={cx}
         cy={cy}

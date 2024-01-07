@@ -84,49 +84,41 @@ const StepperForm = ({
 
   return (
     <>
-      <ConfigProvider
-        theme={{
-          token: {
-            colorPrimary: "#00674A",
-          },
-        }}
-      >
-        <Steps current={current} items={items} />
-        <FormProvider {...methods}>
-          <form onSubmit={handleSubmit(handleOnSubmit)}>
-            <div>{steps[current]?.content}</div>
-            <div style={{ marginTop: 24 }}>
-              <Button
-                disabled={!(current > 0)}
-                className="mr-5"
-                onClick={() => prev()}
-              >
+      <Steps current={current} items={items} />
+      <FormProvider {...methods}>
+        <form onSubmit={handleSubmit(handleOnSubmit)}>
+          <div>{steps[current]?.content}</div>
+          <div style={{ marginTop: 24 }}>
+            <Button
+              disabled={!(current > 0)}
+              className="mr-5"
+              onClick={() => prev()}
+            >
+              <span>
+                <LeftOutlined /> Previous
+              </span>
+            </Button>
+
+            {current < steps.length - 1 && (
+              <Button onClick={() => next()}>
                 <span>
-                  <LeftOutlined /> Previous
+                  Next <RightOutlined />
                 </span>
               </Button>
-
-              {current < steps.length - 1 && (
-                <Button onClick={() => next()}>
-                  <span>
-                    Next <RightOutlined />
-                  </span>
-                </Button>
-              )}
-              {current === steps.length - 1 && (
-                <Button
-                  type="primary"
-                  className="bg-[#00674A]"
-                  htmlType="submit"
-                  // onClick={() => message.success("Processing complete!")}
-                >
-                  Done
-                </Button>
-              )}
-            </div>
-          </form>
-        </FormProvider>
-      </ConfigProvider>
+            )}
+            {current === steps.length - 1 && (
+              <Button
+                type="primary"
+                className="bg-[#00674A]"
+                htmlType="submit"
+                // onClick={() => message.success("Processing complete!")}
+              >
+                Done
+              </Button>
+            )}
+          </div>
+        </form>
+      </FormProvider>
     </>
   );
 };

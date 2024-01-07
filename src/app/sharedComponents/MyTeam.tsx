@@ -47,7 +47,7 @@ const MyTeam = () => {
       <Row gutter={10}>
         {teamData?.myTeam?.map((data, index) => (
           <Col key={index} xs={24} sm={18} md={16} lg={12}>
-            <Card className="mb-2 border-gray-300 hover:shadow-md shadow min-w-[250px]">
+            <Card className="mb-2 border-gray-300 shadow-sm min-w-[250px] hover:shadow-md transition duration-300 ease-in-out">
               <div className="md:flex gap-4">
                 <div className="flex justify-center">
                   <Avatar

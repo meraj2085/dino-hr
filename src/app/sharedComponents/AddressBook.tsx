@@ -49,7 +49,7 @@ const AddressBook = () => {
         {data?.address?.map((data: IAddress) => (
           <Col xs={24} sm={18} md={16} lg={12} key={data.id}>
             <Card
-              className="mb-2 border-gray-300 hover:shadow-md shadow min-w-[250px]"
+              className="mb-2 border-gray-300 shadow-sm min-w-[250px] hover:shadow-md transition duration-300 ease-in-out"
               loading={isLoading}
             >
               <div className="md:flex gap-4">

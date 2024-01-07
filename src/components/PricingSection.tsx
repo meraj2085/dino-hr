@@ -15,7 +15,7 @@ const PricingSection = () => {
 
         {/* <!-- Component Start --> */}
         <div className="flex flex-wrap items-center justify-center w-full max-w-4xl mt-0 md:mt-8 transition-all">
-          <div className=" md:w-64 flex flex-col flex-grow mt-8 overflow-hidden bg-white rounded-lg shadow-lg hover:md:scale-110 hover:md:z-3 duration-75">
+          <div className=" md:w-64 flex flex-col flex-grow mt-8 overflow-hidden bg-white rounded-lg shadow-lg hover:md:scale-110 hover:md:z-3 transition duration-300 ease-in-out">
             <div className="flex flex-col items-center p-10 bg-gray-200">
               <span className="font-semibold">Monthly</span>
               <div className="flex items-center">
@@ -79,7 +79,7 @@ const PricingSection = () => {
             <div className="flex px-10 pb-10 justfy-center">
               <Link
                 href="/bookCall"
-                className="flex items-center justify-center w-full h-12 px-6 text-sm uppercase bg-gray-200 rounded-lg hover:bg-gray-300 duration-75"
+                className="flex items-center justify-center w-full h-12 px-6 text-sm uppercase bg-gray-200 rounded-lg hover:bg-gray-300 transition duration-300 ease-in-out"
               >
                 Buy plan
               </Link>
@@ -151,7 +151,7 @@ const PricingSection = () => {
             <div className="flex px-10 pb-10 justify-center">
               <Link
                 href="/bookCall"
-                className="flex items-center justify-center w-full h-12 px-6 text-sm uppercase bg-gray-200 rounded-lg hover:bg-gray-300 duration-75"
+                className="flex items-center justify-center w-full h-12 px-6 text-sm uppercase bg-gray-200 rounded-lg hover:bg-gray-300 transition duration-300 ease-in-out"
               >
                 Buy plan
               </Link>
@@ -159,7 +159,7 @@ const PricingSection = () => {
           </div>
 
           {/* <!-- Tile 3 --> */}
-          <div className="md:w-64 flex flex-col flex-grow overflow-hidden bg-white rounded-lg shadow-lg mt-8 hover:md:scale-110 hover:md:z-3 duration-75">
+          <div className="md:w-64 flex flex-col flex-grow overflow-hidden bg-white rounded-lg shadow-lg mt-8 hover:md:scale-110 hover:md:z-3 transition duration-300 ease-in-out">
             <div className="flex flex-col items-center p-10 bg-gray-200">
               <span className="font-semibold">Quarterly</span>
               <div className="flex items-center">
@@ -223,7 +223,7 @@ const PricingSection = () => {
             <div className="flex px-10 pb-10 justfy-center">
               <Link
                 href="/bookCall"
-                className="flex items-center justify-center w-full h-12 px-6 text-sm uppercase bg-gray-200 rounded-lg hover:bg-gray-300 duration-75"
+                className="flex items-center justify-center w-full h-12 px-6 text-sm uppercase bg-gray-200 rounded-lg hover:bg-gray-300 transition duration-300 ease-in-out"
               >
                 Buy plan
               </Link>

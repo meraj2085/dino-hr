@@ -16,6 +16,7 @@ export enum tagTypes {
   leave = "leave",
   attendance = "attendance",
   myTeam = "myTeam",
+  statistics = "statistics",
 }
 
 export const tagTypesList = [
@@ -36,4 +37,5 @@ export const tagTypesList = [
   tagTypes.attendance,
   tagTypes.leave,
   tagTypes.myTeam,
+  tagTypes.statistics
 ];

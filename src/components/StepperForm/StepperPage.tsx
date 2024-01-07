@@ -28,13 +28,7 @@ const StepperPage = ({ steps }: IStepsProps) => {
 
   return (
     <>
-      <ConfigProvider
-        theme={{
-          token: {
-            colorPrimary: "#00674A",
-          },
-        }}
-      >
+      
         <Steps current={current} items={items} />
         <div>{steps[current]?.content}</div>
         <div style={{ marginTop: 24 }}>
@@ -61,7 +55,6 @@ const StepperPage = ({ steps }: IStepsProps) => {
             </Button>
           }
         </div>
-      </ConfigProvider>
     </>
   );
 };

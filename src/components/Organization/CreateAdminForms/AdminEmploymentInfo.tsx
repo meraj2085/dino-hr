@@ -22,7 +22,7 @@ const AdminEmploymentInfoForm = () => {
     }));
 
   return (
-    <div className="border border-gray-300 rounded-md p-4 my-4">
+    <div className="bg-white border border-gray-300 rounded-md p-4 my-4">
       <Row gutter={{ xs: 4, md: 20 }}>
         <Col xs={24} md={12} lg={6} className="mt-3">
           <FormSelectField
@@ -86,7 +86,9 @@ const AdminEmploymentInfoForm = () => {
           <FormSelectField
             size="large"
             name="manager_id"
-            options={managerOptions || [{ label: "No Manager", value: "no-manager" }]}
+            options={
+              managerOptions || [{ label: "No Manager", value: "no-manager" }]
+            }
             label="Manager"
             placeholder="Your Manager ID"
             required

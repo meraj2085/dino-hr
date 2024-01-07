@@ -10,7 +10,7 @@ import UploadImage from "@/components/ui/UploadImage";
 const AdminBasicInfoForm = () => {
   return (
     <>
-      <div className="border border-gray-300 rounded-md p-4 my-4">
+      <div className="bg-white border border-gray-300 rounded-md p-4 my-4">
         <UploadImage name="profile_picture" />
         <Row gutter={{ xs: 4, md: 20 }}>
           <Col xs={24} md={12} lg={6} className="mt-3">

@@ -96,9 +96,8 @@ const ViewEvents = () => {
                 style={{
                   margin: "0px 5px",
                 }}
-              >
-                <EditOutlined />
-              </Button>
+                icon={<EditOutlined />}
+               />
             </Link>
             <Button
               onClick={() => {
@@ -107,10 +106,12 @@ const ViewEvents = () => {
               }}
               style={{
                 margin: "0px 5px",
+                backgroundColor: "#FF4D4F",
               }}
-            >
-              <DeleteOutlined />
-            </Button>
+              danger
+              icon={<DeleteOutlined />}
+             />
+            
           </>
         );
       },

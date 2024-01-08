@@ -1,7 +1,9 @@
 "use client";
+import { useState } from "react";
 import CountUp from "react-countup";
 import VisibilitySensor from "react-visibility-sensor";
 const Overview = () => {
+  const [isCounted, setIsCounted] = useState(false);
   return (
     <section className="bg-[#F3F4F6] mt-16">
       <div className="px-6 py-10 space-y-8 max-w-[1200px] mx-auto">
@@ -18,10 +20,19 @@ const Overview = () => {
           <div className="container mx-auto grid justify-center grid-cols-2 text-center lg:grid-cols-3">
             <div className="flex flex-col justify-start m-2 lg:m-6">
               <div className="text-4xl font-bold leadi lg:text-6xl">
-                <VisibilitySensor partialVisibility offset={{ bottom: 200 }}>
+                <VisibilitySensor partialVisibility>
                   {({ isVisible }: { isVisible: boolean }) => (
                     <div style={{ height: 100 }}>
-                      {isVisible ? <CountUp end={86} duration={5} /> : null}+
+                      {isVisible && !isCounted ? (
+                        <CountUp
+                          end={86}
+                          duration={5}
+                          onEnd={() => setIsCounted(true)}
+                        />
+                      ) : (
+                        86
+                      )}
+                      +
                     </div>
                   )}
                 </VisibilitySensor>
@@ -30,10 +41,15 @@ const Overview = () => {
             </div>
             <div className="flex flex-col justify-start m-2 lg:m-6">
               <div className="text-4xl font-bold leadi lg:text-6xl">
-                <VisibilitySensor partialVisibility offset={{ bottom: 200 }}>
+                <VisibilitySensor partialVisibility>
                   {({ isVisible }: { isVisible: boolean }) => (
                     <div style={{ height: 100 }}>
-                      {isVisible ? <CountUp end={1000} duration={5} /> : null}+
+                      {isVisible && !isCounted ? (
+                        <CountUp end={1000} duration={5} />
+                      ) : (
+                        1000
+                      )}
+                      +
                     </div>
                   )}
                 </VisibilitySensor>
@@ -42,10 +58,15 @@ const Overview = () => {
             </div>
             <div className="flex flex-col justify-start m-2 lg:m-6">
               <div className="text-4xl font-bold leadi lg:text-6xl">
-                <VisibilitySensor partialVisibility offset={{ bottom: 200 }}>
+                <VisibilitySensor partialVisibility>
                   {({ isVisible }: { isVisible: boolean }) => (
                     <div style={{ height: 100 }}>
-                      {isVisible ? <CountUp end={13} duration={5} /> : null}+
+                      {isVisible && !isCounted ? (
+                        <CountUp end={13} duration={5} />
+                      ) : (
+                        13
+                      )}
+                      +
                     </div>
                   )}
                 </VisibilitySensor>
@@ -54,10 +75,14 @@ const Overview = () => {
             </div>
             <div className="flex flex-col justify-start m-2 lg:m-6">
               <div className="text-4xl font-bold leadi lg:text-6xl">
-                <VisibilitySensor partialVisibility offset={{ bottom: 200 }}>
+                <VisibilitySensor partialVisibility>
                   {({ isVisible }: { isVisible: boolean }) => (
                     <div style={{ height: 100 }}>
-                      {isVisible ? <CountUp end={24} duration={5} /> : null}
+                      {isVisible && !isCounted ? (
+                        <CountUp end={24} duration={5} />
+                      ) : (
+                        24
+                      )}
                     </div>
                   )}
                 </VisibilitySensor>
@@ -66,10 +91,14 @@ const Overview = () => {
             </div>
             <div className="flex flex-col justify-start m-2 lg:m-6">
               <div className="text-4xl font-bold leadi lg:text-6xl">
-                <VisibilitySensor partialVisibility offset={{ bottom: 200 }}>
+                <VisibilitySensor partialVisibility>
                   {({ isVisible }: { isVisible: boolean }) => (
                     <div style={{ height: 100 }}>
-                      {isVisible ? <CountUp end={5} duration={5} /> : null}
+                      {isVisible && !isCounted ? (
+                        <CountUp end={5} duration={5} />
+                      ) : (
+                        5
+                      )}
                     </div>
                   )}
                 </VisibilitySensor>
@@ -78,10 +107,12 @@ const Overview = () => {
             </div>
             <div className="flex flex-col justify-start m-2 lg:m-6">
               <div className="text-4xl font-bold leadi lg:text-6xl">
-                <VisibilitySensor partialVisibility offset={{ bottom: 200 }}>
+                <VisibilitySensor partialVisibility>
                   {({ isVisible }: { isVisible: boolean }) => (
                     <div style={{ height: 100 }}>
-                      {isVisible ? <CountUp end={10} duration={5} /> : null}
+                      {isVisible && !isCounted ? (
+                        <CountUp end={10} duration={5} />
+                      ) : 10}
                     </div>
                   )}
                 </VisibilitySensor>

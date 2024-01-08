@@ -14,7 +14,7 @@ const Card = ({
   value: number;
 }) => {
   return (
-    <div className="flex border border-gray-300  bg-white text-[#00674A] rounded-md p-4">
+    <div className="flex gap-3 border border-gray-300 shadow-sm  hover:shadow-md transition duration-300 ease-in-out  bg-white text-[#00674A] rounded-md p-4">
       <div className=" flex justify-center items-center">
         <p className="text-5xl">{icon}</p>
       </div>

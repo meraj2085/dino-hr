@@ -11,8 +11,8 @@
   scroll-behavior: smooth;
 }
 
-.ant-btn {
-  color: #fff;
+.ant-btn:enabled {
+  color: #fff !important;
   background-color: #00674a;
 }
 

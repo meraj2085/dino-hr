@@ -159,6 +159,7 @@ const ApproveLeave = () => {
                   setLeaveId(data?.id);
                 }}
                 type="primary"
+                style={{ backgroundColor: "#FF4D4F" }}
                 danger
               >
                 Reject

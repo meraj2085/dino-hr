@@ -106,7 +106,16 @@ const UpdateEmployee = ({ params }: { params: { employeeId: string } }) => {
   };
 
   return (
-    <div>
+    <div
+      style={{
+        backgroundColor: "#FFFFFF",
+        minHeight: "680px",
+        borderRadius: "20px",
+        padding: "24px 24px",
+        boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
+        overflowX: "auto",
+      }}
+    >
       <BreadCrumb
         items={[
           {

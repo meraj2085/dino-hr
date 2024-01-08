@@ -10,8 +10,9 @@ const Hero = () => {
       <div className="container flex flex-col-reverse justify-center py-6 mx-auto sm:py-12 lg:py-[100px] lg:flex-row lg:justify-between">
         <div className="flex flex-col justify-center py-6 text-center rounded-sm lg:max-w-md xl:max-w-lg lg:text-left">
           <h1 className="text-5xl font-bold leadi sm:text-6xl">
-            Expert <br />
+            Expert<br />
             <span>HR Support</span>{" "}
+            <br />
             <span className="text-gradient">With Dino</span>
           </h1>
           <p className="mt-6 mb-8 text-lg sm:mb-12">
@@ -20,7 +21,7 @@ const Hero = () => {
             team management, salary administration, attendance tracking, and
             many more.
           </p>
-          <div className="flex flex-col space-y-4 sm:items-center sm:justify-center sm:flex-row sm:space-y-0 sm:space-x-4 lg:justify-start">
+          <div className="flex md:px-0 px-10  flex-col space-y-4 sm:items-center sm:justify-center sm:flex-row sm:space-y-0 sm:space-x-4 lg:justify-start">
             <a
               href="#video-section"
               className="relative inline-flex items-center justify-start py-3 pl-4 pr-12 overflow-hidden font-semibold transition-all duration-150 ease-in-out rounded hover:pl-10 hover:pr-6 bg-gray-50 group"
@@ -76,7 +77,7 @@ const Hero = () => {
             </Link>
           </div>
         </div>
-        <div className="flex items-center justify-center py-6 mt-8 lg:mt-0 ">
+        <div className="flex items-center justify-center py-6 px-5 md:px-0 mt-8 lg:mt-0 ">
           <Image
             src={globalMap}
             alt="global map"

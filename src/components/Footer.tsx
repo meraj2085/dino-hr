@@ -6,7 +6,7 @@ const Footer = () => {
       <div className="mx-auto max-w-[1250px] px-4 pb-6 pt-16 sm:px-6 lg:px-8 lg:pt-24">
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
           <div>
-            <div className="flex justify-center text-[#00674A] sm:justify-start">
+            <div className="hidden lg:flex justify-center text-[#00674A] sm:justify-start">
               <Image
                 src="https://res.cloudinary.com/dn163fium/image/upload/v1702705615/usmjqqtg18c9j7bnwh4f.png"
                 height={49}
@@ -15,7 +15,7 @@ const Footer = () => {
               />
             </div>
 
-            <p className="mt-6 max-w-md text-center leading-relaxed text-gray-500 sm:max-w-xs sm:text-left">
+            <p className="hidden lg:flex mt-6 max-w-md text-center leading-relaxed text-gray-500 sm:max-w-xs sm:text-left">
               We are a team of HR professionals dedicated to provide a one-stop
               HR solution. We believe that it is the most important function in
               any organization.

@@ -93,9 +93,7 @@ const MyAttendance = () => {
       render: function (data: any) {
         return (
           <>
-            {!data && (
-              <Button onClick={() => setCheck(!check)}>Check out</Button>
-            )}
+              <Button disabled={data} onClick={() => setCheck(!check)}>Check out</Button>
           </>
         );
       },
@@ -120,11 +118,13 @@ const MyAttendance = () => {
       <ActionBar title="My Attendance">
         <span></span>
         <div className="flex gap-5">
-          {!isCurrentDateAttendance?.date && (
-            <Button className="flex gap-5" onClick={() => setOpen(!open)}>
+            <Button
+              disabled={isCurrentDateAttendance?.date}
+              className="flex gap-5"
+              onClick={() => setOpen(!open)}
+            >
               Check in{" "}
             </Button>
-          )}
         </div>
       </ActionBar>
 

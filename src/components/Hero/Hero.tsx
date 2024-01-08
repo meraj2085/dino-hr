@@ -21,7 +21,7 @@ const Hero = () => {
             team management, salary administration, attendance tracking, and
             many more.
           </p>
-          <div className="flex flex-col space-y-4 sm:items-center sm:justify-center sm:flex-row sm:space-y-0 sm:space-x-4 lg:justify-start">
+          <div className="flex md:px-0 px-10  flex-col space-y-4 sm:items-center sm:justify-center sm:flex-row sm:space-y-0 sm:space-x-4 lg:justify-start">
             <a
               href="#video-section"
               className="relative inline-flex items-center justify-start py-3 pl-4 pr-12 overflow-hidden font-semibold transition-all duration-150 ease-in-out rounded hover:pl-10 hover:pr-6 bg-gray-50 group"
@@ -77,7 +77,7 @@ const Hero = () => {
             </Link>
           </div>
         </div>
-        <div className="flex items-center justify-center py-6 mt-8 lg:mt-0 ">
+        <div className="flex items-center justify-center py-6 px-5 md:px-0 mt-8 lg:mt-0 ">
           <Image
             src={globalMap}
             alt="global map"

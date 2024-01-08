@@ -2,6 +2,7 @@
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
+import Image from "next/image";
 
 const ReviewSection = () => {
   const settings = {
@@ -24,7 +25,6 @@ const ReviewSection = () => {
           dots: true,
         },
       },
-
       {
         breakpoint: 1124,
         settings: {
@@ -46,35 +46,35 @@ const ReviewSection = () => {
     {
       title: "Apex Solutions",
       client_name: "Alex Smith",
-      img: "https://www.apexfootwearltd.com/media/images/2._SNM.466072d2.fill-494x620-c100.jpg",
+      img: "https://res.cloudinary.com/dx2drcria/image/upload/v1704684999/uploads/hxvqyhfmxyweco3gfa3e.png",
       content:
         "The HRMS software exceeded my expectations. It has user-friendly interface, and robust analytics. A game-changer for our HR department",
     },
     {
       title: "Sandbox Inc.",
       client_name: "Daemon Jones",
-      img: "https://static.theceomagazine.net/wp-content/uploads/2023/04/21154637/jack-hidary-sandboxaq-1.png",
+      img: "https://res.cloudinary.com/dx2drcria/image/upload/v1704684998/uploads/zurqu7kjnqzfwepxfrta.jpg",
       content:
         "Impressed with the software's efficiency. Time-saving features, accurate data management, and excellent support. A must-have for any organization",
     },
     {
       title: "Robox Corp.",
       client_name: "Alice Brown",
-      img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTLdmVVSKBgiPk1LIqf0rjsoE3X7M5cuJFDeg&usqp=CAU",
+      img: "https://res.cloudinary.com/dx2drcria/image/upload/v1704684997/uploads/dpvvcredtu08mtmdkltw.jpg",
       content:
         "HRMS software transformed our HR workflows. Seamless integration, and insightful reporting. Enhancing productivity and employee satisfaction.",
     },
     {
       title: "Maximus Inc.",
       client_name: "Olive White",
-      img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQS3MvMZtLocES4CUQGO0es6iQXREI7k9ZtO_yzAHIQG0NOXZxe2y7ofeZ2qs5_rEJBlTk&usqp=CAU",
+      img: "https://res.cloudinary.com/dx2drcria/image/upload/v1704684997/uploads/ctyzwew5wxwdb9inh12x.jpg",
       content:
         "Using the HRMS software has been a game-changer. Navigation, comprehensive features, and excellent customization options. Highly recommended for HR",
     },
   ];
 
   return (
-    <div className="max-w-[1200px] mx-auto px-7 lg:px-0 mt-14 md:mt-16 lg:mt-24 mb-20">
+    <div className="max-w-[1200px] overflow-hidden mx-auto px-7 lg:px-0 mt-14 md:mt-16 lg:mt-24">
       <div className="mb-5 md:mb-12">
         <h1 className="text-5xl text-center font-bold leadi mb-3">
           <span className="text-gradient">Reviews</span>
@@ -86,7 +86,7 @@ const ReviewSection = () => {
       <Slider {...settings}>
         {dummyData?.map((data, index) => (
           <div key={index}>
-            <div className="relative block overflow-hidden rounded-lg  text-gray-800  p-4 sm:p-6 lg:m-8 h-[250px]">
+            <div className="relative block overflow-hidden rounded-lg  text-gray-800  p-4 sm:p-6 h-[350px]">
               <div className="flex flex-col items-center lg:mx-0 ">
                 <div className="relative text-center">
                   <svg
@@ -111,9 +111,11 @@ const ReviewSection = () => {
                 </div>
                 <span className="w-12 h-1 my-2 rounded-lg "></span>
                 <p>{data?.client_name}</p>
-                <div className="justify-center mt-2 hidden md:flex">
-                  <img
-                    alt="client image"
+                <div className="justify-center mt-2 flex">
+                  <Image
+                    height={64}
+                    width={64}
+                    alt="client"
                     src={data?.img}
                     className="h-16 w-16 rounded-full object-cover shadow-sm"
                   />

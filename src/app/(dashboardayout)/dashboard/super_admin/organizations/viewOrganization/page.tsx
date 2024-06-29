@@ -65,6 +65,8 @@ const ViewOrganization = () => {
           </>
         );
       },
+      fixed: 'right',
+      width: 130,
     },
   ];
   const onPaginationChange = (page: number, pageSize: number) => {
@@ -78,7 +80,7 @@ const ViewOrganization = () => {
   };
 
   return (
-    <div style={{ overflowX: "auto" }}>
+    <div style={{ overflowX: "auto" }} className="background">
       <BreadCrumb
         items={[
           {
@@ -98,6 +100,7 @@ const ViewOrganization = () => {
           onChange={(e) => setSearchTerm(e.target.value)}
           style={{
             width: "20%",
+            height: "35px",
           }}
         />
       </ActionBar>

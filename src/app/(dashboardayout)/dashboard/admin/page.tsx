@@ -31,16 +31,7 @@ const Card = ({
 const AdminPage = () => {
   const { data, isLoading } = useGetAdminStatsQuery(undefined);
   return (
-    <div
-      className="min-h-[680px]"
-      style={{
-        backgroundColor: "#FFFFFF",
-        borderRadius: "20px",
-        padding: "24px 24px",
-        boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
-        overflowX: "auto",
-      }}
-    >
+    <div className="min-h-[680px] background">
       <div className="flex flex-col lg:flex-row justify-center max-w-7xl mx-auto">
         <div className="w-full lg:w-1/4 order-1 gap-4 flex flex-col justify-center">
           <div>

@@ -30,16 +30,7 @@ const EmployeeDashboardPage = () => {
   const { data, isLoading } = useGetEmployeeStatsQuery(undefined);
   // console.log(data);
   return (
-    <div
-      className="min-h-[680px]"
-      style={{
-        backgroundColor: "#FFFFFF",
-        borderRadius: "20px",
-        padding: "24px 24px",
-        boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
-        overflowX: "auto",
-      }}
-    >
+    <div className="min-h-[680px] background">
       <h1 className="text-center text-4xl font-bold mb-4 mt-2">
         <span className="text-gradient-action">Dashboard</span>
       </h1>

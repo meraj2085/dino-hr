@@ -16,6 +16,7 @@
   background-color: #00674a;
 }
 
+/* Global Scrollbar Styles */
 ::-webkit-scrollbar {
   width: 7px;
 }
@@ -29,8 +30,32 @@
   background-color: #f1f1f1;
 }
 
+/* Table Scrollbar Styles*/
+.table-container .ant-table-body::-webkit-scrollbar {
+  width: 4px;
+}
+
+.table-container .ant-table-body::-webkit-scrollbar-thumb {
+  background-color: #00674a;
+  border-radius: 10px;
+}
+
+.table-container .ant-table-body::-webkit-scrollbar-thumb:hover {
+  background-color: #ffffff;
+}
+
+.table-container .ant-table-body::-webkit-scrollbar-track {
+  background-color: #ffffff;
+}
+
 .text-gradient {
   background: linear-gradient(45deg, #3a3a3a, #00674a, #f8f8f8);
+  background-clip: text;
+  color: transparent;
+}
+
+.text-gradient-action {
+  background: linear-gradient(45deg, #3a3a3a, #00674a);
   background-clip: text;
   color: transparent;
 }
@@ -49,4 +74,18 @@
 .card-box-border {
   box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px,
     rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+}
+
+.background {
+  background-color: #ffffff;
+  min-height: 89vh;
+  border-radius: 10px;
+  padding: 24px 24px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow-x: auto;
+}
+.table-container {
+  border: 1.2px solid #e0e2e6;
+  padding: 8px;
+  border-radius: 10px;
 }

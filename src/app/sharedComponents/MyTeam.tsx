@@ -7,6 +7,7 @@ import { useGetMyTeamQuery } from "@/redux/api/userApi";
 import Image from "next/image";
 import { useDebounced } from "@/redux/hooks";
 import Loading from "@/app/loading";
+import BreadCrumb from "@/components/ui/BreadCrumb";
 
 const MyTeam = () => {
   const query: Record<string, any> = {};
@@ -27,23 +28,29 @@ const MyTeam = () => {
     return <Loading />;
   }
   return (
-    <div
-      className="min-w-[300px] min-h-[650px] m-0 md:m-[20px]"
-      style={{
-        backgroundColor: "#FFFFFF",
-        borderRadius: "20px",
-        padding: "24px 24px",
-        boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
-        overflowX: "auto",
-      }}
-    >
-      <ActionBar title="My Team" />
-      <Input
-        className="w-52 mb-2"
-        size="large"
-        placeholder="Search"
-        onChange={(e) => setSearchTerm(e.target.value)}
+    <div className="background">
+      <BreadCrumb
+        items={[
+          {
+            label: "Admin",
+            link: "/dashboard/admin",
+          },
+          {
+            label: "My Team",
+            link: "/dashboard/admin/myTeam",
+          },
+        ]}
       />
+      <ActionBar title="My Team">
+        <Input
+          size="large"
+          placeholder="Search"
+          onChange={(e) => setSearchTerm(e.target.value)}
+          style={{
+            width: "20%",
+          }}
+        />
+      </ActionBar>
       <Row gutter={10}>
         {teamData?.myTeam?.map((data, index) => (
           <Col key={index} xs={24} sm={18} md={16} lg={12}>

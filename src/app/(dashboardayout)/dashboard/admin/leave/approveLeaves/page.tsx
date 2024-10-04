@@ -113,6 +113,7 @@ const ApproveLeave = () => {
     },
     {
       title: "Days",
+      width: 100,
       dataIndex: "no_of_days",
     },
     {
@@ -135,6 +136,7 @@ const ApproveLeave = () => {
     {
       title: "Action",
       // dataIndex: "id",
+      width: 200,
       render: function (data: any) {
         return (
           <>
@@ -183,7 +185,7 @@ const ApproveLeave = () => {
 
   return (
     <>
-      <div style={{ overflowX: "auto" }}>
+      <div style={{ overflowX: "auto" }} className="background">
         <BreadCrumb
           items={[
             {

@@ -32,33 +32,23 @@ const CalendarPage = () => {
   if (isLoading) return <Loading />;
 
   return (
-    <div
-      className="min-h-[680px]"
-      style={{
-        backgroundColor: "#FFFFFF",
-        borderRadius: "20px",
-        padding: "24px 24px",
-        boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
-        overflowX: "auto",
-      }}
-    >
+    <div className="background">
+      <BreadCrumb
+        items={[
+          {
+            label: "Dashboard",
+            link: `/dashboard/${user_type}`,
+          },
+          {
+            label: "Calendar",
+            link: `/dashboard/${user_type}/events/calendar`,
+          },
+        ]}
+      />
       <ActionBar title="Calendar" />
-
       <div className="flex justify-center gap-5">
         <div>
-          <BreadCrumb
-            items={[
-              {
-                label: "Dashboard",
-                link: `/dashboard/${user_type}`,
-              },
-              {
-                label: "Calendar",
-                link: `/dashboard/${user_type}/events/calendar`,
-              },
-            ]}
-          />
-          <div style={wrapperStyle} className="mt-3 card-box-border">
+          <div style={wrapperStyle} className="card-box-border">
             <ConfigProvider
               theme={{
                 components: {
@@ -72,7 +62,7 @@ const CalendarPage = () => {
             </ConfigProvider>
           </div>
         </div>
-        <div className="flex flex-col gap-2 pt-8">
+        <div className="flex flex-col gap-2">
           {data?.events?.map((event) => (
             <article
               key={event?.id}

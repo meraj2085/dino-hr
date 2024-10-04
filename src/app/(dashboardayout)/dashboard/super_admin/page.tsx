@@ -96,7 +96,9 @@ const AdminPage = () => {
           </div>
         </div>
         <div className="w-full md:w-1/3 order-0 md:order-1 bg-white rounded-md py-4">
-          <ActionBar title="Dashboard" />
+          <h1 className="text-center text-4xl font-bold mb-4 mt-2">
+            <span className="text-gradient-action">Dashboard</span>
+          </h1>
           <div className="flex justify-center">
             <PiChart employeesByGender={data?.employeesByGender} />
           </div>

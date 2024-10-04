@@ -6,6 +6,7 @@ import FormInput from "@/components/Forms/FormInput";
 import FormSelectField from "@/components/Forms/FormSelectField";
 import FormTextArea from "@/components/Forms/FormTextArea";
 import FormToggleButton from "@/components/Forms/FormToggleButton";
+import ActionBar from "@/components/ui/ActionBar";
 import BreadCrumb from "@/components/ui/BreadCrumb";
 import { useAddNotificationMutation } from "@/redux/api/notificationApi";
 import { sendNotificationSchema } from "@/schema/sendNotification";
@@ -101,17 +102,7 @@ const SendNotification = () => {
   if (isLoading) return <Loading />;
 
   return (
-    <div
-      className="min-w-[250px]"
-      style={{
-        backgroundColor: "#FFFFFF",
-        margin: "20px",
-        borderRadius: "20px",
-        padding: "24px 24px",
-        boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
-        overflowX: "auto",
-      }}
-    >
+    <div className="min-w-[250px] background">
       <BreadCrumb
         items={[
           {
@@ -124,7 +115,7 @@ const SendNotification = () => {
           },
         ]}
       />
-
+      <ActionBar title="Notification" />
       <Form
         submitHandler={onSubmit}
         resolver={yupResolver(sendNotificationSchema)}
@@ -187,13 +178,15 @@ const SendNotification = () => {
           )}
         </Row>
 
-        <Button
-          htmlType="submit"
-          className="bg-[#00674A] text-white flex justify-end item-end"
-          style={{ marginTop: "20px", borderRadius: "10px" }}
-        >
-          Send Notification
-        </Button>
+        <div className="flex justify-end">
+          <Button
+            htmlType="submit"
+            className="bg-[#00674A] text-white"
+            style={{ marginTop: "20px", borderRadius: "10px" }}
+          >
+            Send Notification
+          </Button>
+        </div>
       </Form>
     </div>
   );

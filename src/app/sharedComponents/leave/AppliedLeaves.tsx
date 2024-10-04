@@ -150,7 +150,7 @@ const AppliedLeaves = () => {
 
   return (
     <>
-      <div style={{ overflowX: "auto" }}>
+      <div style={{ overflowX: "auto" }} className="background">
         <BreadCrumb
           items={[
             {

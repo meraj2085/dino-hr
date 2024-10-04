@@ -46,17 +46,7 @@ const AddEvent = () => {
   }
 
   return (
-    <div
-      className="min-w-[250px] min-h-[650px]"
-      style={{
-        backgroundColor: "#FFFFFF",
-        margin: "20px",
-        borderRadius: "20px",
-        padding: "24px 24px",
-        boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
-        overflowX: "auto",
-      }}
-    >
+    <div className="background">
       <BreadCrumb
         items={[
           {
@@ -103,13 +93,15 @@ const AddEvent = () => {
           </Col>
         </Row>
 
-        <Button
-          htmlType="submit"
-          className="bg-[#00674A] text-white hover:text-white flex justify-end item-end"
-          style={{ margin: "10px 0px" }}
-        >
-          Add Event
-        </Button>
+        <div className="flex justify-end">
+          <Button
+            htmlType="submit"
+            className="bg-[#00674A] text-white hover:text-white"
+            style={{ margin: "10px 0px" }}
+          >
+            Add Event
+          </Button>
+        </div>
       </Form>
     </div>
   );

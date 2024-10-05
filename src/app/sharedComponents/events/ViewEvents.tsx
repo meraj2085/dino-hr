@@ -84,40 +84,39 @@ const ViewEvents = () => {
     },
   ];
 
-  if (user_type === "admin") {
-    columns.push({
-      title: "Action",
-      dataIndex: "id",
-      render: function (data: any) {
-        return (
-          <>
-            <Link href={`/dashboard/admin/events/edit/${data}`}>
-              <Button
-                style={{
-                  margin: "0px 5px",
-                }}
-                icon={<EditOutlined />}
-               />
-            </Link>
+  columns.push({
+    title: "Action",
+    dataIndex: "id",
+    render: function (data: any) {
+      return (
+        <>
+          <Link href={`/dashboard/admin/events/edit/${data}`}>
             <Button
-              onClick={() => {
-                setOpen(true);
-                setEventId(data);
-              }}
               style={{
                 margin: "0px 5px",
-                backgroundColor: "#FF4D4F",
               }}
-              danger
-              icon={<DeleteOutlined />}
-             />
-            
-          </>
-        );
-      },
-      sorter: true,
-    });
-  }
+              icon={<EditOutlined />}
+            />
+          </Link>
+          <Button
+            onClick={() => {
+              setOpen(true);
+              setEventId(data);
+            }}
+            style={{
+              margin: "0px 5px",
+              backgroundColor: "#FF4D4F",
+            }}
+            danger
+            icon={<DeleteOutlined />}
+          />
+        </>
+      );
+    },
+    fixed: 'right',
+    width: 130,
+    sorter: true,
+  } as any);
 
   const onPaginationChange = (page: number, pageSize: number) => {
     setPage(page);

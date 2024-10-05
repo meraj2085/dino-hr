@@ -92,6 +92,8 @@ const BookingManagementPage = () => {
           </>
         );
       },
+      fixed: 'right',
+      width: 130,
     },
   ];
   const onPaginationChange = (page: number, pageSize: number) => {

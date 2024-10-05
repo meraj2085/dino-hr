@@ -8,6 +8,8 @@ import { useState } from "react";
 import { useDebounced } from "@/redux/hooks";
 import PPTable from "@/components/ui/PPTable";
 import { useGetAllEmployeeQuery } from "@/redux/api/employeeApi";
+import Image from "next/image";
+import { anonymousAvatar } from "@/constants/global";
 
 const ViewEmployees = () => {
   const query: Record<string, any> = {};
@@ -37,6 +39,28 @@ const ViewEmployees = () => {
 
   const columns = [
     {
+      title: "",
+      dataIndex: "profile_picture",
+      render: function (data: string, record: Record<string, string>) {
+        return (
+          <Image
+            src={
+              data
+                ? data
+                : record?.gender === "Male"
+                ? anonymousAvatar?.male
+                : anonymousAvatar.female
+            }
+            alt="Avatar"
+            width={50}
+            height={50}
+            style={{ borderRadius: "10%" }}
+          />
+        );
+      },
+      width: 80,
+    },
+    {
       title: "Employee Name",
       render: function (data: Record<string, string>) {
         const fullName = `${data?.first_name} ${data?.last_name}`;
@@ -63,7 +87,7 @@ const ViewEmployees = () => {
           </>
         );
       },
-      fixed: 'right',
+      fixed: "right",
       width: 130,
     },
   ];

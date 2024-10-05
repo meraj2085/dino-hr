@@ -135,6 +135,8 @@ const AppliedLeaves = () => {
           </>
         );
       },
+      fixed: 'right',
+      width: 160,
     },
   ];
 

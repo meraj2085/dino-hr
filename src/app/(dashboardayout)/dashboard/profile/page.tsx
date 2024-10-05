@@ -6,6 +6,7 @@ import BreadCrumb from "@/components/ui/BreadCrumb";
 import { Avatar, Card, Col, Row } from "antd";
 import { getUserInfo } from "@/services/auth.service";
 import { useGetSingleUserQuery } from "@/redux/api/userApi";
+import ActionBar from "@/components/ui/ActionBar";
 
 const profile = () => {
   const { userId } = getUserInfo() as any;
@@ -13,8 +14,7 @@ const profile = () => {
 
   if (isLoading) return <Loading />;
   return (
-    <div className="min-w-[250px]">
-      <h1 className="text-2xl font-semibold pb-1">Profile</h1>
+    <div className="background">
       <BreadCrumb
         items={[
           {
@@ -27,8 +27,9 @@ const profile = () => {
           },
         ]}
       />
+      <ActionBar title="Profile"/>
       <div>
-        <Card className="mt-5">
+        <Card className="mt-5 border-gray-300">
           <div className="grid lg:grid-cols-2 mx-auto ">
             {/* left  */}
             <div className="md:flex justify-start items-center mb-5 lg:mb-0">
@@ -41,14 +42,14 @@ const profile = () => {
               </div>
               <div className="flex justify-center">
                 <div className="pl-4">
-                  <h1 className="text-xl font-bold text-center md:text-left text-gradient">
+                  <h1 className="text-xl font-bold text-center md:text-left text-gradient-action">
                     {data?.first_name} {data?.last_name}
                   </h1>
                   <h1 className="text-md font-bold text-center md:text-left">
                     {data?.designation}
                   </h1>
                   <h1 className="text-md font-bold text-center md:text-left">
-                    {data?.employee_code}
+                    Code: {data?.employee_code}
                   </h1>
                 </div>
               </div>
@@ -89,7 +90,7 @@ const profile = () => {
               <Card
                 title="Personal Information"
                 bordered={false}
-                className="mb-2"
+                className="mb-4 border border-gray-300"
               >
                 <div className="flex">
                   {/* input */}
@@ -110,7 +111,7 @@ const profile = () => {
               </Card>
             </Col>
             <Col xs={24} md={24} lg={12}>
-              <Card title="Emergency Contact" bordered={false} className="mb-2">
+              <Card title="Emergency Contact" bordered={false} className="mb-4 border border-gray-300">
                 <div className="flex">
                   {/* input */}
                   <div className="text-md font-bold mr-10">
@@ -134,7 +135,7 @@ const profile = () => {
         <div>
           <Row gutter={10}>
             <Col xs={24} md={24} lg={12}>
-              <Card title="Bank Details" bordered={false} className="mb-2">
+              <Card title="Bank Details" bordered={false} className="mb-2 border border-gray-300">
                 <div className="flex">
                   {/* input */}
                   <div className="text-md font-bold mr-10">
@@ -154,7 +155,7 @@ const profile = () => {
               </Card>
             </Col>
             <Col xs={24} md={24} lg={12}>
-              <Card title="Other Information" bordered={false} className="mb-2">
+              <Card title="Other Information" bordered={false} className="mb-2 border border-gray-300">
                 <div className="flex">
                   {/* input */}
                   <div className="text-md font-bold mr-10">

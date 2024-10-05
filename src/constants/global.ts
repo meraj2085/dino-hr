@@ -144,3 +144,9 @@ export const leaveType = [
     value: "leave-without-pay",
   },
 ];
+
+export const anonymousAvatar = {
+  male: "https://res.cloudinary.com/dn163fium/image/upload/v1728132578/bqfdtkdnopj8sir8ebr0.png",
+  female:
+    "https://res.cloudinary.com/dn163fium/image/upload/v1728132578/rn6sbsg9xmotfiq1ldwb.png",
+};

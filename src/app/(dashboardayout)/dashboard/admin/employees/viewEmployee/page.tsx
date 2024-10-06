@@ -62,15 +62,16 @@ const ViewEmployees = () => {
       width: 80,
     },
     {
-      title: "Employee Name",
+      title: "Full Name",
       render: function (data: Record<string, string>) {
         const fullName = `${data?.first_name} ${data?.last_name}`;
         return <>{fullName}</>;
       },
+      width: 170,
     },
     {
       title: "Gender",
-      width: 120,
+      width: 130,
       render: function (data: Record<string, string>) {
         return (
           <>
@@ -92,11 +93,12 @@ const ViewEmployees = () => {
     {
       title: "Employee Email",
       dataIndex: "office_email",
-      width: 200,
+      width: 230,
     },
     {
-      title: "Employee Phone",
+      title: "Phone Number",
       dataIndex: "phone_number",
+      width: 130,
     },
     {
       title: "Status",

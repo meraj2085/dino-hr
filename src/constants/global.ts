@@ -27,12 +27,16 @@ export const employmentStatus = [
     value: "Temporary",
   },
   {
-    label: "Part-time",
+    label: "Part Time",
     value: "Part-time",
   },
   {
     label: "Freelance",
     value: "Freelance",
+  },
+  {
+    label: "Full Time",
+    value: "Full-time",
   },
 ];
 

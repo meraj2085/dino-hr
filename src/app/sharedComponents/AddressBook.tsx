@@ -8,6 +8,7 @@ import ActionBar from "@/components/ui/ActionBar";
 import Loading from "@/app/loading";
 import Image from "next/image";
 import BreadCrumb from "@/components/ui/BreadCrumb";
+import { anonymousAvatar } from "@/constants/global";
 
 const AddressBook = () => {
   const query: Record<string, any> = {};
@@ -64,12 +65,11 @@ const AddressBook = () => {
                   <Avatar
                     size={64}
                     src={
-                      data?.profile_picture || (
-                        <Image
-                          src={data?.profile_picture || ""}
-                          alt="profile"
-                        />
-                      )
+                      data?.profile_picture
+                        ? data?.profile_picture
+                        : data?.gender === "Male"
+                        ? anonymousAvatar?.male
+                        : anonymousAvatar.female
                     }
                   />
                 </div>

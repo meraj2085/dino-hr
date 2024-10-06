@@ -193,6 +193,7 @@ export type IAddress = {
   phone_number?: number;
   office_email?: string;
   profile_picture?: string;
+  gender?: string;
   __v?: number;
 };
 

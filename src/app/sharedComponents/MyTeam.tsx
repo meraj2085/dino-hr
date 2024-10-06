@@ -8,6 +8,7 @@ import Image from "next/image";
 import { useDebounced } from "@/redux/hooks";
 import Loading from "@/app/loading";
 import BreadCrumb from "@/components/ui/BreadCrumb";
+import { anonymousAvatar } from "@/constants/global";
 
 const MyTeam = () => {
   const query: Record<string, any> = {};
@@ -60,14 +61,11 @@ const MyTeam = () => {
                   <Avatar
                     size={64}
                     src={
-                      data?.profile_picture || (
-                        <Image
-                          height={100}
-                          width={100}
-                          src={data?.profile_picture || ""}
-                          alt="profile"
-                        />
-                      )
+                      data?.profile_picture
+                        ? data?.profile_picture
+                        : data?.gender === "Male"
+                        ? anonymousAvatar?.male
+                        : anonymousAvatar.female
                     }
                   />
                 </div>

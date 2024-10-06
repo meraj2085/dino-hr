@@ -10,6 +10,7 @@ import PPTable from "@/components/ui/PPTable";
 import { useGetAllEmployeeQuery } from "@/redux/api/employeeApi";
 import Image from "next/image";
 import { anonymousAvatar } from "@/constants/global";
+import { MaleSVG, FemaleSVG } from "@/shared/svg";
 
 const ViewEmployees = () => {
   const query: Record<string, any> = {};
@@ -68,12 +69,42 @@ const ViewEmployees = () => {
       },
     },
     {
+      title: "Gender",
+      width: 120,
+      render: function (data: Record<string, string>) {
+        return (
+          <>
+            {data?.gender === "Male" ? (
+              <div className="flex gap-[1px] items-center">
+                <MaleSVG />
+                Male
+              </div>
+            ) : (
+              <div className="flex gap-[1px] items-center">
+                <FemaleSVG />
+                Female
+              </div>
+            )}
+          </>
+        );
+      },
+    },
+    {
       title: "Employee Email",
       dataIndex: "office_email",
+      width: 200,
     },
     {
       title: "Employee Phone",
       dataIndex: "phone_number",
+    },
+    {
+      title: "Status",
+      dataIndex: "employment_status",
+    },
+    {
+      title: "Employee Code",
+      dataIndex: "employee_code",
     },
     {
       title: "Action",
@@ -82,13 +113,13 @@ const ViewEmployees = () => {
         return (
           <>
             <Link href={`/dashboard/admin/employees/viewEmployee/${data}`}>
-              <Button icon={<EyeOutlined />}>View</Button>
+              <Button icon={<EyeOutlined />}></Button>
             </Link>
           </>
         );
       },
       fixed: "right",
-      width: 130,
+      width: 70,
     },
   ];
   const onPaginationChange = (page: number, pageSize: number) => {

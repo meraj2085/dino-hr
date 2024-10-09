@@ -38,7 +38,7 @@ const MyAttendance = () => {
         message.success("Attendance Added Successfully");
       }
     } catch (err: any) {
-      console.error(err.message);
+      // console.error(err.message);
       message.error(err.message);
     }
     setOpen(false);

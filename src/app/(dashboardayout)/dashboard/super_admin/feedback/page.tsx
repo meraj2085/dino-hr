@@ -68,6 +68,8 @@ const Feedback = () => {
           </>
         );
       },
+      fixed: 'right',
+      width: 130,
     },
   ];
   const onPaginationChange = (page: number, pageSize: number) => {
@@ -81,7 +83,7 @@ const Feedback = () => {
   };
 
   return (
-    <div style={{ overflowX: "auto" }} className="min-w-[250px]">
+    <div style={{ overflowX: "auto" }} className="min-w-[250px] background">
       <BreadCrumb
         items={[
           {

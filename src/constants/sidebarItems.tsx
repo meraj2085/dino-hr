@@ -14,7 +14,7 @@ import {
 } from "@ant-design/icons";
 import Link from "next/link";
 import { USER_TYPE } from "./role";
-export const sidebarItems = (user_type: string) => {
+export const sidebarItems = (user_type: string, role?: string) => {
   const adminSidebarItems: MenuProps["items"] = [
     {
       label: <Link href="/">Back To Website</Link>,
@@ -266,6 +266,18 @@ export const sidebarItems = (user_type: string) => {
           ),
           key: `/dashboard/${user_type}/leave/appliedLeaves`,
         },
+        ...(role === "Manager"
+          ? [
+              {
+                label: (
+                  <Link href={`/dashboard/${user_type}/leave/approveLeaves`}>
+                    Approve Leaves
+                  </Link>
+                ),
+                key: `/dashboard/${user_type}/leave/approveLeaves`,
+              },
+            ]
+          : []),
       ],
     },
     {

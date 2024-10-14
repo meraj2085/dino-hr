@@ -35,17 +35,7 @@ const ApplyForLeaves = () => {
     }
   };
   return (
-    <div
-      className="min-w-[250px] min-h-[650px]"
-      style={{
-        backgroundColor: "#FFFFFF",
-        margin: "12px",
-        borderRadius: "20px",
-        padding: "20px 20px",
-        boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
-        overflowX: "auto",
-      }}
-    >
+    <div className="background">
       <BreadCrumb
         items={[
           {

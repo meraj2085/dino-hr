@@ -92,6 +92,8 @@ const BookingManagementPage = () => {
           </>
         );
       },
+      fixed: 'right',
+      width: 130,
     },
   ];
   const onPaginationChange = (page: number, pageSize: number) => {
@@ -105,7 +107,7 @@ const BookingManagementPage = () => {
   };
 
   return (
-    <div style={{ overflowX: "auto" }} className="min-w-[250px]">
+    <div style={{ overflowX: "auto" }} className="min-w-[250px] background">
       <BreadCrumb
         items={[
           {

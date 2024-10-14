@@ -32,16 +32,7 @@ const AdminPage = () => {
   const { data, isLoading } = useGetSuperAdminStatsQuery(undefined);
 
   return (
-    <div
-      className="min-h-[680px]"
-      style={{
-        backgroundColor: "#FFFFFF",
-        borderRadius: "20px",
-        padding: "24px 24px",
-        boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
-        overflowX: "auto",
-      }}
-    >
+    <div className="min-h-[680px] background">
       <div className="flex flex-col md:flex-row justify-center">
         <div className="w-full md:w-1/4 order-1 gap-4 flex flex-col justify-center">
           <div>
@@ -96,7 +87,9 @@ const AdminPage = () => {
           </div>
         </div>
         <div className="w-full md:w-1/3 order-0 md:order-1 bg-white rounded-md py-4">
-          <ActionBar title="Dashboard" />
+          <h1 className="text-center text-4xl font-bold mb-4 mt-2">
+            <span className="text-gradient-action">Dashboard</span>
+          </h1>
           <div className="flex justify-center">
             <PiChart employeesByGender={data?.employeesByGender} />
           </div>

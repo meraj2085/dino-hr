@@ -38,7 +38,7 @@ const MyAttendance = () => {
         message.success("Attendance Added Successfully");
       }
     } catch (err: any) {
-      console.error(err.message);
+      // console.error(err.message);
       message.error(err.message);
     }
     setOpen(false);
@@ -93,7 +93,9 @@ const MyAttendance = () => {
       render: function (data: any) {
         return (
           <>
-              <Button disabled={data} onClick={() => setCheck(!check)}>Check out</Button>
+            <Button disabled={data} onClick={() => setCheck(!check)}>
+              Check out
+            </Button>
           </>
         );
       },
@@ -101,7 +103,7 @@ const MyAttendance = () => {
   ];
 
   return (
-    <div style={{ overflowX: "auto" }}>
+    <div style={{ overflowX: "auto" }} className="background">
       <BreadCrumb
         items={[
           {
@@ -118,13 +120,13 @@ const MyAttendance = () => {
       <ActionBar title="My Attendance">
         <span></span>
         <div className="flex gap-5">
-            <Button
-              disabled={isCurrentDateAttendance?.date}
-              className="flex gap-5"
-              onClick={() => setOpen(!open)}
-            >
-              Check in{" "}
-            </Button>
+          <Button
+            disabled={isCurrentDateAttendance?.date}
+            className="flex gap-5"
+            onClick={() => setOpen(!open)}
+          >
+            Check in{" "}
+          </Button>
         </div>
       </ActionBar>
 

@@ -8,6 +8,9 @@ import { useState } from "react";
 import { useDebounced } from "@/redux/hooks";
 import PPTable from "@/components/ui/PPTable";
 import { useGetAllEmployeeQuery } from "@/redux/api/employeeApi";
+import Image from "next/image";
+import { anonymousAvatar } from "@/constants/global";
+import { MaleSVG, FemaleSVG } from "@/shared/svg";
 
 const ViewEmployees = () => {
   const query: Record<string, any> = {};
@@ -37,19 +40,73 @@ const ViewEmployees = () => {
 
   const columns = [
     {
-      title: "Employee Name",
+      title: "",
+      dataIndex: "profile_picture",
+      render: function (data: string, record: Record<string, string>) {
+        return (
+          <Image
+            src={
+              data
+                ? data
+                : record?.gender === "Male"
+                ? anonymousAvatar?.male
+                : anonymousAvatar.female
+            }
+            alt="Avatar"
+            width={50}
+            height={50}
+            style={{ borderRadius: "10%" }}
+          />
+        );
+      },
+      width: 80,
+    },
+    {
+      title: "Full Name",
       render: function (data: Record<string, string>) {
         const fullName = `${data?.first_name} ${data?.last_name}`;
         return <>{fullName}</>;
+      },
+      width: 170,
+    },
+    {
+      title: "Gender",
+      width: 130,
+      render: function (data: Record<string, string>) {
+        return (
+          <>
+            {data?.gender === "Male" ? (
+              <div className="flex gap-[1px] items-center">
+                <MaleSVG />
+                Male
+              </div>
+            ) : (
+              <div className="flex gap-[1px] items-center">
+                <FemaleSVG />
+                Female
+              </div>
+            )}
+          </>
+        );
       },
     },
     {
       title: "Employee Email",
       dataIndex: "office_email",
+      width: 230,
     },
     {
-      title: "Employee Phone",
+      title: "Phone Number",
       dataIndex: "phone_number",
+      width: 130,
+    },
+    {
+      title: "Status",
+      dataIndex: "employment_status",
+    },
+    {
+      title: "Employee Code",
+      dataIndex: "employee_code",
     },
     {
       title: "Action",
@@ -58,11 +115,13 @@ const ViewEmployees = () => {
         return (
           <>
             <Link href={`/dashboard/admin/employees/viewEmployee/${data}`}>
-              <Button icon={<EyeOutlined />}>View</Button>
+              <Button icon={<EyeOutlined />}></Button>
             </Link>
           </>
         );
       },
+      fixed: "right",
+      width: 70,
     },
   ];
   const onPaginationChange = (page: number, pageSize: number) => {
@@ -76,7 +135,7 @@ const ViewEmployees = () => {
   };
 
   return (
-    <div style={{ overflowX: "auto" }}>
+    <div style={{ overflowX: "auto" }} className="background">
       <BreadCrumb
         items={[
           {

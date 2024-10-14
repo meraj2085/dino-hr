@@ -37,19 +37,22 @@ const PPTable = ({
       }
     : false;
 
-    const getRowClassName = (record: any, index: number): string => {
-      return index % 2 === 0 ? 'even-row' : 'odd-row';
-    };
+  const getRowClassName = (record: any, index: number): string => {
+    return index % 2 === 0 ? "even-row" : "odd-row";
+  };
 
   return (
     <Table
+      className="table-container"
       loading={loading}
       columns={columns}
       dataSource={dataSource}
+      scroll={{ y: 375 }}
       pagination={paginationConfig}
       onChange={onTableChange}
-      scroll={scroll}
-      rowClassName={getRowClassName}
+      // scroll={scroll}
+      // rowClassName={getRowClassName}
+      size="middle"
     />
   );
 };

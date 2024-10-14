@@ -78,7 +78,7 @@ const AllAttendance = () => {
   const dateFormat = "YYYY/MM/DD";
 
   return (
-    <div style={{ overflowX: "auto" }}>
+    <div style={{ overflowX: "auto" }} className="background">
       <BreadCrumb
         items={[
           {

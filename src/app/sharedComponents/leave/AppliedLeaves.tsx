@@ -77,6 +77,8 @@ const AppliedLeaves = () => {
           return <span style={{ color: "Red" }}>{data}</span>;
         } else if (data === "Rejected") {
           return <span style={{ color: "Red" }}>{data}</span>;
+        } else if (data === "Expired") {
+          return <span style={{ color: "Red" }}>{data}</span>;
         }
       },
     },
@@ -135,7 +137,7 @@ const AppliedLeaves = () => {
           </>
         );
       },
-      fixed: 'right',
+      fixed: "right",
       width: 160,
     },
   ];

@@ -4,19 +4,16 @@ import { useDebounced } from "@/redux/hooks";
 import { Button, Input, message } from "antd";
 import { useState } from "react";
 import dayjs from "dayjs";
-import Link from "next/link";
 import BreadCrumb from "@/components/ui/BreadCrumb";
 import ActionBar from "@/components/ui/ActionBar";
 import PPTable from "@/components/ui/PPTable";
 import {
-  useLeavesByEmailQuery,
+  useGetAllLeavesQuery,
   useUpdateLeaveMutation,
 } from "@/redux/api/leaveApi";
-import { getUserInfo } from "@/services/auth.service";
 import PPModal from "@/components/ui/Modal";
 
-const AppliedLeaves = () => {
-  const { userId } = getUserInfo() as any;
+const ApproveLeave = () => {
   const query: Record<string, any> = {};
 
   const [page, setPage] = useState<number>(1);
@@ -38,29 +35,63 @@ const AppliedLeaves = () => {
   if (!!debouncedSearchTerm) {
     query["searchTerm"] = debouncedSearchTerm;
   }
-
+  const { data, isLoading } = useGetAllLeavesQuery({ ...query });
+  const [updateLeave] = useUpdateLeaveMutation();
   const [leaveId, setLeaveId] = useState<string>("");
   const [open, setOpen] = useState<boolean>(false);
-  const { data, isLoading } = useLeavesByEmailQuery(userId);
-  const [updateLeave] = useUpdateLeaveMutation();
+  const [open_2, setOpen_2] = useState<boolean>(false);
 
-  const handleCancel = async (id: string) => {
+  const handleApprove = async (id: string) => {
     try {
       const res = await updateLeave({
         id,
-        body: { status: "Cancelled" },
+        body: { status: "Accepted" },
       }).unwrap();
       if (res) {
-        message.success("Lave cancelled!");
+        message.success("Lave Approved!");
+        setOpen_2(false);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const handleReject = async (id: string) => {
+    try {
+      const res = await updateLeave({
+        id,
+        body: { status: "Rejected" },
+      }).unwrap();
+      if (res) {
+        message.success("Lave Rejected!");
         setOpen(false);
       }
     } catch (error) {
       console.error(error);
     }
   };
+
   const meta = data?.meta;
 
   const columns = [
+    {
+      title: "Employee Name",
+      dataIndex: "user_id",
+      render: function (data: any) {
+        return (
+          <span>
+            {data?.first_name} {data?.last_name}
+          </span>
+        );
+      },
+    },
+    {
+      title: "Employee Code",
+      dataIndex: "user_id",
+      render: function (data: any) {
+        return <span>{data?.employee_code}</span>;
+      },
+    },
     {
       title: "Leave Types",
       dataIndex: "leave_type",
@@ -83,7 +114,8 @@ const AppliedLeaves = () => {
       },
     },
     {
-      title: "Total Days",
+      title: "Days",
+      width: 100,
       dataIndex: "no_of_days",
     },
     {
@@ -105,21 +137,24 @@ const AppliedLeaves = () => {
 
     {
       title: "Action",
+      // dataIndex: "id",
+      width: 200,
       render: function (data: any) {
         return (
           <>
             {data?.status === "Applied" && (
-              <Link
-                href={`/dashboard/admin/leave/appliedLeaves/edit/${data?._id}`}
+              <Button
+                style={{
+                  margin: "0px 5px",
+                }}
+                onClick={() => {
+                  setOpen_2(true);
+                  setLeaveId(data?.id);
+                }}
+                type="primary"
               >
-                <Button
-                  style={{
-                    margin: "0px 5px",
-                  }}
-                >
-                  Edit
-                </Button>
-              </Link>
+                Approve
+              </Button>
             )}
             {data?.status === "Applied" && (
               <Button
@@ -131,14 +166,12 @@ const AppliedLeaves = () => {
                 style={{ backgroundColor: "#FF4D4F" }}
                 danger
               >
-                Cancel
+                Reject
               </Button>
             )}
           </>
         );
       },
-      fixed: "right",
-      width: 160,
     },
   ];
 
@@ -167,7 +200,7 @@ const AppliedLeaves = () => {
             },
           ]}
         />
-        <ActionBar title="Applied Leave">
+        <ActionBar title="Approve Leave">
           <Input
             size="large"
             placeholder="Search"
@@ -181,7 +214,7 @@ const AppliedLeaves = () => {
         <PPTable
           loading={isLoading}
           columns={columns}
-          dataSource={data}
+          dataSource={data?.leaves}
           pageSize={size}
           totalPages={meta?.total}
           showSizeChanger={true}
@@ -192,15 +225,23 @@ const AppliedLeaves = () => {
         />
       </div>
       <PPModal
-        title="Cancel Leave"
+        title="Reject Event"
         isOpen={open}
         closeModal={() => setOpen(false)}
-        handleOk={() => handleCancel(leaveId)}
+        handleOk={() => handleReject(leaveId)}
       >
-        <p className="my-5">Are you sure you want to cancel this leave?</p>
+        <p className="my-5">Are you sure you want to reject this leave?</p>
+      </PPModal>
+      <PPModal
+        title="Approve Event"
+        isOpen={open_2}
+        closeModal={() => setOpen_2(false)}
+        handleOk={() => handleApprove(leaveId)}
+      >
+        <p className="my-5">Are you sure you want to approve this leave?</p>
       </PPModal>
     </>
   );
 };
 
-export default AppliedLeaves;
+export default ApproveLeave;

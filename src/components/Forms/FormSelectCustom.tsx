@@ -1,37 +1,32 @@
 "use client";
 
 import { getErrorMessageByPropertyName } from "@/utils/schemaValidator";
-import { Select } from "antd";
 import { useFormContext, Controller } from "react-hook-form";
 
-export type SelectOptions = {
+export type SelectOption = {
   label: string;
   value: string;
 };
 
-type SelectFieldProps = {
-  options: SelectOptions[];
+type FormSelectCustomProps = {
   name: string;
-  size?: "large" | "small";
-  value?: string | string[] | undefined;
   placeholder?: string;
+  selectOptions: SelectOption[];
   label?: string;
-  defaultValue?: SelectOptions;
-  handleChange?: (el: string) => void;
+  defaultValue?: string;
+  handleChange?: (value: string) => void;
   required?: boolean;
 };
 
-const FormSelectField = ({
+const FormSelectCustom = ({
   name,
-  size = "large",
-  value,
   placeholder = "select",
-  options,
+  selectOptions,
   label,
   defaultValue,
   handleChange,
   required,
-}: SelectFieldProps) => {
+}: FormSelectCustomProps) => {
   const {
     control,
     formState: { errors },
@@ -41,7 +36,7 @@ const FormSelectField = ({
 
   return (
     <>
-      {required ? (
+      {required && (
         <span
           style={{
             color: "red",
@@ -49,22 +44,27 @@ const FormSelectField = ({
         >
           *
         </span>
-      ) : null}
-      {label ? label : null}
+      )}
+      {label && <label>{label}</label>}
       <Controller
         control={control}
         name={name}
         render={({ field: { value, onChange, onBlur } }) => (
-          <Select
-            onChange={handleChange ? handleChange : onChange}
+          <select
+            className="px-3 border py-[9px] w-full custom-select rounded-lg border-gray-300 text-gray-700 sm:text-sm"
+            onChange={handleChange ? (e) => handleChange(e.target.value) : onChange}
             onBlur={onBlur}
-            size={size}
-            defaultValue={defaultValue?.value}
-            options={options}
+            defaultValue={defaultValue}
             value={value}
             style={{ width: "100%" }}
             placeholder={placeholder}
-          />
+          >
+            {selectOptions.map((option, index) => (
+              <option key={index} value={option.value}>
+                {option.label}
+              </option>
+            ))}
+          </select>
         )}
       />
       <small style={{ color: "red" }}>{errorMessage}</small>
@@ -72,4 +72,4 @@ const FormSelectField = ({
   );
 };
 
-export default FormSelectField;
+export default FormSelectCustom;

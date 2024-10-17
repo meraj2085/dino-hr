@@ -2,15 +2,18 @@
 
 import ActionBar from "@/components/ui/ActionBar";
 import BreadCrumb from "@/components/ui/BreadCrumb";
-import {
-  useGetSingleOrganizationQuery,
-} from "@/redux/api/organizationApi";
+import { useGetSingleOrganizationQuery } from "@/redux/api/organizationApi";
 import { Button } from "antd";
 import BasicInfo from "@/components/Organization/OrganizationDetails/BasicInfo";
 import ContactPerson from "@/components/Organization/OrganizationDetails/ContactPerson";
 import BillingDetails from "@/components/Organization/OrganizationDetails/BillingDetails";
 import StepperPage from "@/components/StepperForm/StepperPage";
-import { PlusOutlined, EditOutlined, DeleteOutlined } from "@ant-design/icons";
+import {
+  PlusOutlined,
+  EditOutlined,
+  DeleteOutlined,
+  SettingOutlined,
+} from "@ant-design/icons";
 import Link from "next/link";
 import Image from "next/image";
 
@@ -55,18 +58,23 @@ const OrgDetailPage = ({
             link: "/dashboard/super_admin",
           },
           {
-            label: "Add Organization",
-            link: "/dashboard/super_admin/organizations/addOrganization",
+            label: "View Organization",
+            link: `/dashboard/super_admin/organizations/viewOrganization/${orgId}`,
           },
         ]}
       />
-      <ActionBar title="Organization Detail">
+      <ActionBar title="Organization Details">
         <span></span>
         <div className="flex gap-5">
           <Link
             href={`/dashboard/super_admin/organizations/updateOrganization/createAdmin/${orgId}`}
           >
             <Button icon={<PlusOutlined />}>CREATE ADMIN</Button>
+          </Link>
+          <Link
+            href={`/dashboard/super_admin/organizations/orgConfig/${orgId}`}
+          >
+            <Button icon={<SettingOutlined />}>CONFIG</Button>
           </Link>
           <Link
             href={`/dashboard/super_admin/organizations/updateOrganization/${orgId}`}

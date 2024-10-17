@@ -14,18 +14,38 @@ import {
   teamOptions,
 } from "@/constants/global";
 import FormMultiSelectField from "@/components/Forms/FormMultiSelectField";
+import {
+  useGetSingleOrganizationQuery,
+  useOrganizationConfigMutation,
+} from "@/redux/api/organizationApi";
+import Loading from "@/app/loading";
 
 const OrgConfig = ({ params }: { params: { organizationId: string } }) => {
   const orgId = params.organizationId;
+  const { data, isLoading } = useGetSingleOrganizationQuery(orgId);
+  const [organizationConfig, { isLoading: isUpdateLoading }] =
+    useOrganizationConfigMutation();
 
   const onSubmit = async (data: any) => {
-    console.log(data);
     try {
-      message.success("Successful");
+      const res = await organizationConfig({
+        id: orgId,
+        data: data,
+      }).unwrap();
+      if (res.id) {
+        message.success("Config Updated Successfully");
+      }
     } catch (err: any) {
       message.error(err.message);
     }
   };
+
+  if (isLoading || isUpdateLoading)
+    return (
+      <div className="background">
+        <Loading />
+      </div>
+    );
 
   return (
     <div className="background">
@@ -47,7 +67,17 @@ const OrgConfig = ({ params }: { params: { organizationId: string } }) => {
       />
       <ActionBar title="Organization Config" />
       <div>
-        <Form submitHandler={onSubmit}>
+        <Form
+          submitHandler={onSubmit}
+          defaultValues={{
+            working_days: data?.working_days,
+            office_hours: data?.office_hours,
+            org_departments: data?.org_departments,
+            org_teams: data?.org_teams,
+            org_designations: data?.org_designations,
+            org_roles: data?.org_roles,
+          }}
+        >
           <Row gutter={{ xs: 4, md: 20 }}>
             <Col xs={24} md={12} lg={12} className="mt-3">
               <div>

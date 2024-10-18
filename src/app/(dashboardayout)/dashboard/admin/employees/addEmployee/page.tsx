@@ -13,25 +13,6 @@ import { getUserInfo } from "@/services/auth.service";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { message } from "antd";
 
-const steps = [
-  {
-    title: "Basic Info",
-    content: <EmployeeBasicInfoForm />,
-  },
-  {
-    title: "Contact Info",
-    content: <EmployeeContactInfoForm />,
-  },
-  {
-    title: "Employment Info",
-    content: <EmployeeEmploymentInfoForm />,
-  },
-  {
-    title: "Financial Info",
-    content: <EmployeeFinancialInfoForm />,
-  },
-];
-
 const AddEmployee = () => {
   const { organization_id } = getUserInfo() as any;
   const [addEmployee] = useAddEmployeeMutation();
@@ -52,6 +33,26 @@ const AddEmployee = () => {
       message.error(err.message);
     }
   };
+
+  const steps = [
+    {
+      title: "Basic Info",
+      content: <EmployeeBasicInfoForm />,
+    },
+    {
+      title: "Contact Info",
+      content: <EmployeeContactInfoForm />,
+    },
+    {
+      title: "Employment Info",
+      content: <EmployeeEmploymentInfoForm organization_id={organization_id} />,
+    },
+    {
+      title: "Financial Info",
+      content: <EmployeeFinancialInfoForm />,
+    },
+  ];
+
   return (
     <div className="background">
       <BreadCrumb

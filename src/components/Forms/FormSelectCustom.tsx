@@ -59,7 +59,7 @@ const FormSelectCustom = ({
             style={{ width: "100%" }}
             placeholder={placeholder}
           >
-            {selectOptions.map((option, index) => (
+            {selectOptions?.map((option, index) => (
               <option key={index} value={option.value}>
                 {option.label}
               </option>

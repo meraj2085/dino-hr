@@ -9,8 +9,13 @@ import {
 import FormSelectField from "@/components/Forms/FormSelectField";
 import NormalDatePicker from "@/components/Forms/NormalDatePicker";
 import { useGetAllUsersQuery } from "@/redux/api/userApi";
+import RoleFields from "@/components/Forms/fetchedForms/RoleFields";
 
-const EmployeeEmploymentInfoForm = () => {
+const EmployeeEmploymentInfoForm = ({
+  organization_id,
+}: {
+  organization_id: string;
+}) => {
   const { data, isLoading } = useGetAllUsersQuery({});
 
   const managerOptions: any = data?.users
@@ -72,13 +77,12 @@ const EmployeeEmploymentInfoForm = () => {
           />
         </Col>
         <Col xs={24} md={12} lg={6} className="mt-3">
-          <FormSelectField
-            size="large"
+          <RoleFields
             name="role"
-            options={roleOptions}
             label="Role"
-            placeholder="Your Role"
-            required
+            orgId={organization_id}
+            required={true}
+            placeholder="Select role"
           />
         </Col>
         <Col xs={24} md={12} lg={6} className="mt-3">

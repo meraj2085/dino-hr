@@ -1,13 +1,9 @@
 "use client";
 
+import { SelectOptions } from "@/types";
 import { getErrorMessageByPropertyName } from "@/utils/schemaValidator";
 import { Select } from "antd";
 import { useFormContext, Controller } from "react-hook-form";
-
-export type SelectOptions = {
-  label: string;
-  value: string;
-};
 
 type SelectFieldProps = {
   options: SelectOptions[];

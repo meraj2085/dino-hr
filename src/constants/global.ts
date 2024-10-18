@@ -41,16 +41,17 @@ export const employmentStatus = [
 ];
 
 export const departmentOptions = [
-  { value: "it", label: "IT Department" },
-  { value: "finance", label: "Finance Department" },
-  { value: "hr", label: "Human Resources" },
-  { value: "marketing", label: "Marketing Department" },
-  { value: "sales", label: "Sales Department" },
-  { value: "operations", label: "Operations Department" },
-  { value: "legal", label: "Legal Department" },
-  { value: "procurement", label: "Procurement Department" },
-  { value: "research", label: "Research and Development" },
-  { value: "customer_service", label: "Customer Service" },
+  { value: "Product Development", label: "Product Development" },
+  { value: "Product Design", label: "Product Design" },
+  { value: "Marketing", label: "Marketing" },
+  { value: "Support", label: "Support" },
+  { value: "Quality Assurance", label: "Quality Assurance" },
+  { value: "Sales", label: "Sales" },
+  { value: "HR", label: "HR" },
+  { value: "Finance", label: "Finance" },
+  { value: "Legal", label: "Legal" },
+  { value: "R&D", label: "R&D" },
+  { value: "Customer  Service", label: "Customer Service" },
 ];
 
 export const designationOptions = [
@@ -82,21 +83,22 @@ export const designationOptions = [
 ];
 
 export const teamOptions = [
-  { value: "marketing", label: "Marketing Team" },
-  { value: "sales", label: "Sales Team" },
-  { value: "hr", label: "Human Resources" },
-  { value: "product", label: "Product Development" },
-  { value: "support", label: "Customer Support" },
-  { value: "design", label: "Design Team" },
-  { value: "qa", label: "Quality Assurance" },
-  { value: "devops", label: "DevOps Team" },
-  { value: "finance", label: "Finance Team" },
+  { value: "Frontend Team", label: "Frontend Team" },
+  { value: "Backend Team", label: "Backend Team" },
+  { value: "Full-Stack Team", label: "Full-Stack Team" },
+  { value: "Mobile Dev Team", label: "Mobile Dev Team" },
+  { value: "UX/UI Design Team", label: "UX/UI Design Team" },
+  { value: "DevOps Team", label: "DevOps Team" },
+  { value: "QA", label: "QA" },
+  { value: "Digital Marketing Team", label: "Digital Marketing Team" },
+  { value: "Content Creation Team", label: "Content Creation Team" },
+  { value: "Recruitment Team", label: "Recruitment Team" },
+  { value: "Budget Planning Team", label: "Budget Planning Team" },
 ];
 
 export const roleOptions = [
   { label: "Employee", value: "Employee" },
   { label: "Manager", value: "Manager" },
-  { label: "Developer", value: "Developer" },
   { label: "Designer", value: "Designer" },
   { label: "Tester", value: "Tester" },
   { label: "Product Manager", value: "Product Manager" },

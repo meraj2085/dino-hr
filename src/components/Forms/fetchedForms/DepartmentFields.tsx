@@ -1,7 +1,7 @@
 import { SelectOptions } from "@/types";
 import FormSelectField from "../FormSelectField";
 
-type RoleFieldsProps = {
+type DepartmentFieldsProps = {
   name: string;
   label?: string;
   orgData: any;
@@ -10,22 +10,22 @@ type RoleFieldsProps = {
   placeholder?: string;
 };
 
-const RoleFields = ({
+const DepartmentFields = ({
   name,
   label,
   orgData,
   isOrgDataLoading,
   required,
   placeholder,
-}: RoleFieldsProps) => {
-  const roles = orgData?.org_roles;
+}: DepartmentFieldsProps) => {
+  const roles = orgData?.org_departments;
   const acDepartmentOptions = roles?.map((role: string) => ({
     label: role,
     value: role,
   }));
 
   const options: SelectOptions[] = isOrgDataLoading
-    ? [{ label: "Loading...", value: "loading", disabled: true }]
+    ? [{ label: "Loading...", value: "Loading", disabled: true }]
     : acDepartmentOptions || [];
 
   return (
@@ -39,4 +39,4 @@ const RoleFields = ({
   );
 };
 
-export default RoleFields;
+export default DepartmentFields;

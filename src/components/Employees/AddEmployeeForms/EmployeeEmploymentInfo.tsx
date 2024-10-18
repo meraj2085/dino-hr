@@ -1,22 +1,21 @@
 import { Col, Row } from "antd";
-import {
-  departmentOptions,
-  designationOptions,
-  employmentStatus,
-  roleOptions,
-  teamOptions,
-} from "@/constants/global";
+import { employmentStatus } from "@/constants/global";
 import FormSelectField from "@/components/Forms/FormSelectField";
 import NormalDatePicker from "@/components/Forms/NormalDatePicker";
 import { useGetAllUsersQuery } from "@/redux/api/userApi";
 import RoleFields from "@/components/Forms/fetchedForms/RoleFields";
+import TeamFields from "@/components/Forms/fetchedForms/TeamFields";
+import DesignationFields from "@/components/Forms/fetchedForms/DesignationFields";
+import DepartmentFields from "@/components/Forms/fetchedForms/DepartmentFields";
 
 const EmployeeEmploymentInfoForm = ({
-  organization_id,
+  orgData,
+  isOrgDataLoading,
 }: {
-  organization_id: string;
+  orgData: any;
+  isOrgDataLoading: boolean;
 }) => {
-  const { data, isLoading } = useGetAllUsersQuery({});
+  const { data, isLoading: alUsersLoading } = useGetAllUsersQuery({});
 
   const managerOptions: any = data?.users
     ?.filter((user: any) => user.role === "Manager")
@@ -47,42 +46,43 @@ const EmployeeEmploymentInfoForm = ({
           />
         </Col>
         <Col xs={24} md={12} lg={6} className="mt-3">
-          <FormSelectField
-            size="large"
+          <DepartmentFields
             name="department"
-            options={departmentOptions}
             label="Department"
             placeholder="Your Department"
-            required
+            orgData={orgData}
+            isOrgDataLoading={isOrgDataLoading}
+            required={true}
           />
         </Col>
         <Col xs={24} md={12} lg={6} className="mt-3">
-          <FormSelectField
-            size="large"
+          <DesignationFields
             name="designation"
-            options={designationOptions}
             label="Designation"
             placeholder="Your Designation"
-            required
+            orgData={orgData}
+            isOrgDataLoading={isOrgDataLoading}
+            required={true}
           />
         </Col>
         <Col xs={24} md={12} lg={6} className="mt-3">
-          <FormSelectField
-            size="large"
+          <TeamFields
             name="team"
-            options={teamOptions}
             label="Team"
-            placeholder="Your Team"
-            required
+            placeholder="Select Team"
+            orgData={orgData}
+            isOrgDataLoading={isOrgDataLoading}
+            required={true}
           />
         </Col>
         <Col xs={24} md={12} lg={6} className="mt-3">
           <RoleFields
             name="role"
             label="Role"
-            orgId={organization_id}
-            required={true}
             placeholder="Select role"
+            orgData={orgData}
+            isOrgDataLoading={isOrgDataLoading}
+            required={true}
           />
         </Col>
         <Col xs={24} md={12} lg={6} className="mt-3">

@@ -1,7 +1,7 @@
 import { SelectOptions } from "@/types";
 import FormSelectField from "../FormSelectField";
 
-type RoleFieldsProps = {
+type TeamFieldsProps = {
   name: string;
   label?: string;
   orgData: any;
@@ -10,15 +10,15 @@ type RoleFieldsProps = {
   placeholder?: string;
 };
 
-const RoleFields = ({
+const TeamFields = ({
   name,
   label,
   orgData,
   isOrgDataLoading,
   required,
   placeholder,
-}: RoleFieldsProps) => {
-  const roles = orgData?.org_roles;
+}: TeamFieldsProps) => {
+  const roles = orgData?.org_teams;
   const acDepartmentOptions = roles?.map((role: string) => ({
     label: role,
     value: role,
@@ -39,4 +39,4 @@ const RoleFields = ({
   );
 };
 
-export default RoleFields;
+export default TeamFields;

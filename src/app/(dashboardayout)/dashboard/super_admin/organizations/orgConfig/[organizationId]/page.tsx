@@ -4,6 +4,7 @@ import ActionBar from "@/components/ui/ActionBar";
 import BreadCrumb from "@/components/ui/BreadCrumb";
 import Form from "@/components/Forms/Form";
 import FormInput from "@/components/Forms/FormInput";
+import FormTimePicker from "@/components/Forms/FormTimePicker";
 import { Button, Col, message, Row } from "antd";
 import FormMultiSelectCreate from "@/components/Forms/FormMultiSelectCreate";
 import {
@@ -71,7 +72,8 @@ const OrgConfig = ({ params }: { params: { organizationId: string } }) => {
           submitHandler={onSubmit}
           defaultValues={{
             working_days: data?.working_days,
-            office_hours: data?.office_hours,
+            office_start_time: data?.office_start_time,
+            office_end_time: data?.office_end_time,
             org_departments: data?.org_departments,
             org_teams: data?.org_teams,
             org_designations: data?.org_designations,
@@ -81,35 +83,39 @@ const OrgConfig = ({ params }: { params: { organizationId: string } }) => {
           <Row gutter={{ xs: 4, md: 20 }}>
             <Col xs={24} md={12} lg={12} className="mt-3">
               <div>
+                <FormMultiSelectField
+                  name="working_days"
+                  label="Working Days"
+                  placeholder="Select Working Days"
+                  options={dayOptions}
+                />
+              </div>
+            </Col>
+            <Col xs={24} md={12} lg={12} className="mt-3">
+              <div className="flex justify-between">
                 <div>
-                  <FormMultiSelectField
-                    name="working_days"
-                    label="Working Days"
-                    placeholder="Select Working Days"
-                    options={dayOptions}
+                  <FormTimePicker
+                    name="office_start_time"
+                    label="Office Start Time"
+                  />
+                </div>
+                <p className="pt-[29px]">-</p>
+                <div>
+                  <FormTimePicker
+                    name="office_end_time"
+                    label="Office End Time"
                   />
                 </div>
               </div>
             </Col>
             <Col xs={24} md={12} lg={12} className="mt-3">
-              <FormInput
-                name="office_hours"
-                type="number"
-                size="large"
-                label="Office Hours"
-                placeholder="Enter office hours"
-              />
-            </Col>
-            <Col xs={24} md={12} lg={12} className="mt-3">
               <div>
-                <div>
-                  <FormMultiSelectCreate
-                    name="org_departments"
-                    label="Departments"
-                    placeholder="Select Departments"
-                    selectOptions={departmentOptions}
-                  />
-                </div>
+                <FormMultiSelectCreate
+                  name="org_departments"
+                  label="Departments"
+                  placeholder="Select Departments"
+                  selectOptions={departmentOptions}
+                />
               </div>
             </Col>
             <Col xs={24} md={12} lg={12} className="mt-3">
@@ -124,26 +130,22 @@ const OrgConfig = ({ params }: { params: { organizationId: string } }) => {
             </Col>
             <Col xs={24} md={12} lg={12} className="mt-3">
               <div>
-                <div>
-                  <FormMultiSelectCreate
-                    name="org_designations"
-                    label="Designations"
-                    placeholder="Select Designations"
-                    selectOptions={designationOptions}
-                  />
-                </div>
+                <FormMultiSelectCreate
+                  name="org_designations"
+                  label="Designations"
+                  placeholder="Select Designations"
+                  selectOptions={designationOptions}
+                />
               </div>
             </Col>
             <Col xs={24} md={12} lg={12} className="mt-3">
               <div>
-                <div>
-                  <FormMultiSelectCreate
-                    name="org_roles"
-                    label="Roles"
-                    placeholder="Select Roles"
-                    selectOptions={roleOptions}
-                  />
-                </div>
+                <FormMultiSelectCreate
+                  name="org_roles"
+                  label="Roles"
+                  placeholder="Select Roles"
+                  selectOptions={roleOptions}
+                />
               </div>
             </Col>
           </Row>

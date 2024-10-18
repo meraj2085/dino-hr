@@ -4,7 +4,10 @@ import StepperForm from "@/components/StepperForm/StepperForm";
 import ActionBar from "@/components/ui/ActionBar";
 import BreadCrumb from "@/components/ui/BreadCrumb";
 import { Spin, message } from "antd";
-import { useGetSingleUserQuery, useUpdateUserMutation } from "@/redux/api/userApi";
+import {
+  useGetSingleUserQuery,
+  useUpdateUserMutation,
+} from "@/redux/api/userApi";
 import EmployeeBasicInfoForm from "@/components/Employees/AddEmployeeForms/EmployeeBasicInfo";
 import EmployeeContactInfoForm from "@/components/Employees/AddEmployeeForms/EmployeeContactInfo";
 import EmployeeEmploymentInfoForm from "@/components/Employees/AddEmployeeForms/EmployeeEmploymentInfo";
@@ -12,11 +15,16 @@ import EmployeeFinancialInfoForm from "@/components/Employees/AddEmployeeForms/E
 import { useUpdateEmployeeMutation } from "@/redux/api/employeeApi";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { userSchema } from "@/schema/user";
+import { useGetSingleOrganizationQuery } from "@/redux/api/organizationApi";
+import { getUserInfo } from "@/services/auth.service";
 
 const UpdateEmployee = ({ params }: { params: { employeeId: string } }) => {
   const empId = params.employeeId;
+  const { organization_id } = getUserInfo() as any;
 
   const { data, isLoading } = useGetSingleUserQuery(empId);
+  const { data: orgData, isLoading: isOrgDataLoading } =
+    useGetSingleOrganizationQuery(organization_id);
 
   const steps = [
     {
@@ -31,7 +39,12 @@ const UpdateEmployee = ({ params }: { params: { employeeId: string } }) => {
     },
     {
       title: "Employment Info",
-      content: <EmployeeEmploymentInfoForm />,
+      content: (
+        <EmployeeEmploymentInfoForm
+          orgData={orgData}
+          isOrgDataLoading={isOrgDataLoading}
+        />
+      ),
     },
     {
       title: "Financial Info",
@@ -44,12 +57,10 @@ const UpdateEmployee = ({ params }: { params: { employeeId: string } }) => {
 
   const handleSubmit = async (values: any) => {
     try {
-      // console.log(values);
       const res = await UpdateEmployee({
         id: empId,
         updatedData: values,
       }).unwrap();
-      // console.log(res);
       if (res._id) {
         message.success("Employee Updated Successfully");
       }
@@ -60,18 +71,16 @@ const UpdateEmployee = ({ params }: { params: { employeeId: string } }) => {
 
   if (isLoading) return <Spin />;
 
-  // console.log(data);
-
   const defaultValues = {
     organization_id: data?.organization_id,
     first_name: data?.first_name,
     last_name: data?.last_name,
     date_of_birth: data?.date_of_birth,
     gender: data?.gender,
-    employment_status: data?.employment_status, // ['Contract', 'Intern', 'Temporary', 'Part-time', 'Freelance']
+    employment_status: data?.employment_status,
     office_email: data?.office_email,
     date_of_joining: data?.date_of_joining,
-    department: data?.department, // ['HR', 'IT', 'Finance', 'Marketing', 'Sales', 'Operations']
+    department: data?.department,
     flat_number: data?.flat_number,
     building_name: data?.building_name,
     street: data?.street,
@@ -84,11 +93,11 @@ const UpdateEmployee = ({ params }: { params: { employeeId: string } }) => {
     other_phone_number: data?.other_phone_number,
     personal_email: data?.personal_email,
     bank_name: data?.bank_name,
-    role: data?.role, // ['Employee', 'Manager', 'Admin', 'Super Admin']
+    role: data?.role,
     account_number: data?.account_number,
     branch_name: data?.branch_name,
-    designation: data?.designation, // ['Software Engineer', 'Senior Software Engineer', 'Team Lead', 'Project Manager', 'Product Manager', 'CEO', 'CTO', 'COO', 'CFO', 'HR Manager', 'HR Executive', 'HR Intern', 'Marketing Manager', 'Marketing Executive', 'Marketing Intern', 'Sales Manager', 'Sales Executive', 'Sales Intern', 'Finance Manager', 'Finance Executive', 'Finance Intern', 'Operations Manager', 'Operations Executive', 'Operations Intern']
-    team: data?.team, // ['IT', 'Finance', 'Marketing', 'Sales', 'Operations']
+    designation: data?.designation,
+    team: data?.team,
     manager_id: data?.manager_id, // [_id of user thats role is manager]
     emergency_contact: {
       full_name: data?.emergency_contact?.full_name,

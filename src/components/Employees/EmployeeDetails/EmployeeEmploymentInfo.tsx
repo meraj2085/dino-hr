@@ -13,12 +13,11 @@ import { useGetAllUsersQuery } from "@/redux/api/userApi";
 const EmployeeEmploymentInfo = ({ user }: { user: IUser }) => {
   const { data, isLoading } = useGetAllUsersQuery({});
 
-  const managerOptions: any = data?.users
-    ?.filter((user: any) => user.role === "Manager")
-    .map((user: any) => ({
-      label: user.first_name + " " + user.last_name,
-      value: user._id,
-    }));
+  const managerOptions: any = data?.users.map((user: any) => ({
+    label: user.first_name + " " + user.last_name,
+    value: user._id,
+  }));
+  
   return (
     <div className="bg-white border border-gray-300 rounded-md p-4 my-4">
       <Row gutter={{ xs: 4, md: 20 }}>

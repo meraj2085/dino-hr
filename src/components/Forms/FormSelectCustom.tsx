@@ -1,5 +1,6 @@
 "use client";
 
+import { ArrowDownSVG } from "@/shared/svg";
 import { getErrorMessageByPropertyName } from "@/utils/schemaValidator";
 import { useFormContext, Controller } from "react-hook-form";
 
@@ -50,21 +51,28 @@ const FormSelectCustom = ({
         control={control}
         name={name}
         render={({ field: { value, onChange, onBlur } }) => (
-          <select
-            className="px-3 border py-[9px] w-full custom-select rounded-lg border-gray-300 text-gray-700 sm:text-sm"
-            onChange={handleChange ? (e) => handleChange(e.target.value) : onChange}
-            onBlur={onBlur}
-            defaultValue={defaultValue}
-            value={value}
-            style={{ width: "100%" }}
-            placeholder={placeholder}
-          >
-            {selectOptions?.map((option, index) => (
-              <option key={index} value={option.value}>
-                {option.label}
-              </option>
-            ))}
-          </select>
+          <div className="relative">
+            <select
+              className="px-3 pr-8 border py-[9px] w-full custom-select rounded-lg border-gray-300 text-gray-700 sm:text-sm appearance-none"
+              onChange={
+                handleChange ? (e) => handleChange(e.target.value) : onChange
+              }
+              onBlur={onBlur}
+              defaultValue={defaultValue}
+              value={value}
+              style={{ width: "100%" }}
+              placeholder={placeholder}
+            >
+              {selectOptions?.map((option, index) => (
+                <option key={index} value={option.value}>
+                  {option.label}
+                </option>
+              ))}
+            </select>
+            <div className="absolute right-2 top-1/2 transform -translate-y-1/2 pointer-events-none">
+              <ArrowDownSVG />
+            </div>
+          </div>
         )}
       />
       <small style={{ color: "red" }}>{errorMessage}</small>

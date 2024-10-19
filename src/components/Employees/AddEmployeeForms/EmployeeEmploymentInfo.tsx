@@ -7,6 +7,7 @@ import RoleFields from "@/components/Forms/fetchedForms/RoleFields";
 import TeamFields from "@/components/Forms/fetchedForms/TeamFields";
 import DesignationFields from "@/components/Forms/fetchedForms/DesignationFields";
 import DepartmentFields from "@/components/Forms/fetchedForms/DepartmentFields";
+import FormSelectCustom from "@/components/Forms/FormSelectCustom";
 
 const EmployeeEmploymentInfoForm = ({
   orgData,
@@ -18,7 +19,7 @@ const EmployeeEmploymentInfoForm = ({
   const { data, isLoading: alUsersLoading } = useGetAllUsersQuery({});
 
   const managerOptions: any = data?.users
-    ?.filter((user: any) => user.role === "Manager")
+    // ?.filter((user: any) => user.role === "Manager")
     .map((user: any) => ({
       label: user.first_name + " " + user.last_name,
       value: user._id,
@@ -86,12 +87,13 @@ const EmployeeEmploymentInfoForm = ({
           />
         </Col>
         <Col xs={24} md={12} lg={6} className="mt-3">
-          <FormSelectField
-            size="large"
+          <FormSelectCustom
             name="manager_id"
-            options={managerOptions || [{ label: "No Manager", value: "" }]}
+            selectOptions={
+              managerOptions || [{ label: "No Manager", value: "" }]
+            }
             label="Manager"
-            placeholder="Your Manager"
+            placeholder="Select Manager"
             required
           />
         </Col>

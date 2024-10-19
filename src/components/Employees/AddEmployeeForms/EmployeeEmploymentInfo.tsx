@@ -18,12 +18,10 @@ const EmployeeEmploymentInfoForm = ({
 }) => {
   const { data, isLoading: alUsersLoading } = useGetAllUsersQuery({});
 
-  const managerOptions: any = data?.users
-    // ?.filter((user: any) => user.role === "Manager")
-    .map((user: any) => ({
-      label: user.first_name + " " + user.last_name,
-      value: user._id,
-    }));
+  const managerOptions: any = data?.users.map((user: any) => ({
+    label: user.first_name + " " + user.last_name,
+    value: user._id,
+  }));
 
   return (
     <div className="border bg-white border-gray-300 rounded-md p-4 my-4">

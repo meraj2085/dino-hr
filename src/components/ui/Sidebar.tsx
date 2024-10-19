@@ -13,7 +13,7 @@ import Link from "next/link";
 const SideBar = () => {
   const theme = useAppSelector((state) => state.config.theme);
   const [collapsed, setCollapsed] = useState(false);
-  const { user_type, role } = getUserInfo() as any;
+  const { user_type, is_manager } = getUserInfo() as any;
 
   return (
     <ConfigProvider
@@ -61,7 +61,7 @@ const SideBar = () => {
           // theme="dark"
           defaultSelectedKeys={["1"]}
           mode="inline"
-          items={sidebarItems(user_type, role)}
+          items={sidebarItems(user_type, is_manager)}
         />
       </Sider>
     </ConfigProvider>

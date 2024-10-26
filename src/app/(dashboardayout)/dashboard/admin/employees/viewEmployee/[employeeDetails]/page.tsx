@@ -12,7 +12,12 @@ import EmployeeContactInfo from "@/components/Employees/EmployeeDetails/Employee
 import EmployeeEmploymentInfo from "@/components/Employees/EmployeeDetails/EmployeeEmploymentInfo";
 import EmployeeFinancialInfo from "@/components/Employees/EmployeeDetails/EmployeeFinancialInfo";
 import DHRButton from "@/components/ui/DHRButton";
-import { DeleteSVG, DisableSVG, LockSVG, ResetPasswordSVG } from "@/shared/svg";
+import {
+  ActionSVG,
+  DeleteSVG,
+  DisableSVG,
+  ResetPasswordSVG,
+} from "@/shared/svg";
 
 const EmployeeDetails = ({
   params,
@@ -98,14 +103,14 @@ const EmployeeDetails = ({
           },
         ]}
       />
-      <ActionBar title="Employee Detail">
+      <ActionBar title="Employee Details">
         <span></span>
         <div className="flex gap-2">
           <div className="flex gap-5">
             <Dropdown placement="bottom" arrow menu={{ items }}>
               <a>
                 <Space wrap size={16}>
-                  <DHRButton text="ACTIONS" />
+                  <DHRButton icon={<ActionSVG />} text="ACTIONS" />
                 </Space>
               </a>
             </Dropdown>

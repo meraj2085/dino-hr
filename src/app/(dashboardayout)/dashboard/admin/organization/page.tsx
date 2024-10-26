@@ -4,6 +4,7 @@ import BasicInfo from "@/components/Organization/OrganizationDetails/BasicInfo";
 import BillingDetails from "@/components/Organization/OrganizationDetails/BillingDetails";
 import ContactPerson from "@/components/Organization/OrganizationDetails/ContactPerson";
 import StepperPage from "@/components/StepperForm/StepperPage";
+import ActionBar from "@/components/ui/ActionBar";
 import BreadCrumb from "@/components/ui/BreadCrumb";
 import { useGetSingleOrganizationQuery } from "@/redux/api/organizationApi";
 import { getUserInfo } from "@/services/auth.service";
@@ -28,17 +29,20 @@ const Organization = () => {
   ];
 
   return (
-    <div>
+    <div className="background">
       <BreadCrumb
         items={[
           {
-            label: "Admin",
+            label: "Dashboard",
             link: "/dashboard/admin",
+          },
+          {
+            label: "Organization",
+            link: "/dashboard/admin/organization",
           },
         ]}
       />
-
-      <div className="w-full h-4" />
+      <ActionBar title="Organization" />
       <StepperPage steps={steps} />
     </div>
   );

@@ -157,6 +157,7 @@ const BookCall = () => {
                 <div className="mb-3">
                   <label className="block">
                     <FormTimePicker
+                      defaultValue="00:00"
                       name="appointment_time"
                       label="Appointment time"
                     />

@@ -2,7 +2,7 @@
 
 import ActionBar from "@/components/ui/ActionBar";
 import BreadCrumb from "@/components/ui/BreadCrumb";
-import { Button, Dropdown, MenuProps, Space } from "antd";
+import { Button, Dropdown, MenuProps, message, Space } from "antd";
 import StepperPage from "@/components/StepperForm/StepperPage";
 import { EditOutlined } from "@ant-design/icons";
 import Link from "next/link";
@@ -18,6 +18,8 @@ import {
   DisableSVG,
   ResetPasswordSVG,
 } from "@/shared/svg";
+import PPModal from "@/components/ui/Modal";
+import { useState } from "react";
 
 const EmployeeDetails = ({
   params,
@@ -26,6 +28,22 @@ const EmployeeDetails = ({
 }) => {
   const employeeId = params.employeeDetails;
   const { data, isLoading } = useGetSingleEmployeeQuery(employeeId);
+  const [open, setOpen] = useState<boolean>(false);
+
+  const handleResetPassword = async (id: string) => {
+    try {
+      // const res = await updateLeave({
+      //   id,
+      //   body: { status: "Cancelled" },
+      // }).unwrap();
+      // if (res) {
+      //   message.success("Lave cancelled!");
+      //   setOpen(false);
+      // }
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   const steps = [
     {
@@ -50,14 +68,14 @@ const EmployeeDetails = ({
     {
       key: "1",
       label: (
-        <Link
-          href="/auth/changePassword"
+        <button
+          onClick={() => setOpen(true)}
           className="flex w-full items-center gap-2 rounded-lg px-2 py-2 text-sm text-gray-800 hover:bg-gray-50"
           role="menuitem"
         >
           <ResetPasswordSVG />
           Reset Password
-        </Link>
+        </button>
       ),
     },
     {
@@ -81,52 +99,63 @@ const EmployeeDetails = ({
   ];
 
   return (
-    <div
-      style={{
-        backgroundColor: "#FFFFFF",
-        minHeight: "680px",
-        borderRadius: "20px",
-        padding: "24px 24px",
-        boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
-        overflowX: "auto",
-      }}
-    >
-      <BreadCrumb
-        items={[
-          {
-            label: "Admin",
-            link: "/dashboard/admin",
-          },
-          {
-            label: "Add Employee",
-            link: "/dashboard/admin/employees/addEmployee",
-          },
-        ]}
-      />
-      <ActionBar title="Employee Details">
-        <span></span>
-        <div className="flex gap-2">
-          <div className="flex gap-5">
-            <Dropdown placement="bottom" arrow menu={{ items }}>
-              <a>
-                <Space wrap size={16}>
-                  <DHRButton icon={<ActionSVG />} text="ACTIONS" />
-                </Space>
-              </a>
-            </Dropdown>
+    <>
+      {" "}
+      <div
+        style={{
+          backgroundColor: "#FFFFFF",
+          minHeight: "680px",
+          borderRadius: "20px",
+          padding: "24px 24px",
+          boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
+          overflowX: "auto",
+        }}
+      >
+        <BreadCrumb
+          items={[
+            {
+              label: "Admin",
+              link: "/dashboard/admin",
+            },
+            {
+              label: "Add Employee",
+              link: "/dashboard/admin/employees/addEmployee",
+            },
+          ]}
+        />
+        <ActionBar title="Employee Details">
+          <span></span>
+          <div className="flex gap-2">
+            <div className="flex gap-5">
+              <Dropdown placement="bottom" arrow menu={{ items }}>
+                <a>
+                  <Space wrap size={16}>
+                    <DHRButton icon={<ActionSVG />} text="ACTIONS" />
+                  </Space>
+                </a>
+              </Dropdown>
+            </div>
+            <div className="flex gap-5">
+              <Link
+                href={`/dashboard/admin/employees/updateEmployee/${employeeId}`}
+              >
+                <DHRButton icon={<EditOutlined />} text="UPDATE" />
+              </Link>
+            </div>
           </div>
-          <div className="flex gap-5">
-            <Link
-              href={`/dashboard/admin/employees/updateEmployee/${employeeId}`}
-            >
-              <DHRButton icon={<EditOutlined />} text="UPDATE" />
-            </Link>
-          </div>
-        </div>
-      </ActionBar>
-      <div className="w-full h-4" />
-      <StepperPage steps={steps} />
-    </div>
+        </ActionBar>
+        <div className="w-full h-4" />
+        <StepperPage steps={steps} />
+      </div>
+      <PPModal
+        title="Reset Password"
+        isOpen={open}
+        closeModal={() => setOpen(false)}
+        handleOk={() => handleResetPassword(employeeId)}
+      >
+        <p className="my-5">Are you sure you want to reset password?</p>
+      </PPModal>
+    </>
   );
 };
 

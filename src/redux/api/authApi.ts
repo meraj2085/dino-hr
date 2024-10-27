@@ -34,6 +34,14 @@ export const authApi = baseApi.injectEndpoints({
         method: "POST",
         data: data,
       }),
+      invalidatesTags: [tagTypes.user],
+    }),
+    adminShowPassword: build.mutation({
+      query: (data) => ({
+        url: `${AUTH_URL}/show-password`,
+        method: "POST",
+        data: data,
+      }),
     }),
   }),
 });
@@ -43,4 +51,5 @@ export const {
   useUserLoginMutation,
   useChangePasswordMutation,
   useAdminResetPasswordMutation,
+  useAdminShowPasswordMutation,
 } = authApi;

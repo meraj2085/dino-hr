@@ -251,6 +251,28 @@ export const ResetPasswordSVG = () => {
   );
 };
 
+export const ViewPasswordSVG = () => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      className="icon icon-tabler icons-tabler-outline icon-tabler-eye-check w-5 h-5"
+    >
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path d="M11.102 17.957c-3.204 -.307 -5.904 -2.294 -8.102 -5.957c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6a19.5 19.5 0 0 1 -.663 1.032" />
+      <path d="M15 19l2 2l4 -4" />
+    </svg>
+  );
+};
+
 export const NotificationSVG = () => {
   return (
     <svg
@@ -307,6 +329,114 @@ export const ActionSVG = () => {
       <path stroke="none" d="M0 0h24v24H0z" fill="none" />
       <path d="M10.325 4.317c.426 -1.756 2.924 -1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543 -.94 3.31 .826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756 .426 1.756 2.924 0 3.35a1.724 1.724 0 0 0 -1.066 2.573c.94 1.543 -.826 3.31 -2.37 2.37a1.724 1.724 0 0 0 -2.572 1.065c-.426 1.756 -2.924 1.756 -3.35 0a1.724 1.724 0 0 0 -2.573 -1.066c-1.543 .94 -3.31 -.826 -2.37 -2.37a1.724 1.724 0 0 0 -1.065 -2.572c-1.756 -.426 -1.756 -2.924 0 -3.35a1.724 1.724 0 0 0 1.066 -2.573c-.94 -1.543 .826 -3.31 2.37 -2.37c1 .608 2.296 .07 2.572 -1.065z" />
       <path d="M9 12a3 3 0 1 0 6 0a3 3 0 0 0 -6 0" />
+    </svg>
+  );
+};
+
+export const CopyIconSVG = () => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="#6A7280"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      className="icon icon-tabler icons-tabler-outline icon-tabler-copy w-6 h-6"
+    >
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M7 7m0 2.667a2.667 2.667 0 0 1 2.667 -2.667h8.666a2.667 2.667 0 0 1 2.667 2.667v8.666a2.667 2.667 0 0 1 -2.667 2.667h-8.666a2.667 2.667 0 0 1 -2.667 -2.667z" />
+      <path d="M4.012 16.737a2.005 2.005 0 0 1 -1.012 -1.737v-10c0 -1.1 .9 -2 2 -2h10c.75 0 1.158 .385 1.5 1" />
+    </svg>
+  );
+};
+
+export const SpinnerSVG = () => {
+  return (
+    <svg className="h-7 w-7 animate-spin stroke-gray-500" viewBox="0 0 256 256">
+      <line
+        x1="128"
+        y1="32"
+        x2="128"
+        y2="64"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke="#00674A"
+        stroke-width="24"
+      ></line>
+      <line
+        x1="195.9"
+        y1="60.1"
+        x2="173.3"
+        y2="82.7"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="24"
+        stroke="#00674A"
+      ></line>
+      <line
+        x1="224"
+        y1="128"
+        x2="192"
+        y2="128"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="24"
+        stroke="#00674A"
+      ></line>
+      <line
+        x1="195.9"
+        y1="195.9"
+        x2="173.3"
+        y2="173.3"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="24"
+        stroke="#00674A"
+      ></line>
+      <line
+        x1="128"
+        y1="224"
+        x2="128"
+        y2="192"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="24"
+        stroke="#00674A"
+      ></line>
+      <line
+        x1="60.1"
+        y1="195.9"
+        x2="82.7"
+        y2="173.3"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="24"
+        stroke="#00674A"
+      ></line>
+      <line
+        x1="32"
+        y1="128"
+        x2="64"
+        y2="128"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="24"
+        stroke="#00674A"
+      ></line>
+      <line
+        x1="60.1"
+        y1="60.1"
+        x2="82.7"
+        y2="82.7"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="24"
+        stroke="#00674A"
+      ></line>
     </svg>
   );
 };

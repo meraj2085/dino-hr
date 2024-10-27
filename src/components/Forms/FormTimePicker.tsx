@@ -6,12 +6,18 @@ import dayjs from "dayjs";
 type FormTimePickerProps = {
   name: string;
   label?: string;
+  defaultValue?: string; // Add default value prop
 };
-export default function FormTimePicker({ name, label }: FormTimePickerProps) {
+
+export default function FormTimePicker({
+  name,
+  label,
+  defaultValue,
+}: FormTimePickerProps) {
   const { control, watch } = useFormContext();
 
   // Use `watch` to dynamically get the current value
-  const currentValue = watch(name);
+  const currentValue = watch(name) || defaultValue; // Use defaultValue if there's no current value
 
   return (
     <>
@@ -19,10 +25,11 @@ export default function FormTimePicker({ name, label }: FormTimePickerProps) {
       <Controller
         name={name}
         control={control}
+        defaultValue={defaultValue} // Set the default value for the form
         render={({ field }) => (
           <TimePicker
             size="large"
-            value={dayjs(currentValue, "HH:mm")}
+            value={currentValue ? dayjs(currentValue, "HH:mm") : null}
             format={"HH:mm"}
             onChange={(el, value) => {
               field.onChange(value);

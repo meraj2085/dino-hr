@@ -27,12 +27,18 @@ const PPModal = ({
       onOk={handleOk}
       onCancel={closeModal}
       cancelButtonProps={{
-        style: { display: showCancelButton ? "inline" : "none" },
+        style: {
+          background: "#9d0208",
+          display: showCancelButton ? "inline" : "none",
+          boxShadow: "none",
+          border: "none",
+        },
       }}
       okButtonProps={{
         style: {
-          background: "#6E97D4",
+          background: "#00674A",
           display: showOkButton ? "inline" : "none",
+          boxShadow: "none",
         },
       }}
     >

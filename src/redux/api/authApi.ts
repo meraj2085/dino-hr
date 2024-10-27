@@ -28,6 +28,13 @@ export const authApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: [tagTypes.user],
     }),
+    adminResetPassword: build.mutation({
+      query: (data) => ({
+        url: `${AUTH_URL}/admin-reset-password`,
+        method: "POST",
+        data: data,
+      }),
+    }),
   }),
 });
 
@@ -35,4 +42,5 @@ export const {
   useUserSignUpMutation,
   useUserLoginMutation,
   useChangePasswordMutation,
+  useAdminResetPasswordMutation,
 } = authApi;

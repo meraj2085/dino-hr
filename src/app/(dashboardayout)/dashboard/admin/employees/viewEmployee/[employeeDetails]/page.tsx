@@ -34,7 +34,7 @@ const EmployeeDetails = ({
   params: { employeeDetails: string };
 }) => {
   const employeeId = params.employeeDetails;
-  const { data, isLoading } = useGetSingleEmployeeQuery(employeeId);
+  const { data, isLoading, refetch } = useGetSingleEmployeeQuery(employeeId);
   const [adminResetPassword, { isLoading: resetPasswordLoading }] =
     useAdminResetPasswordMutation();
   const [adminShowPassword, { isLoading: showPasswordLoading }] =
@@ -50,6 +50,7 @@ const EmployeeDetails = ({
       if (res) {
         message.success("Password reset successfully");
         setOpen(false);
+        await refetch(); // Re-fetch data to update UI
       }
     } catch (error) {
       console.error(error);

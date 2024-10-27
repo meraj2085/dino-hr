@@ -32,13 +32,17 @@ import {
   useDeleteUserMutation,
   useDisableOrActivateUserMutation,
 } from "@/redux/api/userApi";
+import { useRouter } from "next/navigation";
+import { getUserInfo } from "@/services/auth.service";
 
 const EmployeeDetails = ({
   params,
 }: {
   params: { employeeDetails: string };
 }) => {
+  const router = useRouter();
   const employeeId = params.employeeDetails;
+  const { user_type } = getUserInfo() as any;
   const { data, isLoading, refetch } = useGetSingleEmployeeQuery(employeeId);
   const [adminResetPassword, { isLoading: resetPasswordLoading }] =
     useAdminResetPasswordMutation();
@@ -100,6 +104,8 @@ const EmployeeDetails = ({
     try {
       const res = await deleteUser(id).unwrap();
       if (res) {
+        router.push(`/dashboard/${user_type}/employees/viewEmployee`);
+        refetch();
         message.success("User deleted successfully");
       }
     } catch (error) {

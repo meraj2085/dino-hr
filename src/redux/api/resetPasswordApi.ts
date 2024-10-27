@@ -1,25 +1,25 @@
 import { baseApi } from "./baseApi";
-const RESET_PASSWORD_URL = "/reset-password";
+const OTP_URL = "/otp";
 
 export const resetPasswordApi = baseApi.injectEndpoints({
   endpoints: (build) => ({
     sendOtp: build.mutation({
       query: (data) => ({
-        url: `${RESET_PASSWORD_URL}/send-otp`,
+        url: `${OTP_URL}/send-otp`,
         method: "POST",
         data, // {office_email}
       }),
     }),
     verifyOtp: build.mutation({
       query: (data) => ({
-        url: `${RESET_PASSWORD_URL}/verify-otp`,
+        url: `${OTP_URL}/verify-otp`,
         method: "POST",
         data, // {office_email, otp}
       }),
     }),
     resetPassword: build.mutation({
       query: (data) => ({
-        url: `${RESET_PASSWORD_URL}`,
+        url: `${OTP_URL}/reset-password`,
         method: "POST",
         data, // {office_email, password}
       }),

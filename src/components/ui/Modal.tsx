@@ -28,7 +28,7 @@ const PPModal = ({
       onCancel={closeModal}
       cancelButtonProps={{
         style: {
-          background: "#F87069",
+          background: "#9d0208",
           display: showCancelButton ? "inline" : "none",
           boxShadow: "none",
           border: "none",

@@ -2,7 +2,7 @@
 
 import ActionBar from "@/components/ui/ActionBar";
 import BreadCrumb from "@/components/ui/BreadCrumb";
-import { Button, Dropdown, MenuProps, message, Space } from "antd";
+import { Dropdown, MenuProps, message, Space } from "antd";
 import StepperPage from "@/components/StepperForm/StepperPage";
 import { EditOutlined } from "@ant-design/icons";
 import Link from "next/link";
@@ -20,6 +20,7 @@ import {
 } from "@/shared/svg";
 import PPModal from "@/components/ui/Modal";
 import { useState } from "react";
+import { useAdminResetPasswordMutation } from "@/redux/api/authApi";
 
 const EmployeeDetails = ({
   params,
@@ -28,18 +29,17 @@ const EmployeeDetails = ({
 }) => {
   const employeeId = params.employeeDetails;
   const { data, isLoading } = useGetSingleEmployeeQuery(employeeId);
+  const [adminResetPassword, { isLoading: resetPasswordLoading }] =
+    useAdminResetPasswordMutation();
   const [open, setOpen] = useState<boolean>(false);
 
   const handleResetPassword = async (id: string) => {
     try {
-      // const res = await updateLeave({
-      //   id,
-      //   body: { status: "Cancelled" },
-      // }).unwrap();
-      // if (res) {
-      //   message.success("Lave cancelled!");
-      //   setOpen(false);
-      // }
+      const res = await adminResetPassword({ id }).unwrap();
+      if (res) {
+        message.success("Password reset successfully");
+        setOpen(false);
+      }
     } catch (error) {
       console.error(error);
     }

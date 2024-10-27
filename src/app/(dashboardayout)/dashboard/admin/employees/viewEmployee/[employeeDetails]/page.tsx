@@ -114,6 +114,7 @@ const EmployeeDetails = ({
             status === "Disabled" ? "disabled" : "activated"
           } successfully`
         );
+        await refetch();
       }
     } catch (error) {
       console.error(error);

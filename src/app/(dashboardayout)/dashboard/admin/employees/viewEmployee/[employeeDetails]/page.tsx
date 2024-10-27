@@ -49,16 +49,21 @@ const EmployeeDetails = ({
   const [disableOrActivateUser, { isLoading: disableUserLoading }] =
     useDisableOrActivateUserMutation();
 
-  const [open, setOpen] = useState<boolean>(false);
   const [open_2, setOpen_2] = useState<boolean>(false);
   const [showPassData, setShowPassData] = useState<Record<string, any>>({});
+  const [action, setAction] = useState<string | null>(null); // Track the action to perform
+  const [isConfirmModalOpen, setConfirmModalOpen] = useState<boolean>(false);
+
+  const openConfirmationModal = (actionType: string) => {
+    setAction(actionType);
+    setConfirmModalOpen(true);
+  };
 
   const handleResetPassword = async (id: string) => {
     try {
       const res = await adminResetPassword({ id }).unwrap();
       if (res) {
         message.success("Password reset successfully");
-        setOpen(false);
         await refetch();
       }
     } catch (error) {
@@ -121,6 +126,26 @@ const EmployeeDetails = ({
     }
   };
 
+  const handleConfirmation = async () => {
+    if (!action) return;
+
+    try {
+      if (action === "delete") {
+        await handleDeleteUser(employeeId);
+      } else if (action === "activate") {
+        await handleDisableOrActivateUser(employeeId, "Active");
+      } else if (action === "disable") {
+        await handleDisableOrActivateUser(employeeId, "Disabled");
+      } else if (action === "reset the password of") {
+        await handleResetPassword(employeeId);
+      }
+      setConfirmModalOpen(false);
+    } catch (error) {
+      console.error(error);
+      setConfirmModalOpen(false);
+    }
+  };
+
   const steps = [
     {
       title: "Basic Info",
@@ -145,7 +170,7 @@ const EmployeeDetails = ({
       key: "1",
       label: data?.is_password_reset ? (
         <button
-          onClick={() => setOpen(true)}
+          onClick={() => openConfirmationModal("reset the password of")}
           className="flex w-full items-center gap-2 rounded-lg px-2 py-2 text-sm text-gray-800 hover:bg-gray-50"
           role="menuitem"
         >
@@ -166,7 +191,7 @@ const EmployeeDetails = ({
       key: "2",
       label: (
         <button
-          onClick={() => handleDeleteUser(employeeId)}
+          onClick={() => openConfirmationModal("delete")}
           className="flex w-full items-center gap-2 rounded-lg px-2 py-2 text-sm text-red-700 hover:bg-red-50"
         >
           <DeleteSVG />
@@ -180,7 +205,7 @@ const EmployeeDetails = ({
         data?.status === "Disabled" ? (
           <button
             disabled={data?.status === "Active" ? true : false}
-            onClick={() => handleDisableOrActivateUser(employeeId, "Active")}
+            onClick={() => openConfirmationModal("activate")}
             className={`flex w-full items-center gap-2 rounded-lg px-2 py-2 text-sm text-[#00674A] hover:bg-green-50 ${
               data?.status === "Active"
                 ? "cursor-not-allowed"
@@ -193,7 +218,7 @@ const EmployeeDetails = ({
         ) : (
           <button
             disabled={data?.status === "Disabled" ? true : false}
-            onClick={() => handleDisableOrActivateUser(employeeId, "Disabled")}
+            onClick={() => openConfirmationModal("disable")}
             className={`flex w-full items-center gap-2 rounded-lg px-2 py-2 text-sm text-red-700 hover:bg-red-50 ${
               data?.status === "Disabled"
                 ? "cursor-not-allowed"
@@ -255,14 +280,16 @@ const EmployeeDetails = ({
         <div className="w-full h-4" />
         <StepperPage steps={steps} />
       </div>
+
       <PPModal
-        title="Reset Password"
-        isOpen={open}
-        closeModal={() => setOpen(false)}
-        handleOk={() => handleResetPassword(employeeId)}
+        isOpen={isConfirmModalOpen}
+        closeModal={() => setConfirmModalOpen(false)}
+        handleOk={() => handleConfirmation()}
+        title="Confirm Action"
       >
-        <p className="my-5">Are you sure you want to reset password?</p>
+        <p className="my-5">Are you sure you want to {action} this user?</p>
       </PPModal>
+
       <PPModal
         title="Show Password"
         isOpen={open_2}

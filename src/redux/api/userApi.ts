@@ -90,6 +90,21 @@ export const userApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: [tagTypes.user],
     }),
+    deleteUser: build.mutation({
+      query: (id) => ({
+        url: `${USER_URL}/delete/${id}`,
+        method: "POST",
+      }),
+      invalidatesTags: [tagTypes.user],
+    }),
+    disableOrActivateUser: build.mutation({
+      query: (data) => ({
+        url: `${USER_URL}/disable-or-activate`,
+        method: "POST",
+        data: data,
+      }),
+      invalidatesTags: [tagTypes.user],
+    }),
   }),
 });
 
@@ -102,4 +117,6 @@ export const {
   useGetAdminsQuery,
   useUpdateUserAdminMutation,
   useGetMyTeamQuery,
+  useDeleteUserMutation,
+  useDisableOrActivateUserMutation,
 } = userApi;

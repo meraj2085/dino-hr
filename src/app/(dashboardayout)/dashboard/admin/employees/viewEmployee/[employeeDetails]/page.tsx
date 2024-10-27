@@ -14,6 +14,7 @@ import EmployeeFinancialInfo from "@/components/Employees/EmployeeDetails/Employ
 import DHRButton from "@/components/ui/DHRButton";
 import {
   ActionSVG,
+  ActiveSVG,
   CopyIconSVG,
   DeleteSVG,
   DisableSVG,
@@ -27,6 +28,10 @@ import {
   useAdminShowPasswordMutation,
 } from "@/redux/api/authApi";
 import SmallLoader from "@/components/shared/SmallLoader";
+import {
+  useDeleteUserMutation,
+  useDisableOrActivateUserMutation,
+} from "@/redux/api/userApi";
 
 const EmployeeDetails = ({
   params,
@@ -39,6 +44,10 @@ const EmployeeDetails = ({
     useAdminResetPasswordMutation();
   const [adminShowPassword, { isLoading: showPasswordLoading }] =
     useAdminShowPasswordMutation();
+  const [deleteUser, { isLoading: deleteUserLoading }] =
+    useDeleteUserMutation();
+  const [disableOrActivateUser, { isLoading: disableUserLoading }] =
+    useDisableOrActivateUserMutation();
 
   const [open, setOpen] = useState<boolean>(false);
   const [open_2, setOpen_2] = useState<boolean>(false);
@@ -50,7 +59,7 @@ const EmployeeDetails = ({
       if (res) {
         message.success("Password reset successfully");
         setOpen(false);
-        await refetch(); // Re-fetch data to update UI
+        await refetch();
       }
     } catch (error) {
       console.error(error);
@@ -80,6 +89,35 @@ const EmployeeDetails = ({
         console.error("Failed to copy: ", err);
         message.error("Failed to copy.");
       });
+  };
+
+  const handleDeleteUser = async (id: string) => {
+    try {
+      const res = await deleteUser(id).unwrap();
+      if (res) {
+        message.success("User deleted successfully");
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const handleDisableOrActivateUser = async (
+    id: string,
+    status: "Disabled" | "Active"
+  ) => {
+    try {
+      const res = await disableOrActivateUser({ id, status }).unwrap();
+      if (res) {
+        message.success(
+          `User ${
+            status === "Disabled" ? "disabled" : "activated"
+          } successfully`
+        );
+      }
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   const steps = [
@@ -126,7 +164,10 @@ const EmployeeDetails = ({
     {
       key: "2",
       label: (
-        <button className="flex w-full items-center gap-2 rounded-lg px-2 py-2 text-sm text-red-700 hover:bg-red-50">
+        <button
+          onClick={() => handleDeleteUser(employeeId)}
+          className="flex w-full items-center gap-2 rounded-lg px-2 py-2 text-sm text-red-700 hover:bg-red-50"
+        >
           <DeleteSVG />
           Delete
         </button>
@@ -134,12 +175,34 @@ const EmployeeDetails = ({
     },
     {
       key: "3",
-      label: (
-        <button className="flex w-full items-center gap-2 rounded-lg px-2 py-2 text-sm text-red-700 hover:bg-red-50">
-          <DisableSVG />
-          Disable
-        </button>
-      ),
+      label:
+        data?.status === "Disabled" ? (
+          <button
+            disabled={data?.status === "Active" ? true : false}
+            onClick={() => handleDisableOrActivateUser(employeeId, "Active")}
+            className={`flex w-full items-center gap-2 rounded-lg px-2 py-2 text-sm text-[#00674A] hover:bg-green-50 ${
+              data?.status === "Active"
+                ? "cursor-not-allowed"
+                : "cursor-pointer"
+            }`}
+          >
+            <ActiveSVG />
+            Activate
+          </button>
+        ) : (
+          <button
+            disabled={data?.status === "Disabled" ? true : false}
+            onClick={() => handleDisableOrActivateUser(employeeId, "Disabled")}
+            className={`flex w-full items-center gap-2 rounded-lg px-2 py-2 text-sm text-red-700 hover:bg-red-50 ${
+              data?.status === "Disabled"
+                ? "cursor-not-allowed"
+                : "cursor-pointer"
+            }`}
+          >
+            <DisableSVG />
+            Disable
+          </button>
+        ),
     },
   ];
 

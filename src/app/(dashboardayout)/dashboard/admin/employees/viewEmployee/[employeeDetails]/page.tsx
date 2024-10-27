@@ -14,13 +14,19 @@ import EmployeeFinancialInfo from "@/components/Employees/EmployeeDetails/Employ
 import DHRButton from "@/components/ui/DHRButton";
 import {
   ActionSVG,
+  CopyIconSVG,
   DeleteSVG,
   DisableSVG,
   ResetPasswordSVG,
+  ViewPasswordSVG,
 } from "@/shared/svg";
 import PPModal from "@/components/ui/Modal";
 import { useState } from "react";
-import { useAdminResetPasswordMutation } from "@/redux/api/authApi";
+import {
+  useAdminResetPasswordMutation,
+  useAdminShowPasswordMutation,
+} from "@/redux/api/authApi";
+import SmallLoader from "@/components/shared/SmallLoader";
 
 const EmployeeDetails = ({
   params,
@@ -28,10 +34,15 @@ const EmployeeDetails = ({
   params: { employeeDetails: string };
 }) => {
   const employeeId = params.employeeDetails;
-  const { data, isLoading } = useGetSingleEmployeeQuery(employeeId);
+  const { data, isLoading, refetch } = useGetSingleEmployeeQuery(employeeId);
   const [adminResetPassword, { isLoading: resetPasswordLoading }] =
     useAdminResetPasswordMutation();
+  const [adminShowPassword, { isLoading: showPasswordLoading }] =
+    useAdminShowPasswordMutation();
+
   const [open, setOpen] = useState<boolean>(false);
+  const [open_2, setOpen_2] = useState<boolean>(false);
+  const [showPassData, setShowPassData] = useState<Record<string, any>>({});
 
   const handleResetPassword = async (id: string) => {
     try {
@@ -39,10 +50,36 @@ const EmployeeDetails = ({
       if (res) {
         message.success("Password reset successfully");
         setOpen(false);
+        await refetch(); // Re-fetch data to update UI
       }
     } catch (error) {
       console.error(error);
     }
+  };
+
+  const handleShowPassword = async (id: string) => {
+    try {
+      setOpen_2(true);
+      const res = await adminShowPassword({ id }).unwrap();
+      if (res) {
+        setShowPassData(res);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const handleCopyToClipboard = () => {
+    const textToCopy = `Email: ${showPassData?.office_email} | Password: ${showPassData?.password}`;
+    navigator.clipboard
+      .writeText(textToCopy)
+      .then(() => {
+        message.success("Copied to clipboard!");
+      })
+      .catch((err) => {
+        console.error("Failed to copy: ", err);
+        message.error("Failed to copy.");
+      });
   };
 
   const steps = [
@@ -67,7 +104,7 @@ const EmployeeDetails = ({
   const items: MenuProps["items"] = [
     {
       key: "1",
-      label: (
+      label: data?.is_password_reset ? (
         <button
           onClick={() => setOpen(true)}
           className="flex w-full items-center gap-2 rounded-lg px-2 py-2 text-sm text-gray-800 hover:bg-gray-50"
@@ -75,6 +112,14 @@ const EmployeeDetails = ({
         >
           <ResetPasswordSVG />
           Reset Password
+        </button>
+      ) : (
+        <button
+          onClick={() => handleShowPassword(employeeId)}
+          className="flex w-full items-center gap-2 rounded-lg px-2 py-2 text-sm text-gray-800 hover:bg-gray-50"
+        >
+          <ViewPasswordSVG />
+          Show Password
         </button>
       ),
     },
@@ -100,7 +145,6 @@ const EmployeeDetails = ({
 
   return (
     <>
-      {" "}
       <div
         style={{
           backgroundColor: "#FFFFFF",
@@ -154,6 +198,43 @@ const EmployeeDetails = ({
         handleOk={() => handleResetPassword(employeeId)}
       >
         <p className="my-5">Are you sure you want to reset password?</p>
+      </PPModal>
+      <PPModal
+        title="Show Password"
+        isOpen={open_2}
+        closeModal={() => setOpen_2(false)}
+        showOkButton={false}
+        showCancelButton={false}
+      >
+        <div className="flex items-center justify-between w-full h-20 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50">
+          {showPasswordLoading ? (
+            <div className="w-full flex justify-center">
+              <SmallLoader />
+            </div>
+          ) : (
+            <>
+              <div className="flex flex-col justify-center ps-5">
+                <p className="text-sm mb-1 text-gray-500 dark:text-gray-400">
+                  <span className="font-semibold">Email:</span>{" "}
+                  {showPassData?.office_email}
+                </p>
+                <p className="text-sm text-gray-500 dark:text-gray-400">
+                  <span className="font-semibold">Password:</span>{" "}
+                  {showPassData?.password}
+                </p>
+              </div>
+
+              <div className="flex items-center justify-center h-full pr-4">
+                <div
+                  className="hover:bg-slate-200 p-1 rounded-md duration-300"
+                  onClick={handleCopyToClipboard}
+                >
+                  <CopyIconSVG />
+                </div>
+              </div>
+            </>
+          )}
+        </div>
       </PPModal>
     </>
   );

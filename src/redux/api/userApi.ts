@@ -19,7 +19,7 @@ export const userApi = baseApi.injectEndpoints({
           meta,
         };
       },
-      providesTags: [tagTypes.user],
+      providesTags: [tagTypes.allUsers],
     }),
     getMyTeam: build.query({
       query: (arg: Record<string, any>) => {
@@ -103,7 +103,7 @@ export const userApi = baseApi.injectEndpoints({
         method: "POST",
         data: data,
       }),
-      invalidatesTags: [tagTypes.user],
+      invalidatesTags: [tagTypes.user, tagTypes.allUsers],
     }),
   }),
 });

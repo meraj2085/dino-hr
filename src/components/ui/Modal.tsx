@@ -9,6 +9,8 @@ interface IModal {
   handleOk?: () => void;
   showCancelButton?: boolean;
   showOkButton?: boolean;
+  okText?: string;
+  cancelText?: string;
 }
 
 const PPModal = ({
@@ -19,12 +21,16 @@ const PPModal = ({
   handleOk,
   showCancelButton = true,
   showOkButton = true,
+  okText = "Ok",
+  cancelText = "Cancel",
 }: IModal) => {
   return (
     <Modal
       title={title}
       open={isOpen}
       onOk={handleOk}
+      okText={okText}
+      cancelText={cancelText}
       onCancel={closeModal}
       cancelButtonProps={{
         style: {

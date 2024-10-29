@@ -2,7 +2,7 @@
 
 import ActionBar from "@/components/ui/ActionBar";
 import BreadCrumb from "@/components/ui/BreadCrumb";
-import { Dropdown, MenuProps, message, Space } from "antd";
+import { Col, Dropdown, Input, MenuProps, message, Row, Space } from "antd";
 import StepperPage from "@/components/StepperForm/StepperPage";
 import { EditOutlined } from "@ant-design/icons";
 import Link from "next/link";
@@ -18,6 +18,7 @@ import {
   CopyIconSVG,
   DeleteSVG,
   DisableSVG,
+  RefreshSVG,
   ResetPasswordSVG,
   ViewPasswordSVG,
 } from "@/shared/svg";
@@ -34,6 +35,8 @@ import {
 } from "@/redux/api/userApi";
 import { useRouter } from "next/navigation";
 import { getUserInfo } from "@/services/auth.service";
+import { generateRandomCaptcha } from "@/utils/captchaGenerator";
+import "./employeeDetails.css";
 
 const EmployeeDetails = ({
   params,
@@ -55,8 +58,18 @@ const EmployeeDetails = ({
 
   const [open_2, setOpen_2] = useState<boolean>(false);
   const [showPassData, setShowPassData] = useState<Record<string, any>>({});
-  const [action, setAction] = useState<string | null>(null); // Track the action to perform
+  const [action, setAction] = useState<string | null>(null);
   const [isConfirmModalOpen, setConfirmModalOpen] = useState<boolean>(false);
+  const [deleteOpen, setDeleteOpen] = useState<boolean>(false);
+  const [captcha, setCaptcha] = useState<string>(generateRandomCaptcha());
+  const [captchaInput, setCaptchaInput] = useState<string>("");
+  const [isVerified, setIsVerified] = useState<boolean>(false);
+
+  const refreshCaptcha = () => {
+    setCaptcha(generateRandomCaptcha());
+    setCaptchaInput("");
+    setIsVerified(false);
+  };
 
   const openConfirmationModal = (actionType: string) => {
     setAction(actionType);
@@ -100,19 +113,6 @@ const EmployeeDetails = ({
       });
   };
 
-  const handleDeleteUser = async (id: string) => {
-    try {
-      const res = await deleteUser(id).unwrap();
-      if (res) {
-        router.push(`/dashboard/${user_type}/employees/viewEmployee`);
-        refetch();
-        message.success("User deleted successfully");
-      }
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
   const handleDisableOrActivateUser = async (
     id: string,
     status: "Disabled" | "Active"
@@ -136,9 +136,7 @@ const EmployeeDetails = ({
     if (!action) return;
 
     try {
-      if (action === "delete") {
-        await handleDeleteUser(employeeId);
-      } else if (action === "activate") {
+      if (action === "activate") {
         await handleDisableOrActivateUser(employeeId, "Active");
       } else if (action === "disable") {
         await handleDisableOrActivateUser(employeeId, "Disabled");
@@ -149,6 +147,36 @@ const EmployeeDetails = ({
     } catch (error) {
       console.error(error);
       setConfirmModalOpen(false);
+    }
+  };
+
+  const closeDeleteModal = () => {
+    setDeleteOpen(false);
+    setCaptchaInput("");
+    setIsVerified(false);
+  };
+
+  const handleCaptchaVerification = () => {
+    if (captchaInput === captcha) {
+      setIsVerified(true);
+      message.success("Captcha verification successful");
+    } else {
+      message.error("Captcha verification failed");
+      setIsVerified(false);
+    }
+  };
+
+  const handleDeleteUser = async (id: string) => {
+    try {
+      const res = await deleteUser(id).unwrap();
+      if (res) {
+        router.push(`/dashboard/${user_type}/employees/viewEmployee`);
+        refetch();
+        message.success("User deleted successfully");
+        closeDeleteModal();
+      }
+    } catch (error) {
+      console.error(error);
     }
   };
 
@@ -197,7 +225,7 @@ const EmployeeDetails = ({
       key: "2",
       label: (
         <button
-          onClick={() => openConfirmationModal("delete")}
+          onClick={() => setDeleteOpen(true)}
           className="flex w-full items-center gap-2 rounded-lg px-2 py-2 text-sm text-red-700 hover:bg-red-50"
         >
           <DeleteSVG />
@@ -294,6 +322,75 @@ const EmployeeDetails = ({
         title="Confirm Action"
       >
         <p className="my-5">Are you sure you want to {action} this user?</p>
+      </PPModal>
+
+      <PPModal
+        isOpen={deleteOpen}
+        closeModal={closeDeleteModal}
+        handleOk={
+          isVerified
+            ? () => handleDeleteUser(employeeId)
+            : handleCaptchaVerification
+        }
+        okText={isVerified ? "Delete" : "Verify"}
+        title="Confirm Action"
+      >
+        <div>
+          <Row gutter={{ xs: 4, md: 20 }}>
+            <div className="relative w-full flex justify-center items-center">
+              <div className="bg-gray-200 px-4 py-[6px] border border-dashed border-gray-700">
+                {captcha.split("").map((char, index) => (
+                  <span
+                    key={index}
+                    className="captcha-char"
+                    style={{
+                      display: "inline-block",
+                      transform: `translateY(${Math.sin(index) * 9}px)`,
+                      fontSize: "24px",
+                      fontWeight: "bold",
+                      letterSpacing: "3px",
+                      color: "#333",
+                    }}
+                  >
+                    {char}
+                  </span>
+                ))}
+              </div>
+
+              <div
+                style={{
+                  position: "absolute",
+                  right: "120px",
+                  top: "50%",
+                  transform: "translateY(-50%)",
+                  transition: "transform 0.3s ease",
+                }}
+                className="icon-container"
+                onClick={refreshCaptcha}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.transform =
+                    "translateY(-50%) rotate(180deg)";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.transform =
+                    "translateY(-50%) rotate(0deg)";
+                }}
+              >
+                <RefreshSVG />
+              </div>
+            </div>
+
+            <Col xs={24} md={24} lg={24} className="my-3">
+              <Input
+                type="text"
+                size="large"
+                placeholder="Enter Captcha"
+                value={captchaInput}
+                onChange={(e) => setCaptchaInput(e.target.value)}
+              />
+            </Col>
+          </Row>
+        </div>
       </PPModal>
 
       <PPModal

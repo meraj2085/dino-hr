@@ -20,6 +20,7 @@ import {
   useOrganizationConfigMutation,
 } from "@/redux/api/organizationApi";
 import Loading from "@/app/loading";
+import FormSwitch from "@/components/Forms/FormSwitch";
 
 const OrgConfig = ({ params }: { params: { organizationId: string } }) => {
   const orgId = params.organizationId;
@@ -78,6 +79,7 @@ const OrgConfig = ({ params }: { params: { organizationId: string } }) => {
             org_teams: data?.org_teams,
             org_designations: data?.org_designations,
             org_roles: data?.org_roles,
+            user_delete_permission: data?.user_delete_permission,
           }}
         >
           <Row gutter={{ xs: 4, md: 20 }}>
@@ -148,15 +150,26 @@ const OrgConfig = ({ params }: { params: { organizationId: string } }) => {
                 />
               </div>
             </Col>
+            <Col xs={24} md={12} lg={12} className="mt-3">
+              <div>
+                <FormSwitch
+                  name="user_delete_permission"
+                  label="Allow Admin To Delete User?"
+                  defaultValue={data?.user_delete_permission}
+                />
+              </div>
+            </Col>
           </Row>
 
-          <Button
-            htmlType="submit"
-            className="bg-[#00674A] text-white hover:text-white flex justify-end item-end"
-            style={{ margin: "10px 0px" }}
-          >
-            Submit
-          </Button>
+          <div className="mt-5">
+            <Button
+              htmlType="submit"
+              className="bg-[#00674A] text-white hover:text-white flex justify-end item-end"
+              style={{ margin: "10px 0px" }}
+            >
+              Submit
+            </Button>
+          </div>
         </Form>
       </div>
     </div>

@@ -1,7 +1,7 @@
 "use client";
 import ActionBar from "@/components/ui/ActionBar";
 import BreadCrumb from "@/components/ui/BreadCrumb";
-import { Button, Input } from "antd";
+import { Badge, Button, Input } from "antd";
 import Link from "next/link";
 import { EyeOutlined } from "@ant-design/icons";
 import { useState } from "react";
@@ -71,7 +71,7 @@ const ViewEmployees = () => {
     },
     {
       title: "Gender",
-      width: 130,
+      width: 100,
       render: function (data: Record<string, string>) {
         return (
           <>
@@ -101,8 +101,22 @@ const ViewEmployees = () => {
       width: 130,
     },
     {
-      title: "Status",
+      title: "Type",
       dataIndex: "employment_status",
+      // width: 150,
+    },
+    {
+      title: "Status",
+      dataIndex: "status",
+      render: function (data: string, record: Record<string, string>) {
+        return (
+          <Badge
+            status={record?.status === "Active" ? "success" : "error"}
+            text={data}
+          />
+        );
+      },
+      // width: 150,
     },
     {
       title: "Employee Code",

@@ -37,6 +37,7 @@ import { useRouter } from "next/navigation";
 import { getUserInfo } from "@/services/auth.service";
 import { generateRandomCaptcha } from "@/utils/captchaGenerator";
 import "./employeeDetails.css";
+import { useGetSingleOrganizationQuery } from "@/redux/api/organizationApi";
 
 const EmployeeDetails = ({
   params,
@@ -45,7 +46,7 @@ const EmployeeDetails = ({
 }) => {
   const router = useRouter();
   const employeeId = params.employeeDetails;
-  const { user_type } = getUserInfo() as any;
+  const { user_type, organization_id } = getUserInfo() as any;
   const { data, isLoading, refetch } = useGetSingleEmployeeQuery(employeeId);
   const [adminResetPassword, { isLoading: resetPasswordLoading }] =
     useAdminResetPasswordMutation();
@@ -55,6 +56,8 @@ const EmployeeDetails = ({
     useDeleteUserMutation();
   const [disableOrActivateUser, { isLoading: disableUserLoading }] =
     useDisableOrActivateUserMutation();
+  const { data: orgData, isLoading: isOrgDataLoading } =
+    useGetSingleOrganizationQuery(organization_id);
 
   const [open_2, setOpen_2] = useState<boolean>(false);
   const [showPassData, setShowPassData] = useState<Record<string, any>>({});
@@ -226,7 +229,12 @@ const EmployeeDetails = ({
       label: (
         <button
           onClick={() => setDeleteOpen(true)}
-          className="flex w-full items-center gap-2 rounded-lg px-2 py-2 text-sm text-red-700 hover:bg-red-50"
+          disabled={!orgData?.user_delete_permission}
+          className={`flex w-full items-center gap-2 rounded-lg px-2 py-2 text-sm text-red-700 hover:bg-red-50 ${
+            !orgData?.user_delete_permission
+              ? "cursor-not-allowed"
+              : "cursor-pointer"
+          }`}
         >
           <DeleteSVG />
           Delete

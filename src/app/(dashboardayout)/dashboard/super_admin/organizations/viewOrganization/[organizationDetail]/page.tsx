@@ -65,7 +65,7 @@ const OrgDetailPage = ({
       />
       <ActionBar title="Organization Details">
         <span></span>
-        <div className="flex gap-5">
+        <div className="flex gap-2">
           <Link
             href={`/dashboard/super_admin/organizations/updateOrganization/createAdmin/${orgId}`}
           >

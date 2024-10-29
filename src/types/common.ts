@@ -251,3 +251,8 @@ export type IOrganization = {
   updatedAt?: string;
   __v?: number;
 };
+
+export type SelectOptions = {
+  label: string;
+  value: string;
+};

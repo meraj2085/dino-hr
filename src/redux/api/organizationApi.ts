@@ -61,6 +61,14 @@ export const organizationApi = baseApi.injectEndpoints({
       },
       invalidatesTags: [tagTypes.organization],
     }),
+    organizationConfig: build.mutation({
+      query: (data) => ({
+        url: `${ORGANIZATION_URL}/organizationConfig/${data?.id}`,
+        method: "PATCH",
+        data: data?.data,
+      }),
+      invalidatesTags: [tagTypes.organization],
+    }),
     deleteOrganization: build.mutation({
       query: (id) => ({
         url: `${ORGANIZATION_URL}/${id}`,
@@ -77,4 +85,5 @@ export const {
   useGetSingleOrganizationQuery,
   useUpdateOrganizationMutation,
   useDeleteOrganizationMutation,
+  useOrganizationConfigMutation,
 } = organizationApi;

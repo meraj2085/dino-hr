@@ -8,35 +8,19 @@ import StepperForm from "@/components/StepperForm/StepperForm";
 import ActionBar from "@/components/ui/ActionBar";
 import BreadCrumb from "@/components/ui/BreadCrumb";
 import { useAddEmployeeMutation } from "@/redux/api/employeeApi";
+import { useGetSingleOrganizationQuery } from "@/redux/api/organizationApi";
 import { userSchema } from "@/schema/user";
 import { getUserInfo } from "@/services/auth.service";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { message } from "antd";
 
-const steps = [
-  {
-    title: "Basic Info",
-    content: <EmployeeBasicInfoForm />,
-  },
-  {
-    title: "Contact Info",
-    content: <EmployeeContactInfoForm />,
-  },
-  {
-    title: "Employment Info",
-    content: <EmployeeEmploymentInfoForm />,
-  },
-  {
-    title: "Financial Info",
-    content: <EmployeeFinancialInfoForm />,
-  },
-];
-
 const AddEmployee = () => {
   const { organization_id } = getUserInfo() as any;
   const [addEmployee] = useAddEmployeeMutation();
+  const { data: orgData, isLoading: isOrgDataLoading } =
+    useGetSingleOrganizationQuery(organization_id);
+
   const handleEmployeesSubmit = async (values: any) => {
-    // const { profile_picture, ...rest } = values;
     const total_ctc =
       Number(values.salaryDetails.basic_salary) +
       Number(values.salaryDetails.total_allowance) +
@@ -52,6 +36,31 @@ const AddEmployee = () => {
       message.error(err.message);
     }
   };
+
+  const steps = [
+    {
+      title: "Basic Info",
+      content: <EmployeeBasicInfoForm />,
+    },
+    {
+      title: "Contact Info",
+      content: <EmployeeContactInfoForm />,
+    },
+    {
+      title: "Employment Info",
+      content: (
+        <EmployeeEmploymentInfoForm
+          orgData={orgData}
+          isOrgDataLoading={isOrgDataLoading}
+        />
+      ),
+    },
+    {
+      title: "Financial Info",
+      content: <EmployeeFinancialInfoForm />,
+    },
+  ];
+
   return (
     <div className="background">
       <BreadCrumb

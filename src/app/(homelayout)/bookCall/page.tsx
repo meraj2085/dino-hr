@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import Form from "@/components/Forms/Form";
 import FormInput from "../../../components/Forms/FormInput";
 import FormTextArea from "../../../components/Forms/FormTextArea";
@@ -15,6 +16,7 @@ import { SubmitHandler } from "react-hook-form";
 const BookCall = () => {
   const router = useRouter();
   const [addAppointment] = useAddAppointmentMutation();
+  const [isChecked, setIsChecked] = useState(false); // State to track checkbox
 
   type FormValues = {
     fullName: string;
@@ -28,6 +30,10 @@ const BookCall = () => {
   };
 
   const onSubmit: SubmitHandler<FormValues> = async (data: any) => {
+    if (!isChecked) {
+      message.warning("Please agree to the storage of your data.");
+      return;
+    }
     try {
       const response = await addAppointment(data).unwrap();
       if (response?._id) {
@@ -38,6 +44,7 @@ const BookCall = () => {
       console.error(err.message);
     }
   };
+
   return (
     <div className="mt-20 text-gray-800">
       <div className="mb-5 md:mb-12">
@@ -157,6 +164,7 @@ const BookCall = () => {
                 <div className="mb-3">
                   <label className="block">
                     <FormTimePicker
+                      defaultValue="00:00"
                       name="appointment_time"
                       label="Appointment time"
                     />
@@ -175,15 +183,25 @@ const BookCall = () => {
               <label className="block mt-3">
                 <FormTextArea name="message" label="Message" />
               </label>
-              <input
-                type="checkbox"
-                className="mr-2 mt-2 ml-0 h-4 w-4 text-green-500"
-              />
-              <span className="text-gray-700">
-                I agree to the storage of my data
-              </span>
+              <div className="flex items-center mt-2">
+                <input
+                  type="checkbox"
+                  className="mr-2 h-4 w-4 text-green-500"
+                  checked={isChecked}
+                  onChange={(e) => setIsChecked(e.target.checked)}
+                />
+                <span className="text-gray-700">
+                  I agree to the storage of my data
+                </span>
+              </div>
               <div className="flex justify-start mt-4">
-                <button className="rounded-md bg-[#00674A] px-5 py-2.5 text-sm font-medium text-white shadow hover:bg-green-400 transition duration-300">
+                <button
+                  type="submit"
+                  disabled={!isChecked}
+                  className={`rounded-md bg-[#00674A] px-5 py-2.5 text-sm font-medium text-white shadow hover:bg-green-400 transition duration-300 ${
+                    !isChecked ? "opacity-50 cursor-not-allowed" : ""
+                  }`}
+                >
                   Book Call
                 </button>
               </div>

@@ -9,6 +9,8 @@ interface IModal {
   handleOk?: () => void;
   showCancelButton?: boolean;
   showOkButton?: boolean;
+  okText?: string;
+  cancelText?: string;
 }
 
 const PPModal = ({
@@ -19,20 +21,30 @@ const PPModal = ({
   handleOk,
   showCancelButton = true,
   showOkButton = true,
+  okText = "Ok",
+  cancelText = "Cancel",
 }: IModal) => {
   return (
     <Modal
       title={title}
       open={isOpen}
       onOk={handleOk}
+      okText={okText}
+      cancelText={cancelText}
       onCancel={closeModal}
       cancelButtonProps={{
-        style: { display: showCancelButton ? "inline" : "none" },
+        style: {
+          background: "#9d0208",
+          display: showCancelButton ? "inline" : "none",
+          boxShadow: "none",
+          border: "none",
+        },
       }}
       okButtonProps={{
         style: {
-          background: "#6E97D4",
+          background: "#00674A",
           display: showOkButton ? "inline" : "none",
+          boxShadow: "none",
         },
       }}
     >

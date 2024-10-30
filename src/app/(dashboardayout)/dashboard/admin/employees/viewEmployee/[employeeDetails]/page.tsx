@@ -352,7 +352,15 @@ const EmployeeDetails = ({
         <div>
           <Row gutter={{ xs: 4, md: 20 }}>
             <div className="relative w-full flex justify-center items-center">
-              <div className="bg-gray-200 px-4 py-[6px] border border-dashed border-gray-700">
+              <div
+                style={{
+                  userSelect: "none",
+                  WebkitUserSelect: "none",
+                  MozUserSelect: "none",
+                  msUserSelect: "none",
+                }}
+                className="bg-gray-200 px-4 py-[6px] border border-dashed border-gray-700"
+              >
                 {captcha.split("").map((char, index) => (
                   <span
                     key={index}

@@ -1,5 +1,5 @@
 import { useGetAllEmployeeQuery } from "@/redux/api/employeeApi";
-import { SelectOptions } from "./FormSelectField";
+import { SelectOptions } from "@/types";
 import FormMultiSelectField from "./FormMultiSelectField";
 
 type DSNotificationFieldProps = {

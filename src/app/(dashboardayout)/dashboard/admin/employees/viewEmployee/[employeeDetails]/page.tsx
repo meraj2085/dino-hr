@@ -46,7 +46,7 @@ const EmployeeDetails = ({
 }) => {
   const router = useRouter();
   const employeeId = params.employeeDetails;
-  const { user_type, organization_id } = getUserInfo() as any;
+  const { user_type, organization_id, userId } = getUserInfo() as any;
   const { data, isLoading, refetch } = useGetSingleEmployeeQuery(employeeId);
   const [adminResetPassword, { isLoading: resetPasswordLoading }] =
     useAdminResetPasswordMutation();
@@ -202,7 +202,7 @@ const EmployeeDetails = ({
     },
   ];
 
-  const items: MenuProps["items"] = [
+  let items: MenuProps["items"] = [
     {
       key: "1",
       label: data?.is_password_reset ? (
@@ -224,55 +224,61 @@ const EmployeeDetails = ({
         </button>
       ),
     },
-    {
-      key: "2",
-      label: (
-        <button
-          onClick={() => setDeleteOpen(true)}
-          disabled={!orgData?.user_delete_permission}
-          className={`flex w-full items-center gap-2 rounded-lg px-2 py-2 text-sm text-red-700 hover:bg-red-50 ${
-            !orgData?.user_delete_permission
-              ? "cursor-not-allowed"
-              : "cursor-pointer"
-          }`}
-        >
-          <DeleteSVG />
-          Delete
-        </button>
-      ),
-    },
-    {
-      key: "3",
-      label:
-        data?.status === "Disabled" ? (
+  ];
+
+  if (userId !== employeeId) {
+    items = [
+      ...items,
+      {
+        key: "2",
+        label: (
           <button
-            disabled={data?.status === "Active" ? true : false}
-            onClick={() => openConfirmationModal("activate")}
-            className={`flex w-full items-center gap-2 rounded-lg px-2 py-2 text-sm text-[#00674A] hover:bg-green-50 ${
-              data?.status === "Active"
-                ? "cursor-not-allowed"
-                : "cursor-pointer"
-            }`}
-          >
-            <ActiveSVG />
-            Activate
-          </button>
-        ) : (
-          <button
-            disabled={data?.status === "Disabled" ? true : false}
-            onClick={() => openConfirmationModal("disable")}
+            onClick={() => setDeleteOpen(true)}
+            disabled={!orgData?.user_delete_permission}
             className={`flex w-full items-center gap-2 rounded-lg px-2 py-2 text-sm text-red-700 hover:bg-red-50 ${
-              data?.status === "Disabled"
+              !orgData?.user_delete_permission
                 ? "cursor-not-allowed"
                 : "cursor-pointer"
             }`}
           >
-            <DisableSVG />
-            Disable
+            <DeleteSVG />
+            Delete
           </button>
         ),
-    },
-  ];
+      },
+      {
+        key: "3",
+        label:
+          data?.status === "Disabled" ? (
+            <button
+              disabled={data?.status === "Active" ? true : false}
+              onClick={() => openConfirmationModal("activate")}
+              className={`flex w-full items-center gap-2 rounded-lg px-2 py-2 text-sm text-[#00674A] hover:bg-green-50 ${
+                data?.status === "Active"
+                  ? "cursor-not-allowed"
+                  : "cursor-pointer"
+              }`}
+            >
+              <ActiveSVG />
+              Activate
+            </button>
+          ) : (
+            <button
+              disabled={data?.status === "Disabled" ? true : false}
+              onClick={() => openConfirmationModal("disable")}
+              className={`flex w-full items-center gap-2 rounded-lg px-2 py-2 text-sm text-red-700 hover:bg-red-50 ${
+                data?.status === "Disabled"
+                  ? "cursor-not-allowed"
+                  : "cursor-pointer"
+              }`}
+            >
+              <DisableSVG />
+              Disable
+            </button>
+          ),
+      },
+    ];
+  }
 
   return (
     <>

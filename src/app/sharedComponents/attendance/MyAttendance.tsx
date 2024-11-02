@@ -136,10 +136,32 @@ const MyAttendance = () => {
             <p className="text-[#1F1F1F]">Punch In at</p>
             <p className="text-[#727272]">Wed, 11th Mar 2019 10.00 AM</p>
           </div>
-          <div className="flex justify-center my-5">
-            <p className="w-[120px] h-[120px] bg-[#F9F9F9] flex items-center justify-center rounded-full border-4 border-[#E3E3E3] font-semibold text-lg">
+          <div className="flex justify-center my-5 relative">
+            <svg width="120" height="120" className="absolute">
+              <circle
+                cx="60"
+                cy="60"
+                r="54"
+                stroke="#E3E3E3"
+                strokeWidth="8"
+                fill="none"
+              />
+              <circle
+                cx="60"
+                cy="60"
+                r="54"
+                stroke="#00674A"
+                strokeWidth="8"
+                fill="none"
+                strokeDasharray="339.292"
+                strokeDashoffset={(1 - 7.45 / 8) * 339.292}
+                strokeLinecap="round"
+                transform="rotate(-90 60 60)"
+              />
+            </svg>
+            <div className="w-[120px] h-[120px] bg-[#F9F9F9] flex items-center justify-center rounded-full font-semibold text-lg">
               3.45 hrs
-            </p>
+            </div>
           </div>
           <div className="flex justify-center">
             <button
@@ -150,6 +172,7 @@ const MyAttendance = () => {
             </button>
           </div>
         </div>
+
         {/* 2 */}
         <div className="block rounded-lg p-4 shadow-sm shadow-indigo-100 border w-[400px] h-[300px]">
           <ProgressCard

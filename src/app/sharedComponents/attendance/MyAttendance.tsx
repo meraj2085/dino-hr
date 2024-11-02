@@ -17,6 +17,7 @@ import { getUserInfo } from "@/services/auth.service";
 import ActionBar from "@/components/ui/ActionBar";
 import CustomDatePicker from "@/components/Forms/CustomDatePicker";
 import CustomTimePicker from "@/components/Forms/CustomTimePicker";
+import { ProgressCard } from "./ProgressCard";
 
 const MyAttendance = () => {
   const { userId } = getUserInfo() as any;
@@ -129,6 +130,82 @@ const MyAttendance = () => {
           </Button>
         </div>
       </ActionBar>
+      <div className="mb-5 flex justify-between">
+        <div className="block rounded-lg p-4 shadow-sm shadow-indigo-100 border w-[300px] h-[300px]">
+          <div className="block rounded-lg px-4 py-2 shadow-sm border bg-[#F9F9F9]">
+            <p className="text-[#1F1F1F]">Punch In at</p>
+            <p className="text-[#727272]">Wed, 11th Mar 2019 10.00 AM</p>
+          </div>
+          <div className="flex justify-center my-5">
+            <p className="w-[120px] h-[120px] bg-[#F9F9F9] flex items-center justify-center rounded-full border-4 border-[#E3E3E3] font-semibold text-lg">
+              3.45 hrs
+            </p>
+          </div>
+          <div className="flex justify-center">
+            <button
+              type="button"
+              className="px-7 py-[10px] font-semibold rounded-full bg-[#00674A] text-gray-100"
+            >
+              Punch Out
+            </button>
+          </div>
+        </div>
+        {/* 2 */}
+        <div className="block rounded-lg p-4 shadow-sm shadow-indigo-100 border w-[400px] h-[300px]">
+          <ProgressCard
+            title="Today"
+            progress={3.45}
+            total={8}
+            color="#FF9B43"
+          />
+          <ProgressCard
+            title="This Week"
+            progress={28}
+            total={40}
+            color="#64279A"
+          />
+          <ProgressCard
+            title="This Month"
+            progress={90}
+            total={160}
+            color="#00674A"
+          />
+          <ProgressCard
+            title="Remaining"
+            progress={70}
+            total={160}
+            color="#F52D51"
+          />
+          <ProgressCard
+            title="Overtime"
+            progress={9}
+            total={100}
+            color="#009EFB"
+          />
+        </div>
+        {/* 3 */}
+        <div className="block rounded-lg py-4 px-5 shadow-sm shadow-indigo-100 border w-[330px] h-[300px]">
+          <div className="max-w-5xl max-h-[250px] overflow-y-auto">
+            <div className="grid gap-4 sm:grid-cols-12">
+              <div className="relative col-span-12 px-4 space-y-6 sm:col-span-9">
+                <div className="col-span-12 space-y-12 relative px-4 sm:col-span-8 sm:space-y-3 sm:before:absolute sm:before:top-2 sm:before:bottom-0 sm:before:w-0.5 sm:before:-left-3 before:bg-gray-300">
+                  {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((item, index) => (
+                    <div
+                      key={index}
+                      className="flex flex-col sm:relative sm:before:absolute sm:before:top-2 sm:before:w-2 sm:before:h-2 sm:before:rounded-full sm:before:left-[-31px] sm:before:z-[1] before:bg-emerald-600"
+                    >
+                      <time className="text-[12px] tracki font-semibold text-gray-600">
+                        Punch In at
+                      </time>
+                      <p className="text-[12px]">10.00 AM.</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
 
       <PPTable
         loading={isLoading}

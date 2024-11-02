@@ -2,15 +2,17 @@
 
 import BreadCrumb from "@/components/ui/BreadCrumb";
 import { Button, Col, Row, message } from "antd";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import PPTable from "@/components/ui/PPTable";
 import PPModal from "@/components/ui/Modal";
 import Form from "@/components/Forms/Form";
 import FormTextArea from "@/components/Forms/FormTextArea";
+import SmallLoader from "@/components/shared/SmallLoader";
 import dayjs from "dayjs";
 import {
   useAddAttendanceMutation,
   useGetSingleAttendanceQuery,
+  useGetTodaysAttendanceQuery,
   useUpdateAttendanceMutation,
 } from "@/redux/api/attendanceApi";
 import { getUserInfo } from "@/services/auth.service";
@@ -24,7 +26,30 @@ const MyAttendance = () => {
   const [open, setOpen] = useState<boolean>(false);
   const [check, setCheck] = useState<boolean>(false);
   const [updateAttendance] = useUpdateAttendanceMutation();
-  const [addAttendance] = useAddAttendanceMutation();
+  const [action, setAction] = useState<string>("check_in");
+  const { data: todaysAttendanceData, isLoading: todaysAttendanceDataLoading } =
+    useGetTodaysAttendanceQuery({});
+  const [addAttendance, { isLoading: addAttendanceLoading }] =
+    useAddAttendanceMutation();
+
+  useEffect(() => {
+    if (!todaysAttendanceDataLoading && todaysAttendanceData) {
+      const lastActivity =
+        todaysAttendanceData.activity_logs[
+          todaysAttendanceData.activity_logs.length - 1
+        ];
+
+      if (lastActivity) {
+        if (lastActivity.activity === "check_in") {
+          setAction("check_out");
+        } else {
+          setAction("check_in");
+        }
+      } else {
+        setAction("check_in");
+      }
+    }
+  }, [todaysAttendanceData, todaysAttendanceDataLoading]);
 
   const onSubmit = async (data: any) => {
     try {
@@ -72,20 +97,43 @@ const MyAttendance = () => {
     }
   };
 
+  const handlePunchIn = async () => {
+    try {
+      const attendanceData = {
+        user_id: userId,
+        date: new Date().toISOString().split("T")[0],
+        action: action,
+        activity_logs: [],
+      };
+
+      const response = await addAttendance(attendanceData).unwrap();
+      if (response._id) {
+        message.success(
+          `Punch ${action === "check_in" ? "In" : "Out"} Successfully`
+        );
+      }
+    } catch (error) {
+      console.error("Failed to record attendance:", error);
+    }
+  };
+
   const columns = [
     {
       title: "Date",
       dataIndex: "date",
       sorter: true,
+      render: (date: string) => dayjs(date).format("DD MMM YYYY"),
     },
 
     {
       title: "Punch In",
       dataIndex: "check_in",
+      render: (check_in: string) => dayjs(check_in).format("hh:mm A"),
     },
     {
       title: "Punch Out",
       dataIndex: "check_out",
+      render: (check_out: string) => dayjs(check_out).format("hh:mm A"),
     },
     {
       title: "Production",
@@ -176,10 +224,22 @@ const MyAttendance = () => {
           </div>
           <div className="flex justify-center">
             <button
-              type="button"
-              className="px-7 py-[10px] font-semibold rounded-full bg-[#00674A] text-gray-100"
+              onClick={() => handlePunchIn()}
+              disabled={todaysAttendanceDataLoading}
+              className={`${
+                todaysAttendanceDataLoading
+                  ? "cursor-not-allowed"
+                  : "cursor-pointer"
+              } rounded-full px-5 py-2.5 overflow-hidden group bg-[#00674A] relative hover:bg-gradient-to-r hover:from-[#00674A] hover:to-[#00674A] text-white hover:ring-2 hover:ring-offset-2 hover:ring-[#00674A] transition-all ease-out duration-300`}
             >
-              Punch Out
+              <span className="absolute right-0 w-8 h-32 -mt-12 transition-all duration-1000 transform translate-x-12 bg-white opacity-10 rotate-12 group-hover:-translate-x-40 ease"></span>
+              <span className="relative">
+                {todaysAttendanceDataLoading
+                  ? "Loading..."
+                  : action === "check_out"
+                  ? "Punch Out"
+                  : "Punch In"}
+              </span>
             </button>
           </div>
         </div>

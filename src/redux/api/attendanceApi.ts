@@ -37,6 +37,13 @@ export const attendanceApi = baseApi.injectEndpoints({
       }),
       providesTags: [tagTypes.attendance],
     }),
+    getTodaysAttendance: build.query({
+      query: ({}) => ({
+        url: `${ATTENDANCE_URL}/getTodaysAttendance`,
+        method: "GET",
+      }),
+      providesTags: [tagTypes.attendance],
+    }),
     updateAttendance: build.mutation({
       query: ({ id, data }) => ({
         url: `${ATTENDANCE_URL}/${id}`,
@@ -56,9 +63,10 @@ export const attendanceApi = baseApi.injectEndpoints({
 });
 
 export const {
-    useAddAttendanceMutation,
-    useGetAllAttendanceQuery,
-    useUpdateAttendanceMutation,
-    useDeleteAttendanceMutation,
-    useGetSingleAttendanceQuery,
+  useAddAttendanceMutation,
+  useGetAllAttendanceQuery,
+  useUpdateAttendanceMutation,
+  useDeleteAttendanceMutation,
+  useGetSingleAttendanceQuery,
+  useGetTodaysAttendanceQuery,
 } = attendanceApi;

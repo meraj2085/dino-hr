@@ -76,17 +76,28 @@ const MyAttendance = () => {
     {
       title: "Date",
       dataIndex: "date",
+      sorter: true,
     },
 
     {
-      title: "Check in time",
+      title: "Punch In",
       dataIndex: "check_in",
-      sorter: true,
     },
     {
-      title: "Check out time",
+      title: "Punch Out",
       dataIndex: "check_out",
-      sorter: true,
+    },
+    {
+      title: "Production",
+      dataIndex: "production",
+    },
+    {
+      title: "Break",
+      dataIndex: "break",
+    },
+    {
+      title: "Overtime",
+      dataIndex: "overtime",
     },
     {
       title: "Action",
@@ -154,7 +165,7 @@ const MyAttendance = () => {
                 strokeWidth="8"
                 fill="none"
                 strokeDasharray="339.292"
-                strokeDashoffset={(1 - 7.45 / 8) * 339.292}
+                strokeDashoffset={(1 - 3.45 / 8) * 339.292}
                 strokeLinecap="round"
                 transform="rotate(-90 60 60)"
               />

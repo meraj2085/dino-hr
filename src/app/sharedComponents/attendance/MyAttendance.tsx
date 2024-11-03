@@ -31,6 +31,10 @@ const MyAttendance = () => {
     useGetTodaysAttendanceQuery({});
   const [addAttendance, { isLoading: addAttendanceLoading }] =
     useAddAttendanceMutation();
+  const [todaysTotalWorkingTime, setTodaysTotalWorkingTime] =
+    useState<string>("00:00");
+
+  console.log(todaysTotalWorkingTime, "todaysTotalWorkingTime");
 
   useEffect(() => {
     if (!todaysAttendanceDataLoading && todaysAttendanceData) {
@@ -48,6 +52,48 @@ const MyAttendance = () => {
       } else {
         setAction("check_in");
       }
+    }
+
+    if (todaysAttendanceData) {
+      let totalSeconds = 0;
+      let lastCheckIn: Date | null = null;
+
+      // Loop through the activity logs
+      todaysAttendanceData.activity_logs.forEach((activity: any) => {
+        const activityTime = new Date(activity.timestamp);
+
+        if (activity.activity === "check_in") {
+          lastCheckIn = activityTime; // Store the time of the last check-in
+        } else if (activity.activity === "check_out" && lastCheckIn) {
+          // Calculate the time difference in milliseconds
+          const diffMs = activityTime.getTime() - lastCheckIn.getTime();
+          const diffSeconds = Math.floor(diffMs / 1000); // Convert milliseconds to seconds
+
+          // Accumulate total seconds
+          totalSeconds += diffSeconds;
+
+          // Reset lastCheckIn after pairing
+          lastCheckIn = null;
+        }
+      });
+
+      // Convert total seconds to minutes and remaining seconds
+      const totalMinutes = Math.floor(totalSeconds / 60);
+      const remainingSeconds = totalSeconds % 60;
+
+      // Convert total minutes to hours and minutes
+      const hours = Math.floor(totalMinutes / 60);
+      const minutes = totalMinutes % 60;
+
+      // Set total working time in HH:MM format
+      setTodaysTotalWorkingTime(
+        `${String(hours).padStart(2, "0")}:${String(minutes).padStart(2, "0")}`
+      );
+
+      // Optionally log total time for verification
+      console.log(
+        `Total Working Time: ${hours} hours, ${minutes} minutes, ${remainingSeconds} seconds`
+      );
     }
   }, [todaysAttendanceData, todaysAttendanceDataLoading]);
 
@@ -96,6 +142,11 @@ const MyAttendance = () => {
       message.success("Attendance Updated Successfully");
     }
   };
+
+  function convertTimeToDecimal(time: string): number {
+    const [hours, minutes] = time.split(":").map(Number);
+    return hours + minutes / 60;
+  }
 
   const handlePunchIn = async () => {
     try {
@@ -213,13 +264,16 @@ const MyAttendance = () => {
                 strokeWidth="8"
                 fill="none"
                 strokeDasharray="339.292"
-                strokeDashoffset={(1 - 3.45 / 8) * 339.292}
+                strokeDashoffset={
+                  (1 - convertTimeToDecimal(todaysTotalWorkingTime) / 8) *
+                  339.292
+                }
                 strokeLinecap="round"
                 transform="rotate(-90 60 60)"
               />
             </svg>
             <div className="w-[120px] h-[120px] bg-[#F9F9F9] flex items-center justify-center rounded-full font-semibold text-lg">
-              3.45 hrs
+              {todaysTotalWorkingTime} hrs
             </div>
           </div>
           <div className="flex justify-center">
@@ -243,7 +297,6 @@ const MyAttendance = () => {
             </button>
           </div>
         </div>
-
         {/* 2 */}
         <div className="block rounded-lg p-4 shadow-sm shadow-indigo-100 border w-[400px] h-[300px]">
           <ProgressCard
@@ -278,26 +331,57 @@ const MyAttendance = () => {
           />
         </div>
         {/* 3 */}
-        <div className="block rounded-lg py-4 px-5 shadow-sm shadow-indigo-100 border w-[330px] h-[300px]">
-          <div className="max-w-5xl max-h-[250px] overflow-y-auto">
-            <div className="grid gap-4 sm:grid-cols-12">
-              <div className="relative col-span-12 px-4 space-y-6 sm:col-span-9">
-                <div className="col-span-12 space-y-12 relative px-4 sm:col-span-8 sm:space-y-3 sm:before:absolute sm:before:top-2 sm:before:bottom-0 sm:before:w-0.5 sm:before:-left-3 before:bg-gray-300">
-                  {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((item, index) => (
-                    <div
-                      key={index}
-                      className="flex flex-col sm:relative sm:before:absolute sm:before:top-2 sm:before:w-2 sm:before:h-2 sm:before:rounded-full sm:before:left-[-31px] sm:before:z-[1] before:bg-emerald-600"
-                    >
-                      <time className="text-[12px] tracki font-semibold text-gray-600">
-                        Punch In at
-                      </time>
-                      <p className="text-[12px]">10.00 AM.</p>
+        <div className="rounded-lg py-4 px-5 shadow-sm shadow-indigo-100 border w-[330px] h-[300px] flex flex-col justify-between">
+          {todaysAttendanceData ? (
+            <>
+              {!todaysAttendanceDataLoading ? (
+                <div className="max-w-5xl max-h-[250px] overflow-y-auto">
+                  <div className="grid gap-4 sm:grid-cols-12">
+                    <div className="relative col-span-12 px-4 space-y-6 sm:col-span-9">
+                      <div className="col-span-12 space-y-12 relative px-4 sm:col-span-8 sm:space-y-3 sm:before:absolute sm:before:top-2 sm:before:bottom-0 sm:before:w-0.5 sm:before:-left-3 before:bg-gray-300">
+                        {todaysAttendanceData?.activity_logs
+                          ?.slice()
+                          .sort(
+                            (a: any, b: any) =>
+                              new Date(b.timestamp).getTime() -
+                              new Date(a.timestamp).getTime()
+                          )
+                          .map((activity: any, index: any) => (
+                            <div
+                              key={index}
+                              className="flex flex-col sm:relative sm:before:absolute sm:before:top-2 sm:before:w-2 sm:before:h-2 sm:before:rounded-full sm:before:left-[-31px] sm:before:z-[1] before:bg-emerald-600"
+                            >
+                              <time className="text-[12px] tracking font-semibold text-gray-600">
+                                {activity.activity === "check_in"
+                                  ? "Punch In at"
+                                  : "Punch Out at"}
+                              </time>
+                              <p className="text-[12px]">
+                                {new Date(
+                                  activity.timestamp
+                                ).toLocaleTimeString([], {
+                                  hour: "2-digit",
+                                  minute: "2-digit",
+                                  hour12: true,
+                                })}
+                              </p>
+                            </div>
+                          ))}
+                      </div>
                     </div>
-                  ))}
+                  </div>
                 </div>
-              </div>
+              ) : (
+                <div className="flex justify-center items-center h-full">
+                  <SmallLoader />
+                </div>
+              )}
+            </>
+          ) : (
+            <div className="flex justify-center items-center h-full">
+              <p className="text-md font-semibold leadi">No Data...</p>
             </div>
-          </div>
+          )}
         </div>
       </div>
 

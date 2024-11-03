@@ -34,8 +34,6 @@ const MyAttendance = () => {
   const [todaysTotalWorkingTime, setTodaysTotalWorkingTime] =
     useState<string>("00:00");
 
-  console.log(todaysTotalWorkingTime, "todaysTotalWorkingTime");
-
   useEffect(() => {
     if (!todaysAttendanceDataLoading && todaysAttendanceData) {
       const lastActivity =
@@ -57,42 +55,26 @@ const MyAttendance = () => {
     if (todaysAttendanceData) {
       let totalSeconds = 0;
       let lastCheckIn: Date | null = null;
-
-      // Loop through the activity logs
       todaysAttendanceData.activity_logs.forEach((activity: any) => {
         const activityTime = new Date(activity.timestamp);
-
         if (activity.activity === "check_in") {
-          lastCheckIn = activityTime; // Store the time of the last check-in
+          lastCheckIn = activityTime;
         } else if (activity.activity === "check_out" && lastCheckIn) {
-          // Calculate the time difference in milliseconds
           const diffMs = activityTime.getTime() - lastCheckIn.getTime();
-          const diffSeconds = Math.floor(diffMs / 1000); // Convert milliseconds to seconds
-
-          // Accumulate total seconds
+          const diffSeconds = Math.floor(diffMs / 1000);
           totalSeconds += diffSeconds;
-
-          // Reset lastCheckIn after pairing
           lastCheckIn = null;
         }
       });
 
-      // Convert total seconds to minutes and remaining seconds
       const totalMinutes = Math.floor(totalSeconds / 60);
       const remainingSeconds = totalSeconds % 60;
 
-      // Convert total minutes to hours and minutes
       const hours = Math.floor(totalMinutes / 60);
       const minutes = totalMinutes % 60;
 
-      // Set total working time in HH:MM format
       setTodaysTotalWorkingTime(
         `${String(hours).padStart(2, "0")}:${String(minutes).padStart(2, "0")}`
-      );
-
-      // Optionally log total time for verification
-      console.log(
-        `Total Working Time: ${hours} hours, ${minutes} minutes, ${remainingSeconds} seconds`
       );
     }
   }, [todaysAttendanceData, todaysAttendanceDataLoading]);
@@ -110,7 +92,6 @@ const MyAttendance = () => {
         message.success("Attendance Added Successfully");
       }
     } catch (err: any) {
-      // console.error(err.message);
       message.error(err.message);
     }
     setOpen(false);
@@ -145,7 +126,8 @@ const MyAttendance = () => {
 
   function convertTimeToDecimal(time: string): number {
     const [hours, minutes] = time.split(":").map(Number);
-    return hours + minutes / 60;
+    const decimalTime = hours + minutes / 100;
+    return Number(decimalTime.toFixed(2));
   }
 
   const handlePunchIn = async () => {
@@ -197,19 +179,6 @@ const MyAttendance = () => {
     {
       title: "Overtime",
       dataIndex: "overtime",
-    },
-    {
-      title: "Action",
-      dataIndex: "is_checkout",
-      render: function (data: any) {
-        return (
-          <>
-            <Button disabled={data} onClick={() => setCheck(!check)}>
-              Check out
-            </Button>
-          </>
-        );
-      },
     },
   ];
 
@@ -301,7 +270,7 @@ const MyAttendance = () => {
         <div className="block rounded-lg p-4 shadow-sm shadow-indigo-100 border w-[400px] h-[300px]">
           <ProgressCard
             title="Today"
-            progress={3.45}
+            progress={convertTimeToDecimal(todaysTotalWorkingTime)}
             total={8}
             color="#FF9B43"
           />

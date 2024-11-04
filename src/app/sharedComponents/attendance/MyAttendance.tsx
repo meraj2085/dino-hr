@@ -242,7 +242,7 @@ const MyAttendance = () => {
               />
             </svg>
             <div className="w-[120px] h-[120px] bg-[#F9F9F9] flex items-center justify-center rounded-full font-semibold text-lg">
-              {todaysTotalWorkingTime} hrs
+              {todaysTotalWorkingTime}
             </div>
           </div>
           <div className="flex justify-center">

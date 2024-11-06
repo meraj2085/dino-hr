@@ -14,6 +14,8 @@ import {
 import { getUserInfo } from "@/services/auth.service";
 import ActionBar from "@/components/ui/ActionBar";
 import { ProgressCard } from "./ProgressCard";
+import no_data from "../../../../public/assets/no_data.png";
+import Image from "next/image";
 
 const MyAttendance = () => {
   const { userId } = getUserInfo() as any;
@@ -279,7 +281,13 @@ const MyAttendance = () => {
             </>
           ) : (
             <div className="flex justify-center items-center h-full">
-              <p className="text-md font-semibold leadi">No Data...</p>
+              <Image
+                width={100}
+                height={100}
+                src={no_data}
+                alt="Profile image"
+                draggable={false}
+              />
             </div>
           )}
         </div>

@@ -25,8 +25,9 @@ const MyAttendance = () => {
   const [addAttendance, { isLoading: addAttendanceLoading }] =
     useAddAttendanceMutation();
   const [todaysTotalWorkingTime, setTodaysTotalWorkingTime] =
-    useState<string>("00:00");
+    useState<string>("00:00:00");
   const { data, isLoading } = useGetSingleAttendanceQuery(userId);
+  const [isCountdownLoading, setIsCountdownLoading] = useState<boolean>(false);
 
   useEffect(() => {
     if (!todaysAttendanceDataLoading && todaysAttendanceData) {
@@ -68,10 +69,56 @@ const MyAttendance = () => {
       const minutes = totalMinutes % 60;
 
       setTodaysTotalWorkingTime(
-        `${String(hours).padStart(2, "0")}:${String(minutes).padStart(2, "0")}`
+        `${String(hours).padStart(2, "0")}:${String(minutes).padStart(
+          2,
+          "0"
+        )}:${remainingSeconds < 10 ? "0" + remainingSeconds : remainingSeconds}`
       );
     }
   }, [todaysAttendanceData, todaysAttendanceDataLoading]);
+
+  useEffect(() => {
+    let interval: NodeJS.Timeout | null = null;
+
+    if (action === "check_out" && todaysAttendanceData) {
+      interval = setInterval(() => {
+        let totalSeconds = 0;
+        let lastCheckIn: Date | null = null;
+
+        todaysAttendanceData.activity_logs.forEach((activity: any) => {
+          const activityTime = new Date(activity.timestamp);
+          if (activity.activity === "check_in") {
+            lastCheckIn = activityTime;
+          } else if (activity.activity === "check_out" && lastCheckIn) {
+            const diffMs = activityTime.getTime() - lastCheckIn.getTime();
+            const diffSeconds = Math.floor(diffMs / 1000);
+            totalSeconds += diffSeconds;
+            lastCheckIn = null;
+          }
+        });
+
+        if (lastCheckIn) {
+          const diffMs = new Date().getTime() - (lastCheckIn as Date).getTime();
+          const diffSeconds = Math.floor(diffMs / 1000);
+          totalSeconds += diffSeconds;
+        }
+
+        const hours = String(Math.floor(totalSeconds / 3600)).padStart(2, "0");
+        const minutes = String(Math.floor((totalSeconds % 3600) / 60)).padStart(
+          2,
+          "0"
+        );
+        const seconds = String(totalSeconds % 60).padStart(2, "0");
+
+        setTodaysTotalWorkingTime(`${hours}:${minutes}:${seconds}`);
+        // setIsCountdownLoading(false);
+      }, 1000);
+    }
+
+    return () => {
+      if (interval) clearInterval(interval);
+    };
+  }, [todaysAttendanceData, action]);
 
   function convertTimeToDecimal(time: string): number {
     const [hours, minutes] = time.split(":").map(Number);
@@ -167,7 +214,10 @@ const MyAttendance = () => {
                 fill="none"
                 strokeDasharray="339.292"
                 strokeDashoffset={
-                  (1 - convertTimeToDecimal(todaysTotalWorkingTime) / 8) *
+                  (1 -
+                    (isCountdownLoading
+                      ? 0
+                      : convertTimeToDecimal(todaysTotalWorkingTime) / 8)) *
                   339.292
                 }
                 strokeLinecap="round"
@@ -175,7 +225,7 @@ const MyAttendance = () => {
               />
             </svg>
             <div className="w-[120px] h-[120px] bg-[#F9F9F9] flex items-center justify-center rounded-full font-semibold text-lg">
-              {todaysTotalWorkingTime}
+              {isCountdownLoading ? <SmallLoader /> : todaysTotalWorkingTime}
             </div>
           </div>
           <div className="flex justify-center">

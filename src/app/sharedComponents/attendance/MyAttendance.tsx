@@ -25,7 +25,7 @@ const MyAttendance = () => {
   const [addAttendance, { isLoading: addAttendanceLoading }] =
     useAddAttendanceMutation();
   const [todaysTotalWorkingTime, setTodaysTotalWorkingTime] =
-    useState<string>("00:00");
+    useState<string>("00:00:00");
   const { data, isLoading } = useGetSingleAttendanceQuery(userId);
 
   useEffect(() => {
@@ -68,7 +68,10 @@ const MyAttendance = () => {
       const minutes = totalMinutes % 60;
 
       setTodaysTotalWorkingTime(
-        `${String(hours).padStart(2, "0")}:${String(minutes).padStart(2, "0")}`
+        `${String(hours).padStart(2, "0")}:${String(minutes).padStart(
+          2,
+          "0"
+        )}:${remainingSeconds < 10 ? "0" + remainingSeconds : remainingSeconds}`
       );
     }
   }, [todaysAttendanceData, todaysAttendanceDataLoading]);

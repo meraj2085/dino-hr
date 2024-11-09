@@ -384,14 +384,19 @@ const MyAttendance = () => {
         </div>
       </div>
 
-      <DatePicker
-        style={{ width: "20%" }}
-        className="py-2"
-        onChange={handleDateChange}
-        picker="month"
-        defaultValue={dayjs(selectedMonthYear, "YYYY/MM")}
-        format="YYYY-MM"
-      />
+      <div className="mb-2 flex justify-end">
+        <DatePicker
+          style={{ width: "20%", height: "35px" }}
+          className="py-2"
+          onChange={handleDateChange}
+          picker="month"
+          defaultValue={dayjs(selectedMonthYear, "YYYY/MM")}
+          format="YYYY-MM"
+          disabledDate={(current) => {
+            return current && current > dayjs().endOf("month");
+          }}
+        />
+      </div>
       <PPTable
         loading={isLoading}
         columns={columns}

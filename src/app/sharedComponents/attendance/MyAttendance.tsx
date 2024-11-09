@@ -1,7 +1,8 @@
 "use client";
 
+import moment from "moment";
 import BreadCrumb from "@/components/ui/BreadCrumb";
-import { message } from "antd";
+import { DatePicker, message } from "antd";
 import { useEffect, useState } from "react";
 import PPTable from "@/components/ui/PPTable";
 import SmallLoader from "@/components/shared/SmallLoader";
@@ -16,18 +17,58 @@ import ActionBar from "@/components/ui/ActionBar";
 import { ProgressCard } from "./ProgressCard";
 import no_data from "../../../../public/assets/no_data.png";
 import Image from "next/image";
+import { useDebounced } from "@/redux/hooks";
 
 const MyAttendance = () => {
   const { userId } = getUserInfo() as any;
+  const query: Record<string, any> = {};
   const [action, setAction] = useState<string>("check_in");
+  const currentDate = moment(new Date()).format("YYYY-MM");
   const { data: todaysAttendanceData, isLoading: todaysAttendanceDataLoading } =
     useGetTodaysAttendanceQuery({});
   const [addAttendance, { isLoading: addAttendanceLoading }] =
     useAddAttendanceMutation();
   const [todaysTotalWorkingTime, setTodaysTotalWorkingTime] =
     useState<string>("00:00:00");
-  const { data, isLoading } = useGetSingleAttendanceQuery(userId);
   const [isCountdownLoading, setIsCountdownLoading] = useState<boolean>(false);
+  const [selectedMonthYear, setSelectedMonthYear] = useState(currentDate);
+  const [page, setPage] = useState<number>(1);
+  const [size, setSize] = useState<number>(10);
+  const [sortBy, setSortBy] = useState<string>("");
+  const [sortOrder, setSortOrder] = useState<string>("");
+  const [searchTerm, setSearchTerm] = useState<string>("");
+
+  query["limit"] = size;
+  query["page"] = page;
+  query["sortBy"] = sortBy;
+  query["sortOrder"] = sortOrder;
+  query["monthYear"] = selectedMonthYear;
+
+  const handleDateChange = (date: any) => {
+    setSelectedMonthYear(dayjs(date).format("YYYY-MM"));
+  };
+
+  const debouncedSearchTerm = useDebounced({
+    searchQuery: searchTerm,
+    delay: 600,
+  });
+
+  if (!!debouncedSearchTerm) {
+    query["searchTerm"] = debouncedSearchTerm;
+  }
+
+  const onPaginationChange = (page: number, pageSize: number) => {
+    setPage(page);
+    setSize(pageSize);
+  };
+  const onTableChange = (pagination: any, filter: any, sorter: any) => {
+    const { order, field } = sorter;
+    setSortBy(field as string);
+    setSortOrder(order === "ascend" ? "asc" : "desc");
+  };
+
+  const { data, isLoading } = useGetSingleAttendanceQuery({ ...query });
+  const meta = data?.meta;
 
   useEffect(() => {
     if (!todaysAttendanceDataLoading && todaysAttendanceData) {
@@ -343,11 +384,24 @@ const MyAttendance = () => {
         </div>
       </div>
 
+      <DatePicker
+        style={{ width: "20%" }}
+        className="py-2"
+        onChange={handleDateChange}
+        picker="month"
+        defaultValue={dayjs(selectedMonthYear, "YYYY/MM")}
+        format="YYYY-MM"
+      />
       <PPTable
         loading={isLoading}
         columns={columns}
-        dataSource={data}
+        dataSource={data?.attendances || []}
         showSizeChanger={true}
+        pageSize={size}
+        totalPages={meta?.total}
+        onPaginationChange={onPaginationChange}
+        onTableChange={onTableChange}
+        showPagination={true}
         scroll={{ x: true }}
       />
     </div>

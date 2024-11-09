@@ -8,10 +8,14 @@ import ActionBar from "@/components/ui/ActionBar";
 import PPTable from "@/components/ui/PPTable";
 import { useGetAllAttendanceQuery } from "@/redux/api/attendanceApi";
 import dayjs from "dayjs";
-import moment from "moment";
+import weekday from "dayjs/plugin/weekday";
+import locale from "dayjs/plugin/localeData";
+
+dayjs.extend(weekday);
+dayjs.extend(locale);
 
 const AllAttendance = () => {
-  const currentDate = moment(new Date()).format("YYYY-MM-DD");
+  const currentDate = dayjs().format("YYYY-MM-DD");
   const [selectedDate, setSelectedDate] = useState(currentDate);
   const query: Record<string, any> = {};
   const [page, setPage] = useState<number>(1);
@@ -38,6 +42,7 @@ const AllAttendance = () => {
   if (!!debouncedSearchTerm) {
     query["searchTerm"] = debouncedSearchTerm;
   }
+
   const { data, isLoading } = useGetAllAttendanceQuery({ ...query });
 
   const meta = data?.meta;
@@ -69,13 +74,12 @@ const AllAttendance = () => {
     setPage(page);
     setSize(pageSize);
   };
+
   const onTableChange = (pagination: any, filter: any, sorter: any) => {
     const { order, field } = sorter;
     setSortBy(field as string);
     setSortOrder(order === "ascend" ? "asc" : "desc");
   };
-
-  const dateFormat = "YYYY/MM/DD";
 
   return (
     <div style={{ overflowX: "auto" }} className="background">
@@ -105,7 +109,8 @@ const AllAttendance = () => {
           style={{ width: "20%" }}
           className="py-2"
           onChange={handleDateChange}
-          defaultValue={dayjs(selectedDate, dateFormat)}
+          picker="date"
+          defaultValue={dayjs(selectedDate, "YYYY-MM-DD")}
           format="YYYY-MM-DD"
         />
       </ActionBar>

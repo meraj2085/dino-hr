@@ -31,10 +31,19 @@ export const attendanceApi = baseApi.injectEndpoints({
       providesTags: [tagTypes.attendance],
     }),
     getSingleAttendance: build.query({
-      query: (id) => ({
-        url: `${ATTENDANCE_URL}/${id}`,
-        method: "GET",
-      }),
+      query: (arg: Record<string, any>) => {
+        return {
+          url: `${ATTENDANCE_URL}/singleAttendance`,
+          method: "GET",
+          params: arg,
+        };
+      },
+      transformResponse: (response: IAttendance[], meta: IMeta) => {
+        return {
+          attendances: response,
+          meta,
+        };
+      },
       providesTags: [tagTypes.attendance],
     }),
     getTodaysAttendance: build.query({

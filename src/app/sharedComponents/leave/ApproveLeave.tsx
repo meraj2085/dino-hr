@@ -221,7 +221,7 @@ const ApproveLeave = () => {
           onPaginationChange={onPaginationChange}
           onTableChange={onTableChange}
           showPagination={true}
-          scroll={{ x: true }}
+          
         />
       </div>
       <PPModal

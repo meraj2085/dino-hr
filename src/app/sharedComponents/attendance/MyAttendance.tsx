@@ -413,7 +413,7 @@ const MyAttendance = () => {
         onPaginationChange={onPaginationChange}
         onTableChange={onTableChange}
         showPagination={true}
-        scroll={{ x: true }}
+        
       />
     </div>
   );

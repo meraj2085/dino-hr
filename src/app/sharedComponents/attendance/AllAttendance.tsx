@@ -10,6 +10,7 @@ import { useGetAllAttendanceQuery } from "@/redux/api/attendanceApi";
 import dayjs from "dayjs";
 import weekday from "dayjs/plugin/weekday";
 import locale from "dayjs/plugin/localeData";
+import { CheckSVG, XSignSVG } from "@/shared/svg";
 
 dayjs.extend(weekday);
 dayjs.extend(locale);
@@ -44,30 +45,26 @@ const AllAttendance = () => {
   }
 
   const { data, isLoading } = useGetAllAttendanceQuery({ ...query });
-
   const meta = data?.meta;
+
+  const totalDays = 30;
 
   const columns = [
     {
-      title: "Name",
-      dataIndex: "userName",
+      title: "Employee",
+      dataIndex: "employee",
+      key: "employee",
+      fixed: "left",
+      width: 150,
+      render: (employee: any) => "Meraj Hossain",
     },
-    {
-      title: "Date",
-      dataIndex: "date",
-    },
-    {
-      title: "Check in time",
-      dataIndex: "check_in",
-    },
-    {
-      title: "Check out time",
-      dataIndex: "check_out",
-    },
-    {
-      title: "Description",
-      dataIndex: "description",
-    },
+
+    ...Array.from({ length: totalDays }, (_, index) => ({
+      title: (index + 1).toString(),
+      dataIndex: `day_${index + 1}`,
+      key: `day_${index + 1}`,
+      render: (status: any) => status || <CheckSVG />,
+    })),
   ];
 
   const onPaginationChange = (page: number, pageSize: number) => {
@@ -125,7 +122,7 @@ const AllAttendance = () => {
         onPaginationChange={onPaginationChange}
         onTableChange={onTableChange}
         showPagination={true}
-        scroll={{ x: true }}
+        scroll={{ x: 1500 }}
       />
     </div>
   );

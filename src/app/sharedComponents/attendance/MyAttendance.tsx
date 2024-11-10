@@ -18,6 +18,7 @@ import { ProgressCard } from "./ProgressCard";
 import no_data from "../../../../public/assets/no_data.png";
 import Image from "next/image";
 import { useDebounced } from "@/redux/hooks";
+import { formatSecondToTime } from "@/utils/common";
 
 const MyAttendance = () => {
   const { userId } = getUserInfo() as any;
@@ -203,19 +204,23 @@ const MyAttendance = () => {
     {
       title: "Punch Out",
       dataIndex: "check_out",
-      render: (check_out: string) => dayjs(check_out).format("hh:mm A"),
+      render: (check_out: string) =>
+        check_out ? dayjs(check_out).format("hh:mm A") : "00:00",
     },
     {
       title: "Production",
       dataIndex: "production",
+      render: (production: string) => formatSecondToTime(production),
     },
     {
       title: "Break",
       dataIndex: "break",
+      render: (breakTime: string) => formatSecondToTime(breakTime),
     },
     {
       title: "Overtime",
       dataIndex: "overtime",
+      render: (overtime: string) => formatSecondToTime(overtime),
     },
   ];
 
@@ -355,6 +360,7 @@ const MyAttendance = () => {
                                 ).toLocaleTimeString([], {
                                   hour: "2-digit",
                                   minute: "2-digit",
+                                  // second: "2-digit",
                                   hour12: true,
                                 })}
                               </p>
@@ -407,7 +413,7 @@ const MyAttendance = () => {
         onPaginationChange={onPaginationChange}
         onTableChange={onTableChange}
         showPagination={true}
-        scroll={{ x: true }}
+        
       />
     </div>
   );

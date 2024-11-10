@@ -115,7 +115,7 @@ const ViewOrganization = () => {
         onPaginationChange={onPaginationChange}
         onTableChange={onTableChange}
         showPagination={true}
-        scroll={{ x: true }}
+        
       />
     </div>
   );

@@ -204,7 +204,8 @@ const MyAttendance = () => {
     {
       title: "Punch Out",
       dataIndex: "check_out",
-      render: (check_out: string) => dayjs(check_out).format("hh:mm A"),
+      render: (check_out: string) =>
+        check_out ? dayjs(check_out).format("hh:mm A") : "00:00",
     },
     {
       title: "Production",

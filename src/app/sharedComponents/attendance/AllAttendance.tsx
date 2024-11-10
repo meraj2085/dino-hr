@@ -45,7 +45,6 @@ const AllAttendance = () => {
   }
 
   const { data, isLoading } = useGetAllAttendanceQuery({ ...query });
-
   const meta = data?.meta;
 
   const totalDays = 30;
@@ -55,7 +54,11 @@ const AllAttendance = () => {
       title: "Employee",
       dataIndex: "employee",
       key: "employee",
+      fixed: "left",
+      width: 150,
+      render: (employee: any) => "Meraj Hossain",
     },
+
     ...Array.from({ length: totalDays }, (_, index) => ({
       title: (index + 1).toString(),
       dataIndex: `day_${index + 1}`,

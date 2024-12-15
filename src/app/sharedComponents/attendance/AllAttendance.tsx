@@ -10,14 +10,16 @@ import { useGetAllAttendanceQuery } from "@/redux/api/attendanceApi";
 import dayjs from "dayjs";
 import weekday from "dayjs/plugin/weekday";
 import locale from "dayjs/plugin/localeData";
-import { CheckSVG, XSignSVG } from "@/shared/svg";
+import { CheckSVG, XSignSVG, UpcomingSVG } from "@/shared/svg";
 
 dayjs.extend(weekday);
 dayjs.extend(locale);
 
 const AllAttendance = () => {
-  const currentDate = dayjs().format("YYYY-MM-DD");
-  const [selectedDate, setSelectedDate] = useState(currentDate);
+  const currentDate = dayjs();
+  const [selectedMonthYear, setSelectedMonthYear] = useState(
+    currentDate.format("YYYY-MM")
+  );
   const query: Record<string, any> = {};
   const [page, setPage] = useState<number>(1);
   const [size, setSize] = useState<number>(10);
@@ -25,14 +27,15 @@ const AllAttendance = () => {
   const [sortOrder, setSortOrder] = useState<string>("");
   const [searchTerm, setSearchTerm] = useState<string>("");
 
+  const totalDays = dayjs(selectedMonthYear).daysInMonth();
   query["limit"] = size;
   query["page"] = page;
   query["sortBy"] = sortBy;
   query["sortOrder"] = sortOrder;
-  query["date"] = selectedDate;
+  query["monthYear"] = selectedMonthYear;
 
   const handleDateChange = (date: any) => {
-    setSelectedDate(dayjs(date).format("YYYY-MM-DD"));
+    setSelectedMonthYear(dayjs(date).format("YYYY-MM"));
   };
 
   const debouncedSearchTerm = useDebounced({
@@ -47,25 +50,43 @@ const AllAttendance = () => {
   const { data, isLoading } = useGetAllAttendanceQuery({ ...query });
   const meta = data?.meta;
 
-  const totalDays = 30;
-
   const columns = [
     {
       title: "Employee",
-      dataIndex: "employee",
-      key: "employee",
+      dataIndex: "name",
+      key: "name",
       fixed: "left",
       width: 150,
-      render: (employee: any) => "Meraj Hossain",
+      render: (name: string) => <div>{name}</div>,
     },
 
     ...Array.from({ length: totalDays }, (_, index) => ({
       title: (index + 1).toString(),
       dataIndex: `day_${index + 1}`,
       key: `day_${index + 1}`,
-      render: (status: any) => status || <CheckSVG />,
+      render: (status: any) => {
+        const dayDate = dayjs(selectedMonthYear).date(index + 1);
+        const isFutureDate = dayDate.isAfter(currentDate, "day");
+        const isToday = dayDate.isSame(currentDate, "day");
+
+        if (isFutureDate) {
+          return <UpcomingSVG />;
+        }
+
+        return status?.attendance ? <CheckSVG /> : <XSignSVG />;
+      },
     })),
   ];
+
+  const tableData = (data?.attendances || []).map((user: any) => {
+    const row: Record<string, any> = { user_id: user.user_id, name: user.name };
+    user.data.forEach((day: any, index: number) => {
+      row[`day_${index + 1}`] = day;
+    });
+    return row;
+  });
+
+  console.log(tableData, "tableData");
 
   const onPaginationChange = (page: number, pageSize: number) => {
     setPage(page);
@@ -106,16 +127,17 @@ const AllAttendance = () => {
           style={{ width: "20%" }}
           className="py-2"
           onChange={handleDateChange}
-          picker="date"
-          defaultValue={dayjs(selectedDate, "YYYY-MM-DD")}
-          format="YYYY-MM-DD"
+          picker="month"
+          defaultValue={dayjs(selectedMonthYear, "YYYY-MM")}
+          format="YYYY-MM"
+          disabledDate={(current) => current > currentDate.endOf("month")}
         />
       </ActionBar>
 
       <PPTable
         loading={isLoading}
         columns={columns}
-        dataSource={data?.attendances}
+        dataSource={tableData}
         pageSize={size}
         totalPages={meta?.total}
         showSizeChanger={true}

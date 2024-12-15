@@ -33,6 +33,7 @@
 /* Table Scrollbar Styles*/
 .table-container .ant-table-body::-webkit-scrollbar {
   width: 4px;
+  height: 4px;
 }
 
 .table-container .ant-table-body::-webkit-scrollbar-thumb {

@@ -1,23 +1,31 @@
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { getFromLocalStorage } from "@/utils/localStorage";
-import { createSlice } from "@reduxjs/toolkit";
+interface ConfigState {
+  theme: string;
+  employee: Record<string, any>;
+}
 
 const localStorageTheme = getFromLocalStorage("theme");
 const theme = localStorageTheme ? JSON.parse(localStorageTheme) : null;
 
-const initialState = {
-  theme: theme?.theme ? theme?.theme : "light",
+const initialState: ConfigState = {
+  theme: theme?.theme ? theme.theme : "light",
+  employee: {},
 };
 
 const configSlice = createSlice({
   name: "config",
   initialState,
   reducers: {
-    setTheme: (state, action) => {
+    setTheme: (state, action: PayloadAction<string>) => {
       state.theme = action.payload;
+    },
+    setEmployee: (state, action: PayloadAction<Record<string, any>>) => {
+      state.employee = action.payload;
     },
   },
 });
 
-export const { setTheme } = configSlice.actions;
+export const { setTheme, setEmployee } = configSlice.actions;
 
 export default configSlice.reducer;

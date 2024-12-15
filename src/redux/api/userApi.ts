@@ -14,6 +14,7 @@ export const userApi = baseApi.injectEndpoints({
         };
       },
       transformResponse: (response: IUser[], meta: IMeta) => {
+        console.log('Fetched all users data:', response);
         return {
           users: response,
           meta,
@@ -103,7 +104,7 @@ export const userApi = baseApi.injectEndpoints({
         method: "POST",
         data: data,
       }),
-      invalidatesTags: [tagTypes.user, tagTypes.allUsers],
+      invalidatesTags: [tagTypes.allUsers],
     }),
   }),
 });

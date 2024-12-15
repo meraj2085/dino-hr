@@ -4,8 +4,8 @@ import BreadCrumb from "@/components/ui/BreadCrumb";
 import { Badge, Button, Input } from "antd";
 import Link from "next/link";
 import { EyeOutlined } from "@ant-design/icons";
-import { useState } from "react";
-import { useDebounced } from "@/redux/hooks";
+import { useEffect, useState } from "react";
+import { useAppSelector, useDebounced } from "@/redux/hooks";
 import PPTable from "@/components/ui/PPTable";
 import { useGetAllEmployeeQuery } from "@/redux/api/employeeApi";
 import Image from "next/image";
@@ -35,8 +35,15 @@ const ViewEmployees = () => {
     query["searchTerm"] = debouncedSearchTerm;
   }
 
-  const { data, isLoading } = useGetAllEmployeeQuery({ ...query });
+  const { data, isLoading, refetch } = useGetAllEmployeeQuery({ ...query });
   const meta = data?.meta;
+  const employeeUpdated = useAppSelector((state) => state.config.employee);
+
+  useEffect(() => {
+    if (employeeUpdated) {
+      refetch();
+    }
+  }, [employeeUpdated, refetch]);
 
   const columns = [
     {
@@ -183,7 +190,6 @@ const ViewEmployees = () => {
         onPaginationChange={onPaginationChange}
         onTableChange={onTableChange}
         showPagination={true}
-        scroll={{ x: true }}
       />
     </div>
   );

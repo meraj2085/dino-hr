@@ -1,10 +1,10 @@
 "use client";
 
 import BreadCrumb from "@/components/ui/BreadCrumb";
-import Image from "next/image";
 import Loading from "@/app/loading";
 import dayjs from "dayjs";
 import { useGetSingleFeedbackQuery } from "@/redux/api/feedbackApi";
+import ActionBar from "@/components/ui/ActionBar";
 
 type IDProps = {
   params: any;
@@ -17,7 +17,7 @@ const ViewBlogPage = ({ params }: IDProps) => {
   if (isLoading) return <Loading />;
 
   return (
-    <div>
+    <div style={{ overflowX: "auto" }} className="min-w-[250px] background">
       <BreadCrumb
         items={[
           {
@@ -34,8 +34,9 @@ const ViewBlogPage = ({ params }: IDProps) => {
           },
         ]}
       />
+      <ActionBar title="View Feedback" />
 
-      <div className="mt-10">
+      <div>
         <div
           style={{
             border: "1px solid #d9d9d9",
@@ -44,23 +45,29 @@ const ViewBlogPage = ({ params }: IDProps) => {
             marginBottom: "10px",
           }}
         >
-          <div className="relative block overflow-hidden rounded-lg border bg-white border-gray-100 p-4 sm:p-6 lg:p-8">
-            <div className="sm:flex sm:justify-between sm:gap-4">
-              <div>
-                <h3 className="text-lg font-bold text-gray-900 sm:text-xl">
-                  {data?.name}
-                </h3>
-                <p className="mt-1 text-xs font-medium text-gray-600">
-                  {data?.email}
-                </p>
-              </div>
+          <div className="relative block overflow-hidden rounded-lg  bg-white p-4 sm:p-6 lg:p-6">
+            <div className="flow-root">
+              <dl className="-my-3 divide-y divide-gray-100 text-sm">
+                <div className="grid grid-cols-1 gap-1 py-3 px-2 even:bg-gray-50 sm:grid-cols-3 sm:gap-4">
+                  <dt className="font-medium text-gray-900">Name</dt>
+                  <dd className="text-gray-700 sm:col-span-2">{data?.name}</dd>
+                </div>
+
+                <div className="grid grid-cols-1 gap-1 py-3 px-2 even:bg-gray-50 sm:grid-cols-3 sm:gap-4">
+                  <dt className="font-medium text-gray-900">Email</dt>
+                  <dd className="text-gray-700 sm:col-span-2">{data?.email}</dd>
+                </div>
+
+                <div className="grid grid-cols-1 gap-1 py-3 px-2 even:bg-gray-50 sm:grid-cols-3 sm:gap-4">
+                  <dt className="font-medium text-gray-900">Feedback</dt>
+                  <dd className="text-gray-700 sm:col-span-2">
+                    {data?.feedback}
+                  </dd>
+                </div>
+              </dl>
             </div>
 
-            <div className="mt-4">
-              <p className=" text-sm text-gray-500">{data?.feedback}</p>
-            </div>
-
-            <dl className="mt-6 flex gap-4 sm:gap-6">
+            <dl className="mt-6 px-2 flex gap-4 sm:gap-6">
               <div className="flex flex-col-reverse">
                 <dt className="text-sm font-medium text-gray-600">Posted On</dt>
                 <dd className="text-xs text-gray-500">

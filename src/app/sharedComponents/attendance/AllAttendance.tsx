@@ -1,7 +1,7 @@
 "use client";
 
 import { useDebounced } from "@/redux/hooks";
-import { DatePicker, Input } from "antd";
+import { DatePicker, Input, Tooltip } from "antd";
 import { useState } from "react";
 import BreadCrumb from "@/components/ui/BreadCrumb";
 import ActionBar from "@/components/ui/ActionBar";
@@ -59,23 +59,30 @@ const AllAttendance = () => {
       width: 150,
       render: (name: string) => <div>{name}</div>,
     },
-
-    ...Array.from({ length: totalDays }, (_, index) => ({
-      title: (index + 1).toString(),
-      dataIndex: `day_${index + 1}`,
-      key: `day_${index + 1}`,
-      render: (status: any) => {
-        const dayDate = dayjs(selectedMonthYear).date(index + 1);
-        const isFutureDate = dayDate.isAfter(currentDate, "day");
-        const isToday = dayDate.isSame(currentDate, "day");
-
-        if (isFutureDate) {
-          return <UpcomingSVG />;
-        }
-
-        return status?.attendance ? <CheckSVG /> : <XSignSVG />;
-      },
-    })),
+  
+    ...Array.from({ length: totalDays }, (_, index) => {
+      const dayDate = dayjs(selectedMonthYear).date(index + 1);
+      const dayName = dayDate.format("ddd");
+  
+      return {
+        title: (
+          <Tooltip placement="top" title={dayName}>
+            <span>{index + 1}</span>
+          </Tooltip>
+        ),
+        dataIndex: `day_${index + 1}`,
+        key: `day_${index + 1}`,
+        render: (status: any) => {
+          const isFutureDate = dayDate.isAfter(currentDate, "day");
+  
+          if (isFutureDate) {
+            return <UpcomingSVG />;
+          }
+  
+          return status?.attendance ? <CheckSVG /> : <XSignSVG />;
+        },
+      };
+    }),
   ];
 
   const tableData = (data?.attendances || []).map((user: any) => {

@@ -18,7 +18,7 @@ import { ProgressCard } from "./ProgressCard";
 import no_data from "../../../../public/assets/no_data.png";
 import Image from "next/image";
 import { useDebounced } from "@/redux/hooks";
-import { formatSecondToTime } from "@/utils/common";
+import { formatSecondToDecimalHour, formatSecondToTime } from "@/utils/common";
 
 const MyAttendance = () => {
   const { userId } = getUserInfo() as any;
@@ -69,6 +69,13 @@ const MyAttendance = () => {
   };
 
   const { data, isLoading } = useGetSingleAttendanceQuery({ ...query });
+  const {
+    totalWorkingHours,
+    totalWorkingDaysNumber,
+    thisWeekProduction,
+    thisMonthProduction,
+    thisMonthOvertime,
+  } = data?.stats || {};
   const meta = data?.meta;
 
   useEffect(() => {
@@ -222,17 +229,17 @@ const MyAttendance = () => {
     {
       title: "Production",
       dataIndex: "production",
-      render: (production: string) => formatSecondToTime(production),
+      render: (production: string) => formatSecondToTime(production, true),
     },
     {
       title: "Break",
       dataIndex: "break",
-      render: (breakTime: string) => formatSecondToTime(breakTime),
+      render: (breakTime: string) => formatSecondToTime(breakTime, true),
     },
     {
       title: "Overtime",
       dataIndex: "overtime",
-      render: (overtime: string) => formatSecondToTime(overtime),
+      render: (overtime: string) => formatSecondToTime(overtime, true),
     },
   ];
 
@@ -317,26 +324,33 @@ const MyAttendance = () => {
           />
           <ProgressCard
             title="This Week"
-            progress={28}
-            total={40}
+            progress={formatSecondToDecimalHour(thisWeekProduction)}
+            total={formatSecondToDecimalHour(totalWorkingHours)}
             color="#64279A"
           />
           <ProgressCard
             title="This Month"
-            progress={90}
-            total={160}
+            progress={formatSecondToDecimalHour(thisMonthProduction)}
+            total={formatSecondToDecimalHour(totalWorkingHours) * 26}
             color="#00674A"
           />
           <ProgressCard
             title="Remaining"
-            progress={70}
-            total={160}
+            progress={
+              formatSecondToDecimalHour(totalWorkingHours) *
+                (totalWorkingDaysNumber * 4) -
+              formatSecondToDecimalHour(thisMonthProduction)
+            }
+            total={
+              formatSecondToDecimalHour(totalWorkingHours) *
+              (totalWorkingDaysNumber * 4)
+            }
             color="#F52D51"
           />
           <ProgressCard
             title="Overtime"
-            progress={9}
-            total={100}
+            progress={formatSecondToDecimalHour(thisMonthOvertime)}
+            total={2 * (totalWorkingDaysNumber * 4)}
             color="#009EFB"
           />
         </div>

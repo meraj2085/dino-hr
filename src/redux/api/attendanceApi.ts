@@ -38,9 +38,10 @@ export const attendanceApi = baseApi.injectEndpoints({
           params: arg,
         };
       },
-      transformResponse: (response: IAttendance[], meta: IMeta) => {
+      transformResponse: (response: any, meta: IMeta) => {
         return {
-          attendances: response,
+          attendances: response?.myAttendanceData,
+          stats: response?.stats,
           meta,
         };
       },

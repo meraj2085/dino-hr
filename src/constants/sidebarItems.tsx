@@ -11,6 +11,7 @@ import {
   UserAddOutlined,
   FileTextOutlined,
   MailOutlined,
+  FileExcelOutlined,
 } from "@ant-design/icons";
 import Link from "next/link";
 import { USER_TYPE } from "./role";
@@ -154,6 +155,15 @@ export const sidebarItems = (user_type: string, is_manager?: boolean) => {
           key: `/dashboard/${user_type}/events/calendar`,
         },
       ],
+    },
+    {
+      label: (
+        <Link href={`/dashboard/${user_type}/report`}>
+          Download Report
+        </Link>
+      ),
+      icon: <FileExcelOutlined />,
+      key: `/dashboard/${user_type}/report`,
     },
   ];
 

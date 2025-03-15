@@ -486,15 +486,15 @@ export const CheckSVG = () => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
+      width="15"
+      height="15"
       viewBox="0 0 24 24"
       fill="none"
       stroke="#00674A"
-      stroke-width="2"
+      stroke-width="3"
       stroke-linecap="round"
       stroke-linejoin="round"
-      className="icon icon-tabler icons-tabler-outline icon-tabler-check w-5 h-5"
+      className="icon icon-tabler icons-tabler-outline icon-tabler-check"
     >
       <path stroke="none" d="M0 0h24v24H0z" fill="none" />
       <path d="M5 12l5 5l10 -10" />
@@ -506,19 +506,50 @@ export const XSignSVG = () => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
+      width="15"
+      height="15"
       viewBox="0 0 24 24"
       fill="none"
       stroke="#c1121f"
       stroke-width="2"
       stroke-linecap="round"
       stroke-linejoin="round"
-      className="icon icon-tabler icons-tabler-outline icon-tabler-x w-5 h-5"
+      className="icon icon-tabler icons-tabler-outline icon-tabler-x"
     >
       <path stroke="none" d="M0 0h24v24H0z" fill="none" />
       <path d="M18 6l-12 12" />
       <path d="M6 6l12 12" />
+    </svg>
+  );
+};
+
+export const UpcomingSVG = () => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="15"
+      height="15"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="1"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      className="icon icon-tabler icons-tabler-outline icon-tabler-circle-dotted"
+    >
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M7.5 4.21l0 .01" />
+      <path d="M4.21 7.5l0 .01" />
+      <path d="M3 12l0 .01" />
+      <path d="M4.21 16.5l0 .01" />
+      <path d="M7.5 19.79l0 .01" />
+      <path d="M12 21l0 .01" />
+      <path d="M16.5 19.79l0 .01" />
+      <path d="M19.79 16.5l0 .01" />
+      <path d="M21 12l0 .01" />
+      <path d="M19.79 7.5l0 .01" />
+      <path d="M16.5 4.21l0 .01" />
+      <path d="M12 3l0 .01" />
     </svg>
   );
 };

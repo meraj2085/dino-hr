@@ -103,6 +103,7 @@ const Feedback = () => {
           onChange={(e) => setSearchTerm(e.target.value)}
           style={{
             width: "20%",
+            height: "35px",
           }}
         />
       </ActionBar>

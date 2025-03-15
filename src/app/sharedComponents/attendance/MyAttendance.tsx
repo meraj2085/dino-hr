@@ -18,7 +18,7 @@ import { ProgressCard } from "./ProgressCard";
 import no_data from "../../../../public/assets/no_data.png";
 import Image from "next/image";
 import { useDebounced } from "@/redux/hooks";
-import { formatSecondToTime } from "@/utils/common";
+import { formatSecondToDecimalHour, formatSecondToTime } from "@/utils/common";
 
 const MyAttendance = () => {
   const { userId } = getUserInfo() as any;
@@ -69,6 +69,13 @@ const MyAttendance = () => {
   };
 
   const { data, isLoading } = useGetSingleAttendanceQuery({ ...query });
+  const {
+    totalWorkingHours,
+    totalWorkingDaysNumber,
+    thisWeekProduction,
+    thisMonthProduction,
+    thisMonthOvertime,
+  } = data?.stats || {};
   const meta = data?.meta;
 
   useEffect(() => {
@@ -188,6 +195,18 @@ const MyAttendance = () => {
     }
   };
 
+  const [dateTime, setDateTime] = useState(
+    moment().format("ddd, Do MMM YYYY, h:mm A")
+  );
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setDateTime(moment().format("ddd, Do MMM YYYY, h:mm A"));
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, []);
+
   const columns = [
     {
       title: "Date",
@@ -210,17 +229,17 @@ const MyAttendance = () => {
     {
       title: "Production",
       dataIndex: "production",
-      render: (production: string) => formatSecondToTime(production),
+      render: (production: string) => formatSecondToTime(production, true),
     },
     {
       title: "Break",
       dataIndex: "break",
-      render: (breakTime: string) => formatSecondToTime(breakTime),
+      render: (breakTime: string) => formatSecondToTime(breakTime, true),
     },
     {
       title: "Overtime",
       dataIndex: "overtime",
-      render: (overtime: string) => formatSecondToTime(overtime),
+      render: (overtime: string) => formatSecondToTime(overtime, true),
     },
   ];
 
@@ -238,8 +257,8 @@ const MyAttendance = () => {
       <div className="mb-5 flex justify-between">
         <div className="block rounded-lg p-4 shadow-sm shadow-indigo-100 border w-[300px] h-[300px]">
           <div className="block rounded-lg px-4 py-2 shadow-sm border bg-[#F9F9F9]">
-            <p className="text-[#1F1F1F]">Punch In at</p>
-            <p className="text-[#727272]">Wed, 11th Mar 2019 10.00 AM</p>
+            <p className="text-[#1F1F1F]">Date & Time</p>
+            <p className="text-[#727272]">{dateTime}</p>
           </div>
           <div className="flex justify-center my-5 relative">
             <svg width="120" height="120" className="absolute">
@@ -305,26 +324,33 @@ const MyAttendance = () => {
           />
           <ProgressCard
             title="This Week"
-            progress={28}
-            total={40}
+            progress={formatSecondToDecimalHour(thisWeekProduction)}
+            total={formatSecondToDecimalHour(totalWorkingHours)}
             color="#64279A"
           />
           <ProgressCard
             title="This Month"
-            progress={90}
-            total={160}
+            progress={formatSecondToDecimalHour(thisMonthProduction)}
+            total={formatSecondToDecimalHour(totalWorkingHours) * 26}
             color="#00674A"
           />
           <ProgressCard
             title="Remaining"
-            progress={70}
-            total={160}
+            progress={
+              formatSecondToDecimalHour(totalWorkingHours) *
+                (totalWorkingDaysNumber * 4) -
+              formatSecondToDecimalHour(thisMonthProduction)
+            }
+            total={
+              formatSecondToDecimalHour(totalWorkingHours) *
+              (totalWorkingDaysNumber * 4)
+            }
             color="#F52D51"
           />
           <ProgressCard
             title="Overtime"
-            progress={9}
-            total={100}
+            progress={formatSecondToDecimalHour(thisMonthOvertime)}
+            total={2 * (totalWorkingDaysNumber * 4)}
             color="#009EFB"
           />
         </div>
@@ -413,7 +439,6 @@ const MyAttendance = () => {
         onPaginationChange={onPaginationChange}
         onTableChange={onTableChange}
         showPagination={true}
-        
       />
     </div>
   );

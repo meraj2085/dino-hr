@@ -53,6 +53,7 @@ const SideBar = () => {
           </Link>
         </div>
         <Menu
+          className="no-select"
           style={{
             borderTop: "0.5px solid #e8e8e8",
             borderRight: "none",
